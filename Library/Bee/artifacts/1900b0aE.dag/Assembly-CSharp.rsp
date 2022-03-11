@@ -339,6 +339,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
+"Assets/Scripts/Interfaces/Constants.cs"
 "Assets/Scripts/Interfaces/Enums.cs"
 "Assets/Scripts/Interfaces/IGameManager.cs"
 "Assets/Scripts/ItemSystem/BaseItemData.cs"
@@ -348,6 +349,7 @@
 "Assets/Scripts/Managers/InventoryManager.cs"
 "Assets/Scripts/Managers/Managers.cs"
 "Assets/Scripts/Managers/PlayerManager.cs"
+"Assets/Scripts/PlayerController.cs"
 -langversion:8.0
 
 /deterministic

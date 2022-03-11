@@ -22,6 +22,8 @@ public class Managers : MonoBehaviour
         gameManagers.Add(Inventory);
 
         StartCoroutine(StartupManagers());
+
+        Application.targetFrameRate = 60;
     }
 
     private IEnumerator StartupManagers()
