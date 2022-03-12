@@ -350,6 +350,8 @@
 "Assets/Scripts/Managers/Managers.cs"
 "Assets/Scripts/Managers/PlayerManager.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/UI/CanvasUI.cs"
+"Assets/Scripts/UI/InventoryUI.cs"
 -langversion:8.0
 
 /deterministic

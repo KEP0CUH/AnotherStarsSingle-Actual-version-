@@ -10,16 +10,20 @@ public class Managers : MonoBehaviour
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
 
+    public static CanvasUI Canvas { get; set; }
+
     private List<IGameManager> gameManagers = new List<IGameManager>();
 
     private void Awake()
     {
         Player = GetComponent<PlayerManager>();
-        Inventory= GetComponent<InventoryManager>();
+        Inventory = GetComponent<InventoryManager>();
+        Canvas = GetComponent<CanvasUI>();
 
         gameManagers = new List<IGameManager>();
         gameManagers.Add(Player);
         gameManagers.Add(Inventory);
+        gameManagers.Add(Canvas);
 
         StartCoroutine(StartupManagers());
 
