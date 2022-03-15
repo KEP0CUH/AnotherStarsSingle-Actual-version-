@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
 
     public void Startup()
     {
-        Debug.Log("Inventory manager starting...");
+        Debug.Log("Player manager starting...".SetColor(Color.Yellow));
 
         maxHealth = 100;
         currentHealth = 80;
@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
 
 
         Status = ManagerStatus.Started;
+        Debug.Log("Player manager started.".SetColor(Color.Green));
     }
 
     public void ChangeHealth(int value)

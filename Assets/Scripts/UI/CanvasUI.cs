@@ -4,23 +4,35 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CanvasUI : MonoBehaviour, IGameManager
+public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
 {
-    private GameObject canvas;
-
+    private static GameObject canvas;
     public ManagerStatus Status { get; private set; }
+    public UIModuleKind Kind { get; private set; }
+
+    public static InventoryUI Inventory;
+    
+    private List<IUIModule> modules = new List<IUIModule>();
+
 
     public void Startup()
     {
-        Debug.Log("CanvasUI started.");
+        Kind = UIModuleKind.Canvas;
+        Debug.Log("CanvasUI starting...".SetColor(Color.Yellow));
         canvas = SetupCanvas();
         SetupEventSystem();
 
+        canvas.AddComponent<InventoryUI>();
+        Inventory = canvas.GetComponent<InventoryUI>();
+        modules.Add(Inventory);
+
+        StartCoroutine(StartupModules());
 
         Status = ManagerStatus.Started;
+        Debug.Log("CanvasUI started...".SetColor(Color.Green));
     }
 
-    public GameObject AddModuleToCanvas(GameObject gameObject, string layer = "UI")
+    public GameObject AddModule(GameObject gameObject, string layer = "UI")
     {
         gameObject.transform.parent = canvas.transform;
         gameObject.layer = LayerMask.NameToLayer(layer);
@@ -41,7 +53,6 @@ public class CanvasUI : MonoBehaviour, IGameManager
 
         return canvas;
     }
-
     private void SetupEventSystem()
     {
         GameObject eventSystem = new GameObject("EventSystem");
@@ -49,4 +60,57 @@ public class CanvasUI : MonoBehaviour, IGameManager
         eventSystem.AddComponent<StandaloneInputModule>();
     }
 
+    public void DisableAllModules()
+    {
+        foreach(IUIModule module in modules)
+        {
+            module.Disable();
+        }
+    }
+
+    public void EnableModule(UIModuleKind kind)
+    {
+        foreach(IUIModule module in modules)
+        {
+            if(module.Kind == kind)
+            {
+                module.Enable();
+            }
+        }
+    }
+
+    private IEnumerator StartupModules()
+    {
+        foreach(IUIModule module in modules)
+        {
+            module.Startup(this);
+        }
+
+        yield return null;
+
+        int numModules = modules.Count;
+        int numDownloaded = 0;
+
+        while(numDownloaded < numModules)
+        {
+            int lastReady = numDownloaded;
+            numDownloaded = 0;
+
+            foreach(IUIModule module in modules)
+            {
+                if(module.Status == ManagerStatus.Started)
+                {
+                    numDownloaded++;
+                }
+            }
+
+            if(numDownloaded > lastReady)
+            {
+                Debug.Log($"Progress: {numDownloaded} / {numModules}");
+            }
+            yield return null;
+        }
+        Debug.Log("All UI modules downloaded.");
+
+    }
 }

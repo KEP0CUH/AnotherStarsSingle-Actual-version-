@@ -1,8 +1,15 @@
-﻿public enum ManagerStatus
+public enum ManagerStatus
 {
     Shutdown = 1,
     Initializing,
     Started
+}
+
+public enum UIModuleKind
+{
+    Canvas = 2,
+    Inventory = 4,
+    Skills = 8
 }
 public enum ItemKind
 {

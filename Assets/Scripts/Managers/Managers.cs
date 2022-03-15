@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
+[RequireComponent(typeof(CanvasUI))]
 public class Managers : MonoBehaviour
 {
     public static PlayerManager Player { get; private set; }
@@ -62,6 +63,6 @@ public class Managers : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("All managers started up.");
+        Debug.Log("All managers started up.".SetColor(Color.Green));
     }
 }

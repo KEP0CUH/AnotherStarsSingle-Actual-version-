@@ -25,39 +25,39 @@ public abstract class BaseItemData : ScriptableObject
             case ItemKind.rudaFerrum:
                 name = "Ferrum";
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
-                title = "Железо";
-                description = "Металл с высокой химической реакционной способностью. Широко распространен во Вселенной \"Иные звёзды\"";
+                title = "Р–РµР»РµР·Рѕ";
+                description = "РњРµС‚Р°Р»Р» СЃ РІС‹СЃРѕРєРѕР№ С…РёРјРёС‡РµСЃРєРѕР№ СЂРµР°РєС†РёРѕРЅРЅРѕР№ СЃРїРѕСЃРѕР±РЅРѕСЃС‚СЊСЋ. РЁРёСЂРѕРєРѕ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅ РІРѕ Р’СЃРµР»РµРЅРЅРѕР№ \"РРЅС‹Рµ Р·РІС‘Р·РґС‹\"";
                 break;
             case ItemKind.rudaGold:
                 name = "Gold";
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
-                title = "Золото";
-                description = "Золото – это ценный металл, известный человечеству с древних времён.Полезное ископаемое имеет характерный жёлтый цвет.";
+                title = "Р—РѕР»РѕС‚Рѕ";
+                description = "Р—РѕР»РѕС‚Рѕ вЂ“ СЌС‚Рѕ С†РµРЅРЅС‹Р№ РјРµС‚Р°Р»Р», РёР·РІРµСЃС‚РЅС‹Р№ С‡РµР»РѕРІРµС‡РµСЃС‚РІСѓ СЃ РґСЂРµРІРЅРёС… РІСЂРµРјС‘РЅ.РџРѕР»РµР·РЅРѕРµ РёСЃРєРѕРїР°РµРјРѕРµ РёРјРµРµС‚ С…Р°СЂР°РєС‚РµСЂРЅС‹Р№ Р¶С‘Р»С‚С‹Р№ С†РІРµС‚.";
                 break;
             case ItemKind.rudaNickel:
                 name = "Nickel";
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
-                title = "Никель";
+                title = "РќРёРєРµР»СЊ";
                 break;
             case ItemKind.rudaTitan:
                 name = "Titan";
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
-                title = "Титан";
+                title = "РўРёС‚Р°РЅ";
                 break;
 
             case ItemKind.weaponKinetic:
                 {
-                    name = "Кинетическое";
+                    name = "РљРёРЅРµС‚РёС‡РµСЃРєРѕРµ";
                     break;
                 }
             case ItemKind.weaponLaser:
                 {
-                    name = "Лазерное";
+                    name = "Р›Р°Р·РµСЂРЅРѕРµ";
                     break;
                 }
             case ItemKind.weaponEnergetic:
                 {
-                    name = "Энергетическое";
+                    name = "Р­РЅРµСЂРіРµС‚РёС‡РµСЃРєРѕРµ";
                     break;
                 }
         }

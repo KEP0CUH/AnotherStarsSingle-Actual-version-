@@ -11,11 +11,12 @@ public class InventoryManager : MonoBehaviour, IGameManager
 
     public void Startup()
     {
-        Debug.Log("Inventory manager started...");
+        Debug.Log("Inventory manager starting...".SetColor(Color.Yellow));
 
         items = new Dictionary<string, int>();
 
         Status = ManagerStatus.Started;
+        Debug.Log("Inventory manager started.".SetColor(Color.Green));
     }
 
     public List<string> GetItemList()
@@ -44,6 +45,15 @@ public class InventoryManager : MonoBehaviour, IGameManager
 
         DisplayItems();
     }
+
+    public void RemoveItem(BaseItemData data)
+    {
+        if(items.ContainsKey(data.Title))
+        {
+            items.Remove(data.Title);
+        }
+    }
+
     private void DisplayItems()
     {
         string itemDisplay = "Items: ";
