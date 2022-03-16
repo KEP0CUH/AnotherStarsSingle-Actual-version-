@@ -34,6 +34,15 @@ public class PlayerController : MonoBehaviour
             SpawnAsteroid();
         }
 
+        if(Input.GetKey(KeyCode.I))
+        {
+            CanvasUI.Inventory.Enable();
+        }
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Managers.Canvas.DisableAllModules();
+        }
+
         //MoveBullets();
     }
 

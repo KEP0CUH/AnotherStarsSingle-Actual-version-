@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\CollectableItemData.cs" />
     <Compile Include="Assets\Scripts\Asteroid\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

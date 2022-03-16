@@ -10,7 +10,9 @@ public class InventoryUI : MonoBehaviour, IUIModule
     private GameObject leftInventoryList;
     private GameObject rightInventory;
 
-    private GameObject itemSlot;
+    private List<GameObject> itemSlots = new List<GameObject>();
+
+    private Dictionary<BaseItemData, int> itemViews = new Dictionary<BaseItemData, int>();
 
     //          PosX и PosY отвечают за позицию ui объекта. Соответсвенно при привязке
     //          к правому верхнему углу требуется смещать ui элемент в отрицательном направлении.
@@ -38,7 +40,37 @@ public class InventoryUI : MonoBehaviour, IUIModule
         CreateLeftInventory();
         CreateLeftInventoryList();
         CreateRightInventory();
+        ShowInventory(Managers.Inventory.GetItemList());
         OnValidate();
+    }
+
+    public void ShowInventory(Dictionary<BaseItemData, int> items)
+    {
+        foreach(var item in itemSlots)
+        {
+            if(item != null)
+            {
+                Destroy(item.gameObject);
+            }
+        }
+        itemViews.Clear();
+        itemSlots.Clear();
+
+
+        foreach(var item in items)
+        {
+            if(itemViews.ContainsKey(item.Key))
+            {
+                itemViews[item.Key] += 1;
+                continue;
+            }
+            itemViews.Add(item.Key, item.Value);
+        }
+
+        foreach(var item in itemViews)
+        {
+            CreateItemSlot(item.Key,item.Value);
+        }
     }
 
     [ContextMenu("Enable")]
@@ -136,10 +168,33 @@ public class InventoryUI : MonoBehaviour, IUIModule
         leftInventory.GetComponent<ScrollRect>().content = leftInventoryList.GetComponent<RectTransform>();
     }
     [ContextMenu("CreateItemSlot")]
-    private void CreateItemSlot()
+    private void CreateItemSlot(BaseItemData itemData, int count)
     {
-        itemSlot = new GameObject("Item",typeof(Image));
+        var itemSlot = new GameObject("Item" + itemData.Title,typeof(Image),typeof(Selectable));
         itemSlot.GetComponent<RectTransform>().SetParent(leftInventoryList.transform, false);
+
+        var colors = itemSlot.GetComponent<Selectable>().colors;
+        colors.pressedColor = new UnityEngine.Color(23, 229, 225,255) / 256f;
+        itemSlot.GetComponent<Selectable>().colors = colors;   
+
+        itemSlot.GetComponent<Image>().sprite = itemData.Icon;
+        itemSlots.Add(itemSlot);
+
+        var itemSlotText = new GameObject("ItemText", typeof(Text));
+        itemSlotText.GetComponent<RectTransform>().SetParent(itemSlot.transform);
+        var text = itemSlotText.GetComponent<Text>();
+        Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        text.font = font;
+        text.text = $"{itemData.Title}: {count}";
+
+
+        var rect = itemSlotText.GetComponent<RectTransform>();
+        rect.pivot = Vector2.up;
+        rect.anchorMax = new Vector2(1, 0);
+        rect.anchorMin = new Vector2(0, 0);
+        rect.localPosition = Vector2.zero;
+        rect.offsetMin = new Vector2(0, -30);
+        rect.offsetMax = new Vector2(100, 0);
     }
 
     private void OnValidate()

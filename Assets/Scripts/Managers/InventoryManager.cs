@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour, IGameManager
 {
     [SerializeField]
-    private Dictionary<string,int> items;
+    private Dictionary<BaseItemData,int> items;
 
     public ManagerStatus Status {get;private set;}
 
@@ -13,19 +13,19 @@ public class InventoryManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Inventory manager starting...".SetColor(Color.Yellow));
 
-        items = new Dictionary<string, int>();
+        items = new Dictionary<BaseItemData, int>();
 
         Status = ManagerStatus.Started;
         Debug.Log("Inventory manager started.".SetColor(Color.Green));
     }
 
-    public List<string> GetItemList()
+    public Dictionary<BaseItemData, int> GetItemList()
     {
-        List<string> list = new List<string>(items.Keys);
-        return list;
+        Dictionary<BaseItemData, int> items = new Dictionary<BaseItemData, int>(this.items);
+        return items;
     }
 
-    public int GetItemCount(string item)
+    public int GetItemCount(BaseItemData item)
     {
         if (items.ContainsKey(item))
             return items[item];
@@ -34,13 +34,13 @@ public class InventoryManager : MonoBehaviour, IGameManager
 
     public void AddItem(BaseItemData data)
     {
-        if(items.ContainsKey(data.Title))
+        if(items.ContainsKey(data))
         {
-            items[data.Title] += 1;
+            items[data] += 1;
         }
         else
         {
-            items.Add(data.Title, 1);
+            items.Add(data, 1);
         }
 
         DisplayItems();
@@ -48,9 +48,9 @@ public class InventoryManager : MonoBehaviour, IGameManager
 
     public void RemoveItem(BaseItemData data)
     {
-        if(items.ContainsKey(data.Title))
+        if(items.ContainsKey(data))
         {
-            items.Remove(data.Title);
+            items.Remove(data);
         }
     }
 
@@ -63,6 +63,8 @@ public class InventoryManager : MonoBehaviour, IGameManager
         }
 
         Debug.Log(itemDisplay);
+
+        CanvasUI.Inventory.ShowInventory(items);
     }
 }
 
