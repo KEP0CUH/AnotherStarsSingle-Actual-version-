@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour, IUIModule
 {
     private GameObject inventory;
+    private GameObject leftInventory;
+    private GameObject leftInventoryList;
+    private GameObject rightInventory;
+
+    private GameObject itemSlot;
 
     //          PosX и PosY отвечают за позицию ui объекта. Соответсвенно при привязке
     //          к правому верхнему углу требуется смещать ui элемент в отрицательном направлении.
@@ -17,9 +22,9 @@ public class InventoryUI : MonoBehaviour, IUIModule
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
     [SerializeField]
-    private int width = 400;
+    private int width = 300;
     [SerializeField]
-    private int height = 220;
+    private int height = 200;
 
     public ManagerStatus Status { get;private set; }
     public UIModuleKind Kind { get;private set; }
@@ -30,6 +35,9 @@ public class InventoryUI : MonoBehaviour, IUIModule
         Status = ManagerStatus.Initializing;
         Debug.Log("InventoryUI initializing...");
         CreateInventory(canvas);
+        CreateLeftInventory();
+        CreateLeftInventoryList();
+        CreateRightInventory();
         OnValidate();
     }
 
@@ -60,8 +68,78 @@ public class InventoryUI : MonoBehaviour, IUIModule
 
         inventory.GetComponent<RectTransform>().offsetMin = new Vector2(-50, -50);
         inventory.GetComponent<RectTransform>().offsetMax = new Vector2(40, 32);
+
+        //inventory.AddComponent<VerticalLayoutGroup>();
         Status = ManagerStatus.Started;
         Debug.Log("InventoryUI started.");
+    }
+
+    private void CreateLeftInventory()
+    {
+        leftInventory = new GameObject("LeftPanel", typeof(Image), typeof(LayoutElement),typeof(ScrollRect),typeof(Mask));
+        leftInventory.transform.parent = inventory.transform;
+
+        leftInventory.GetComponent<LayoutElement>().ignoreLayout = true;
+        var rect = leftInventory.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0.5f);
+        rect.anchorMax = new Vector2(0, 0.5f);
+        rect.pivot = new Vector2(0, 0.5f);
+        rect.position = Vector2.zero;
+
+        var scroll = leftInventory.GetComponent<ScrollRect>();
+        scroll.inertia = false;
+        scroll.scrollSensitivity = 10;
+        scroll.horizontal = false;
+
+        leftInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
+        Debug.Log("LeftInventory created.");
+    }
+
+    private void CreateRightInventory()
+    {
+        rightInventory = new GameObject("RightPanel", typeof(Image), typeof(LayoutElement));
+        rightInventory.transform.parent = inventory.transform;
+
+        rightInventory.GetComponent<LayoutElement>().ignoreLayout = true;
+        var rect = rightInventory.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(1, 0.5f);
+        rect.anchorMax = new Vector2(1, 0.5f);
+        rect.pivot = new Vector2(1, 0.5f);
+        rect.position = Vector2.zero;
+
+        rightInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
+        Debug.Log("RightInventory created.");
+    }
+
+
+    private void CreateLeftInventoryList()
+    {
+        leftInventoryList = new GameObject("Items", typeof(GridLayoutGroup),typeof(ContentSizeFitter));
+        leftInventoryList.transform.parent = leftInventory.transform;
+
+        var rect = leftInventoryList.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 1);
+        rect.anchorMax = new Vector2(1, 1);
+        rect.pivot = Vector2.one;
+        //rect.offsetMin = (
+
+        var layout = leftInventoryList.GetComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(64, 64);
+        layout.spacing = new Vector2(15, 15);
+        layout.padding.top = 15;
+        layout.padding.left = 15;
+        
+        var fitter = leftInventoryList.GetComponent<ContentSizeFitter>();
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+
+        leftInventory.GetComponent<ScrollRect>().content = leftInventoryList.GetComponent<RectTransform>();
+    }
+    [ContextMenu("CreateItemSlot")]
+    private void CreateItemSlot()
+    {
+        itemSlot = new GameObject("Item",typeof(Image));
+        itemSlot.GetComponent<RectTransform>().SetParent(leftInventoryList.transform, false);
     }
 
     private void OnValidate()
@@ -71,6 +149,24 @@ public class InventoryUI : MonoBehaviour, IUIModule
             //inventory.GetComponent<RectTransform>().offsetMin = new Vector2(posX, posY);
             inventory.GetComponent<RectTransform>().offsetMin = new Vector2(-width, -height);
             inventory.GetComponent<RectTransform>().offsetMax = new Vector2(width, height);
+        }
+
+        if(leftInventory != null)
+        {
+            leftInventory.GetComponent<RectTransform>().offsetMin = new Vector2(10, -height + 10);
+            leftInventory.GetComponent<RectTransform>().offsetMax = new Vector2((int)(0.64f * width), height - 10);
+        }
+        
+        if(rightInventory != null)
+        {
+            rightInventory.GetComponent<RectTransform>().offsetMin = new Vector2(-(int)(1.30f * width), -height + 10);
+            rightInventory.GetComponent<RectTransform>().offsetMax = new Vector2(-10, height - 10);
+        }
+
+        if(leftInventoryList != null)
+        {
+            leftInventoryList.GetComponent<RectTransform>().offsetMin = Vector2.up;
+            leftInventoryList.GetComponent<RectTransform>().offsetMax = Vector2.one;
         }
     }
 }
