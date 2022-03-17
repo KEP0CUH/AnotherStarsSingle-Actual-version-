@@ -52,6 +52,8 @@ public class InventoryManager : MonoBehaviour, IGameManager
         {
             items.Remove(data);
         }
+
+        DisplayItems();
     }
 
     private void DisplayItems()

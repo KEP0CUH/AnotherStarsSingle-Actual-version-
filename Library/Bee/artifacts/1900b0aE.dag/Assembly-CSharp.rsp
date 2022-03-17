@@ -346,6 +346,7 @@
 "Assets/Scripts/Interfaces/ICanvas.cs"
 "Assets/Scripts/Interfaces/IGameManager.cs"
 "Assets/Scripts/Interfaces/IInventory.cs"
+"Assets/Scripts/Interfaces/IInventoryUI.cs"
 "Assets/Scripts/Interfaces/IUIModule.cs"
 "Assets/Scripts/ItemSystem/BaseItemData.cs"
 "Assets/Scripts/ItemSystem/CollectableItemData.cs"
@@ -359,6 +360,7 @@
 "Assets/Scripts/Spawner/Spawner.cs"
 "Assets/Scripts/UI/CanvasUI.cs"
 "Assets/Scripts/UI/InventoryUI.cs"
+"Assets/Scripts/UI/ItemSlot.cs"
 -langversion:8.0
 
 /deterministic

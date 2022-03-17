@@ -3,24 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour, IUIModule
+public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 {
-    private GameObject inventory;
-    private GameObject leftInventory;
-    private GameObject leftInventoryList;
-    private GameObject rightInventory;
+    private GameObject inventory;               // Окно инвентаря.
+    private GameObject leftInventory;           // Левая часть инвентаря
+    private GameObject leftInventoryList;       // Левая часть инвентаря, отображение списка предметов.
+    private GameObject rightInventory;          // Правая часть инвентаря
 
     private List<GameObject> itemSlots = new List<GameObject>();
 
-    private Dictionary<BaseItemData, int> itemViews = new Dictionary<BaseItemData, int>();
+    private Dictionary<BaseItemData, int> itemData = new Dictionary<BaseItemData, int>();
 
-    //          PosX и PosY отвечают за позицию ui объекта. Соответсвенно при привязке
-    //          к правому верхнему углу требуется смещать ui элемент в отрицательном направлении.
-    //          поскольку начальной точкой (0,0) выступает угол.
-    [SerializeField]
-    private int posX = -32;             
-    [SerializeField]
-    private int posY = -32;
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
     [SerializeField]
@@ -53,23 +46,23 @@ public class InventoryUI : MonoBehaviour, IUIModule
                 Destroy(item.gameObject);
             }
         }
-        itemViews.Clear();
+        this.itemData.Clear();
         itemSlots.Clear();
 
 
         foreach(var item in items)
         {
-            if(itemViews.ContainsKey(item.Key))
+            if(this.itemData.ContainsKey(item.Key))
             {
-                itemViews[item.Key] += 1;
+                this.itemData[item.Key] += 1;
                 continue;
             }
-            itemViews.Add(item.Key, item.Value);
+            this.itemData.Add(item.Key, item.Value);
         }
 
-        foreach(var item in itemViews)
+        foreach(var item in this.itemData)
         {
-            CreateItemSlot(item.Key,item.Value);
+            CreateItemSlot(item.Key, item.Value);
         }
     }
 
@@ -167,41 +160,19 @@ public class InventoryUI : MonoBehaviour, IUIModule
 
         leftInventory.GetComponent<ScrollRect>().content = leftInventoryList.GetComponent<RectTransform>();
     }
+
+
     [ContextMenu("CreateItemSlot")]
     private void CreateItemSlot(BaseItemData itemData, int count)
     {
-        var itemSlot = new GameObject("Item" + itemData.Title,typeof(Image),typeof(Selectable));
-        itemSlot.GetComponent<RectTransform>().SetParent(leftInventoryList.transform, false);
-
-        var colors = itemSlot.GetComponent<Selectable>().colors;
-        colors.pressedColor = new UnityEngine.Color(23, 229, 225,255) / 256f;
-        itemSlot.GetComponent<Selectable>().colors = colors;   
-
-        itemSlot.GetComponent<Image>().sprite = itemData.Icon;
-        itemSlots.Add(itemSlot);
-
-        var itemSlotText = new GameObject("ItemText", typeof(Text));
-        itemSlotText.GetComponent<RectTransform>().SetParent(itemSlot.transform);
-        var text = itemSlotText.GetComponent<Text>();
-        Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        text.font = font;
-        text.text = $"{itemData.Title}: {count}";
-
-
-        var rect = itemSlotText.GetComponent<RectTransform>();
-        rect.pivot = Vector2.up;
-        rect.anchorMax = new Vector2(1, 0);
-        rect.anchorMin = new Vector2(0, 0);
-        rect.localPosition = Vector2.zero;
-        rect.offsetMin = new Vector2(0, -30);
-        rect.offsetMax = new Vector2(100, 0);
+        var itemSlot = new GameObject("Item" + itemData.Title, typeof(Image), typeof(Selectable),typeof(ItemSlot));
+        itemSlot.GetComponent<ItemSlot>().Init(leftInventoryList.transform,this, itemData, count);
     }
 
     private void OnValidate()
     {
         if(inventory != null)
         {
-            //inventory.GetComponent<RectTransform>().offsetMin = new Vector2(posX, posY);
             inventory.GetComponent<RectTransform>().offsetMin = new Vector2(-width, -height);
             inventory.GetComponent<RectTransform>().offsetMax = new Vector2(width, height);
         }
@@ -223,5 +194,10 @@ public class InventoryUI : MonoBehaviour, IUIModule
             leftInventoryList.GetComponent<RectTransform>().offsetMin = Vector2.up;
             leftInventoryList.GetComponent<RectTransform>().offsetMax = Vector2.one;
         }
+    }
+
+    public void AddItemSlot(GameObject slot)
+    {
+        itemSlots.Add(slot);
     }
 }
