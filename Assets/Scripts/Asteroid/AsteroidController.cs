@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class AsteroidController : MonoBehaviour
 {
@@ -64,7 +64,7 @@ public class AsteroidController : MonoBehaviour
     private void Awake()
     {
         this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/Asteroids/Asteroid_TestType");
-        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<SphereCollider>().isTrigger = true;
     }
 
     private void FixedUpdate()
@@ -103,15 +103,13 @@ public class AsteroidController : MonoBehaviour
     }
     #endregion
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log($"Collision of asteroid and {collision.gameObject.name}");
-        this.GetComponent<SpriteRenderer>().color = UnityEngine.Color.magenta;
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        if(other.GetComponent<Bullet>())
+        {
+            this.GetComponent<AsteroidData>().ChangeHealth(35);
+            Destroy(other.gameObject);
+        }    
         Debug.Log($"Trigger of asteroid and {other.gameObject.name}");
         this.GetComponent<SpriteRenderer>().color = UnityEngine.Color.magenta;
 

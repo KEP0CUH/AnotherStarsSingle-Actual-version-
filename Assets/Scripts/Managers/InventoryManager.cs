@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour, IGameManager
 {
     [SerializeField]
-    private Dictionary<BaseItemData,int> items;
+    private Dictionary<BaseScriptableItemData,int> items;
 
     public ManagerStatus Status {get;private set;}
 
@@ -13,40 +13,42 @@ public class InventoryManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Inventory manager starting...".SetColor(Color.Yellow));
 
-        items = new Dictionary<BaseItemData, int>();
+        items = new Dictionary<BaseScriptableItemData, int>();
 
         Status = ManagerStatus.Started;
         Debug.Log("Inventory manager started.".SetColor(Color.Green));
     }
 
-    public Dictionary<BaseItemData, int> GetItemList()
+    public Dictionary<BaseScriptableItemData, int> GetItemList()
     {
-        Dictionary<BaseItemData, int> items = new Dictionary<BaseItemData, int>(this.items);
+        Dictionary<BaseScriptableItemData, int> items = new Dictionary<BaseScriptableItemData, int>(this.items);
         return items;
     }
 
-    public int GetItemCount(BaseItemData item)
+    public int GetItemCount(BaseScriptableItemData item)
     {
-        if (items.ContainsKey(item))
+        if(items.ContainsKey(item))
             return items[item];
         return 0;
     }
 
-    public void AddItem(BaseItemData data)
+    public void AddItem(BaseScriptableItemData data)
     {
-        if(items.ContainsKey(data))
+        foreach(var item in items)
         {
-            items[data] += 1;
-        }
-        else
-        {
-            items.Add(data, 1);
+            if(item.Key.Title == data.Title)
+            {
+                items[item.Key] += 1;
+                DisplayItems();
+                return;
+            }
         }
 
+        items.Add(data, 1);
         DisplayItems();
     }
 
-    public void RemoveItem(BaseItemData data)
+    public void RemoveItem(BaseScriptableItemData data)
     {
         if(items.ContainsKey(data))
         {

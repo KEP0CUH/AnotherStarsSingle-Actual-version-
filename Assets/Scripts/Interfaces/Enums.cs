@@ -50,7 +50,15 @@ public enum EntityType
 {
     Player,
     Enemy,
-    Asteroid
+ 
+}
+
+public enum AsteroidType
+{
+    AsteroidGold = 1,
+    AsteroidFerrum,
+    AsteroidNickel,
+    AsteroidTitan
 }
 
 public enum EntityKind

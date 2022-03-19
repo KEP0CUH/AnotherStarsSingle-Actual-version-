@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
@@ -74,7 +75,11 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
+    <Compile Include="Assets\Scripts\Asteroid\AsteroidData.cs" />
+    <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
+    <Compile Include="Assets\Scripts\Asteroid\AsteroidSpawner.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\BaseScriptableItemData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -8,7 +8,7 @@ public class ItemSlot : MonoBehaviour
 {
     private GameObject slot;
     private Transform parent;
-    private BaseItemData data;
+    private BaseScriptableItemData data;
     private int count;
     private IInventoryUI inventory;
 
@@ -18,7 +18,7 @@ public class ItemSlot : MonoBehaviour
         Managers.Inventory.RemoveItem(data);
     }
 
-    public void Init(Transform transform,IInventoryUI inventory,BaseItemData itemData,int count)
+    public void Init(Transform transform,IInventoryUI inventory, BaseScriptableItemData itemData,int count)
     {
         this.inventory = inventory;
         this.parent = transform;
@@ -28,7 +28,7 @@ public class ItemSlot : MonoBehaviour
         this.inventory.AddItemSlot(slot);
     }
 
-    private void CreateItemSlot(BaseItemData itemData, int count)
+    private void CreateItemSlot(BaseScriptableItemData itemData, int count)
     {
         slot = this.gameObject;
 

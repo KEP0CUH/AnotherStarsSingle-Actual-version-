@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class BaseItemData : ScriptableObject
+public abstract class BaseItemData : MonoBehaviour
 {
     [SerializeField]
     private Sprite icon;
@@ -17,6 +17,13 @@ public abstract class BaseItemData : ScriptableObject
     public Sprite Icon => icon;
     public string Title => title;
     public string Description => description;
+
+    public BaseItemData Init(ItemKind kind)
+    {
+        this.kind = kind;
+        OnValidate();
+        return this;
+    }
 
     private void OnValidate()
     {

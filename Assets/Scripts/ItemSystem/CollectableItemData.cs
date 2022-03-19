@@ -8,6 +8,4 @@ public class CollectableItemData : BaseItemData
 {
     private int maxCountStack;
     public int MaxCountStack => maxCountStack;
-
-
 }

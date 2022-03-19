@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private List<GameObject> itemSlots = new List<GameObject>();
 
-    private Dictionary<BaseItemData, int> itemData = new Dictionary<BaseItemData, int>();
+    private Dictionary<BaseScriptableItemData, int> itemData = new Dictionary<BaseScriptableItemData, int>();
 
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
@@ -37,7 +37,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         OnValidate();
     }
 
-    public void ShowInventory(Dictionary<BaseItemData, int> items)
+    public void ShowInventory(Dictionary<BaseScriptableItemData, int> items)
     {
         foreach(var item in itemSlots)
         {
@@ -163,7 +163,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
 
     [ContextMenu("CreateItemSlot")]
-    private void CreateItemSlot(BaseItemData itemData, int count)
+    private void CreateItemSlot(BaseScriptableItemData itemData, int count)
     {
         var itemSlot = new GameObject("Item" + itemData.Title, typeof(Image), typeof(Selectable),typeof(ItemSlot));
         itemSlot.GetComponent<ItemSlot>().Init(leftInventoryList.transform,this, itemData, count);

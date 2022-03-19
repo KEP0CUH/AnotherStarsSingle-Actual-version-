@@ -8,21 +8,31 @@ using UnityEngine;
 public class ItemViewGame : MonoBehaviour
 {
     [SerializeField]
-    private BaseItemData data;
+    private BaseScriptableItemData data;
 
-    public BaseItemData Data => data;
+    public BaseScriptableItemData Data => data;
 
+    private bool triggerWorked = false;
 
-    private void Start()
+    public void Init(BaseScriptableItemData data)
     {
+        this.data = data;
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = data.Icon;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         // if other.tag == player && player.WantsToTake
-        Managers.Inventory.AddItem(data);
-        Destroy(this.gameObject);
+
+        if (triggerWorked == false)
+        {
+            Managers.Inventory.AddItem(data);
+            Destroy(this.gameObject);
+        }
+        triggerWorked = true;
+
     }
 }
