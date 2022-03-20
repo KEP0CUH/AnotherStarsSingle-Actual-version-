@@ -56,15 +56,16 @@
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
-    <Compile Include="Assets\Scripts\Asteroid\AsteroidData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\BaseItemData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
+    <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\BaseItemState.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
     <Compile Include="Assets\Scripts\Asteroid\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
@@ -78,9 +79,9 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Managers\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\BaseItemState.cs" />
-    <Compile Include="Assets\Scripts\Asteroid\AsteroidState.cs" />
-    <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
+    <Compile Include="Assets\Scripts\Asteroid\BaseAsteroidData.cs" />
+    <Compile Include="Assets\Scripts\Asteroid\BaseAsteroidState.cs" />
+    <Compile Include="Assets\Scripts\UI\InfoWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

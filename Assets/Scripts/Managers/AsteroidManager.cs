@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidManager : MonoBehaviour, IGameManager
 {
-    private Dictionary<AsteroidData, int> asteroids = new Dictionary<AsteroidData, int>();
+    private Dictionary<BaseAsteroidData, int> asteroids = new Dictionary<BaseAsteroidData, int>();
 
     public ManagerStatus Status { get; private set; }
 
@@ -17,18 +17,18 @@ public class AsteroidManager : MonoBehaviour, IGameManager
         Debug.Log("AsteroidManager started.".SetColor(Color.Green));
     }
 
-    public void AddAsteroid()
+    public void AddAsteroid(BaseAsteroidData data,int count)
     {
-
+        // if contains asteroids.Add()
     }
 
-    public Dictionary<AsteroidData,int> GetAsteroidList()
+    public Dictionary<BaseAsteroidData,int> GetAsteroidList()
     {
-        Dictionary<AsteroidData, int> asteroids = new Dictionary<AsteroidData, int>(this.asteroids);
+        Dictionary<BaseAsteroidData, int> asteroids = new Dictionary<BaseAsteroidData, int>(this.asteroids);
         return asteroids;
     }
 
-    public void RemoveAsteroid(AsteroidData data)
+    public void RemoveAsteroid(BaseAsteroidData data)
     {
         if(asteroids.ContainsKey(data))
         {

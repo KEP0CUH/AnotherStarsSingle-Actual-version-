@@ -13,8 +13,8 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void Awake()
     {
-        asteroids.Add(AsteroidType.AsteroidGold);
-        asteroids.Add(AsteroidType.AsteroidFerrum);
+        asteroids.Add(AsteroidType.GoldAsteroid);
+        asteroids.Add(AsteroidType.FerrumAsteroid);
 
         currentExistNum = 0;
         maxExistNum = 34;
@@ -30,11 +30,17 @@ public class AsteroidSpawner : MonoBehaviour
         if (currentExistNum < maxExistNum)
         {
             var type = GetRandomType();
-            GameObject newAsteroid = new GameObject("Asteroid" + type, typeof(AsteroidData));
+            GameObject newAsteroid = new GameObject("Asteroid" + type);
             newAsteroid.transform.parent = this.transform;
-            newAsteroid.AddComponent<AsteroidController>().Init(this.transform);
-            var data = newAsteroid.GetComponent<AsteroidData>();
+
+            var data = Resources.Load<BaseAsteroidData>("ScriptableObjects/Asteroids/" + type.ToString());
             data.Init(type);
+
+
+
+            var state = newAsteroid.AddComponent<BaseAsteroidState>();
+            state.Init(data);
+            newAsteroid.AddComponent<AsteroidController>().Init(this.transform, state);
             currentExistNum++;
         }
     }

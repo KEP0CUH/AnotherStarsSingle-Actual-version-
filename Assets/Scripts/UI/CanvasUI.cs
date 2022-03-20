@@ -39,7 +39,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
 
     public GameObject AddModule(GameObject gameObject, string layer = "UI")
     {
-        gameObject.transform.parent = canvas.transform;
+        gameObject.GetComponent<RectTransform>().SetParent(canvas.transform,false);
         gameObject.layer = LayerMask.NameToLayer(layer);
         return gameObject;
     }

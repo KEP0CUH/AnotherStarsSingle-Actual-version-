@@ -3,18 +3,20 @@ using UnityEngine.UI;
 
 public class RadarUI : MonoBehaviour, IUIModule
 {
+    private GameObject radar;
+
     public ManagerStatus Status { get; private set; }
 
     public UIModuleKind Kind { get; private set; }
 
     public void Disable()
     {
-        throw new System.NotImplementedException();
+        radar.SetActive(false);
     }
 
     public void Enable()
     {
-        throw new System.NotImplementedException();
+        radar.SetActive(true);
     }
 
     public void Startup(ICanvas canvas)
@@ -23,7 +25,7 @@ public class RadarUI : MonoBehaviour, IUIModule
         Kind = UIModuleKind.Radar;
         Debug.Log("RadarUI initializing...");
 
-        GameObject radar = new GameObject("Radar");
+        radar = new GameObject("Radar",typeof(RectTransform));
         canvas.AddModule(radar);
 
         radar.AddComponent<RawImage>();

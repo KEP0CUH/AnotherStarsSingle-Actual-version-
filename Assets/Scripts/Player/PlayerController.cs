@@ -7,6 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     private List<Bullet> bullets = new List<Bullet>();
 
+    private float timer = 0;
+    private float shootDelay = 0.5f;
+    private int numOfFires = 5;
+    private int firesMade = 0;
+
     [SerializeField]
     private float moveSpeed = 1 / Constants.TICKS_PER_SEC;
     private Camera mainCamera;
@@ -28,7 +33,22 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Mouse0))
         {
-            Shoot();
+            timer += Time.fixedDeltaTime;
+            if(timer > shootDelay)
+            {
+                if(numOfFires > firesMade)
+                {
+                    Shoot();
+                    firesMade++;
+                    timer -= 12 * Time.fixedDeltaTime;
+                }
+                if(numOfFires <= firesMade)
+                {
+                    timer = 0;
+                    firesMade = 0;
+                }
+
+            }
         }
 
         if(Input.GetKey(KeyCode.A))
@@ -40,6 +60,12 @@ public class PlayerController : MonoBehaviour
         {
             CanvasUI.Inventory.Enable();
         }
+
+        if(Input.GetKey(KeyCode.M))
+        {
+            CanvasUI.Radar.Enable();
+        }
+
         if(Input.GetKey(KeyCode.Escape))
         {
             Managers.Canvas.DisableAllModules();
@@ -85,8 +111,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SetupCamera()
     {
-        GameObject camera = new GameObject("MainCamera");
-        camera.AddComponent<Camera>();
+        GameObject camera = new GameObject("MainCamera",typeof(Camera),typeof(AudioListener));
 
         mainCamera = camera.GetComponent<Camera>();
         mainCamera.backgroundColor = UnityEngine.Color.gray;

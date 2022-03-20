@@ -80,7 +80,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private void CreateInventory(ICanvas canvas)
     {
-        inventory = new GameObject("Inventory");
+        inventory = new GameObject("Inventory",typeof(RectTransform));
         canvas.AddModule(inventory);
         inventory.AddComponent<Image>();
         inventory.GetComponent<Image>().color = new UnityEngine.Color(134,183,219,90) / 256f;

@@ -9,9 +9,16 @@ public class AsteroidController : MonoBehaviour
     private float moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
     private Vector3 originPoint = new Vector3();
     private GameObject spawner;
+    private BaseAsteroidState asteroid;
+
+
+    private GameObject infoWindow = null;
+    private bool isClicked = false;
 
     [SerializeField] private AsteroidType asteroidType;
     [SerializeField] private string name;
+
+    public BaseAsteroidState Asteroid => asteroid;
 
     public enum AsteroidType
     {
@@ -20,10 +27,11 @@ public class AsteroidController : MonoBehaviour
         empty
     }
 
-    public void Init(Transform spawner)
+    public void Init(Transform spawner,BaseAsteroidState asteroidState)
     {
         this.originPoint = spawner.transform.position;
         this.spawner = spawner.gameObject;
+        this.asteroid = asteroidState;
 
         xMax += originPoint.x;
         xMin += originPoint.x;
@@ -31,6 +39,19 @@ public class AsteroidController : MonoBehaviour
         yMin += originPoint.y;
 
         this.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
+
+        this.GetComponent<SpriteRenderer>().sprite = asteroid.Data.Icon;
+        this.GetComponent<SphereCollider>().isTrigger = true;
+    }
+
+    public void RemoveInfoWindow()
+    {
+        if(infoWindow != null)
+        {
+            Destroy(infoWindow.gameObject);
+            infoWindow = null;
+            isClicked = false;
+        }
     }
 
     private void OnValidate()
@@ -75,12 +96,6 @@ public class AsteroidController : MonoBehaviour
     [SerializeField]
     private float delayTime = 10f;
 
-    private void Awake()
-    {
-        this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/Asteroids/Asteroid_TestType");
-        this.GetComponent<SphereCollider>().isTrigger = true;
-    }
-
     private void FixedUpdate()
     {
         if (moveEnd)
@@ -122,20 +137,53 @@ public class AsteroidController : MonoBehaviour
         if(other.GetComponent<Bullet>())
         {
             var bullet = other.GetComponent<Bullet>();
-            this.GetComponent<AsteroidData>().ChangeHealth(-bullet.Strength);
+            this.GetComponent<BaseAsteroidState>().ChangeHealth(-bullet.Strength);
             Destroy(other.gameObject);
         }    
         Debug.Log($"Trigger of asteroid and {other.gameObject.name}");
         this.GetComponent<SpriteRenderer>().color = UnityEngine.Color.magenta;
     }
 
-    private void OnDestroy()
+
+
+    private void OnMouseEnter()
     {
-        if(gameObject.scene.isLoaded)
+        var data = this.gameObject.GetComponent<BaseAsteroidState>();
+        Debug.Log($"Это объект: {data.Data.Title} {data.Data.Description} {data.Health}/{data.MaxHealth}");
+
+        if(infoWindow == null)
         {
-            spawner.GetComponent<AsteroidSpawner>().RemoveAsteroid();
+            infoWindow = new GameObject("InfoWindow");
+            infoWindow.AddComponent<InfoWindow>().Init(this.gameObject.GetComponent<AsteroidController>());
         }
     }
 
+    private void OnMouseDown()
+    {
+        isClicked = true;
+    }
+
+    private void OnMouseExit()
+    {
+        if(infoWindow != null && !isClicked)
+        {
+            Destroy(infoWindow.gameObject);
+            infoWindow = null;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameObject.scene.isLoaded)
+        {
+            spawner.GetComponent<AsteroidSpawner>().RemoveAsteroid();
+
+            if (infoWindow != null && !isClicked)
+            {
+                Destroy(infoWindow.gameObject);
+                infoWindow = null;
+            }
+        }
+    }
 }
 

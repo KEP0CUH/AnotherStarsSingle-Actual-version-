@@ -56,10 +56,10 @@ public enum EntityType
 
 public enum AsteroidType
 {
-    AsteroidGold = 1,
-    AsteroidFerrum,
-    AsteroidNickel,
-    AsteroidTitan
+    GoldAsteroid = 1,
+    FerrumAsteroid,
+    NickelAsteroid,
+    TitanAsteroid
 }
 
 public enum EntityKind
