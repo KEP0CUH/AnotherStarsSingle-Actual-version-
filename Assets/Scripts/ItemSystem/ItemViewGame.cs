@@ -8,15 +8,17 @@ using UnityEngine;
 public class ItemViewGame : MonoBehaviour
 {
     [SerializeField]
-    private BaseScriptableItemData data;
+    private BaseItemState state;
 
-    public BaseScriptableItemData Data => data;
+    public BaseItemState State => state;
 
     private bool triggerWorked = false;
 
-    public void Init(BaseScriptableItemData data)
+    public void Init(BaseItemData data, int count)
     {
-        this.data = data;
+        gameObject.AddComponent<BaseItemState>();
+        state = gameObject.GetComponent<BaseItemState>();
+        this.state.Init(data,count);
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = data.Icon;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -25,14 +27,14 @@ public class ItemViewGame : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // if other.tag == player && player.WantsToTake
-
         if (triggerWorked == false)
         {
-            Managers.Inventory.AddItem(data);
-            Destroy(this.gameObject);
+            if (other.GetComponent<PlayerController>())
+            {
+                Managers.Inventory.AddItem(state.Data);
+                Destroy(this.gameObject);
+                triggerWorked = true;
+            }
         }
-        triggerWorked = true;
-
     }
 }

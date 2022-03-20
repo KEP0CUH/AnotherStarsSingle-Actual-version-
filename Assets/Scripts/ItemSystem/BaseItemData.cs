@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public abstract class BaseItemData : MonoBehaviour
+[CreateAssetMenu(menuName ="Items",fileName ="NewItem",order=51)]
+public class BaseItemData : ScriptableObject
 {
     [SerializeField]
     private Sprite icon;
@@ -12,18 +12,11 @@ public abstract class BaseItemData : MonoBehaviour
     [SerializeField]
     private string description;
     [SerializeField]
-    private ItemKind kind;
+    private ItemKind kind = ItemKind.rudaFerrum;
 
     public Sprite Icon => icon;
     public string Title => title;
     public string Description => description;
-
-    public BaseItemData Init(ItemKind kind)
-    {
-        this.kind = kind;
-        OnValidate();
-        return this;
-    }
 
     private void OnValidate()
     {

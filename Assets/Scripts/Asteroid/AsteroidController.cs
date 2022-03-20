@@ -7,16 +7,30 @@ using UnityEngine;
 public class AsteroidController : MonoBehaviour
 {
     private float moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
+    private Vector3 originPoint = new Vector3();
+    private GameObject spawner;
 
     [SerializeField] private AsteroidType asteroidType;
     [SerializeField] private string name;
-
 
     public enum AsteroidType
     {
         gold,
         mineral,
         empty
+    }
+
+    public void Init(Transform spawner)
+    {
+        this.originPoint = spawner.transform.position;
+        this.spawner = spawner.gameObject;
+
+        xMax += originPoint.x;
+        xMin += originPoint.x;
+        yMax += originPoint.y;
+        yMin += originPoint.y;
+
+        this.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
     }
 
     private void OnValidate()
@@ -37,10 +51,10 @@ public class AsteroidController : MonoBehaviour
 
     #region Movement
     // Координаты, в пределах которых осуществляется движение
-    public int xMax = 50;
-    public int xMin = -50;
-    public int yMax = 50;
-    public int yMin = -50;
+    public float xMax = +50;
+    public float xMin = -50;
+    public float yMax = 50;
+    public float yMin = -50;
 
     // Радиус и углы не используются, но в будущем возможно генерация позиции будет именно по окружности, а не по прямоугольнику.
     public int radius = 50;
@@ -107,12 +121,20 @@ public class AsteroidController : MonoBehaviour
     {
         if(other.GetComponent<Bullet>())
         {
-            this.GetComponent<AsteroidData>().ChangeHealth(35);
+            var bullet = other.GetComponent<Bullet>();
+            this.GetComponent<AsteroidData>().ChangeHealth(-bullet.Strength);
             Destroy(other.gameObject);
         }    
         Debug.Log($"Trigger of asteroid and {other.gameObject.name}");
         this.GetComponent<SpriteRenderer>().color = UnityEngine.Color.magenta;
+    }
 
+    private void OnDestroy()
+    {
+        if(gameObject.scene.isLoaded)
+        {
+            spawner.GetComponent<AsteroidSpawner>().RemoveAsteroid();
+        }
     }
 
 }

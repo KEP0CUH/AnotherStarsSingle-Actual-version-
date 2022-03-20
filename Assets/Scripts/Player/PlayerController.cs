@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1 / Constants.TICKS_PER_SEC;
     private Camera mainCamera;
+    private Camera radarCamera;
 
     private void Start()
     {
         SetupCamera();
+        SetupRadar();
     }
 
     public void FixedUpdate()
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void SetupCamera()
     {
-        GameObject camera = new GameObject("MainCamera2");
+        GameObject camera = new GameObject("MainCamera");
         camera.AddComponent<Camera>();
 
         mainCamera = camera.GetComponent<Camera>();
@@ -93,10 +95,24 @@ public class PlayerController : MonoBehaviour
         mainCamera = camera.GetComponent<Camera>();
     }
 
+    private void SetupRadar()
+    {
+        GameObject radarCam = new GameObject("RadarCamera");
+        radarCam.AddComponent<Camera>();
+
+        var cam = radarCam.GetComponent<Camera>();
+        cam.orthographicSize = 20;
+        cam.backgroundColor = UnityEngine.Color.grey;
+        cam.orthographic = true;
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        cam.targetTexture = Resources.Load<RenderTexture>("Textures/Radar");
+        radarCamera = cam;
+    }
+
     private void UpdateCameraPosition()
     {
-
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
     
     private void Shoot()

@@ -11,6 +11,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
     public UIModuleKind Kind { get; private set; }
 
     public static InventoryUI Inventory;
+    public static RadarUI Radar;
     
     private List<IUIModule> modules = new List<IUIModule>();
 
@@ -25,6 +26,10 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         canvas.AddComponent<InventoryUI>();
         Inventory = canvas.GetComponent<InventoryUI>();
         modules.Add(Inventory);
+
+        canvas.AddComponent<RadarUI>();
+        Radar = canvas.GetComponent<RadarUI>();
+        modules.Add(Radar);
 
         StartCoroutine(StartupModules());
 

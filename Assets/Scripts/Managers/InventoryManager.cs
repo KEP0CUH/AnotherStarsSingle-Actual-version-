@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour, IGameManager
 {
     [SerializeField]
-    private Dictionary<BaseScriptableItemData,int> items;
+    private Dictionary<BaseItemData,int> items;
 
     public ManagerStatus Status {get;private set;}
 
@@ -13,26 +13,26 @@ public class InventoryManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Inventory manager starting...".SetColor(Color.Yellow));
 
-        items = new Dictionary<BaseScriptableItemData, int>();
+        items = new Dictionary<BaseItemData, int>();
 
         Status = ManagerStatus.Started;
         Debug.Log("Inventory manager started.".SetColor(Color.Green));
     }
 
-    public Dictionary<BaseScriptableItemData, int> GetItemList()
+    public Dictionary<BaseItemData, int> GetItemList()
     {
-        Dictionary<BaseScriptableItemData, int> items = new Dictionary<BaseScriptableItemData, int>(this.items);
+        Dictionary<BaseItemData, int> items = new Dictionary<BaseItemData, int>(this.items);
         return items;
     }
 
-    public int GetItemCount(BaseScriptableItemData item)
+    public int GetItemCount(BaseItemData item)
     {
         if(items.ContainsKey(item))
             return items[item];
         return 0;
     }
 
-    public void AddItem(BaseScriptableItemData data)
+    public void AddItem(BaseItemData data)
     {
         foreach(var item in items)
         {
@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour, IGameManager
         DisplayItems();
     }
 
-    public void RemoveItem(BaseScriptableItemData data)
+    public void RemoveItem(BaseItemData data)
     {
         if(items.ContainsKey(data))
         {
