@@ -10,13 +10,13 @@ public class BaseAsteroidData : ScriptableObject
     [SerializeField] private string description;
     [SerializeField] private AsteroidType type;
     [SerializeField] private Sprite icon;
-    [SerializeField] private string dropName;
+    [SerializeField] private ItemKind dropKind;
 
     public string Title => title;
     public string Description => description;
     public AsteroidType Type => type;
     public Sprite Icon => icon;
-    public string DropName => dropName;
+    public ItemKind DropKind => dropKind;
 
     public void Init(AsteroidType asteroidType)
     {
@@ -32,13 +32,13 @@ public class BaseAsteroidData : ScriptableObject
                 title = "GoldAsteroid";
                 description = "Астероид, содержащий в себе до 5% золота.";
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.GoldAsteroid.ToString());
-                dropName = "Gold";
+                dropKind = ItemKind.rudaGold;
                 break;
             case AsteroidType.FerrumAsteroid:
                 title = "FerrumAsteroid";
                 description = "Астероид с примесями железа.";
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
-                dropName = "Ferrum";
+                dropKind = ItemKind.rudaFerrum;
                 break;
 
         }

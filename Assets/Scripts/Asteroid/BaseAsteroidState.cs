@@ -36,10 +36,10 @@ public class BaseAsteroidState : MonoBehaviour
     {
         if (gameObject.scene.isLoaded)
         {
-            GameObject drop = new GameObject("Item: " + this.data.DropName);
+            GameObject drop = new GameObject("Item: " + this.data.DropKind.ToString());
             drop.transform.position = this.gameObject.transform.position;
 
-            var data = Resources.Load<BaseItemData>($"ScriptableObjects/" + this.data.DropName);
+            var data = Managers.Resources.DownloadData(this.data.DropKind);
 
             drop.AddComponent<ItemViewGame>().Init(data, 4);
         }

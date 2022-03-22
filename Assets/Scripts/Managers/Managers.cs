@@ -6,12 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
 [RequireComponent(typeof(CanvasUI))]
+[RequireComponent(typeof(ResourceLoader))]
 public class Managers : MonoBehaviour
 {
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
-
-    public static CanvasUI Canvas { get; set; }
+    public static CanvasUI Canvas { get; private set; }
+    public static ResourceLoader Resources { get; private set; }
 
     private List<IGameManager> gameManagers = new List<IGameManager>();
 
@@ -20,11 +21,13 @@ public class Managers : MonoBehaviour
         Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
         Canvas = GetComponent<CanvasUI>();
+        Resources = GetComponent<ResourceLoader>();
 
         gameManagers = new List<IGameManager>();
         gameManagers.Add(Player);
         gameManagers.Add(Inventory);
         gameManagers.Add(Canvas);
+        gameManagers.Add(Resources);
 
         StartCoroutine(StartupManagers());
 

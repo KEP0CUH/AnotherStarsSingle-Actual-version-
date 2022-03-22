@@ -1,8 +1,7 @@
 public interface IInventory 
 {
-    public void AddItem();
+    public void AddItem(ItemKind kind, int count);
     public BaseItemData GetItem(ItemKind kind);
-    public void RemoveItem();
+    public void RemoveItem(ItemKind kind,int count);
 
-    
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent (typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody))]
-public class ItemViewGame : MonoBehaviour
+public class ItemViewGame : MonoBehaviour, Interactable
 {
     [SerializeField]
     private BaseItemState state;
@@ -36,5 +36,15 @@ public class ItemViewGame : MonoBehaviour
                 triggerWorked = true;
             }
         }
+    }
+
+    public void OnPickup()
+    {
+        Debug.Log($"Item {state.Data.Title} picked up.");
+    }
+
+    public void OnDrop()
+    {
+        Debug.Log($"Item {state.Data.Title} dropped.");
     }
 }

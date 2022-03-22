@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     private List<Bullet> bullets = new List<Bullet>();
+
+    private PlayerState state;
+    private PlayerInventory inventory;
 
     private float timer = 0;
     private float shootDelay = 0.5f;
@@ -19,6 +23,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        this.gameObject.AddComponent<PlayerData>().Init();
+        state = new PlayerState(this.gameObject.GetComponent<PlayerData>());
+        inventory = new PlayerInventory();
+
         SetupCamera();
         SetupRadar();
     }
@@ -49,11 +57,6 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-        }
-
-        if(Input.GetKey(KeyCode.A))
-        {
-            SpawnAsteroid();
         }
 
         if(Input.GetKey(KeyCode.I))
@@ -148,13 +151,5 @@ public class PlayerController : MonoBehaviour
         bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
         bullet.AddComponent<Bullet>();
         Destroy(bullet, 10);
-    }
-
-    private void SpawnAsteroid()
-    {
-        Debug.Log("Игрок спавнит астероид.");
-        GameObject asteroid = new GameObject("Asteroid");
-        asteroid.AddComponent<AsteroidController>();
-        Destroy(asteroid, 100);
     }
 }

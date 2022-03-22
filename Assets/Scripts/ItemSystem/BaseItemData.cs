@@ -17,6 +17,7 @@ public class BaseItemData : ScriptableObject
     public Sprite Icon => icon;
     public string Title => title;
     public string Description => description;
+    public ItemKind ItemKind => kind;
 
     private void OnValidate()
     {
