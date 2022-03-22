@@ -17,4 +17,20 @@ public class PlayerState
         this.data = data;
     }
 
+
+    public void ChangeHealth(int value)
+    {
+        health += value;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else if (health < 0)
+        {
+            health = 0;
+        }
+
+        Debug.Log($"CurrentHealth: {health} / {maxHealth}");
+    }
+
 }

@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Camera radarCamera;
 
+    public PlayerState State => state;
+    public PlayerInventory Inventory => inventory;
+
     private void Start()
     {
         this.gameObject.AddComponent<PlayerData>().Init();
@@ -151,5 +154,15 @@ public class PlayerController : MonoBehaviour
         bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
         bullet.AddComponent<Bullet>();
         Destroy(bullet, 10);
+    }
+
+    public void OnItemDrop()
+    {
+
+    }
+
+    public void OnItemPickup()
+    {
+
     }
 }

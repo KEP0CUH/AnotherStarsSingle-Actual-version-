@@ -9,7 +9,7 @@ public class ItemViewGame : MonoBehaviour, Interactable
 {
     [SerializeField]
     private BaseItemState state;
-
+    private IInventory inventory;
     public BaseItemState State => state;
 
     private bool triggerWorked = false;
@@ -31,9 +31,8 @@ public class ItemViewGame : MonoBehaviour, Interactable
         {
             if (other.GetComponent<PlayerController>())
             {
-                Managers.Inventory.AddItem(state.Data);
-                Destroy(this.gameObject);
-                triggerWorked = true;
+                inventory = other.GetComponent<PlayerController>().Inventory;
+                OnPickup();
             }
         }
     }
@@ -41,10 +40,13 @@ public class ItemViewGame : MonoBehaviour, Interactable
     public void OnPickup()
     {
         Debug.Log($"Item {state.Data.Title} picked up.");
+        inventory.AddItem(this.state.Data.ItemKind, 1);
+        Destroy(this.gameObject);
+        triggerWorked = true;
     }
 
     public void OnDrop()
     {
-        Debug.Log($"Item {state.Data.Title} dropped.");
+        
     }
 }

@@ -66,9 +66,9 @@ public class InventoryManager : MonoBehaviour, IGameManager
             itemDisplay += $" {item.Key}: {item.Value}; ";
         }
 
-        Debug.Log(itemDisplay);
+        //Debug.Log(itemDisplay);
 
-        CanvasUI.Inventory.ShowInventory(items);
+        //CanvasUI.Inventory.ShowInventory(items);
     }
 }
 

@@ -44,4 +44,6 @@ public class BaseAsteroidState : MonoBehaviour
             drop.AddComponent<ItemViewGame>().Init(data, 4);
         }
     }
+
+
 }
