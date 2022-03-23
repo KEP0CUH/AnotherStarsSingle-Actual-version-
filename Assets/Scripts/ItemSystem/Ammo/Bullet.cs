@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         var audioObj = new GameObject("Sound of shoot.", typeof(AudioSource));
         var audio = audioObj.GetComponent<AudioSource>();
-        audio.clip = Resources.Load<AudioClip>("Sounds/Weapons/BattleFotressGun1");
+        audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
         audio.Play();
         Destroy(audioObj, 2);
 

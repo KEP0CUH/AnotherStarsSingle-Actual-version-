@@ -18,7 +18,7 @@ public enum ItemKind
 
     #region weapons
     weaponKinetic = 91,
-    weaponLaser,
+    weaponRocket,
     weaponEnergetic,
     #endregion
 
@@ -51,6 +51,12 @@ public enum ItemKind
     GreenLaserAmmo = 1004
     #endregion
 
+}
+
+public enum SoundKind
+{
+    ShotKinetic1 = 10,
+    ShotKinetic2 = 11
 }
 
 public enum EntityType

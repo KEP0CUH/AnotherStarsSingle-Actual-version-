@@ -19,10 +19,12 @@ public class BaseItemData : ScriptableObject
     public string Description => description;
     public ItemKind ItemKind => kind;
 
-    private void OnValidate()
+    protected void OnValidate()
     {
         switch (kind)
         {
+            #region Ruda
+
             case ItemKind.rudaFerrum:
                 name = "Ferrum";
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
@@ -45,16 +47,29 @@ public class BaseItemData : ScriptableObject
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
                 title = "Титан";
                 break;
+            #endregion
+
+            #region Guns
 
             case ItemKind.weaponKinetic:
-                name = "Кинетическое";
+                name = "KineticWeapon";
+                icon = Resources.Load<Sprite>("Icons/Items/Guns/Gun1");
+                title = "Кинетическое";
+                description = "Кинетическое оружие";
                 break;
-            case ItemKind.weaponLaser:
-                name = "Лазерное";
+            case ItemKind.weaponRocket:
+                name = "Laser";
+                //icon = 
+                title = "Лазерное";
                 break;
             case ItemKind.weaponEnergetic:
-                name = "Энергетическое";
+                name = "Laser";
+                //icon = 
+                title = "Энергетическое";
                 break;
+            #endregion
+
+            #region Ammo
 
             case ItemKind.blueLaserAmmo:
                 name = "BlueLaser";
@@ -68,6 +83,7 @@ public class BaseItemData : ScriptableObject
                 title = "Красный лазерный патрон.";
                 description = "Слабый патрон, позволяющий разрушать астероиды.";
                 break;
+           #endregion
         }
     }
 }

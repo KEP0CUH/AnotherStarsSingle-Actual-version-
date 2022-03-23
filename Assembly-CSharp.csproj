@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Guns\GunData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

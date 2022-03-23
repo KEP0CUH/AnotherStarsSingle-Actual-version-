@@ -356,6 +356,7 @@
 "Assets/Scripts/ItemSystem/Ammo/Bullet.cs"
 "Assets/Scripts/ItemSystem/BaseItemData.cs"
 "Assets/Scripts/ItemSystem/BaseItemState.cs"
+"Assets/Scripts/ItemSystem/Guns/GunData.cs"
 "Assets/Scripts/ItemSystem/ItemViewGame.cs"
 "Assets/Scripts/Managers/AsteroidManager.cs"
 "Assets/Scripts/Managers/GameManager.cs"
