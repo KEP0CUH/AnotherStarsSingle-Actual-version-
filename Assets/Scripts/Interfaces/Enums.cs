@@ -44,6 +44,12 @@ public enum ItemKind
     #region other
     otherRubbish,
     #endregion
+    #region Ammo
+    redLaserAmmo = 1001,
+    blueLaserAmmo = 1002,
+    yellowLaserAmmo = 1003,
+    GreenLaserAmmo = 1004
+    #endregion
 
 }
 

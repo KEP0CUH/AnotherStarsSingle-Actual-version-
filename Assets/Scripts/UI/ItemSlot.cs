@@ -76,9 +76,10 @@ public class ItemSlot : MonoBehaviour
     private void DropItem()
     {
         inventory.RemoveItem(itemData.ItemKind, 1);
+        var item = new GameObject("Item" + itemData.Title, typeof(ItemViewGame));
+        item.GetComponent<ItemViewGame>().Init(itemData, 1);
+
         Destroy(this.gameObject);
-        //Managers.Inventory.RemoveItem(itemView.State.Data);
-        //itemView.GetComponent<ItemViewGame>().OnDrop();
     }
 
 

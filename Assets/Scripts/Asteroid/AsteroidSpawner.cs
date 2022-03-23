@@ -15,6 +15,7 @@ public class AsteroidSpawner : MonoBehaviour
     {
         asteroids.Add(AsteroidType.GoldAsteroid);
         asteroids.Add(AsteroidType.FerrumAsteroid);
+        asteroids.Add(AsteroidType.NickelAsteroid);
 
         currentExistNum = 0;
         maxExistNum = 34;

@@ -13,7 +13,6 @@ public class PlayerInventory : IInventory
 
     public void AddItem(ItemKind kind,int count)
     {
-        Debug.Log("New item was added.".SetColor(Color.Magenta));
         foreach(var item in items)
         {
             if(item.Key == kind)
@@ -32,7 +31,7 @@ public class PlayerInventory : IInventory
     {
         if(items.ContainsKey(kind))
         {
-            var data = Resources.Load<BaseItemData>($"ScriptableObjects/" + kind.ToString());
+            var data = Managers.Resources.DownloadData(kind);
             return data;
         }
         return null;
@@ -54,7 +53,6 @@ public class PlayerInventory : IInventory
         foreach(var item in items)
         {
             CanvasUI.Inventory.ShowInventory(this,items);
-            Debug.Log($"{item.Key}: {item.Value}");
         }
 
     }

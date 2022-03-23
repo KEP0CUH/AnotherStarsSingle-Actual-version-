@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Items",fileName ="NewItem",order=51)]
+[CreateAssetMenu(menuName = "Items", fileName = "NewItem", order = 51)]
 public class BaseItemData : ScriptableObject
 {
     [SerializeField]
@@ -47,20 +47,27 @@ public class BaseItemData : ScriptableObject
                 break;
 
             case ItemKind.weaponKinetic:
-                {
-                    name = "Кинетическое";
-                    break;
-                }
+                name = "Кинетическое";
+                break;
             case ItemKind.weaponLaser:
-                {
-                    name = "Лазерное";
-                    break;
-                }
+                name = "Лазерное";
+                break;
             case ItemKind.weaponEnergetic:
-                {
-                    name = "Энергетическое";
-                    break;
-                }
+                name = "Энергетическое";
+                break;
+
+            case ItemKind.blueLaserAmmo:
+                name = "BlueLaser";
+                icon = Resources.Load<Sprite>("Icons/Items/Ammo/" + name);
+                title = "Синий лазерный патрон";
+                description = "Синий патрон, наиболее мощный из имеющихся.";
+                break;
+            case ItemKind.redLaserAmmo:
+                name = "RedLaser";
+                icon = Resources.Load<Sprite>("Icons/Items/Ammo/" + name);
+                title = "Красный лазерный патрон.";
+                description = "Слабый патрон, позволяющий разрушать астероиды.";
+                break;
         }
     }
 }

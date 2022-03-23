@@ -39,7 +39,6 @@ public class ItemViewGame : MonoBehaviour, Interactable
 
     public void OnPickup()
     {
-        Debug.Log($"Item {state.Data.Title} picked up.");
         inventory.AddItem(this.state.Data.ItemKind, 1);
         Destroy(this.gameObject);
         triggerWorked = true;

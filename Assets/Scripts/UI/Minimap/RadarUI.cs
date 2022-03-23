@@ -21,17 +21,26 @@ public class RadarUI : MonoBehaviour, IUIModule
 
     public void Startup(ICanvas canvas)
     {
+        Debug.Log("RadarUI initializing...");
         Status = ManagerStatus.Initializing;
         Kind = UIModuleKind.Radar;
-        Debug.Log("RadarUI initializing...");
 
-        radar = new GameObject("Radar",typeof(RectTransform));
+
+        CreateRadar(canvas);
+
+        Debug.Log("RadarUI started.");
+        Status = ManagerStatus.Started;
+    }
+
+    private void CreateRadar(ICanvas canvas)
+    {
+        radar = new GameObject("Radar", typeof(RectTransform));
         canvas.AddModule(radar);
 
         radar.AddComponent<RawImage>();
         var raw = radar.GetComponent<RawImage>();
         raw.texture = Resources.Load<Texture>("Textures/Radar");
-        raw.color = new UnityEngine.Color(166f,166f,166f,154f) / 256f;
+        raw.color = new UnityEngine.Color(166f, 166f, 166f, 154f) / 256f;
 
         var rect = radar.GetComponent<RectTransform>();
         rect.anchorMax = new Vector2(1, 1);
@@ -40,15 +49,6 @@ public class RadarUI : MonoBehaviour, IUIModule
 
         rect.offsetMax = new Vector2(-10, -10);
         rect.offsetMin = new Vector2(-260, -260);
-
-        //CreateRadar();
-
-        Debug.Log("RadarUI started.");
-        Status = ManagerStatus.Started;
-    }
-
-    private void CreateRadar()
-    {
 
     }
 }

@@ -40,7 +40,12 @@ public class BaseAsteroidData : ScriptableObject
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
                 dropKind = ItemKind.rudaFerrum;
                 break;
-
+            case AsteroidType.NickelAsteroid:
+                title = "NickelAsteroid";
+                description = "Asteroid from nickel.";
+                icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
+                dropKind = ItemKind.rudaNickel;
+                break;
         }
     }
 }
