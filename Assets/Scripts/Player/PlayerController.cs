@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
     private List<Bullet> bullets = new List<Bullet>();
@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
         SetupCamera();
         SetupRadar();
+
+        var ship = this.gameObject.AddComponent<ShipState>().Init(Managers.Resources.DownloadData(ShipKind.Linkor));
+        Debug.Log(ship.Data.Title);
+        GetComponent<SpriteRenderer>().sprite = ship.Data.Icon;
     }
 
     public void FixedUpdate()

@@ -53,6 +53,12 @@ public enum ItemKind
 
 }
 
+public enum ShipKind
+{
+    Linkor = 1,
+    Frigate = 2
+}
+
 public enum SoundKind
 {
     ShotKinetic1 = 10,

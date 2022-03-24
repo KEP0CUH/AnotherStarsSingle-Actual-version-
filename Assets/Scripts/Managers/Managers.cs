@@ -23,7 +23,6 @@ public class Managers : MonoBehaviour
 
         gameManagers = new List<IGameManager>();
         gameManagers.Add(Player);
-
         gameManagers.Add(Canvas);
         gameManagers.Add(Resources);
 

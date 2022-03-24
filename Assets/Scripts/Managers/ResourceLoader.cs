@@ -8,6 +8,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<AsteroidType, BaseAsteroidData> asteroids;
     //private Dictionary<AmmoType, BaseAmmoData> ammo;
     private Dictionary<SoundKind,AudioClip> sounds;
+    private Dictionary<ShipKind, ShipData> ships;
 
 
     public Dictionary<ItemKind, BaseItemData> Items => items;
@@ -21,6 +22,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         items = new Dictionary<ItemKind, BaseItemData>();
         asteroids = new Dictionary<AsteroidType,BaseAsteroidData>();
         sounds = new Dictionary<SoundKind,AudioClip>();
+        ships = new Dictionary<ShipKind, ShipData>();
 
         LoadAllResources();
 
@@ -58,12 +60,23 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
+    public ShipData DownloadData(ShipKind kind)
+    {
+        if (ships.ContainsKey(kind))
+        {
+            return ships[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
     private void LoadAllResources()
     {
         string basePath = $"ScriptableObjects/";
         string mineralsPath = $"Items/Minerals/";
         string ammoPath = $"Items/Ammo/";
         string gunsPath = $"Items/Guns/";
+        string shipsPath = "Ships/";
         string asteroidsPath = $"Asteroids/";
         Resources.Load<AudioClip>("Sounds/ShotKinetic");
         string soundsPath = $"Sounds/";
@@ -86,5 +99,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         sounds.Add(SoundKind.ShotKinetic1, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic1"));
         sounds.Add(SoundKind.ShotKinetic2, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic2"));
+
+        ships.Add(ShipKind.Linkor, Resources.Load<ShipData>(basePath + shipsPath                                + "Linkor1"));
     }
 }
