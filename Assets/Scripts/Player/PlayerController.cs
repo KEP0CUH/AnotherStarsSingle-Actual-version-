@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IObserver
 {
     private List<Bullet> bullets = new List<Bullet>();
 
@@ -168,5 +168,20 @@ public class PlayerController : MonoBehaviour
     public void OnItemPickup()
     {
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+
+        if(other.gameObject.GetComponent<ItemViewGame>())
+        {
+            var view = other.gameObject.GetComponent<ItemViewGame>();
+            view.AddObserver(this.gameObject.GetComponent<PlayerController>());
+        }
+    }
+    public void Invoke(ItemKind kind, int count)
+    {
+        Debug.Log("Invoked");
+        inventory.AddItem(kind, count);
     }
 }

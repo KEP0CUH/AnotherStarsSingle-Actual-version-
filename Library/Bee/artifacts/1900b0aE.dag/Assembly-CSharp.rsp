@@ -352,6 +352,8 @@
 "Assets/Scripts/Interfaces/IInventory.cs"
 "Assets/Scripts/Interfaces/IInventoryUI.cs"
 "Assets/Scripts/Interfaces/Interactable.cs"
+"Assets/Scripts/Interfaces/IObservable.cs"
+"Assets/Scripts/Interfaces/IObserver.cs"
 "Assets/Scripts/Interfaces/IUIModule.cs"
 "Assets/Scripts/ItemSystem/Ammo/Bullet.cs"
 "Assets/Scripts/ItemSystem/BaseItemData.cs"

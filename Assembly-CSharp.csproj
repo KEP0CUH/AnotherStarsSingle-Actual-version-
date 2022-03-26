@@ -53,6 +53,7 @@
     <UnityVersion>2021.1.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGameManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
@@ -66,14 +67,17 @@
     <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
     <Compile Include="Assets\Scripts\UI\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\UI\ItemSlot.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
+    <Compile Include="Assets\Scripts\ShipSystem\ShipState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\BaseItemState.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Guns\GunState.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
@@ -82,15 +86,13 @@
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\Bullet.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICanvas.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidSpawner.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IObservable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Constants.cs" />
     <Compile Include="Assets\Scripts\Managers\ResourceLoader.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
-    <Compile Include="Assets\Scripts\ShipSystem\ShipState.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\Guns\GunState.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
