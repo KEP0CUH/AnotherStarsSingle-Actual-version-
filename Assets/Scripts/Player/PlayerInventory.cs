@@ -4,46 +4,52 @@ using UnityEngine;
 
 public class PlayerInventory : IInventory
 {
-    private Dictionary<ItemKind, int> items;
+    private Dictionary<ItemKind, BaseItemState> items;
 
     public PlayerInventory()
     {
-        items = new Dictionary<ItemKind, int>();
+        items = new Dictionary<ItemKind, BaseItemState>();
     }
 
-    public void AddItem(ItemKind kind,int count)
+    public void AddItem(ItemKind kind, BaseItemState state)
     {
-        foreach(var item in items)
+        foreach (var item in items)
         {
-            if(item.Key == kind)
+            if (item.Key == kind)
             {
-                items[item.Key] += count;
+                items[item.Key].IncreaseNumber();
                 ShowInventory();
                 return;
             }
         }
 
-        items.Add(kind, count);
+        var newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(BaseItemState));
+        var newItemState = newItemStateObj.GetComponent<BaseItemState>();
+        newItemState.Init(kind, state.Count);
+        items.Add(kind, newItemState);
         ShowInventory();
     }
 
-    public BaseItemData GetItem(ItemKind kind)
+    public BaseItemState GetItem(ItemKind kind)
     {
-        if(items.ContainsKey(kind))
+        if (items.ContainsKey(kind))
         {
-            var data = Managers.Resources.DownloadData(kind);
-            return data;
+            return items[kind];
         }
         return null;
     }
 
-    public void RemoveItem(ItemKind kind, int count = 1)
+    public void RemoveItem(ItemKind kind)
     {
         if (items.ContainsKey(kind))
         {
-            items[kind] -= count;
-            if(items[kind] <= 0)
+            items[kind].DecreaseNumber();
+            if (items[kind].Count <= 0)
+            {
+                GameObject.Destroy(items[kind].gameObject);
                 items.Remove(kind);
+            }
+
         }
         ShowInventory();
     }
@@ -52,9 +58,9 @@ public class PlayerInventory : IInventory
     {
         foreach(var item in items)
         {
-            CanvasUI.Inventory.ShowInventory(this,items);
+            Debug.Log($"{item.Key}: {item.Value}".SetColor(Color.Magenta));
         }
-
+        CanvasUI.Inventory.ShowInventory(this, items);
     }
 
 

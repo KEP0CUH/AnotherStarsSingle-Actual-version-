@@ -8,18 +8,15 @@ public class ItemSlot : MonoBehaviour
 {
     private GameObject slot;
     private Transform parent;
-    private BaseItemData itemData;
-    private int count;
+    private BaseItemState state;
 
     private IInventory inventory;
 
-    public void Init(Transform transform,IInventory inventory, BaseItemData itemData,int count)
+    public void Init(Transform transform,IInventory inventory, BaseItemState state)
     {
         this.inventory = inventory;
         this.parent = transform;
-
-        this.itemData = itemData;
-        this.count = count;
+        this.state = state;
 
         CreateItemSlot();
         CanvasUI.Inventory.AddItemSlot(slot);
@@ -27,7 +24,7 @@ public class ItemSlot : MonoBehaviour
 
     private void CreateItemSlot()
     {
-        if(itemData != null)
+        if(state != null)
         {
             slot = this.gameObject;
 
@@ -36,7 +33,7 @@ public class ItemSlot : MonoBehaviour
             colors.pressedColor = new UnityEngine.Color(23, 229, 225, 255) / 256f;
             slot.GetComponent<Selectable>().colors = colors;
 
-            slot.GetComponent<Image>().sprite = itemData.Icon;
+            slot.GetComponent<Image>().sprite = state.Data.Icon;
 
 
             //      Добавление текстовой информации об итеме.
@@ -46,7 +43,7 @@ public class ItemSlot : MonoBehaviour
             var text = itemSlotText.GetComponent<Text>();
             Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
             text.font = font;
-            text.text = $"{itemData.Title}: {count}";
+            text.text = $"{state.Data.Title}: {state.Count}";
 
 
             //      Добавления кнопки выбросить итем и ее настройка.
@@ -71,13 +68,21 @@ public class ItemSlot : MonoBehaviour
         }
     }
 
+    [ContextMenu("Set Gun")]
+    private void SetGun()
+    {
+        if(this.state.Data.ItemKind.GetType() == typeof(GunKind))
+        {
+            //Managers.Player.ChangeGun();
+        }
+    }
 
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.RemoveItem(itemData.ItemKind, 1);
-        var item = new GameObject("Item" + itemData.Title, typeof(ItemViewGame));
-        item.GetComponent<ItemViewGame>().Init(itemData, 1);
+        inventory.RemoveItem(state.Data.ItemKind);
+        var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
+        item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
 
         Destroy(this.gameObject);
     }

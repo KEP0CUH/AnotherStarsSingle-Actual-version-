@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private List<GameObject> itemSlots = new List<GameObject>();
 
-    private Dictionary<ItemKind, int> itemData = new Dictionary<ItemKind, int>();
+    private Dictionary<ItemKind, BaseItemState> itemStates = new Dictionary<ItemKind, BaseItemState>();
 
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
@@ -37,7 +37,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         Debug.Log("InventoryUI started.");
     }
 
-    public void ShowInventory(IInventory inventory,Dictionary<ItemKind, int> items)
+    public void ShowInventory(IInventory inventory,Dictionary<ItemKind, BaseItemState> items)
     {
         foreach (var item in itemSlots)
         {
@@ -46,18 +46,18 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
                 Destroy(item.gameObject);
             }
         }
-        this.itemData.Clear();
+        this.itemStates.Clear();
         itemSlots.Clear();
 
 
         foreach (var item in items)
         {
-            this.itemData[item.Key] = item.Value;
+            this.itemStates[item.Key] = item.Value;
         }
 
-        foreach (var item in this.itemData)
+        foreach (var item in this.itemStates)
         {
-            CreateItemSlot(inventory,Managers.Resources.DownloadData(item.Key), item.Value);
+            CreateItemSlot(inventory, item.Value);
         }
     }
 
@@ -159,10 +159,11 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
 
     [ContextMenu("CreateItemSlot")]
-    private void CreateItemSlot(IInventory inventory,BaseItemData itemData, int count)
+    private void CreateItemSlot(IInventory inventory, BaseItemState state)
     {
-        var itemSlot = new GameObject("Item" + itemData.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
-        itemSlot.GetComponent<ItemSlot>().Init(leftInventoryList.transform,inventory, itemData, count);
+        var itemSlot = new GameObject("Item" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
+        itemSlot.GetComponent<ItemSlot>().Init(leftInventoryList.transform,inventory, state);
+        itemSlots.Add(itemSlot);
     }
 
     private void OnValidate()

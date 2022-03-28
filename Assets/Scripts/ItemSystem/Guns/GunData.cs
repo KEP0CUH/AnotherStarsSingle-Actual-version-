@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Guns",fileName ="NewGun",order =53)]
 public class GunData : BaseItemData
 {
-    [SerializeField] private BaseItemData ammoData;
+    [SerializeField] private BaseItemData data;
     [SerializeField] private ItemKind ammoKind;
 
 
@@ -14,7 +14,7 @@ public class GunData : BaseItemData
         base.OnValidate();
         if(Managers.Resources != null)
         {
-            this.ammoData = Managers.Resources.DownloadData(ammoKind);
+            this.data = Managers.Resources.DownloadData(ammoKind);
         }
 
     }

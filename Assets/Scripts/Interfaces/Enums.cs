@@ -5,6 +5,11 @@ public enum ManagerStatus
     Started
 }
 
+public enum EventType
+{
+    OnItemDrop,
+    OnItemPick,
+}
 public enum UIModuleKind
 {
     Canvas = 2,
@@ -57,6 +62,15 @@ public enum ShipKind
 {
     Linkor = 1,
     Frigate = 2
+}
+
+public enum GunKind
+{
+    #region weapons
+    weaponKinetic = 91,
+    weaponRocket,
+    weaponEnergetic,
+    #endregion
 }
 
 public enum SoundKind

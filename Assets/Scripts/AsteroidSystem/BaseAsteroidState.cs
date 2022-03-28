@@ -41,7 +41,7 @@ public class BaseAsteroidState : MonoBehaviour
 
             var data = Managers.Resources.DownloadData(this.data.DropKind);
 
-            drop.AddComponent<ItemViewGame>().Init(data, 4);
+            drop.AddComponent<ItemViewGame>().Init(data.ItemKind, 4);
         }
     }
 

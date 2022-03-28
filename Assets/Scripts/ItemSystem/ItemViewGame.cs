@@ -15,15 +15,16 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
 
     private bool triggerWorked = false;
 
-    private Action<ItemKind,int> onItemDrop;
+    private Action<ItemKind,BaseItemState> onItemDrop;
+    private Action<ItemKind, int> inItemAddedInventory;
 
-    public void Init(BaseItemData data, int count)
+    public void Init(ItemKind kind, int count)
     {
         gameObject.AddComponent<BaseItemState>();
         state = gameObject.GetComponent<BaseItemState>();
-        this.state.Init(data,count);
+        this.state.Init(kind,count);
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        gameObject.GetComponent<SpriteRenderer>().sprite = data.Icon;
+        gameObject.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
@@ -36,45 +37,40 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
             {
                 inventory = other.GetComponent<PlayerController>().Inventory;
                 triggerWorked = true;
-                onItemDrop.Invoke(this.state.Data.ItemKind, 1);
+                for(int i = 0; i < this.state.Count;i++)
+                {
+                    onItemDrop.Invoke(this.state.Data.ItemKind, state);
+                }
             }
         }
     }
-
-
 
     public void OnDrop()
     {
         
     }
 
-    public void AddObserver(IObserver observer)
+    public void AddObserver(IObserver observer,EventType eventType)
     {
         if (observers.Contains(observer))
         {
             return;
         }
-        onItemDrop += (kind, count) =>
-        {
-            observers.Add(observer);
-            observer.Invoke(kind, count);
-            Destroy(this.gameObject);
-        };
 
+        if(eventType == EventType.OnItemDrop)
+        {
+            onItemDrop += (kind, state) =>
+            {
+                observers.Add(observer);
+                observer.Invoke(eventType,kind, state);
+                Destroy(this.gameObject);
+            };
+        }
     }
 
     public void RemoveObserver(IObserver observer)
     {
         //
-    }
-    public void NotifyObservers()
-    {
-        Debug.Log($"Notification worked.");
-
-        foreach (var o in observers)
-        {
-            //o.Invoke(this.state.Data.ItemKind, 1);
-        }
     }
 
     public void OnPickup()

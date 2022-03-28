@@ -11,9 +11,9 @@ public class GunViewGame : MonoBehaviour
     private GunState state;
     private IInventory inventory;
 
-    public void Init(GunData data,int ammoMax)
+    public void Init(GunKind kind,int ammoMax)
     {
-        this.state = this.gameObject.AddComponent<GunState>().Init(data,ammoMax);
+        this.state = this.gameObject.AddComponent<GunState>().Init(kind,ammoMax);
 
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;

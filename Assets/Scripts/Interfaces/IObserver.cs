@@ -1,4 +1,4 @@
 public interface IObserver
 {
-    public void Invoke(ItemKind kind, int count);
+    public void Invoke(EventType eventType,ItemKind kind, BaseItemState state);
 }

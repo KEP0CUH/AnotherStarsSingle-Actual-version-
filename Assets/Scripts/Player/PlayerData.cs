@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private string title;
     [SerializeField] private string name;
     [SerializeField] private Sprite icon;
-    [SerializeField] private string ship;
+
 
     public Sprite Icon => icon;
 

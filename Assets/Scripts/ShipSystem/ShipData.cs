@@ -12,7 +12,7 @@ public class ShipData : ScriptableObject
     [SerializeField]
     private string description;
     [SerializeField]
-    private ShipKind kind = ShipKind.Linkor;
+    private ShipKind kind;
 
     public Sprite Icon => icon;
     public string Title => title;

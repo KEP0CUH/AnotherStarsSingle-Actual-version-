@@ -5,14 +5,14 @@ using UnityEngine;
 public class BaseItemState : MonoBehaviour, Interactable
 {
     [SerializeField] private BaseItemData data;
-    [SerializeField] private int count;
+    [SerializeField] protected int count;
 
     public BaseItemData Data => data;
     public int Count => count;
 
-    public void Init(BaseItemData data, int count)
+    public void Init(ItemKind kind, int count)
     {
-        this.data = data;
+        this.data = Managers.Resources.DownloadData(kind);
         this.count = count;
     }
 
@@ -24,5 +24,19 @@ public class BaseItemState : MonoBehaviour, Interactable
     public void OnPickup()
     {
         Debug.Log("Item was picked up.");
+    }
+
+    public void IncreaseNumber()
+    {
+        this.count++;
+    }
+    public void DecreaseNumber()
+    {
+        this.count--;
+    }
+
+    public virtual bool IsWeapon()
+    {
+        return false;
     }
 }

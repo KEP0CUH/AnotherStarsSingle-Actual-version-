@@ -30,13 +30,13 @@ public class BaseAsteroidData : ScriptableObject
         {
             case AsteroidType.GoldAsteroid:
                 title = "GoldAsteroid";
-                description = "Астероид, содержащий в себе до 5% золота.";
+                description = "РђСЃС‚РµСЂРѕРёРґ, СЃРѕРґРµСЂР¶Р°С‰РёР№ РІ СЃРµР±Рµ РґРѕ 5% Р·РѕР»РѕС‚Р°.";
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.GoldAsteroid.ToString());
                 dropKind = ItemKind.rudaGold;
                 break;
             case AsteroidType.FerrumAsteroid:
                 title = "FerrumAsteroid";
-                description = "Астероид с примесями железа.";
+                description = "РђСЃС‚РµСЂРѕРёРґ СЃ РїСЂРёРјРµСЃСЏРјРё Р¶РµР»РµР·Р°.";
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
                 dropKind = ItemKind.rudaFerrum;
                 break;

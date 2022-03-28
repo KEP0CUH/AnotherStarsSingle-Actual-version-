@@ -29,11 +29,12 @@ public class PlayerController : MonoBehaviour, IObserver
         this.gameObject.AddComponent<PlayerData>().Init();
         state = new PlayerState(this.gameObject.GetComponent<PlayerData>());
         inventory = new PlayerInventory();
+        Managers.Player.Init(this);
 
         SetupCamera();
         SetupRadar();
 
-        var ship = this.gameObject.AddComponent<ShipState>().Init(Managers.Resources.DownloadData(ShipKind.Linkor));
+        var ship = this.gameObject.AddComponent<ShipState>().Init(ShipKind.Linkor);
         Debug.Log(ship.Data.Title);
         GetComponent<SpriteRenderer>().sprite = ship.Data.Icon;
     }
@@ -172,16 +173,23 @@ public class PlayerController : MonoBehaviour, IObserver
 
     public void OnTriggerEnter(Collider other)
     {
-
         if(other.gameObject.GetComponent<ItemViewGame>())
         {
             var view = other.gameObject.GetComponent<ItemViewGame>();
-            view.AddObserver(this.gameObject.GetComponent<PlayerController>());
+            view.AddObserver(this.gameObject.GetComponent<PlayerController>(),EventType.OnItemDrop);
         }
     }
-    public void Invoke(ItemKind kind, int count)
+    public void Invoke(EventType eventType,ItemKind kind, BaseItemState state)
     {
-        Debug.Log("Invoked");
-        inventory.AddItem(kind, count);
+        if(eventType == EventType.OnItemDrop)
+        {
+            Debug.Log("Invoked event OnItemDrop.");
+            inventory.AddItem(kind, state);
+        }
+    }
+
+    public void SetGun(GunState gun)
+    {
+        this.state.ChangeGun(gun);
     }
 }

@@ -7,6 +7,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<ItemKind,BaseItemData> items;
     private Dictionary<AsteroidType, BaseAsteroidData> asteroids;
     //private Dictionary<AmmoType, BaseAmmoData> ammo;
+    private Dictionary<GunKind, GunData> guns;
     private Dictionary<SoundKind,AudioClip> sounds;
     private Dictionary<ShipKind, ShipData> ships;
 
@@ -35,6 +36,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if(items.ContainsKey(kind))
         {
             return items[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public GunData DownloadData(GunKind kind)
+    {
+        if (guns.ContainsKey(kind))
+        {
+            return guns[kind];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -101,5 +112,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         sounds.Add(SoundKind.ShotKinetic2, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic2"));
 
         ships.Add(ShipKind.Linkor, Resources.Load<ShipData>(basePath + shipsPath                                + "Linkor1"));
+
+        //guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Gun1"));
     }
 }
