@@ -5,20 +5,36 @@ using UnityEngine;
 public class ShipState : MonoBehaviour
 {
     [SerializeField] private ShipData data;
-    [SerializeField] private GunState gun; 
+    [SerializeField] private List<GunState> guns; 
 
     public ShipData Data => data;
-    public GunState Gun => gun;
+    public List<GunState> Guns => guns;
 
     public ShipState Init(ShipKind kind)
     {
-
         this.data = Managers.Resources.DownloadData(kind);
+        guns = new List<GunState>();
         return this;
     }
 
+    
+
     public void SetGun(GunState gun)
     {
-        this.gun = gun;
+        AddGun(gun);
     }
+
+    private void AddGun(GunState state)
+    {
+        GameObject newItemStateObj;
+        BaseItemState newItemState;
+
+        newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
+        newItemState = newItemStateObj.GetComponent<GunState>();
+
+        newItemState.Init(state.GunKind, state.Count);
+        this.guns.Add((GunState)newItemState);
+    }
+
+
 }

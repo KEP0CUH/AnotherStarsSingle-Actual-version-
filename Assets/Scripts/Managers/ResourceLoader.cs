@@ -24,6 +24,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         asteroids = new Dictionary<AsteroidType,BaseAsteroidData>();
         sounds = new Dictionary<SoundKind,AudioClip>();
         ships = new Dictionary<ShipKind, ShipData>();
+        guns = new Dictionary<GunKind,GunData>();
 
         LoadAllResources();
 
@@ -97,7 +98,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         items.Add(ItemKind.rudaNickel, Resources.Load<BaseItemData>(basePath + mineralsPath                     + "Nickel"));
         items.Add(ItemKind.rudaTitan, Resources.Load<BaseItemData>($""));
 
-        items.Add(ItemKind.weaponKinetic, Resources.Load<BaseItemData>(basePath + gunsPath                      + "Gun1"));
+        items.Add(ItemKind.weaponKinetic, Resources.Load<BaseItemData>(basePath + gunsPath                      + "Laser"));
+        Debug.Log(items[ItemKind.weaponKinetic].Title);
 
         items.Add(ItemKind.blueLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                      + "BlueLaser"));
         items.Add(ItemKind.redLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                       + "RedLaser"));
@@ -113,6 +115,6 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         ships.Add(ShipKind.Linkor, Resources.Load<ShipData>(basePath + shipsPath                                + "Linkor1"));
 
-        //guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Gun1"));
+        guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Laser"));
     }
 }

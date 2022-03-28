@@ -23,9 +23,22 @@ public class PlayerInventory : IInventory
             }
         }
 
-        var newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(BaseItemState));
-        var newItemState = newItemStateObj.GetComponent<BaseItemState>();
-        newItemState.Init(kind, state.Count);
+
+        GameObject newItemStateObj;
+        BaseItemState newItemState;
+
+        if (state.IsWeapon)
+        {
+            newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
+            newItemState = newItemStateObj.GetComponent<GunState>();
+            newItemState.Init(((GunState)state).GunKind, state.Count);
+        }
+        else
+        {
+            newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(BaseItemState));
+            newItemState = newItemStateObj.GetComponent<BaseItemState>();
+            newItemState.Init(kind, state.Count);
+        }
         items.Add(kind, newItemState);
         ShowInventory();
     }

@@ -14,9 +14,10 @@ public class PlayerState
     public PlayerData Data => data;
     public ShipState Ship => ship;
 
-    public PlayerState(PlayerData data)
+    public PlayerState(PlayerData data,ShipState playerShip)
     {
         this.data = data;
+        this.ship = playerShip;
     }
 
     public void ChangeHealth(int value)

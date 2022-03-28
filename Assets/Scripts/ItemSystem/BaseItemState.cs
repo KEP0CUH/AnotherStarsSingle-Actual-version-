@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class BaseItemState : MonoBehaviour, Interactable
 {
-    [SerializeField] private BaseItemData data;
+    [SerializeField] protected BaseItemData data;
     [SerializeField] protected int count;
+    [SerializeField] protected bool isWeapon = false;
 
     public BaseItemData Data => data;
     public int Count => count;
 
-    public void Init(ItemKind kind, int count)
+    public bool IsWeapon => isWeapon;
+
+    public virtual void Init(ItemKind kind, int count)
     {
         this.data = Managers.Resources.DownloadData(kind);
         this.count = count;
+        this.isWeapon = false;
+    }
+
+    public virtual void Init(GunKind kind,int count)
+    {
+        this.data = Managers.Resources.DownloadData(kind);
+        this.count = count;
+        this.isWeapon = true;
     }
 
     public void OnDrop()
@@ -33,10 +44,5 @@ public class BaseItemState : MonoBehaviour, Interactable
     public void DecreaseNumber()
     {
         this.count--;
-    }
-
-    public virtual bool IsWeapon()
-    {
-        return false;
     }
 }

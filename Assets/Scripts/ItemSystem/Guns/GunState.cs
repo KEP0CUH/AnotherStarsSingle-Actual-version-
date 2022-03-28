@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class GunState : BaseItemState
 {
-    [SerializeField] private GunData data;
+    [SerializeField] private GunKind gunKind;
     private int maxAmmo;
 
-    public GunData Data => data;
+    public GunKind GunKind => gunKind;
     public int MaxAmmo => maxAmmo;
 
-    public GunState Init(GunKind kind,int maxAmmo)
+    public override void Init(GunKind kind, int count)
     {
         this.data = Managers.Resources.DownloadData(kind);
-        this.maxAmmo = maxAmmo;
-        return this;
-    }
-
-    public override bool IsWeapon()
-    {
-        return true;
+        this.count = count;
+        this.isWeapon = true;
+        this.gunKind = kind;
     }
 
 }

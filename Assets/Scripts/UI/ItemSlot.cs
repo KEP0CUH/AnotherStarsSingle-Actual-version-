@@ -12,7 +12,7 @@ public class ItemSlot : MonoBehaviour
 
     private IInventory inventory;
 
-    public void Init(Transform transform,IInventory inventory, BaseItemState state)
+    public void Init(Transform transform, IInventory inventory, BaseItemState state)
     {
         this.inventory = inventory;
         this.parent = transform;
@@ -24,7 +24,7 @@ public class ItemSlot : MonoBehaviour
 
     private void CreateItemSlot()
     {
-        if(state != null)
+        if (state != null)
         {
             slot = this.gameObject;
 
@@ -71,10 +71,13 @@ public class ItemSlot : MonoBehaviour
     [ContextMenu("Set Gun")]
     private void SetGun()
     {
-        if(this.state.Data.ItemKind.GetType() == typeof(GunKind))
+        Debug.Log($"{this.state.IsWeapon}");
+        if (this.state.IsWeapon)
         {
-            //Managers.Player.ChangeGun();
+            var gunState = (GunState)this.state;
+            Managers.Player.ChangeGun(gunState);
         }
+
     }
 
     [ContextMenu("DropItem")]

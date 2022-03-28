@@ -27,16 +27,19 @@ public class PlayerController : MonoBehaviour, IObserver
     private void Start()
     {
         this.gameObject.AddComponent<PlayerData>().Init();
-        state = new PlayerState(this.gameObject.GetComponent<PlayerData>());
+
+        var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.Linkor);
+        Debug.Log(shipState.Data.Title);
+
+        state = new PlayerState(this.gameObject.GetComponent<PlayerData>(),shipState);
         inventory = new PlayerInventory();
         Managers.Player.Init(this);
 
         SetupCamera();
         SetupRadar();
 
-        var ship = this.gameObject.AddComponent<ShipState>().Init(ShipKind.Linkor);
-        Debug.Log(ship.Data.Title);
-        GetComponent<SpriteRenderer>().sprite = ship.Data.Icon;
+
+        GetComponent<SpriteRenderer>().sprite = shipState.Data.Icon;
     }
 
     public void FixedUpdate()
