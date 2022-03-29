@@ -33,7 +33,6 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         gameObject.AddComponent<GunState>();
         state = gameObject.GetComponent<GunState>();
         this.state.Init(kind, ammo);
-        Debug.Log($"{this.state.Data.Title}".SetColor(Color.Magenta));
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;

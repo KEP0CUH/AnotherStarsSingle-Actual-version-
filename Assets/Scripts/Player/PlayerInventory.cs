@@ -69,10 +69,6 @@ public class PlayerInventory : IInventory
 
     public void ShowInventory()
     {
-        foreach(var item in items)
-        {
-            Debug.Log($"{item.Key}: {item.Value}".SetColor(Color.Magenta));
-        }
         CanvasUI.Inventory.ShowInventory(this, items);
     }
 

@@ -84,8 +84,6 @@ public class PlayerController : MonoBehaviour, IObserver
         {
             Managers.Canvas.DisableAllModules();
         }
-
-        //MoveBullets();
     }
 
     // Передвигаем клиента к координатам, на которые он кликнул мышью

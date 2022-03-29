@@ -18,6 +18,8 @@ public class PlayerState
     {
         this.data = data;
         this.ship = playerShip;
+
+        this.ship.SetGun(GunKind.weaponKinetic);
     }
 
     public void ChangeHealth(int value)

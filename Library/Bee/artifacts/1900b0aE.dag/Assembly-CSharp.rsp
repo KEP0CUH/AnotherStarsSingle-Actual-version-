@@ -376,8 +376,9 @@
 "Assets/Scripts/Spawner/Spawner.cs"
 "Assets/Scripts/UI/CanvasUI.cs"
 "Assets/Scripts/UI/InfoWindow.cs"
-"Assets/Scripts/UI/InventoryUI.cs"
-"Assets/Scripts/UI/ItemSlot.cs"
+"Assets/Scripts/UI/Inventory/GunSlot.cs"
+"Assets/Scripts/UI/Inventory/InventoryUI.cs"
+"Assets/Scripts/UI/Inventory/ItemSlot.cs"
 "Assets/Scripts/UI/Minimap/RadarUI.cs"
 -langversion:8.0
 

@@ -5,7 +5,9 @@ using UnityEngine;
 public class ShipState : MonoBehaviour
 {
     [SerializeField] private ShipData data;
-    [SerializeField] private List<GunState> guns; 
+    [SerializeField] private List<GunState> guns;
+
+    private int maxNumGuns = 4;
 
     public ShipData Data => data;
     public List<GunState> Guns => guns;
@@ -21,7 +23,19 @@ public class ShipState : MonoBehaviour
 
     public void SetGun(GunState gun)
     {
-        AddGun(gun);
+        if(IsCanSetGun())
+        {
+            AddGun(gun);
+        }
+
+    }
+
+    public void SetGun(GunKind gunKind)
+    {
+        if(IsCanSetGun())
+        {
+            AddGun(gunKind);
+        }
     }
 
     private void AddGun(GunState state)
@@ -36,5 +50,21 @@ public class ShipState : MonoBehaviour
         this.guns.Add((GunState)newItemState);
     }
 
+    private void AddGun(GunKind gunKind)
+    {
+        var gunDefault = new GameObject("DefaultGun", typeof(GunState));
+        var gunState = gunDefault.GetComponent<GunState>();
+        gunState.Init(GunKind.weaponKinetic, 1);
 
+        this.guns.Add(gunState);
+    }
+
+    private bool IsCanSetGun()
+    {
+        if(guns.Count < maxNumGuns)
+        {
+            return true;
+        }
+        return false;
+    }
 }
