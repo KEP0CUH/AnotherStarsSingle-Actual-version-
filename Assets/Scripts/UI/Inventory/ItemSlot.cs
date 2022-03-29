@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     private BaseItemState state;
 
     private IInventory inventory;
+    private IShipInventory shipInventory;
 
     public void Init(Transform transform, IInventory inventory, BaseItemState state)
     {
@@ -20,6 +21,16 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
         CreateItemSlot();
         CanvasUI.Inventory.AddItemSlot(slot);
+    }
+
+    public void Init(Transform transform, IShipInventory inventory, BaseItemState state)
+    {
+        this.shipInventory = inventory;
+        this.parent = transform;
+        this.state = state;
+
+        CreateItemSlot();
+        CanvasUI.Inventory.AddGunSlot(slot);
     }
 
     private void CreateItemSlot()
@@ -80,7 +91,6 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         Destroy(this.gameObject);
     }
 
-
     [ContextMenu("Set Gun")]
     private void SetGun()
     {
@@ -89,7 +99,6 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
             var gunState = (GunState)this.state;
             Managers.Player.ChangeGun(gunState);
         }
-
     }
 
     public void OnPointerDown(PointerEventData data)

@@ -12,8 +12,10 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private GameObject rightInventoryList;      // Правая часть инвентаря, отображение оборудования корабля.
 
     private List<GameObject> itemSlots = new List<GameObject>();
+    private List<GameObject> gunSlots = new List<GameObject>();
 
     private Dictionary<ItemKind, BaseItemState> itemStates = new Dictionary<ItemKind, BaseItemState>();
+    private List<GunState> gunStates = new List<GunState>();
 
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
@@ -60,6 +62,31 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         foreach (var item in this.itemStates)
         {
             CreateItemSlot(inventory, item.Value);
+        }
+    }
+
+    public void ShowInventory(IShipInventory inventory,List<GunState> guns)
+    {
+        foreach (var gun in gunSlots)
+        {
+            if (gun != null)
+            {
+                Destroy(gun.gameObject);
+            }
+        }
+
+        this.gunStates.Clear();
+        gunSlots.Clear();
+
+
+        foreach (var gun in guns)
+        {
+            this.gunStates.Add(gun);
+        }
+
+        foreach (var gun in this.gunStates)
+        {
+            CreateGunSlot(inventory, gun);
         }
     }
 
@@ -198,6 +225,13 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         itemSlots.Add(itemSlot);
     }
 
+    private void CreateGunSlot(IShipInventory inventory,BaseItemState state)
+    {
+        var gunSlot = new GameObject("Gun" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
+        gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
+        gunSlots.Add(gunSlot);
+    }
+
     private void OnValidate()
     {
         if (inventory != null)
@@ -228,5 +262,10 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     public void AddItemSlot(GameObject slot)
     {
         itemSlots.Add(slot);
+    }
+
+    public void AddGunSlot(GameObject slot)
+    {
+        gunSlots.Add(slot);
     }
 }

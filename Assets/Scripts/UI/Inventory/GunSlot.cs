@@ -11,16 +11,16 @@ public class GunSlot : MonoBehaviour
     private Transform parent;
     private BaseItemState state;
 
-    private IInventory inventory;
+    private IShipInventory inventory;
 
-    public void Init(Transform transform, IInventory inventory, BaseItemState state)
+    public void Init(Transform transform, IShipInventory inventory, BaseItemState state)
     {
         this.inventory = inventory;
         this.parent = transform;
         this.state = state;
 
         CreateItemSlot();
-        CanvasUI.Inventory.AddItemSlot(slot);
+        CanvasUI.Inventory.AddGunSlot(slot);
     }
 
     private void CreateItemSlot()
@@ -84,9 +84,9 @@ public class GunSlot : MonoBehaviour
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.RemoveItem(state.Data.ItemKind);
+        inventory.RemoveItem((GunState)state);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
+        item.GetComponent<ItemViewGame>().Init(((GunState)state).GunKind, 1);
 
         Destroy(this.gameObject);
     }

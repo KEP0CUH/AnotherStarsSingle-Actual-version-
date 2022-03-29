@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunState.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\GunSlot.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindow.cs" />
@@ -93,7 +94,8 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\GunSlot.cs" />
+    <Compile Include="Assets\Scripts\ShipSystem\ShipInventory.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IShipInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
