@@ -57,13 +57,13 @@ public class ShipInventory : IShipInventory
 
     public void ShowInventory()
     {
-        string list = "";
+/*        string list = "";
         foreach(var gun in guns)
         {
             list += $"{gun.Data.Title} ";
 
             Debug.Log(list);
-        }
+        }*/
         CanvasUI.Inventory.ShowInventory(this, guns);
     }
 

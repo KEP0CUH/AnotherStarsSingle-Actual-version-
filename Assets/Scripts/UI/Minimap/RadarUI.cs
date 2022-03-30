@@ -39,6 +39,7 @@ public class RadarUI : MonoBehaviour, IUIModule
 
         radar.AddComponent<RawImage>();
         var raw = radar.GetComponent<RawImage>();
+        raw.raycastTarget = false;
         raw.texture = Resources.Load<Texture>("Textures/Radar");
         raw.color = new UnityEngine.Color(166f, 166f, 166f, 154f) / 256f;
 

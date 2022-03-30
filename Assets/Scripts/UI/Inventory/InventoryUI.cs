@@ -11,6 +11,9 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private GameObject rightInventory;          // Правая часть инвентаря
     private GameObject rightInventoryList;      // Правая часть инвентаря, отображение оборудования корабля.
 
+    private GameObject rightDownInventory;      // Инвентарь, справа внизу.
+    private GameObject rightDownInventoryList;  // Содержимое инвентаря, справа внизу.
+
     private List<GameObject> itemSlots = new List<GameObject>();
     private List<GameObject> gunSlots = new List<GameObject>();
 
@@ -164,6 +167,32 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         scroll.horizontal = false;
 
         rightInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
+        Debug.Log("RightInventory created.");
+
+        CreateRightDownInventory(rightInventory.transform);
+    }
+
+    private void CreateRightDownInventory(Transform parent)
+    {
+        rightDownInventory = new GameObject("RightDownPanel", typeof(Image), typeof(LayoutElement), typeof(ScrollRect), typeof(Mask));
+        rightDownInventory.transform.parent = parent.transform;
+
+        rightDownInventory.GetComponent<LayoutElement>().ignoreLayout = true;
+        var rect = rightDownInventory.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0);
+        rect.anchorMax = new Vector2(1, 0);
+        rect.pivot = new Vector2(1, 0.5f);
+        rect.position = Vector2.zero;
+
+        rect.offsetMin = new Vector2(10, 10);
+        rect.offsetMax = new Vector2(-10, 0.66f * height);
+
+        var scroll = rightDownInventory.GetComponent<ScrollRect>();
+        scroll.inertia = false;
+        scroll.scrollSensitivity = 10;
+        scroll.horizontal = false;
+
+        rightDownInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
         Debug.Log("RightInventory created.");
     }
 

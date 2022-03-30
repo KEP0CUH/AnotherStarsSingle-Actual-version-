@@ -75,7 +75,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     {
         inventory.RemoveItem(state.Data.ItemKind);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
+        if(state.IsWeapon)
+        {
+            item.GetComponent<ItemViewGame>().Init(((GunState)state).GunKind,1);
+        }
+        else item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
 
         Destroy(this.gameObject);
     }
