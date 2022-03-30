@@ -23,9 +23,33 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this.controller = controller;
     }
 
+
     public void ChangeGun(GunState gun)
     {
         controller.SetGun(gun);
     }
+    public void ChangeGun(GunState gun,IInventory inventory)
+    {
+        controller.SetGun(gun,inventory);
+    }
+
+    public void AddItemInventory(GunState state)
+    {
+        controller.Inventory.AddItem(state.Data.ItemKind, state);
+    }
+
+    public void AddItemInventory(ItemKind kind,BaseItemState state)
+    {
+        controller.Inventory.AddItem(kind, state);
+    }
+    public void RemoveItemInventory(GunState state)
+    {
+        controller.Inventory.RemoveItem(state.Data.ItemKind);
+    }
+    public void RemoveItemInventory(ItemKind kind)
+    {
+        controller.Inventory.RemoveItem(kind);
+    }
+
 
 }

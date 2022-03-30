@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
     private PlayerState state;
     private PlayerInventory inventory;
+    private ShipInventory shipInventory;
 
     private float timer = 0;
     private float shootDelay = 0.5f;
@@ -192,5 +193,9 @@ public class PlayerController : MonoBehaviour, IObserver
     public void SetGun(GunState gun)
     {
         this.state.ChangeGun(gun);
+    }
+    public void SetGun(GunState gun,IInventory inventory)
+    {
+        this.state.ChangeGun(gun,inventory);
     }
 }

@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Selectable))]
-public class GunSlot : MonoBehaviour
+public class GunSlot : MonoBehaviour, IPointerDownHandler
 {
     private GameObject slot;
     private Transform parent;
@@ -13,10 +14,10 @@ public class GunSlot : MonoBehaviour
 
     private IShipInventory inventory;
 
-    public void Init(Transform transform, IShipInventory inventory, BaseItemState state)
+    public void Init(Transform transform, IShipInventory shipInventory, BaseItemState state)
     {
-        this.inventory = inventory;
         this.parent = transform;
+        this.inventory = shipInventory;
         this.state = state;
 
         CreateItemSlot();
@@ -44,8 +45,8 @@ public class GunSlot : MonoBehaviour
             var text = itemSlotText.GetComponent<Text>();
             Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
             text.font = font;
-            text.text = $"{state.Data.Title}: {state.Count}";
-
+            //text.text = $"{state.Data.Title}: {state.Count}";
+            text.text = "Оружие";
 
             //      Добавления кнопки выбросить итем и ее настройка.
             var itemSlotDrop = new GameObject("ItemDrop", typeof(Image), typeof(Button));
@@ -91,6 +92,11 @@ public class GunSlot : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        this.inventory.RemoveItem((GunState)this.state);
+        Managers.Player.AddItemInventory((GunState)this.state);
 
-
+        Destroy(this.gameObject);
+    }
 }

@@ -20,7 +20,11 @@ public class ShipState : MonoBehaviour
 
     public void SetGun(GunState gun)
     {
-        inventory.AddItem(gun);
+        this.inventory.AddItem(gun);
+    }
+    public void SetGun(GunState gun,IInventory inventory)
+    {
+        this.inventory.AddItem(gun,inventory);
     }
 
     public void SetGun(GunKind gunKind)

@@ -13,13 +13,26 @@ public class ShipInventory : IShipInventory
         guns = new List<GunState>();
     }
 
+
     public void AddItem(GunState state)
+    {
+        if (guns.Count < maxNumGuns)
+        {
+            var newState = CreateGunStateObject(state);
+
+            this.guns.Add(newState);
+            ShowInventory();
+        }
+    }
+
+    public void AddItem(GunState state,IInventory inventory)
     {
         if(guns.Count < maxNumGuns)
         {
             var newState = CreateGunStateObject(state);
 
             this.guns.Add(newState);
+            inventory.RemoveItem(newState.Data.ItemKind);
             ShowInventory();
         }
     }

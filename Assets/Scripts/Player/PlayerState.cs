@@ -46,5 +46,10 @@ public class PlayerState
     {
         this.ship.SetGun(gun);
     }
+    public void ChangeGun(GunState gun, IInventory inventory)
+    {
+        this.ship.SetGun(gun, inventory);
+    }
+
 
 }
