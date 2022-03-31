@@ -12,6 +12,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<ShipKind, ShipData> ships;
     private Dictionary<Location, LocationData> locations;
     private Dictionary<Planet, PlanetData> planets;
+    private Dictionary<IconType, Sprite> icons;
 
 
     public Dictionary<ItemKind, BaseItemData> Items => items;
@@ -29,6 +30,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         guns = new Dictionary<GunKind,GunData>();
         locations = new Dictionary<Location, LocationData>();
         planets = new Dictionary<Planet, PlanetData>();
+        icons = new Dictionary<IconType, Sprite>();
 
         LoadAllResources();
 
@@ -105,6 +107,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
     }
+
+    public Sprite DownloadData(IconType icon)
+    {
+        if(icons.ContainsKey(icon))
+        {
+            return icons[icon];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
     private void LoadAllResources()
     {
         string basePath = $"ScriptableObjects/";
@@ -115,6 +127,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string asteroidsPath = $"Asteroids/";
         string locationsPath = $"Locations/";
         string planetsPath = $"Planets/";
+        string iconsPath = $"Icons/Interactive/";
         Resources.Load<AudioClip>("Sounds/ShotKinetic");
         string soundsPath = $"Sounds/";
 
@@ -144,6 +157,9 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));
 
-        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + "Arcea"));     
+        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + "Arcea"));
+
+        icons.Add(IconType.Land, Resources.Load<Sprite>(iconsPath                                               + "Land"));
+        icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));
     }
 }

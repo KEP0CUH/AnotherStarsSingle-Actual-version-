@@ -388,6 +388,8 @@
 "Assets/Scripts/UI/Inventory/InventoryUI.cs"
 "Assets/Scripts/UI/Inventory/ItemSlot.cs"
 "Assets/Scripts/UI/Minimap/RadarUI.cs"
+"Assets/Scripts/UI/Planet/InfoPlanetWindow.cs"
+"Assets/Scripts/UI/Planet/PlanetWindow.cs"
 -langversion:8.0
 
 /deterministic

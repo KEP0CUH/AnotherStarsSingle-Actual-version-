@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc85be6ac6c736740b93d26886e1aa91, type: 3}
   m_Name: Krinul
   m_EditorClassIdentifier: 
-  title: 
-  description: 
-  location: 0
-  iconSun: {fileID: 0}
+  title: "\u041A\u0440\u0438\u043D\u0443\u043B"
+  description: "\u0426\u0435\u043D\u0442\u0440 \u0432\u0441\u0435\u043B\u0435\u043D\u043D\u043E\u0439
+    \u0418\u043D\u044B\u0435 \u0417\u0432\u0451\u0437\u0434\u044B"
+  location: 1
+  iconSun: {fileID: 21300000, guid: ae715dc66508d154b80d845cd199d8cc, type: 3}

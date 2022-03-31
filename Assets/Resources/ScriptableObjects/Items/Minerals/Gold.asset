@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8b259ca8c15eb4f8c88f88784766eb, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 0c4b28155acf1f5489d4a0cac8c493a0, type: 3}
+  icon: {fileID: 21300000, guid: 4a290e841c0d08f44b29bf22de78449e, type: 3}
   title: "\u0417\u043E\u043B\u043E\u0442\u043E"
   description: "\u0417\u043E\u043B\u043E\u0442\u043E \u2013 \u044D\u0442\u043E \u0446\u0435\u043D\u043D\u044B\u0439
     \u043C\u0435\u0442\u0430\u043B\u043B, \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439

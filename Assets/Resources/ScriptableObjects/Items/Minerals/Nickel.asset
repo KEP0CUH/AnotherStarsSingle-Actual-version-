@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8b259ca8c15eb4f8c88f88784766eb, type: 3}
   m_Name: Nickel
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 46330950fa688ac47a869eae7fef1e86, type: 3}
+  icon: {fileID: 21300000, guid: 59ca804770b33cb4b964a5a78624d981, type: 3}
   title: "\u041D\u0438\u043A\u0435\u043B\u044C"
   description: 
   kind: 493

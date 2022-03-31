@@ -121,3 +121,9 @@ public enum Planet
     Mars,
     Arcea
 }
+
+public enum IconType
+{
+    Land,
+    Rise
+}

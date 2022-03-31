@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cab96139e03b864182edf78355d7382, type: 3}
   m_Name: Arcea
   m_EditorClassIdentifier: 
-  title: 
+  title: "\u0410\u0440\u0441\u0435\u044F"
   description: 
-  planet: 0
-  iconPlanet: {fileID: 0}
+  planet: 2
+  iconPlanet: {fileID: 21300000, guid: ead6ddc87443b6f479b64b9e40bc91d5, type: 3}

@@ -56,8 +56,10 @@
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGameManager.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IShipInventory.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\BaseItemData.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\BaseAsteroidData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
@@ -77,15 +79,19 @@
     <Compile Include="Assets\Scripts\ItemSystem\BaseItemState.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidController.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunState.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\GunSlot.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindow.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Enums.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\Bullet.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICanvas.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidSpawner.cs" />
@@ -96,12 +102,8 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\LocationData.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetData.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\InfoPlanetWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\PlanetWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

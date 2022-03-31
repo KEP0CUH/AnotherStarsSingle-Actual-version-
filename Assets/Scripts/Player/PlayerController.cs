@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour, IObserver
         var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.Linkor);
         Debug.Log(shipState.Data.Title);
 
-        state = new PlayerState(this.gameObject.GetComponent<PlayerData>(),shipState);
+        state = new PlayerState(this.gameObject.GetComponent<PlayerData>(), shipState);
         inventory = new PlayerInventory();
-        Managers.Player.Init(this,state);
+        Managers.Player.Init(this, state);
 
         SetupCamera();
         SetupRadar();
@@ -45,48 +45,58 @@ public class PlayerController : MonoBehaviour, IObserver
 
     public void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            Vector2 clickPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            MoveToClick(clickPosition, transform.position);
-        }
 
-        if(Input.GetKey(KeyCode.Mouse0))
+        if (Managers.Player.IsLanded == false)
         {
-            timer += Time.fixedDeltaTime;
-            if(timer > shootDelay)
+
+            if (Input.GetKey(KeyCode.Mouse1))
             {
-                if(numOfFires > firesMade)
-                {
-                    Shoot();
-                    firesMade++;
-                    timer -= 12 * Time.fixedDeltaTime;
-                }
-                if(numOfFires <= firesMade)
-                {
-                    timer = 0;
-                    firesMade = 0;
-                }
+                Vector2 clickPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                MoveToClick(clickPosition, transform.position);
+            }
 
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                timer += Time.fixedDeltaTime;
+                if (timer > shootDelay)
+                {
+                    if (numOfFires > firesMade)
+                    {
+                        Shoot();
+                        firesMade++;
+                        timer -= 12 * Time.fixedDeltaTime;
+                    }
+                    if (numOfFires <= firesMade)
+                    {
+                        timer = 0;
+                        firesMade = 0;
+                    }
+                }
+            }
+
+            if (Input.GetKey(KeyCode.M))
+            {
+                CanvasUI.Radar.Enable();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if(CanvasUI.Inventory.IsEnabled)
+            if (CanvasUI.Inventory.IsEnabled)
                 CanvasUI.Inventory.Disable();
             else CanvasUI.Inventory.Enable();
         }
 
-        if(Input.GetKey(KeyCode.M))
-        {
-            CanvasUI.Radar.Enable();
-        }
-
-        if(Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             Managers.Canvas.DisableAllModules();
         }
+    }
+
+    public void UpdateCameraPosition()
+    {
+        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
 
     // Передвигаем клиента к координатам, на которые он кликнул мышью
@@ -126,7 +136,7 @@ public class PlayerController : MonoBehaviour, IObserver
     /// </summary>
     private void SetupCamera()
     {
-        GameObject camera = new GameObject("MainCamera",typeof(Camera),typeof(AudioListener));
+        GameObject camera = new GameObject("MainCamera", typeof(Camera), typeof(AudioListener));
 
         mainCamera = camera.GetComponent<Camera>();
         mainCamera.backgroundColor = UnityEngine.Color.gray;
@@ -149,17 +159,13 @@ public class PlayerController : MonoBehaviour, IObserver
         radarCamera = cam;
     }
 
-    private void UpdateCameraPosition()
-    {
-        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-        radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
-    }
-    
+
+
     private void Shoot()
     {
         Debug.Log("Стреляю");
         GameObject bullet = new GameObject("Bullet");
-        bullet.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,0);
+        bullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
         bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
         bullet.AddComponent<Bullet>();
         Destroy(bullet, 10);
@@ -177,15 +183,15 @@ public class PlayerController : MonoBehaviour, IObserver
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<ItemViewGame>())
+        if (other.gameObject.GetComponent<ItemViewGame>())
         {
             var view = other.gameObject.GetComponent<ItemViewGame>();
-            view.AddObserver(this.gameObject.GetComponent<PlayerController>(),EventType.OnItemDrop);
+            view.AddObserver(this.gameObject.GetComponent<PlayerController>(), EventType.OnItemDrop);
         }
     }
-    public void Invoke(EventType eventType,ItemKind kind, BaseItemState state)
+    public void Invoke(EventType eventType, ItemKind kind, BaseItemState state)
     {
-        if(eventType == EventType.OnItemDrop)
+        if (eventType == EventType.OnItemDrop)
         {
             Debug.Log("Invoked event OnItemDrop.");
             inventory.AddItem(kind, state);
