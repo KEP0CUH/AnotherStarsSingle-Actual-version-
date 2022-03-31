@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IGameManager
 {
     private PlayerController controller;
+    private PlayerState playerState;
 
     public ManagerStatus Status { get; private set; }
 
@@ -18,19 +19,20 @@ public class PlayerManager : MonoBehaviour, IGameManager
         Debug.Log("Player manager started.".SetColor(Color.Green));
     }
 
-    public void Init(PlayerController controller)
+    public void Init(PlayerController controller, PlayerState state)
     {
         this.controller = controller;
+        this.playerState = state;
     }
 
 
     public void ChangeGun(GunState gun)
     {
-        controller.SetGun(gun);
+        this.playerState.ChangeGun(gun);
     }
     public void ChangeGun(GunState gun,IInventory inventory)
     {
-        controller.SetGun(gun,inventory);
+        this.playerState.ChangeGun(gun, inventory);
     }
 
     public void AddItemInventory(GunState state)

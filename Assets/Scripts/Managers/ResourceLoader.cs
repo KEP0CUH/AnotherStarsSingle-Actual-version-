@@ -10,6 +10,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<GunKind, GunData> guns;
     private Dictionary<SoundKind,AudioClip> sounds;
     private Dictionary<ShipKind, ShipData> ships;
+    private Dictionary<Location, LocationData> locations;
+    private Dictionary<Planet, PlanetData> planets;
 
 
     public Dictionary<ItemKind, BaseItemData> Items => items;
@@ -25,6 +27,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         sounds = new Dictionary<SoundKind,AudioClip>();
         ships = new Dictionary<ShipKind, ShipData>();
         guns = new Dictionary<GunKind,GunData>();
+        locations = new Dictionary<Location, LocationData>();
+        planets = new Dictionary<Planet, PlanetData>();
 
         LoadAllResources();
 
@@ -82,6 +86,25 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
+    public LocationData DownloadData(Location location)
+    {
+        if(locations.ContainsKey(location))
+        {
+            return locations[location];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public PlanetData DownloadData(Planet planet)
+    {
+        if(planets.ContainsKey(planet))
+        {
+            return planets[planet];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
     private void LoadAllResources()
     {
         string basePath = $"ScriptableObjects/";
@@ -90,6 +113,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string gunsPath = $"Items/Guns/";
         string shipsPath = "Ships/";
         string asteroidsPath = $"Asteroids/";
+        string locationsPath = $"Locations/";
+        string planetsPath = $"Planets/";
         Resources.Load<AudioClip>("Sounds/ShotKinetic");
         string soundsPath = $"Sounds/";
 
@@ -116,5 +141,9 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         ships.Add(ShipKind.Linkor, Resources.Load<ShipData>(basePath + shipsPath                                + "Linkor1"));
 
         guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Laser"));
+
+        locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));
+
+        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + "Arcea"));     
     }
 }

@@ -96,6 +96,12 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationData.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetData.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
         state = new PlayerState(this.gameObject.GetComponent<PlayerData>(),shipState);
         inventory = new PlayerInventory();
-        Managers.Player.Init(this);
+        Managers.Player.Init(this,state);
 
         SetupCamera();
         SetupRadar();
@@ -71,9 +71,11 @@ public class PlayerController : MonoBehaviour, IObserver
             }
         }
 
-        if(Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            CanvasUI.Inventory.Enable();
+            if(CanvasUI.Inventory.IsEnabled)
+                CanvasUI.Inventory.Disable();
+            else CanvasUI.Inventory.Enable();
         }
 
         if(Input.GetKey(KeyCode.M))
@@ -188,14 +190,5 @@ public class PlayerController : MonoBehaviour, IObserver
             Debug.Log("Invoked event OnItemDrop.");
             inventory.AddItem(kind, state);
         }
-    }
-
-    public void SetGun(GunState gun)
-    {
-        this.state.ChangeGun(gun);
-    }
-    public void SetGun(GunState gun,IInventory inventory)
-    {
-        this.state.ChangeGun(gun,inventory);
     }
 }

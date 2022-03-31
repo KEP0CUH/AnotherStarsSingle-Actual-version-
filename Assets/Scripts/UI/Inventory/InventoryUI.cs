@@ -20,6 +20,8 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private Dictionary<ItemKind, BaseItemState> itemStates = new Dictionary<ItemKind, BaseItemState>();
     private List<GunState> gunStates = new List<GunState>();
 
+    private bool isEnabled = true;
+    public bool IsEnabled => isEnabled;
 
     //          Ширина и высота UI элемента(в данном случае инвентаря).
     [SerializeField]
@@ -97,11 +99,13 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     public void Enable()
     {
         inventory.SetActive(true);
+        isEnabled = true;
     }
     [ContextMenu("Disable")]
     public void Disable()
     {
         inventory.SetActive(false);
+        isEnabled = false;
     }
 
 
@@ -193,7 +197,35 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         scroll.horizontal = false;
 
         rightDownInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
-        Debug.Log("RightInventory created.");
+        Debug.Log("RightDownInventory created.");
+
+        CreateRightDownInventoryList(rightDownInventory.transform);
+    }
+
+    private void CreateRightDownInventoryList(Transform rightDown)
+    {
+        rightDownInventoryList = new GameObject("Items", typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+        rightDownInventoryList.transform.parent = rightDown.transform;
+
+        var rect = rightDownInventoryList.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 1);
+        rect.anchorMax = new Vector2(1, 1);
+        rect.pivot = new Vector2(1, 1);
+        rect.position = Vector2.zero;
+        rect.offsetMin = new Vector2(0, 0);
+        rect.offsetMax = new Vector2(1, 1);
+
+        var layout = rightDownInventoryList.GetComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(64, 64);
+        layout.spacing = new Vector2(15, 15);
+        layout.padding.top = 15;
+        layout.padding.left = 15;
+
+        var fitter = rightDownInventoryList.GetComponent<ContentSizeFitter>();
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+
+        rightDownInventory.GetComponent<ScrollRect>().content = rightDownInventoryList.GetComponent<RectTransform>();
     }
 
 
@@ -250,7 +282,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private void CreateItemSlot(IInventory inventory, BaseItemState state)
     {
         var itemSlot = new GameObject("Item" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
-        itemSlot.GetComponent<ItemSlot>().Init(leftInventoryList.transform,inventory, state);
+        itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform,inventory, state);
         itemSlots.Add(itemSlot);
     }
 

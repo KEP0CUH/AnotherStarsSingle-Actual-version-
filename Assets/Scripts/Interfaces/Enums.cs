@@ -108,3 +108,16 @@ public enum EntityKind
     aliansFrigate = 200,
     #endregion
 }
+
+public enum Location
+{
+    Krinul = 1,
+    Lambda = 2
+}
+
+public enum Planet
+{
+    Earth,
+    Mars,
+    Arcea
+}
