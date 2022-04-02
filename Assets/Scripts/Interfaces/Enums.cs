@@ -125,5 +125,6 @@ public enum Planet
 public enum IconType
 {
     Land,
-    Rise
+    Rise,
+    ShipShop,
 }

@@ -390,6 +390,8 @@
 "Assets/Scripts/UI/Minimap/RadarUI.cs"
 "Assets/Scripts/UI/Planet/InfoPlanetWindow.cs"
 "Assets/Scripts/UI/Planet/PlanetWindow.cs"
+"Assets/Scripts/UI/Planet/ShipShop.cs"
+"Assets/Scripts/UI/Planet/ShipSlot.cs"
 -langversion:8.0
 
 /deterministic
