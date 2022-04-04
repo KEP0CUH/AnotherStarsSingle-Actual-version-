@@ -356,6 +356,7 @@
 "Assets/Scripts/Interfaces/IObserver.cs"
 "Assets/Scripts/Interfaces/IShipInventory.cs"
 "Assets/Scripts/Interfaces/IUIModule.cs"
+"Assets/Scripts/ItemSystem/Ammo/AmmoData.cs"
 "Assets/Scripts/ItemSystem/Ammo/Bullet.cs"
 "Assets/Scripts/ItemSystem/BaseItemData.cs"
 "Assets/Scripts/ItemSystem/BaseItemState.cs"

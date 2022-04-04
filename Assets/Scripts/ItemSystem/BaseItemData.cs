@@ -21,6 +21,8 @@ public class BaseItemData : ScriptableObject
 
     protected void OnValidate()
     {
+        string gunPath = "Icons/Items/Guns/";
+
         switch (kind)
         {
             #region Ruda
@@ -47,9 +49,9 @@ public class BaseItemData : ScriptableObject
                 icon = Resources.Load<Sprite>("Icons/Items/Minerals/" + name);
                 title = "Титан";
                 break;
-            #endregion
+                #endregion
 
-            #region Guns
+                #region Guns
 
             case ItemKind.weaponKinetic:
                 name = "KineticWeapon";
@@ -66,6 +68,11 @@ public class BaseItemData : ScriptableObject
                 name = "Laser";
                 //icon = 
                 title = "Энергетическое";
+                break;
+            case ItemKind.weaponMultiblaster:
+                name = "Multiblaster";
+                icon = Resources.Load<Sprite>(gunPath + "Multiblaster");
+                title = "Мультибластер";
                 break;
             #endregion
 

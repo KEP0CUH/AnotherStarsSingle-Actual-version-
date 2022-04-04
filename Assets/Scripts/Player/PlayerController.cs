@@ -7,10 +7,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IObserver
 {
     private List<Bullet> bullets = new List<Bullet>();
+    private List<GunState> guns = new List<GunState>();
 
     private PlayerState state;
     private PlayerInventory inventory;
-    private ShipInventory shipInventory;
 
     private float timer = 0;
     private float shootDelay = 0.5f;
@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour, IObserver
         this.gameObject.AddComponent<PlayerData>().Init();
 
         var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.GreenLinkor);
-        Debug.Log(shipState.Data.Title);
 
         state = new PlayerState(this.gameObject.GetComponent<PlayerData>(), shipState);
         inventory = new PlayerInventory();
@@ -163,12 +162,20 @@ public class PlayerController : MonoBehaviour, IObserver
 
     private void Shoot()
     {
-        Debug.Log("Стреляю");
+/*        Debug.Log("Стреляю");
         GameObject bullet = new GameObject("Bullet");
         bullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
         bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
         bullet.AddComponent<Bullet>();
-        Destroy(bullet, 10);
+        Destroy(bullet, 10);*/
+
+        this.guns = this.state.Ship.Inventory.GetGuns();
+        foreach(var gun in this.guns)
+        {
+            gun.Shoot(this.gameObject.transform,gun);
+        }
+
+
     }
 
     public void SetShip(ShipKind kind)

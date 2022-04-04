@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8b259ca8c15eb4f8c88f88784766eb, type: 3}
   m_Name: RedLaser
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 8fe173f338f97f843b2e483916304898, type: 3}
+  icon: {fileID: 21300000, guid: 981eea95bfdd41d41ba3b469b7ce7959, type: 3}
   title: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439 \u043B\u0430\u0437\u0435\u0440\u043D\u044B\u0439
     \u043F\u0430\u0442\u0440\u043E\u043D."
   description: "\u0421\u043B\u0430\u0431\u044B\u0439 \u043F\u0430\u0442\u0440\u043E\u043D,

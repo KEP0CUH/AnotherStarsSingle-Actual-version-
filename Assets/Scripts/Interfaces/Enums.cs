@@ -25,6 +25,7 @@ public enum ItemKind
     weaponKinetic = 91,
     weaponRocket,
     weaponEnergetic,
+    weaponMultiblaster,
     #endregion
 
     #region engines
@@ -57,11 +58,24 @@ public enum ItemKind
     #endregion
 
 }
+public enum AmmoKind
+{
+    redLaserAmmo = 1001,
+    blueLaserAmmo = 1002,
+    yellowLaserAmmo = 1003,
+    GreenLaserAmmo = 1004,
+    Multiblaster,
+}
 
 public enum ShipKind
 {
-    GreenLinkor = 1,
-    GreenFrigate = 2
+    GreenIndus = 1,
+    GreenKorvet,
+    GreenIstrebitel,
+    GreenHeavyIstrebitel,
+    GreenLinkor,
+    GreenFrigate,
+
 }
 
 public enum GunKind
@@ -70,6 +84,7 @@ public enum GunKind
     weaponKinetic = 91,
     weaponRocket,
     weaponEnergetic,
+    weaponMultiblaster,
     #endregion
 }
 

@@ -49,7 +49,7 @@ public class BaseAsteroidState : MonoBehaviour
 
             var dataTest = Managers.Resources.DownloadData(GunKind.weaponKinetic);
 
-            dropTest.AddComponent<ItemViewGame>().Init(GunKind.weaponKinetic, 4);
+            dropTest.AddComponent<ItemViewGame>().Init(GunKind.weaponMultiblaster, 4);
         }
     }
 

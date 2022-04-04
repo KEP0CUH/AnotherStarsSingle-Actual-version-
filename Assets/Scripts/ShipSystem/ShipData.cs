@@ -36,6 +36,12 @@ public class ShipData : ScriptableObject
                 title = "Фрегат";
                 description = "";
                 break;
+            case ShipKind.GreenKorvet:
+                name = "Korvet";
+                icon = Resources.Load<Sprite>(greenPath + "Korvet");
+                title = "Корвет";
+                description = "";
+                break;
         }
     }
 

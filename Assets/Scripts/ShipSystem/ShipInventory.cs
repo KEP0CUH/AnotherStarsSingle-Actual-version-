@@ -48,6 +48,11 @@ public class ShipInventory : IShipInventory
         }
     }
 
+    public List<GunState> GetGuns()
+    {
+        return this.guns;
+    }
+
     public void RemoveItem(GunState state)
     {
         guns.Remove(state);

@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

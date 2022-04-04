@@ -6,7 +6,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 {
     private Dictionary<ItemKind,BaseItemData> items;
     private Dictionary<AsteroidType, BaseAsteroidData> asteroids;
-    //private Dictionary<AmmoType, BaseAmmoData> ammo;
+    private Dictionary<AmmoKind,AmmoData> ammo;
     private Dictionary<GunKind, GunData> guns;
     private Dictionary<SoundKind,AudioClip> sounds;
     private Dictionary<ShipKind, ShipData> ships;
@@ -25,6 +25,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         Debug.Log("ResourceLoader starting...".SetColor(Color.Yellow));
         items = new Dictionary<ItemKind, BaseItemData>();
         asteroids = new Dictionary<AsteroidType,BaseAsteroidData>();
+        ammo = new Dictionary<AmmoKind, AmmoData>();
         sounds = new Dictionary<SoundKind,AudioClip>();
         ships = new Dictionary<ShipKind, ShipData>();
         guns = new Dictionary<GunKind,GunData>();
@@ -53,6 +54,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if (guns.ContainsKey(kind))
         {
             return guns[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public AmmoData DownloadData(AmmoKind kind)
+    {
+        if(ammo.ContainsKey(kind))
+        {
+            return ammo[kind];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -147,14 +158,17 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<BaseAsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
         asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<BaseAsteroidData>($""));
 
+        ammo.Add(AmmoKind.Multiblaster, Resources.Load<AmmoData>(basePath + ammoPath                            + "Multiblaster"));
 
         sounds.Add(SoundKind.ShotKinetic1, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic1"));
         sounds.Add(SoundKind.ShotKinetic2, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic2"));
 
         ships.Add(ShipKind.GreenLinkor, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenLinkor"));
-        ships.Add(ShipKind.GreenFrigate, Resources.Load <ShipData>(basePath + shipsPath                         + "GreenFrigate"));       
+        ships.Add(ShipKind.GreenFrigate, Resources.Load <ShipData>(basePath + shipsPath                         + "GreenFrigate"));
+        ships.Add(ShipKind.GreenKorvet, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenKorvet"));
 
         guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Laser"));
+        guns.Add(GunKind.weaponMultiblaster, Resources.Load<GunData>(basePath + gunsPath                        + "Multiblaster"));
 
         locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));
 
