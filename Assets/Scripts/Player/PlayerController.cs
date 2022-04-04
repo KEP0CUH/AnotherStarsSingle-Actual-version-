@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IObserver
     {
         this.gameObject.AddComponent<PlayerData>().Init();
 
-        var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.Linkor);
+        var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.GreenLinkor);
         Debug.Log(shipState.Data.Title);
 
         state = new PlayerState(this.gameObject.GetComponent<PlayerData>(), shipState);
@@ -169,6 +169,15 @@ public class PlayerController : MonoBehaviour, IObserver
         bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
         bullet.AddComponent<Bullet>();
         Destroy(bullet, 10);
+    }
+
+    public void SetShip(ShipKind kind)
+    {
+
+        var ship = this.GetComponent<ShipState>().Init(kind);
+        this.state.ChangeShip(ship);
+
+        this.GetComponent<SpriteRenderer>().sprite = this.state.Ship.Data.Icon;
     }
 
     public void OnItemDrop()

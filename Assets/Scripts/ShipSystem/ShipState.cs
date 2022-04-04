@@ -14,7 +14,23 @@ public class ShipState : MonoBehaviour
     public ShipState Init(ShipKind kind)
     {
         this.data = Managers.Resources.DownloadData(kind);
+
+        if(this.inventory != null)
+        {
+            this.inventory.RemoveAllItems();
+        }
+
+        switch(kind)
+        {
+            case ShipKind.GreenLinkor:
+                maxNumGuns = 4;
+                break;
+            case ShipKind.GreenFrigate:
+                maxNumGuns = 2;
+                break;
+        }
         inventory = new ShipInventory(maxNumGuns);
+
         return this;
     }
 

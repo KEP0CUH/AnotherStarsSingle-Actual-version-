@@ -18,6 +18,7 @@ public class PlayerInventory : IInventory
             if (item.Key == kind)
             {
                 items[item.Key].IncreaseNumber();
+                GameObject.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -39,6 +40,7 @@ public class PlayerInventory : IInventory
             newItemState = newItemStateObj.GetComponent<BaseItemState>();
             newItemState.Init(kind, state.Count);
         }
+        GameObject.Destroy(state.gameObject);
         items.Add(kind, newItemState);
         ShowInventory();
     }

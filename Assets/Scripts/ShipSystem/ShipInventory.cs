@@ -55,6 +55,18 @@ public class ShipInventory : IShipInventory
         ShowInventory();
     }
 
+    public void RemoveAllItems()
+    {
+        foreach(var gun in this.guns)
+        {
+            Debug.Log("Снятие предмета с корабля...");
+            Managers.Player.AddItemInventory(gun);
+        }
+
+        guns.Clear();
+        ShowInventory();
+    }
+
     public void ShowInventory()
     {
 /*        string list = "";

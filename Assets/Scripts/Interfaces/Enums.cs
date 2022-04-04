@@ -60,8 +60,8 @@ public enum ItemKind
 
 public enum ShipKind
 {
-    Linkor = 1,
-    Frigate = 2
+    GreenLinkor = 1,
+    GreenFrigate = 2
 }
 
 public enum GunKind

@@ -55,7 +55,8 @@ public class ShipShop : MonoBehaviour
 
     private void ShowShips()
     {
-        shipData.Add(Managers.Resources.DownloadData(ShipKind.Linkor));
+        shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenLinkor));
+        shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenFrigate));
 
         foreach(var ship in shipData)
         {

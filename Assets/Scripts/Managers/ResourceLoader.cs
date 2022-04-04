@@ -151,7 +151,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         sounds.Add(SoundKind.ShotKinetic1, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic1"));
         sounds.Add(SoundKind.ShotKinetic2, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic2"));
 
-        ships.Add(ShipKind.Linkor, Resources.Load<ShipData>(basePath + shipsPath                                + "Linkor1"));
+        ships.Add(ShipKind.GreenLinkor, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenLinkor"));
+        ships.Add(ShipKind.GreenFrigate, Resources.Load <ShipData>(basePath + shipsPath                         + "GreenFrigate"));       
 
         guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Laser"));
 

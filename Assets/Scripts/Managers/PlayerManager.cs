@@ -29,6 +29,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this.playerState = state;
     }
 
+    public void ChangeShip(ShipKind kind)
+    {
+        this.controller.SetShip(kind);
+    }
+
 
     public void ChangeGun(GunState gun)
     {

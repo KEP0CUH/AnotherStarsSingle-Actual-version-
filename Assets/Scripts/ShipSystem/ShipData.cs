@@ -21,13 +21,20 @@ public class ShipData : ScriptableObject
 
     private void OnValidate()
     {
+        var greenPath = "Icons/Ships/Green";
         switch(kind)
         {
-            case ShipKind.Linkor:
+            case ShipKind.GreenLinkor:
                 name = "Linkor";
-                icon = Resources.Load<Sprite>("Icons/Ships/Linkor1");
-                title = "Линкор";
-                description = "Корабль, предназначенный для штурма укрепленных баз противника.";
+                icon = Resources.Load<Sprite>(greenPath + "Linkor");
+                title = "Р›РёРЅРєРѕСЂ";
+                description = "РљРѕСЂР°Р±Р»СЊ, РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРЅС‹Р№ РґР»СЏ С€С‚СѓСЂРјР° СѓРєСЂРµРїР»РµРЅРЅС‹С… Р±Р°Р· РїСЂРѕС‚РёРІРЅРёРєР°.";
+                break;
+            case ShipKind.GreenFrigate:
+                name = "Frigate";
+                icon = Resources.Load<Sprite>(greenPath + "Frigate");
+                title = "Р¤СЂРµРіР°С‚";
+                description = "";
                 break;
         }
     }
