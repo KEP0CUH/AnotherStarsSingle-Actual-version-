@@ -44,12 +44,12 @@ public class BaseAsteroidState : MonoBehaviour
             drop.AddComponent<ItemViewGame>().Init(data.ItemKind, 4);
 
 
-            GameObject dropTest = new GameObject("Item: " + GunKind.weaponKinetic.ToString());
+            GameObject dropTest = new GameObject("Item: " + GunKind.weaponMultiblaster.ToString());
             dropTest.transform.position = this.gameObject.transform.position;
 
-            var dataTest = Managers.Resources.DownloadData(GunKind.weaponKinetic);
+            var dataTest = Managers.Resources.DownloadData(GunKind.weaponMultiblaster);
 
-            dropTest.AddComponent<ItemViewGame>().Init(GunKind.weaponMultiblaster, 4);
+            dropTest.AddComponent<ItemViewGame>().Init(dataTest.ItemKind, 4);
         }
     }
 

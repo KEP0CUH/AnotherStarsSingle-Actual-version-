@@ -53,27 +53,22 @@ public class BaseItemData : ScriptableObject
 
                 #region Guns
 
-            case ItemKind.weaponKinetic:
-                name = "KineticWeapon";
-                icon = Resources.Load<Sprite>("Icons/Items/Guns/Gun1");
-                title = "Кинетическое";
-                description = "Кинетическое оружие";
-                break;
             case ItemKind.weaponRocket:
                 name = "Laser";
                 //icon = 
                 title = "Лазерное";
-                break;
-            case ItemKind.weaponEnergetic:
-                name = "Laser";
-                //icon = 
-                title = "Энергетическое";
                 break;
             case ItemKind.weaponMultiblaster:
                 name = "Multiblaster";
                 icon = Resources.Load<Sprite>(gunPath + "Multiblaster");
                 title = "Мультибластер";
                 break;
+            case ItemKind.weaponDesintegrator:
+                name = "Desintegrator";
+                icon = Resources.Load<Sprite>(gunPath + "Desintegrator");
+                title = "Дезинтегратор";
+                break;
+
             #endregion
 
             #region Ammo

@@ -22,10 +22,9 @@ public enum ItemKind
 
 
     #region weapons
-    weaponKinetic = 91,
     weaponRocket,
-    weaponEnergetic,
     weaponMultiblaster,
+    weaponDesintegrator,
     #endregion
 
     #region engines
@@ -65,6 +64,7 @@ public enum AmmoKind
     yellowLaserAmmo = 1003,
     GreenLaserAmmo = 1004,
     Multiblaster,
+    Desintegrator,
 }
 
 public enum ShipKind
@@ -85,13 +85,15 @@ public enum GunKind
     weaponRocket,
     weaponEnergetic,
     weaponMultiblaster,
+    weaponDesintegrator,
     #endregion
 }
 
 public enum SoundKind
 {
     ShotKinetic1 = 10,
-    ShotKinetic2 = 11
+    ShotKinetic2 = 11,
+    ShotEnergetic2
 }
 
 public enum EntityType

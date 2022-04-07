@@ -17,13 +17,22 @@ public class AmmoData : ScriptableObject
 
     private void OnValidate()
     {
+        var pathGuns = "Icons/Items/Guns/";
+        var pathSounds = "Sounds/";
         switch (kind)
         {
+
             case AmmoKind.Multiblaster:
                 title = "bulletMultiblaster";
-                icon = Resources.Load<Sprite>("Icons/Items/Guns/Multiblaster");
-                clip = Resources.Load<AudioClip>("Sounds/ShotKinetic2");
+                icon = Resources.Load<Sprite>(pathGuns + "Multiblaster");
+                clip = Resources.Load<AudioClip>(pathSounds + "ShotKinetic2");
                 break;
+            case AmmoKind.Desintegrator:
+                title = "bulletDesintegrator";
+                icon = Resources.Load<Sprite>(pathGuns + "Desintegrator");
+                clip = Resources.Load <AudioClip>(pathSounds + "ShotEnergetic2");  
+                break;
+
         }
 
     }

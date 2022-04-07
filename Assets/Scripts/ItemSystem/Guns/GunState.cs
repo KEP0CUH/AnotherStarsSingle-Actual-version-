@@ -24,6 +24,9 @@ public class GunState : BaseItemState
             case GunKind.weaponMultiblaster:
                 ammoKind = AmmoKind.Multiblaster;
                 break;
+            case GunKind.weaponDesintegrator:
+                ammoKind = AmmoKind.Desintegrator;
+                break;
         }
     }
 

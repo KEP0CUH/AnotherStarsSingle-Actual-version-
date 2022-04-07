@@ -100,7 +100,7 @@ public class ShipInventory : IShipInventory
     {
         var gunDefault = new GameObject("DefaultGun", typeof(GunState));
         var gunState = gunDefault.GetComponent<GunState>();
-        gunState.Init(GunKind.weaponKinetic, 1);
+        gunState.Init(kind, 1);
 
         return (GunState)gunState;
     }

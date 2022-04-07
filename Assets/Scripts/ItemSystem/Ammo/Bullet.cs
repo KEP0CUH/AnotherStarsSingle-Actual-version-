@@ -35,8 +35,8 @@ public class Bullet : MonoBehaviour
             case GunKind.weaponMultiblaster:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
                 break;
-            case GunKind.weaponKinetic:
-                audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic1);
+            case GunKind.weaponDesintegrator:
+                audio.clip = Managers.Resources.DownloadData(SoundKind.ShotEnergetic2);
                 break;
         }
 
