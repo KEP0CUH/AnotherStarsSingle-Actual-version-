@@ -32,6 +32,12 @@ public class BaseItemData : ScriptableObject
 
         switch (kind)
         {
+            case ItemKind.EmptyItem:
+                name = "Заглушка";
+                icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
+                title = "Заглушка";
+                break;
+
             #region Ruda
 
             case ItemKind.rudaFerrum:

@@ -141,11 +141,13 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string iconsPath = $"Icons/Interactive/";
         string soundsPath = $"Sounds/";
 
+        
         items.Add(ItemKind.rudaFerrum, Resources.Load<BaseItemData>(basePath + mineralsPath                     + "Ferrum"));
         items.Add(ItemKind.rudaGold, Resources.Load<BaseItemData>(basePath + mineralsPath                       + "Gold"));
         items.Add(ItemKind.rudaNickel, Resources.Load<BaseItemData>(basePath + mineralsPath                     + "Nickel"));
         items.Add(ItemKind.rudaTitan, Resources.Load<BaseItemData>($""));
 
+        items.Add(ItemKind.EmptyItem, Resources.Load<BaseItemData>(basePath + gunsPath                          + "EmptyGun"));
         items.Add(ItemKind.weaponDesintegrator, Resources.Load<BaseItemData>(basePath + gunsPath                + "Desintegrator"));
         items.Add(ItemKind.weaponMultiblaster, Resources.Load<BaseItemData>(basePath + gunsPath                 + "Multiblaster"));
         items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));

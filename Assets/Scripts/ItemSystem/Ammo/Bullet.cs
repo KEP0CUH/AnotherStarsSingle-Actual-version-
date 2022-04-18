@@ -38,6 +38,9 @@ public class Bullet : MonoBehaviour
             case ItemKind.weaponDesintegrator:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotEnergetic2);
                 break;
+            case ItemKind.EmptyItem:
+                audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
+                break;
         }
 
         audio.Play();

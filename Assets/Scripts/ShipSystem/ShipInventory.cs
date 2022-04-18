@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ShipInventory : IShipInventory
 {
@@ -11,6 +12,13 @@ public class ShipInventory : IShipInventory
     {
         this.maxNumGuns = maxNumGuns;
         guns = new List<GunState>();
+
+        for (int i = 0; i < maxNumGuns; i++)
+        {
+            var gunEmpty = CreateGunStateObject(ItemKind.EmptyItem);
+            guns.Add(gunEmpty);
+        }
+        ShowInventory();
     }
 
 
@@ -19,15 +27,29 @@ public class ShipInventory : IShipInventory
         if (guns.Count < maxNumGuns)
         {
             var newState = CreateGunStateObject(state);
-
             this.guns.Add(newState);
             ShowInventory();
         }
+        else
+        {
+            for (int i = 0; i < maxNumGuns; i++)
+            {
+                if(guns[i].Data.ItemKind == ItemKind.EmptyItem)
+                {
+                    var newState = CreateGunStateObject(state);
+                    GameObject.Destroy(guns[i]);
+                    guns[i] = newState;
+                    ShowInventory();
+                    return;
+                }
+            }
+        }
+
     }
 
-    public void AddItem(GunState state,IInventory inventory)
+    public void AddItem(GunState state, IInventory inventory)
     {
-        if(guns.Count < maxNumGuns)
+        if (guns.Count < maxNumGuns)
         {
             var newState = CreateGunStateObject(state);
 
@@ -35,16 +57,44 @@ public class ShipInventory : IShipInventory
             inventory.RemoveItem(newState.Data.ItemKind);
             ShowInventory();
         }
+        else
+        {
+            for (int i = 0; i < maxNumGuns; i++)
+            {
+                if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
+                {
+                    var newState = CreateGunStateObject(state);
+                    GameObject.Destroy(guns[i]);
+                    guns[i] = newState;
+                    ShowInventory();
+                    return;
+                }
+            }
+        }
     }
 
     public void AddItem(ItemKind gunKind)
     {
-        if(guns.Count < maxNumGuns)
+        if (guns.Count < maxNumGuns)
         {
             var newState = CreateGunStateObject(gunKind);
 
             this.guns.Add(newState);
             ShowInventory();
+        }
+        else
+        {
+            for (int i = 0; i<maxNumGuns; i++)
+            {
+                if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
+                {
+                    var newState = CreateGunStateObject(gunKind);
+                    GameObject.Destroy(guns[i]);
+                    guns[i] = newState;
+                    ShowInventory();
+                    return;
+                }
+            }
         }
     }
 
@@ -62,7 +112,7 @@ public class ShipInventory : IShipInventory
 
     public void RemoveAllItems()
     {
-        foreach(var gun in this.guns)
+        foreach (var gun in this.guns)
         {
             Debug.Log("Снятие предмета с корабля...");
             Managers.Player.AddItemInventory(gun);
@@ -74,13 +124,14 @@ public class ShipInventory : IShipInventory
 
     public void ShowInventory()
     {
-/*        string list = "";
-        foreach(var gun in guns)
-        {
-            list += $"{gun.Data.Title} ";
+        /*        foreach(var gun in guns)
+                {
+                    if(gun == null)
+                    {
+                        gun = new BaseItemData;
+                    }
 
-            Debug.Log(list);
-        }*/
+                }*/
         CanvasUI.Inventory.ShowInventory(this, guns);
     }
 

@@ -13,11 +13,6 @@ public class GunData : BaseItemData
     private void OnValidate()
     {
         base.OnValidate();
-        if(Managers.Resources != null)
-        {
-            //this.data = Managers.Resources.DownloadData(ammoKind);
-        }
-
     }
 
 }

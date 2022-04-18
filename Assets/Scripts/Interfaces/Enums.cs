@@ -19,7 +19,7 @@ public enum UIModuleKind
 }
 public enum ItemKind
 {
-
+    EmptyItem,
 
     #region weapons
     weaponRocket,

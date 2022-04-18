@@ -23,6 +23,9 @@ public class GunState : BaseItemState
             case ItemKind.weaponDesintegrator:
                 ammoKind = AmmoKind.Desintegrator;
                 break;
+            case ItemKind.EmptyItem:
+                ammoKind = AmmoKind.Multiblaster;
+                break;
         }
     }
     public void Shoot(Transform parent,GunState gun)
