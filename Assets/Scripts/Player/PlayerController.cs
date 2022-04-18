@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour, IObserver
         radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
 
-    // Передвигаем клиента к координатам, на которые он кликнул мышью
     /// <summary>
     /// Осуществление движения игрока к месту клика мышкой.
     /// </summary>

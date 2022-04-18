@@ -20,24 +20,36 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
 
     public void Init(ItemKind kind, int count)
     {
-        gameObject.AddComponent<BaseItemState>();
-        state = gameObject.GetComponent<BaseItemState>();
-        this.state.Init(kind,count);
-        gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        gameObject.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        var data = Managers.Resources.DownloadData(kind);
+        if (data.IsWeapon())
+        {
+            CreateGun(kind,count);
+        }
+        else
+        {
+            CreateBaseItem(kind, count);
+        }
     }
 
-    public void Init(GunKind kind, int ammo)
+    private void CreateGun(ItemKind kind, int ammoCount)
     {
         gameObject.AddComponent<GunState>();
         state = gameObject.GetComponent<GunState>();
-        this.state.Init(kind, ammo);
+        this.state.Init(kind, ammoCount);
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
     }
 
+    private void CreateBaseItem(ItemKind kind, int itemCount)
+    {
+        gameObject.AddComponent<BaseItemState>();
+        state = gameObject.GetComponent<BaseItemState>();
+        this.state.Init(kind, itemCount);
+        gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        gameObject.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

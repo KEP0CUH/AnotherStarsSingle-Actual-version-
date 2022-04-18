@@ -30,12 +30,12 @@ public class Bullet : MonoBehaviour
         baseStrength = 50;
         strength = baseStrength * 1.2f;
 
-        switch (gun.GunKind)
+        switch (gun.Data.ItemKind)
         {
-            case GunKind.weaponMultiblaster:
+            case ItemKind.weaponMultiblaster:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
                 break;
-            case GunKind.weaponDesintegrator:
+            case ItemKind.weaponDesintegrator:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotEnergetic2);
                 break;
         }

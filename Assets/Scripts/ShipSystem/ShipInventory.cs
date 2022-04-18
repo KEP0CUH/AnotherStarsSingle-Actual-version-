@@ -37,7 +37,7 @@ public class ShipInventory : IShipInventory
         }
     }
 
-    public void AddItem(GunKind gunKind)
+    public void AddItem(ItemKind gunKind)
     {
         if(guns.Count < maxNumGuns)
         {
@@ -93,10 +93,10 @@ public class ShipInventory : IShipInventory
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
         newItemState = newItemStateObj.GetComponent<GunState>();
 
-        newItemState.Init(state.GunKind, state.Count);
+        newItemState.Init(state.Data.ItemKind, state.Count);
         return (GunState)newItemState;
     }
-    private GunState CreateGunStateObject(GunKind kind)
+    private GunState CreateGunStateObject(ItemKind kind)
     {
         var gunDefault = new GameObject("DefaultGun", typeof(GunState));
         var gunState = gunDefault.GetComponent<GunState>();

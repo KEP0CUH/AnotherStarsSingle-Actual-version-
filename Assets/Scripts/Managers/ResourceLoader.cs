@@ -7,7 +7,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<ItemKind,BaseItemData> items;
     private Dictionary<AsteroidType, BaseAsteroidData> asteroids;
     private Dictionary<AmmoKind,AmmoData> ammo;
-    private Dictionary<GunKind, GunData> guns;
+/*    private Dictionary<GunKind, GunData> guns;*/
     private Dictionary<SoundKind,AudioClip> sounds;
     private Dictionary<ShipKind, ShipData> ships;
     private Dictionary<Location, LocationData> locations;
@@ -28,7 +28,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         ammo = new Dictionary<AmmoKind, AmmoData>();
         sounds = new Dictionary<SoundKind,AudioClip>();
         ships = new Dictionary<ShipKind, ShipData>();
-        guns = new Dictionary<GunKind,GunData>();
+/*        guns = new Dictionary<GunKind,GunData>();*/
         locations = new Dictionary<Location, LocationData>();
         planets = new Dictionary<Planet, PlanetData>();
         icons = new Dictionary<IconType, Sprite>();
@@ -49,7 +49,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public GunData DownloadData(GunKind kind)
+/*    public GunData DownloadData(GunKind kind)
     {
         if (guns.ContainsKey(kind))
         {
@@ -57,7 +57,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         }
         Debug.Log($"{kind}.Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
-    }
+    }*/
 
     public AmmoData DownloadData(AmmoKind kind)
     {
@@ -148,6 +148,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         items.Add(ItemKind.weaponDesintegrator, Resources.Load<BaseItemData>(basePath + gunsPath                + "Desintegrator"));
         items.Add(ItemKind.weaponMultiblaster, Resources.Load<BaseItemData>(basePath + gunsPath                 + "Multiblaster"));
+        items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));
 
         items.Add(ItemKind.blueLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                      + "BlueLaser"));
         items.Add(ItemKind.redLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                       + "RedLaser"));
@@ -167,9 +168,9 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         ships.Add(ShipKind.GreenFrigate, Resources.Load <ShipData>(basePath + shipsPath                         + "GreenFrigate"));
         ships.Add(ShipKind.GreenKorvet, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenKorvet"));
 
-        guns.Add(GunKind.weaponMultiblaster, Resources.Load<GunData>(basePath + gunsPath                        + "Multiblaster"));
+/*        guns.Add(GunKind.weaponMultiblaster, Resources.Load<GunData>(basePath + gunsPath                        + "Multiblaster"));
         guns.Add(GunKind.weaponDesintegrator, Resources.Load<GunData>(basePath + gunsPath                       + "Desintegrator"));
-        guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));
+        guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));*/
         
 
         locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));

@@ -18,14 +18,18 @@ public class GunViewGame : MonoBehaviour, Interactable, IObservable
     private bool triggerWorked = false;
 
     private Action<ItemKind, BaseItemState> onItemDrop;
-    public void Init(GunKind kind,int ammoMax)
+    public void Init(ItemKind kind,int ammoMax)
     {
-        this.state = this.gameObject.AddComponent<GunState>();
-        //this.state = this.state.Init(kind,ammoMax);
-        Debug.Log($"{this.state.Data.Title}".SetColor(Color.Magenta));
-        this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
-        this.GetComponent<BoxCollider>().isTrigger = true;
-        this.GetComponent<Rigidbody>().isKinematic = true;
+        var data = Managers.Resources.DownloadData(kind);
+        if(data.IsWeapon())
+        {
+            this.state = this.gameObject.AddComponent<GunState>();
+            //this.state = this.state.Init(kind,ammoMax);
+            Debug.Log($"{this.state.Data.Title}".SetColor(Color.Magenta));
+            this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
+            this.GetComponent<BoxCollider>().isTrigger = true;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

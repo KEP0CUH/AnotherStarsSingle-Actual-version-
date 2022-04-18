@@ -25,6 +25,7 @@ public enum ItemKind
     weaponRocket,
     weaponMultiblaster,
     weaponDesintegrator,
+    weaponKinetic,
     #endregion
 
     #region engines
@@ -76,17 +77,6 @@ public enum ShipKind
     GreenLinkor,
     GreenFrigate,
 
-}
-
-public enum GunKind
-{
-    #region weapons
-    weaponKinetic = 91,
-    weaponRocket,
-    weaponEnergetic,
-    weaponMultiblaster,
-    weaponDesintegrator,
-    #endregion
 }
 
 public enum SoundKind

@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Guns",fileName ="NewGun",order =53)]
 public class GunData : BaseItemData
 {
-
-
+    public override bool IsWeapon()
+    {
+        return true;
+    }
 
     private void OnValidate()
     {

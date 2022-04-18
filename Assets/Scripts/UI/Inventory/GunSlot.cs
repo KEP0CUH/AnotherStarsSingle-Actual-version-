@@ -87,7 +87,7 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
     {
         inventory.RemoveItem((GunState)state);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        item.GetComponent<ItemViewGame>().Init(((GunState)state).GunKind, 1);
+        item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind, 1);
 
         Destroy(this.gameObject);
     }
@@ -97,6 +97,6 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
         this.inventory.RemoveItem((GunState)this.state);
         Managers.Player.AddItemInventory((GunState)this.state);
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }

@@ -43,7 +43,7 @@ public class ShipState : MonoBehaviour
         this.inventory.AddItem(gun,inventory);
     }
 
-    public void SetGun(GunKind gunKind)
+    public void SetGun(ItemKind gunKind)
     {
         inventory.AddItem(gunKind);
     }

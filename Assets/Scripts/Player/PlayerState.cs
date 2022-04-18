@@ -19,7 +19,10 @@ public class PlayerState
         this.data = data;
         this.ship = playerShip;
 
-        this.ship.SetGun(GunKind.weaponMultiblaster);                // Установка дефолтного оружия.
+        var defaultGun = new GunState();
+        defaultGun.Init(ItemKind.weaponMultiblaster, 1);
+
+        this.ship.SetGun(defaultGun);                // Установка дефолтного оружия.
     }
 
     public void ChangeHealth(int value)

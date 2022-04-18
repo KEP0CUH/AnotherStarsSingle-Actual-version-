@@ -77,7 +77,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
         if(state.IsWeapon)
         {
-            item.GetComponent<ItemViewGame>().Init(((GunState)state).GunKind,1);
+            item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind,1);
         }
         else item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
 

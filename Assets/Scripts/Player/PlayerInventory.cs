@@ -32,7 +32,7 @@ public class PlayerInventory : IInventory
         {
             newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
             newItemState = newItemStateObj.GetComponent<GunState>();
-            newItemState.Init(((GunState)state).GunKind, state.Count);
+            newItemState.Init(((GunState)state).Data.ItemKind, state.Count);
         }
         else
         {
