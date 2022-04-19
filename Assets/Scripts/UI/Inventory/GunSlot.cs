@@ -77,7 +77,7 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
         if (this.state.IsWeapon)
         {
             var gunState = (GunState)this.state;
-            Managers.Player.ChangeGun(gunState);
+            Managers.Player.Controller.PlayerState.Ship.SetGun(gunState);
         }
 
     }
@@ -85,7 +85,7 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.RemoveItem((GunState)state);
+        inventory.TryUnsetGun((GunState)state);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
         item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind, 1);
 
@@ -94,9 +94,7 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        this.inventory.RemoveItem((GunState)this.state);
-        Managers.Player.AddItemInventory((GunState)this.state);
-
-        //Destroy(this.gameObject);
+        this.inventory.TryUnsetGun((GunState)this.state);
+        Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind,this.state);
     }
 }

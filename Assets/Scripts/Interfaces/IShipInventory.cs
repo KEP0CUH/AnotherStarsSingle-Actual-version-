@@ -1,7 +1,7 @@
 
 public interface IShipInventory 
 {
-    public void AddItem(GunState gun);
-    public void AddItem(GunState gun, IInventory inventory);
-    public void RemoveItem(GunState gun);
+    public void TrySetGun(GunState gun);
+    public void TrySetGun(GunState gun, IInventory inventory);
+    public void TryUnsetGun(GunState gun);
 }

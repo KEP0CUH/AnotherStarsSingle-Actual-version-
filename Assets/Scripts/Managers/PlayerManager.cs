@@ -8,8 +8,9 @@ public class PlayerManager : MonoBehaviour, IGameManager
     private PlayerState playerState;
 
     private Transform landPlace;
-    private bool isLanded;
+    private bool isLanded;                      // Сидит ли на планете?
     public bool IsLanded => isLanded;
+    public PlayerController Controller => controller;
 
     public ManagerStatus Status { get; private set; }
 
@@ -28,40 +29,6 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this.controller = controller;
         this.playerState = state;
     }
-
-    public void ChangeShip(ShipKind kind)
-    {
-        this.controller.SetShip(kind);
-    }
-
-
-    public void ChangeGun(GunState gun)
-    {
-        this.playerState.ChangeGun(gun);
-    }
-    public void ChangeGun(GunState gun,IInventory inventory)
-    {
-        this.playerState.ChangeGun(gun, inventory);
-    }
-
-    public void AddItemInventory(GunState state)
-    {
-        controller.Inventory.AddItem(state.Data.ItemKind, state);
-    }
-
-    public void AddItemInventory(ItemKind kind,BaseItemState state)
-    {
-        controller.Inventory.AddItem(kind, state);
-    }
-    public void RemoveItemInventory(GunState state)
-    {
-        controller.Inventory.RemoveItem(state.Data.ItemKind);
-    }
-    public void RemoveItemInventory(ItemKind kind)
-    {
-        controller.Inventory.RemoveItem(kind);
-    }
-
 
     public void Land(Transform transform)
     {

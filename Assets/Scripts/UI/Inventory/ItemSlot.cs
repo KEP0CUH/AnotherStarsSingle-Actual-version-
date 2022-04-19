@@ -90,8 +90,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         if (this.state.IsWeapon)
         {
             var gunState = (GunState)this.state;
-            Managers.Player.ChangeGun(gunState,inventory);
-
+            Managers.Player.Controller.PlayerState.Ship.SetGun(gunState, inventory);
         }
     }
 

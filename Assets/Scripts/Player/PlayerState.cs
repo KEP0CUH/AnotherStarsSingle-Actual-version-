@@ -40,19 +40,9 @@ public class PlayerState
         Debug.Log($"CurrentHealth: {health} / {maxHealth}");
     }
 
-    public void ChangeShip(ShipState ship)
+    public void SetShip(ShipKind kind)
     {
-        this.ship = ship;
+        this.ship = this.ship.Init(kind);
+        Managers.Player.Controller.UpdateState();
     }
-
-    public void ChangeGun(GunState gun)
-    {
-        this.ship.SetGun(gun);
-    }
-    public void ChangeGun(GunState gun, IInventory inventory)
-    {
-        this.ship.SetGun(gun, inventory);
-    }
-
-
 }

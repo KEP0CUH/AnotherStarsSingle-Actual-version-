@@ -6,10 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour, IObserver
 {
-    private List<Bullet> bullets = new List<Bullet>();
     private List<GunState> guns = new List<GunState>();
 
-    private PlayerState state;
+    private PlayerState playerState;
     private PlayerInventory inventory;
 
     private float timer = 0;
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour, IObserver
     private Camera mainCamera;
     private Camera radarCamera;
 
-    public PlayerState State => state;
+    public PlayerState PlayerState => playerState;
     public PlayerInventory Inventory => inventory;
 
     private void Start()
@@ -31,18 +30,19 @@ public class PlayerController : MonoBehaviour, IObserver
 
         var shipState = this.gameObject.AddComponent<ShipState>().Init(ShipKind.GreenLinkor);
 
-        state = new PlayerState(this.gameObject.GetComponent<PlayerData>(), shipState);
+        playerState = new PlayerState(this.gameObject.GetComponent<PlayerData>(), shipState);
         inventory = new PlayerInventory();
-        Managers.Player.Init(this, state);
+        Managers.Player.Init(this, playerState);
 
         SetupCamera();
         SetupRadar();
-
-
-        GetComponent<SpriteRenderer>().sprite = shipState.Data.Icon;
+        UpdateState();
     }
 
-    public void FixedUpdate()
+    /// <summary>
+    /// Обработка ввода.
+    /// </summary>
+    private void FixedUpdate()
     {
 
         if (Managers.Player.IsLanded == false)
@@ -92,6 +92,11 @@ public class PlayerController : MonoBehaviour, IObserver
         }
     }
 
+
+    public void UpdateState()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = playerState.Ship.Data.Icon;
+    }
     public void UpdateCameraPosition()
     {
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
@@ -161,39 +166,11 @@ public class PlayerController : MonoBehaviour, IObserver
 
     private void Shoot()
     {
-/*        Debug.Log("Стреляю");
-        GameObject bullet = new GameObject("Bullet");
-        bullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
-        bullet.transform.localEulerAngles = new Vector3(0, 0, this.transform.localEulerAngles.z);
-        bullet.AddComponent<Bullet>();
-        Destroy(bullet, 10);*/
-
-        this.guns = this.state.Ship.Inventory.GetGuns();
+        this.guns = this.playerState.Ship.Inventory.GetGuns();
         foreach(var gun in this.guns)
         {
             gun.Shoot(this.gameObject.transform,gun);
         }
-
-
-    }
-
-    public void SetShip(ShipKind kind)
-    {
-
-        var ship = this.GetComponent<ShipState>().Init(kind);
-        this.state.ChangeShip(ship);
-
-        this.GetComponent<SpriteRenderer>().sprite = this.state.Ship.Data.Icon;
-    }
-
-    public void OnItemDrop()
-    {
-
-    }
-
-    public void OnItemPickup()
-    {
-
     }
 
     public void OnTriggerEnter(Collider other)

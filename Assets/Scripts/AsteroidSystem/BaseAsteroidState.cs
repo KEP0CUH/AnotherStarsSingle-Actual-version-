@@ -13,6 +13,26 @@ public class BaseAsteroidState : MonoBehaviour
     public float MaxHealth => maxHealth;
     public float Health => health;
 
+    float radiusMax = 3;
+    float radiusMin = 0.1f;
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.P))
+        {
+            var angle = Random.Range(0, 360);
+            var radius = Random.Range(radiusMin, radiusMax);
+
+            var gameObj = new GameObject("New", typeof(BaseItemState), typeof(SpriteRenderer));
+            gameObj.GetComponent<BaseItemState>().Init(ItemKind.rudaGold, 1);
+            gameObj.GetComponent<SpriteRenderer>().sprite = gameObj.GetComponent<BaseItemState>().Data.Icon;
+            gameObj.transform.position = new Vector3(transform.position.x + radius * Mathf.Sin(angle),
+                                                     transform.position.y + radius * Mathf.Cos(angle),
+                                                     0);
+        }
+
+    }
+
     public void Init(BaseAsteroidData data)
     {
         this.data = data;
@@ -36,12 +56,7 @@ public class BaseAsteroidState : MonoBehaviour
     {
         if (gameObject.scene.isLoaded)
         {
-            GameObject drop = new GameObject("Item: " + this.data.DropKind.ToString());
-            drop.transform.position = this.gameObject.transform.position;
-
-            var data = Managers.Resources.DownloadData(this.data.DropKind);
-
-            drop.AddComponent<ItemViewGame>().Init(data.ItemKind, 4);
+            CreateDrop();
 
 
             GameObject dropTest = new GameObject("Item: " + ItemKind.weaponMultiblaster.ToString());
@@ -50,7 +65,25 @@ public class BaseAsteroidState : MonoBehaviour
             var dataTest = Managers.Resources.DownloadData(ItemKind.weaponMultiblaster);
 
             dropTest.AddComponent<ItemViewGame>().Init(dataTest.ItemKind, 4);
+
+
+
+
         }
+    }
+
+    private void CreateDrop()
+    {
+        var data = Managers.Resources.DownloadData(this.data.DropKind);
+
+        var angle = Random.Range(0, 360);
+        var radius = Random.Range(radiusMin, radiusMax);
+
+        var dropView = new GameObject("Drop" + this.data.DropKind.ToString(), typeof(SpriteRenderer));
+        dropView.AddComponent<ItemViewGame>().Init(data.ItemKind, 4);
+        dropView.transform.position = new Vector3(transform.position.x + radius * Mathf.Sin(angle),
+                                                 transform.position.y + radius * Mathf.Cos(angle),
+                                                 0);
     }
 
 

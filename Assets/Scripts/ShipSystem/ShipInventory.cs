@@ -8,6 +8,10 @@ public class ShipInventory : IShipInventory
     private List<GunState> guns;
     private int maxNumGuns;
 
+    /// <summary>
+    /// Конструктор оборудоваемых слотов корабля. Изначально все ячейки заполняются пустышками, которые будут заменены при взаимодействии.
+    /// </summary>
+    /// <param name="maxNumGuns">Максимальное число оружий одеваемых на корабль.</param>
     public ShipInventory(int maxNumGuns)
     {
         this.maxNumGuns = maxNumGuns;
@@ -15,14 +19,16 @@ public class ShipInventory : IShipInventory
 
         for (int i = 0; i < maxNumGuns; i++)
         {
-            var gunEmpty = CreateGunStateObject(ItemKind.EmptyItem);
-            guns.Add(gunEmpty);
+            guns.Add(CreateEmptyGunState());
         }
         ShowInventory();
     }
 
-
-    public void AddItem(GunState state)
+    /// <summary>
+    /// Вызывается при попытке одеть пушку на корабль, как правило при начальной инициализации корабля.
+    /// </summary>
+    /// <param name="state">Состояние пушки.</param>
+    public void TrySetGun(GunState state)
     {
         if (guns.Count < maxNumGuns)
         {
@@ -34,7 +40,7 @@ public class ShipInventory : IShipInventory
         {
             for (int i = 0; i < maxNumGuns; i++)
             {
-                if(guns[i].Data.ItemKind == ItemKind.EmptyItem)
+                if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
                 {
                     var newState = CreateGunStateObject(state);
                     GameObject.Destroy(guns[i]);
@@ -47,7 +53,12 @@ public class ShipInventory : IShipInventory
 
     }
 
-    public void AddItem(GunState state, IInventory inventory)
+    /// <summary>
+    /// Вызывается при попытке одеть пушку из инвентаря игрока на корабль.
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="inventory"></param>
+    public void TrySetGun(GunState state, IInventory inventory)
     {
         if (guns.Count < maxNumGuns)
         {
@@ -66,6 +77,7 @@ public class ShipInventory : IShipInventory
                     var newState = CreateGunStateObject(state);
                     GameObject.Destroy(guns[i]);
                     guns[i] = newState;
+                    inventory.RemoveItem(newState.Data.ItemKind);
                     ShowInventory();
                     return;
                 }
@@ -73,7 +85,12 @@ public class ShipInventory : IShipInventory
         }
     }
 
-    public void AddItem(ItemKind gunKind)
+
+    /// <summary>
+    /// Вызывается при попытке одеть пушку на корабль.
+    /// </summary>
+    /// <param name="gunKind"></param>
+    public void TrySetGun(ItemKind gunKind)
     {
         if (guns.Count < maxNumGuns)
         {
@@ -84,7 +101,7 @@ public class ShipInventory : IShipInventory
         }
         else
         {
-            for (int i = 0; i<maxNumGuns; i++)
+            for (int i = 0; i < maxNumGuns; i++)
             {
                 if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
                 {
@@ -98,27 +115,42 @@ public class ShipInventory : IShipInventory
         }
     }
 
+    /// <summary>
+    /// Получить список пушек, одетых на корабль.
+    /// </summary>
+    /// <returns></returns>
     public List<GunState> GetGuns()
     {
         return this.guns;
     }
 
-    public void RemoveItem(GunState state)
+    /// <summary>
+    /// Выкинуть\снять пушку с корабля.
+    /// </summary>
+    /// <param name="state"></param>
+    public void TryUnsetGun(GunState state)
     {
         guns.Remove(state);
         GameObject.Destroy(state.gameObject);
+        while(guns.Count < maxNumGuns)
+        {
+            guns.Add(CreateEmptyGunState());
+        }
         ShowInventory();
     }
 
-    public void RemoveAllItems()
+    public void RemoveAllEquipmentFromShip()
     {
         foreach (var gun in this.guns)
         {
-            Debug.Log("Снятие предмета с корабля...");
-            Managers.Player.AddItemInventory(gun);
+            Managers.Player.Controller.Inventory.AddItem(gun.Data.ItemKind,gun);
         }
 
         guns.Clear();
+        while(guns.Count < maxNumGuns)
+        {
+            guns.Add(CreateEmptyGunState());
+        }
         ShowInventory();
     }
 
@@ -154,5 +186,10 @@ public class ShipInventory : IShipInventory
         gunState.Init(kind, 1);
 
         return (GunState)gunState;
+    }
+
+    private GunState CreateEmptyGunState()
+    {
+        return CreateGunStateObject(ItemKind.EmptyItem);
     }
 }

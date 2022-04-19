@@ -17,7 +17,7 @@ public class ShipState : MonoBehaviour
 
         if(this.inventory != null)
         {
-            this.inventory.RemoveAllItems();
+            this.inventory.RemoveAllEquipmentFromShip();
         }
 
         switch(kind)
@@ -36,15 +36,15 @@ public class ShipState : MonoBehaviour
 
     public void SetGun(GunState gun)
     {
-        this.inventory.AddItem(gun);
+        this.inventory.TrySetGun(gun);
     }
     public void SetGun(GunState gun,IInventory inventory)
     {
-        this.inventory.AddItem(gun,inventory);
+        this.inventory.TrySetGun(gun,inventory);
     }
 
     public void SetGun(ItemKind gunKind)
     {
-        inventory.AddItem(gunKind);
+        inventory.TrySetGun(gunKind);
     }
 }

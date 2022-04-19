@@ -383,6 +383,7 @@
 "Assets/Scripts/ShipSystem/ShipInventory.cs"
 "Assets/Scripts/ShipSystem/ShipState.cs"
 "Assets/Scripts/Spawner/Spawner.cs"
+"Assets/Scripts/TestScripts/CircleGeneration.cs"
 "Assets/Scripts/UI/CanvasUI.cs"
 "Assets/Scripts/UI/InfoWindow.cs"
 "Assets/Scripts/UI/Inventory/GunSlot.cs"
