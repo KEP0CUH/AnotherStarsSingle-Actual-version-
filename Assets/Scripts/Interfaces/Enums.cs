@@ -36,6 +36,8 @@ public enum ItemKind
 
     #region devices
     deviceUnknown = 291,
+    deviceEmpty,
+    deviceTourbine,
     #endregion
 
     #region resources

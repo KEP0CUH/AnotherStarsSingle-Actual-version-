@@ -134,6 +134,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string mineralsPath = $"Items/Minerals/";
         string ammoPath = $"Items/Ammo/";
         string gunsPath = $"Items/Guns/";
+        string devicesPath = $"Items/Devices/";
         string shipsPath = "Ships/";
         string asteroidsPath = $"Asteroids/";
         string locationsPath = $"Locations/";
@@ -150,7 +151,10 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         items.Add(ItemKind.EmptyItem, Resources.Load<BaseItemData>(basePath + gunsPath                          + "EmptyGun"));
         items.Add(ItemKind.weaponDesintegrator, Resources.Load<BaseItemData>(basePath + gunsPath                + "Desintegrator"));
         items.Add(ItemKind.weaponMultiblaster, Resources.Load<BaseItemData>(basePath + gunsPath                 + "Multiblaster"));
-        items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));
+        items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                           + "Desintegrator"));
+
+        items.Add(ItemKind.deviceEmpty, Resources.Load<BaseItemData>(basePath + devicesPath                     + "EmptyDevice"));
+        items.Add(ItemKind.deviceTourbine, Resources.Load<BaseItemData>(basePath + devicesPath                  + "Tourbine"));
 
         items.Add(ItemKind.blueLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                      + "BlueLaser"));
         items.Add(ItemKind.redLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                       + "RedLaser"));

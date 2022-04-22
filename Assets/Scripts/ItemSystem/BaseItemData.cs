@@ -24,10 +24,17 @@ public class BaseItemData : ScriptableObject
         return false;
     }
 
+    public virtual bool IsDevice()
+    {
+        return false;
+    }
+    
+
     protected void OnValidate()
     {
         string mineralsSpritesPath = "Icons/Items/Minerals/";
         string gunSpritesPath = "Icons/Items/Guns/";
+        string deviceSpritesPath = "Icons/Items/Devices/";
         string ammoSpritesPath = "Icons/Items/Ammo/";
 
         switch (kind)
@@ -84,6 +91,22 @@ public class BaseItemData : ScriptableObject
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Кинетик";
                 description = "";
+                break;
+
+            #endregion
+
+            #region Devices
+            case ItemKind.deviceEmpty:
+                name = "Empty";
+                icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
+                title = "Заглушка";
+                description = "";
+                break;
+            case ItemKind.deviceTourbine:
+                name = "Tourbine";
+                icon = Resources.Load<Sprite>(deviceSpritesPath + name);
+                title = "Турбина";
+                description = "Ускоряет корабль на 30%";
                 break;
 
             #endregion

@@ -9,10 +9,4 @@ public class GunData : BaseItemData
     {
         return true;
     }
-
-    private void OnValidate()
-    {
-        base.OnValidate();
-    }
-
 }

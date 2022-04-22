@@ -11,14 +11,19 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private GameObject rightInventory;          // Правая часть инвентаря
     private GameObject rightInventoryList;      // Правая часть инвентаря, отображение оборудования корабля.
 
+    private GameObject rightMiddleInventory;        // Центр правой части инвентаря
+    private GameObject rightMiddleInventoryList;    // Содержимое инвентаря правой части по центру.
+
     private GameObject rightDownInventory;      // Инвентарь, справа внизу.
     private GameObject rightDownInventoryList;  // Содержимое инвентаря, справа внизу.
 
     private List<GameObject> itemSlots = new List<GameObject>();
     private List<GameObject> gunSlots = new List<GameObject>();
+    private List<GameObject> deviceSlots = new List<GameObject>();
 
     private Dictionary<ItemKind, BaseItemState> itemStates = new Dictionary<ItemKind, BaseItemState>();
     private List<GunState> gunStates = new List<GunState>();
+    private List<DeviceState> deviceStates = new List<DeviceState>();
 
     private bool isEnabled = true;
     public bool IsEnabled => isEnabled;
@@ -46,7 +51,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         Debug.Log("InventoryUI started.");
     }
 
-    public void ShowInventory(IInventory inventory,Dictionary<ItemKind, BaseItemState> items)
+    public void ShowInventory(IInventory inventory, Dictionary<ItemKind, BaseItemState> items)
     {
         foreach (var item in itemSlots)
         {
@@ -70,7 +75,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         }
     }
 
-    public void ShowInventory(IShipInventory inventory,List<GunState> guns)
+    public void ShowInventory(IShipInventory inventory, List<GunState> guns)
     {
         foreach (var gun in gunSlots)
         {
@@ -93,6 +98,31 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         {
             CreateGunSlot(inventory, gun);
         }
+    }
+
+    public void ShowInventory(IShipInventory inventory, List<DeviceState> devices)
+    {
+        foreach (var device in devices)
+        {
+            if (device != null)
+            {
+                Destroy(device.gameObject);
+            }
+        }
+
+        this.deviceStates.Clear();
+        deviceSlots.Clear();
+
+        foreach (var device in devices)
+        {
+            this.deviceStates.Add(device);
+        }
+
+        foreach (var device in devices)
+        {
+            CreateDeviceSlot(inventory, device);
+        }
+
     }
 
     [ContextMenu("Enable")]
@@ -173,7 +203,36 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         rightInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
         Debug.Log("RightInventory created.");
 
+
         CreateRightDownInventory(rightInventory.transform);
+        CreateRightMiddleInventory(rightInventory.transform);
+
+    }
+
+    private void CreateRightMiddleInventory(Transform parent)
+    {
+        rightMiddleInventory = new GameObject("RightMiddlePanel",typeof(Image),typeof(LayoutElement),typeof(ScrollRect), typeof(Mask));
+        rightMiddleInventory.transform.parent = parent.transform;
+
+        rightMiddleInventory.GetComponent<LayoutElement>().ignoreLayout = true;
+        var rect = rightMiddleInventory.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0);
+        rect.anchorMax = new Vector2(1, 0);
+        rect.pivot = new Vector2(1, 0.5f);
+        rect.position = Vector2.zero;
+
+        rect.offsetMin = new Vector2(10, 10 + 0.66f * height);
+        rect.offsetMax = new Vector2(-10, 10 + 2 * 0.66f * height);
+
+        var scroll = rightMiddleInventory.GetComponent<ScrollRect>();
+        scroll.inertia = false;
+        scroll.scrollSensitivity = 10;
+        scroll.horizontal = false;
+
+        rightMiddleInventory.GetComponent<Image>().color = new UnityEngine.Color(9, 65, 219, 90) / 256f;
+        Debug.Log("RightMiddleInventory created.");
+
+        CreateRightMiddleInventoryList(rightMiddleInventory.transform);
     }
 
     private void CreateRightDownInventory(Transform parent)
@@ -202,14 +261,41 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         CreateRightDownInventoryList(rightDownInventory.transform);
     }
 
+    private void CreateRightMiddleInventoryList(Transform rightMiddle)
+    {
+        rightMiddleInventoryList = new GameObject("Devices",typeof(RectTransform),typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+
+        var rect = rightMiddleInventoryList.GetComponent<RectTransform>();
+        rect.SetParent(rightMiddle.transform);
+        rect.anchorMin = new Vector2(0, 0.5f);
+        rect.anchorMax = new Vector2(1, 0.5f);
+        rect.pivot = new Vector2(1, 1);
+         rect.position = Vector2.zero;
+         rect.offsetMin = new Vector2(0, 0);
+         rect.offsetMax = new Vector2(1, 1);
+
+         var layout = rightMiddleInventoryList.GetComponent<GridLayoutGroup>();
+         layout.cellSize = new Vector2(64, 64);
+         layout.spacing = new Vector2(15, 15);
+         layout.padding.top = 15;
+         layout.padding.left = 15;
+
+         var fitter = rightMiddleInventoryList.GetComponent<ContentSizeFitter>();
+         fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+         rightMiddleInventory.GetComponent<ScrollRect>().content = rightMiddleInventoryList.GetComponent<RectTransform>();
+    }
+
+
     private void CreateRightDownInventoryList(Transform rightDown)
     {
-        rightDownInventoryList = new GameObject("Items", typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+        rightDownInventoryList = new GameObject("Items",typeof(ScrollRect), typeof(GridLayoutGroup), typeof(ContentSizeFitter));
         rightDownInventoryList.transform.parent = rightDown.transform;
 
         var rect = rightDownInventoryList.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0, 1);
-        rect.anchorMax = new Vector2(1, 1);
+        rect.SetParent(rightDown.transform);
+        rect.anchorMin = new Vector2(0, 0.5f);
+        rect.anchorMax = new Vector2(1, 0.5f);
         rect.pivot = new Vector2(1, 1);
         rect.position = Vector2.zero;
         rect.offsetMin = new Vector2(0, 0);
@@ -282,15 +368,23 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private void CreateItemSlot(IInventory inventory, BaseItemState state)
     {
         var itemSlot = new GameObject("Item" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
-        itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform,inventory, state);
+        itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform, inventory, state);
         itemSlots.Add(itemSlot);
     }
 
-    private void CreateGunSlot(IShipInventory inventory,BaseItemState state)
+    private void CreateGunSlot(IShipInventory inventory, BaseItemState state)
     {
         var gunSlot = new GameObject("Gun" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
         gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
         gunSlots.Add(gunSlot);
+    }
+
+    private void CreateDeviceSlot(IShipInventory inventory, BaseItemState state)
+    {
+        Debug.Log("Доделать создание слота устройства");
+        var deviceSlot = new GameObject("Device" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
+        deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);
+        deviceSlots.Add(deviceSlot);
     }
 
     private void OnValidate()
@@ -328,5 +422,10 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     public void AddGunSlot(GameObject slot)
     {
         gunSlots.Add(slot);
+    }
+
+    public void AddDeviceSlot(GameObject slot)
+    {
+        deviceSlots.Add(slot);
     }
 }

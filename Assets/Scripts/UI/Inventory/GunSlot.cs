@@ -95,6 +95,10 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         this.inventory.TryUnsetGun((GunState)this.state);
-        Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind,this.state);
+        if(this.state.Data.ItemKind != ItemKind.EmptyItem)
+        {
+            Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind, this.state);
+        }
+
     }
 }

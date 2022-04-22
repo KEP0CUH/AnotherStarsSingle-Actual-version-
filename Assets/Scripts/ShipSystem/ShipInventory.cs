@@ -8,26 +8,38 @@ public class ShipInventory : IShipInventory
     private List<GunState> guns;
     private int maxNumGuns;
 
+    private List<DeviceState> devices;
+    private int maxNumDevices;
+
     /// <summary>
-    /// Конструктор оборудоваемых слотов корабля. Изначально все ячейки заполняются пустышками, которые будут заменены при взаимодействии.
+    /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕР±РѕСЂСѓРґРѕРІР°РµРјС‹С… СЃР»РѕС‚РѕРІ РєРѕСЂР°Р±Р»СЏ. РР·РЅР°С‡Р°Р»СЊРЅРѕ РІСЃРµ СЏС‡РµР№РєРё Р·Р°РїРѕР»РЅСЏСЋС‚СЃСЏ РїСѓСЃС‚С‹С€РєР°РјРё, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ Р·Р°РјРµРЅРµРЅС‹ РїСЂРё РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёРё.
     /// </summary>
-    /// <param name="maxNumGuns">Максимальное число оружий одеваемых на корабль.</param>
-    public ShipInventory(int maxNumGuns)
+    /// <param name="maxNumGuns">РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РѕСЂСѓР¶РёР№ РѕРґРµРІР°РµРјС‹С… РЅР° РєРѕСЂР°Р±Р»СЊ.</param>
+    public ShipInventory(int maxNumGuns, int maxNumDevices)
     {
         this.maxNumGuns = maxNumGuns;
         guns = new List<GunState>();
+
+        this.maxNumDevices = maxNumDevices;
+        devices = new List<DeviceState>();
 
         for (int i = 0; i < maxNumGuns; i++)
         {
             guns.Add(CreateEmptyGunState());
         }
+
+        for(int i = 0; i < maxNumDevices; i++)
+        {
+            devices.Add(CreateEmptyDeviceState());
+        }
+
         ShowInventory();
     }
 
     /// <summary>
-    /// Вызывается при попытке одеть пушку на корабль, как правило при начальной инициализации корабля.
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ РїСѓС€РєСѓ РЅР° РєРѕСЂР°Р±Р»СЊ, РєР°Рє РїСЂР°РІРёР»Рѕ РїСЂРё РЅР°С‡Р°Р»СЊРЅРѕР№ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РєРѕСЂР°Р±Р»СЏ. Part 1 \ 3
     /// </summary>
-    /// <param name="state">Состояние пушки.</param>
+    /// <param name="state">РЎРѕСЃС‚РѕСЏРЅРёРµ РїСѓС€РєРё.</param>
     public void TrySetGun(GunState state)
     {
         if (guns.Count < maxNumGuns)
@@ -43,18 +55,45 @@ public class ShipInventory : IShipInventory
                 if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
                 {
                     var newState = CreateGunStateObject(state);
-                    GameObject.Destroy(guns[i]);
+                    GameObject.Destroy(guns[i].gameObject);
                     guns[i] = newState;
                     ShowInventory();
                     return;
                 }
             }
         }
-
     }
 
     /// <summary>
-    /// Вызывается при попытке одеть пушку из инвентаря игрока на корабль.
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅР° РєРѕСЂР°Р±Р»СЊ, РєР°Рє РїСЂР°РІРёР»Рѕ РїСЂРё РЅР°С‡Р°Р»СЊРЅРѕР№ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РєРѕСЂР°Р±Р»СЏ. Part 1 \ 3
+    /// </summary>
+    /// <param name="state">РЎРѕСЃС‚РѕСЏРЅРёРµ РїСѓС€РєРё.</param>
+    public void TrySetDevice(DeviceState state)
+    {
+        if (devices.Count < maxNumDevices)
+        {
+            var newState = CreateDeviceStateObject(state);
+            this.devices.Add(newState);
+            ShowInventory();
+        }
+        else
+        {
+            for(int i = 0; i < maxNumDevices;i++)
+            {
+                if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                {
+                    var newState = CreateDeviceStateObject(state);
+                    GameObject.Destroy(devices[i].gameObject);
+                    devices[i] = newState;
+                    ShowInventory();
+                    return;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ РїСѓС€РєСѓ РёР· РёРЅРІРµРЅС‚Р°СЂСЏ РёРіСЂРѕРєР° РЅР° РєРѕСЂР°Р±Р»СЊ. Part 2 \ 3
     /// </summary>
     /// <param name="state"></param>
     /// <param name="inventory"></param>
@@ -75,8 +114,40 @@ public class ShipInventory : IShipInventory
                 if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
                 {
                     var newState = CreateGunStateObject(state);
-                    GameObject.Destroy(guns[i]);
+                    GameObject.Destroy(guns[i].gameObject);
                     guns[i] = newState;
+                    inventory.RemoveItem(newState.Data.ItemKind);
+                    ShowInventory();
+                    return;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РёР· РёРЅРІРµРЅС‚Р°СЂСЏ РёРіСЂРѕРєР° РЅР° РєРѕСЂР°Р±Р»СЊ. Part 2 \ 3
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="inventory"></param>
+    public void TrySetDevice(DeviceState state, IInventory inventory)
+    {
+        if (devices.Count < maxNumDevices)
+        {
+            var newState = CreateDeviceStateObject(state);
+
+            this.devices.Add(newState);
+            inventory.RemoveItem(newState.Data.ItemKind);
+            ShowInventory();
+        }
+        else
+        {
+            for (int i = 0; i < maxNumDevices; i++)
+            {
+                if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                {
+                    var newState = CreateDeviceStateObject(state);
+                    GameObject.Destroy(devices[i].gameObject);
+                    devices[i] = newState;
                     inventory.RemoveItem(newState.Data.ItemKind);
                     ShowInventory();
                     return;
@@ -87,7 +158,7 @@ public class ShipInventory : IShipInventory
 
 
     /// <summary>
-    /// Вызывается при попытке одеть пушку на корабль.
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ РїСѓС€РєСѓ РЅР° РєРѕСЂР°Р±Р»СЊ.  Part 3 \ 3
     /// </summary>
     /// <param name="gunKind"></param>
     public void TrySetGun(ItemKind gunKind)
@@ -106,7 +177,7 @@ public class ShipInventory : IShipInventory
                 if (guns[i].Data.ItemKind == ItemKind.EmptyItem)
                 {
                     var newState = CreateGunStateObject(gunKind);
-                    GameObject.Destroy(guns[i]);
+                    GameObject.Destroy(guns[i].gameObject);
                     guns[i] = newState;
                     ShowInventory();
                     return;
@@ -116,7 +187,36 @@ public class ShipInventory : IShipInventory
     }
 
     /// <summary>
-    /// Получить список пушек, одетых на корабль.
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РѕРґРµС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅР° РєРѕСЂР°Р±Р»СЊ.  Part 3 \ 3
+    /// </summary>
+    /// <param name="gunKind"></param>
+    public void TrySetDevice(ItemKind deviceKind)
+    {
+        if (devices.Count < maxNumDevices)
+        {
+            var newState = CreateDeviceStateObject(deviceKind);
+
+            this.devices.Add(newState);
+            ShowInventory();
+        }
+        else
+        {
+            for(int i = 0; i < maxNumDevices; i++)
+            {
+                if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                {
+                    var newState = CreateDeviceStateObject(deviceKind);
+                    GameObject.Destroy(devices[i].gameObject);
+                    devices[i] = newState;
+                    ShowInventory();
+                    return;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РїСѓС€РµРє, РѕРґРµС‚С‹С… РЅР° РєРѕСЂР°Р±Р»СЊ.
     /// </summary>
     /// <returns></returns>
     public List<GunState> GetGuns()
@@ -124,8 +224,13 @@ public class ShipInventory : IShipInventory
         return this.guns;
     }
 
+    public List<DeviceState> GetDevices()
+    {
+        return this.devices;
+    }
+
     /// <summary>
-    /// Выкинуть\снять пушку с корабля.
+    /// Р’С‹РєРёРЅСѓС‚СЊ\СЃРЅСЏС‚СЊ РїСѓС€РєСѓ СЃ РєРѕСЂР°Р±Р»СЏ.
     /// </summary>
     /// <param name="state"></param>
     public void TryUnsetGun(GunState state)
@@ -139,18 +244,51 @@ public class ShipInventory : IShipInventory
         ShowInventory();
     }
 
+    /// <summary>
+    /// Р’С‹РєРёРЅСѓС‚СЊ\СЃРЅСЏС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ СЃ РєРѕСЂР°Р±Р»СЏ.
+    /// </summary>
+    /// <param name="state"></param>
+    public void TryUnsetDevice(DeviceState state)
+    {
+        devices.Remove(state);
+        GameObject.Destroy(state.gameObject);
+        while (devices.Count < maxNumDevices)
+        {
+            devices.Add(CreateEmptyDeviceState());
+        }
+        ShowInventory();
+    }
+
     public void RemoveAllEquipmentFromShip()
     {
-        foreach (var gun in this.guns)
+        for(int i = 0; i < guns.Count;i++)
         {
-            Managers.Player.Controller.Inventory.AddItem(gun.Data.ItemKind,gun);
+            if(guns[i].Data.ItemKind == ItemKind.EmptyItem)
+            {
+                GameObject.Destroy(guns[i].gameObject);
+                guns[i] = null;
+            }
+            else
+            {
+                Managers.Player.Controller.Inventory.AddItem(guns[i].Data.ItemKind, guns[i]);
+            }
+        }
+
+        for(int i = 0; i < devices.Count;i++)
+        {
+            if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+            {
+                GameObject.Destroy(devices[i].gameObject);
+                devices[i] = null;
+            }
+            else
+            {
+                Managers.Player.Controller.Inventory.AddItem(devices[i].Data.ItemKind, devices[i]);
+            }
         }
 
         guns.Clear();
-        while(guns.Count < maxNumGuns)
-        {
-            guns.Add(CreateEmptyGunState());
-        }
+        devices.Clear();
         ShowInventory();
     }
 
@@ -165,6 +303,7 @@ public class ShipInventory : IShipInventory
 
                 }*/
         CanvasUI.Inventory.ShowInventory(this, guns);
+        CanvasUI.Inventory.ShowInventory(this, devices);
     }
 
 
@@ -179,17 +318,45 @@ public class ShipInventory : IShipInventory
         newItemState.Init(state.Data.ItemKind, state.Count);
         return (GunState)newItemState;
     }
+
+    private DeviceState CreateDeviceStateObject(DeviceState state)
+    {
+        BaseItemState newItemState;
+
+        var newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(DeviceState));
+        newItemState = newItemStateObj.GetComponent<DeviceState>();
+
+        newItemState.Init(state.Data.ItemKind, state.Count);
+        return (DeviceState)newItemState;
+    }
+
     private GunState CreateGunStateObject(ItemKind kind)
     {
         var gunDefault = new GameObject("DefaultGun", typeof(GunState));
         var gunState = gunDefault.GetComponent<GunState>();
         gunState.Init(kind, 1);
 
-        return (GunState)gunState;
+        return gunState;
+    }
+
+    private DeviceState CreateDeviceStateObject(ItemKind kind)
+    {
+        var deviceDefault = new GameObject("DefaultDevice",typeof(DeviceState));
+        var deviceState = deviceDefault.GetComponent<DeviceState>();
+        deviceState.Init(kind, 1);
+
+        return deviceState;
     }
 
     private GunState CreateEmptyGunState()
     {
         return CreateGunStateObject(ItemKind.EmptyItem);
     }
+
+    private DeviceState CreateEmptyDeviceState()
+    {
+        return CreateDeviceStateObject(ItemKind.deviceEmpty);
+    }
+
+    
 }
