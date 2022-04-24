@@ -34,6 +34,12 @@ public class PlayerInventory : IInventory
             newItemState = newItemStateObj.GetComponent<GunState>();
             newItemState.Init(((GunState)state).Data.ItemKind, state.Count);
         }
+        else if(state.IsDevice)
+        {
+            newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
+            newItemState = newItemStateObj.GetComponent<DeviceState>();
+            newItemState.Init(((DeviceState)state).Data.ItemKind, state.Count);
+        }
         else
         {
             newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(BaseItemState));

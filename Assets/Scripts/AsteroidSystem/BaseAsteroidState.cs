@@ -68,7 +68,12 @@ public class BaseAsteroidState : MonoBehaviour
 
 
 
+            GameObject dropTest2 = new GameObject("Item: " + ItemKind.deviceTourbine.ToString());
+            dropTest2.transform.position = this.gameObject.transform.position;
 
+            var dataTest2 = Managers.Resources.DownloadData(ItemKind.deviceTourbine);
+
+            dropTest2.AddComponent<ItemViewGame>().Init(dataTest2.ItemKind, 4);
         }
     }
 

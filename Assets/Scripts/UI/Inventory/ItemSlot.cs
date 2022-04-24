@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Selectable))]
 public class ItemSlot : MonoBehaviour, IPointerDownHandler
 {
-    private GameObject slot;
-    private Transform parent;
-    private BaseItemState state;
+    protected GameObject slot;
+    protected Transform parent;
+    protected BaseItemState state;
 
     private IInventory inventory;
 
@@ -22,7 +22,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         CanvasUI.Inventory.AddItemSlot(slot);
     }
 
-    private void CreateItemSlot()
+    protected virtual void CreateItemSlot()
     {
         if (state != null)
         {
@@ -75,27 +75,53 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     {
         inventory.RemoveItem(state.Data.ItemKind);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        if(state.IsWeapon)
+        if (state.IsWeapon)
         {
-            item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind,1);
+            item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind, 1);
         }
-        else item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
+        else if (state.IsDevice)
+        {
+            item.GetComponent<ItemViewGame>().Init(((DeviceState)state).Data.ItemKind, 1);
+        }
+        else
+        {
+            item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
+        }
 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+
     }
 
-    [ContextMenu("Set Gun")]
-    private void SetGun()
+    private void SetItem()
     {
         if (this.state.IsWeapon)
         {
             var gunState = (GunState)this.state;
             Managers.Player.Controller.PlayerState.Ship.SetGun(gunState, inventory);
         }
+        else if (this.state.IsDevice)
+        {
+            var deviceState = (DeviceState)this.state;
+            Managers.Player.Controller.PlayerState.Ship.SetDevice(deviceState, inventory);
+        }
     }
 
     public void OnPointerDown(PointerEventData data)
     {
-        SetGun();
+        TryInteract();
+    }
+
+    protected virtual void TryInteract()
+    {
+        if (this.state.IsWeapon)
+        {
+            var gunState = (GunState)this.state;
+            Managers.Player.Controller.PlayerState.Ship.SetGun(gunState, inventory);
+        }
+        else if (this.state.IsDevice)
+        {
+            var deviceState = (DeviceState)this.state;
+            Managers.Player.Controller.PlayerState.Ship.SetDevice(deviceState, inventory);
+        }
     }
 }

@@ -18,12 +18,16 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     private Action<ItemKind,BaseItemState> onItemDrop;
     private Action<ItemKind, int> inItemAddedInventory;
 
-    public void Init(ItemKind kind, int count)
+    public virtual void Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);
         if (data.IsWeapon())
         {
             CreateGun(kind,count);
+        }
+        else if(data.IsDevice())
+        {
+            CreateDevice(kind, count);
         }
         else
         {
@@ -36,6 +40,16 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         gameObject.AddComponent<GunState>();
         state = gameObject.GetComponent<GunState>();
         this.state.Init(kind, ammoCount);
+        this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
+        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    private void CreateDevice(ItemKind kind, int count)
+    {
+        gameObject.AddComponent<DeviceState>();
+        state = gameObject.GetComponent<DeviceState>();
+        this.state.Init(kind, count);
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;

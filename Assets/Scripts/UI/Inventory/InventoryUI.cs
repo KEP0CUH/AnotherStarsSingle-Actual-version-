@@ -381,7 +381,6 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private void CreateDeviceSlot(IShipInventory inventory, BaseItemState state)
     {
-        Debug.Log("Доделать создание слота устройства");
         var deviceSlot = new GameObject("Device" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
         deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);
         deviceSlots.Add(deviceSlot);

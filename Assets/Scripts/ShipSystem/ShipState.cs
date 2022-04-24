@@ -36,7 +36,7 @@ public class ShipState : MonoBehaviour
                 maxNumDevices = 2;
                 break;
         }
-        inventory = new ShipInventory(maxNumGuns,maxNumDevices);
+        inventory = new ShipInventory(this,maxNumGuns,maxNumDevices);
 
         return this;
     }
