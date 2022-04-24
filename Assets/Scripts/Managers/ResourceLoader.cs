@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ResourceLoader : MonoBehaviour, IGameManager
 {
-    private Dictionary<ItemKind,BaseItemData> items;
-    private Dictionary<AsteroidType, BaseAsteroidData> asteroids;
+    private Dictionary<ItemKind,ItemData> items;
+    private Dictionary<AsteroidType, AsteroidData> asteroids;
     private Dictionary<AmmoKind,AmmoData> ammo;
 /*    private Dictionary<GunKind, GunData> guns;*/
     private Dictionary<SoundKind,AudioClip> sounds;
@@ -15,16 +15,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<IconType, Sprite> icons;
 
 
-    public Dictionary<ItemKind, BaseItemData> Items => items;
-    public Dictionary<AsteroidType, BaseAsteroidData> Asteroids => asteroids;
+    public Dictionary<ItemKind, ItemData> Items => items;
+    public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
     public ManagerStatus Status { get; private set; }
 
 
     public void Startup()
     {
         Debug.Log("ResourceLoader starting...".SetColor(Color.Yellow));
-        items = new Dictionary<ItemKind, BaseItemData>();
-        asteroids = new Dictionary<AsteroidType,BaseAsteroidData>();
+        items = new Dictionary<ItemKind, ItemData>();
+        asteroids = new Dictionary<AsteroidType,AsteroidData>();
         ammo = new Dictionary<AmmoKind, AmmoData>();
         sounds = new Dictionary<SoundKind,AudioClip>();
         ships = new Dictionary<ShipKind, ShipData>();
@@ -39,7 +39,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         Debug.Log("ResourceLoader started.".SetColor(Color.Green));
     }
 
-    public BaseItemData DownloadData(ItemKind kind)
+    public ItemData DownloadData(ItemKind kind)
     {
         if(items.ContainsKey(kind))
         {
@@ -69,7 +69,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public BaseAsteroidData DownloadData(AsteroidType type)
+    public AsteroidData DownloadData(AsteroidType type)
     {
         if(asteroids.ContainsKey(type))
         {
@@ -143,26 +143,26 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string soundsPath = $"Sounds/";
 
         
-        items.Add(ItemKind.rudaFerrum, Resources.Load<BaseItemData>(basePath + mineralsPath                     + "Ferrum"));
-        items.Add(ItemKind.rudaGold, Resources.Load<BaseItemData>(basePath + mineralsPath                       + "Gold"));
-        items.Add(ItemKind.rudaNickel, Resources.Load<BaseItemData>(basePath + mineralsPath                     + "Nickel"));
-        items.Add(ItemKind.rudaTitan, Resources.Load<BaseItemData>($""));
+        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + mineralsPath                     + "Ferrum"));
+        items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + mineralsPath                       + "Gold"));
+        items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + mineralsPath                     + "Nickel"));
+        items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>($""));
 
-        items.Add(ItemKind.EmptyItem, Resources.Load<BaseItemData>(basePath + gunsPath                          + "EmptyGun"));
-        items.Add(ItemKind.weaponDesintegrator, Resources.Load<BaseItemData>(basePath + gunsPath                + "Desintegrator"));
-        items.Add(ItemKind.weaponMultiblaster, Resources.Load<BaseItemData>(basePath + gunsPath                 + "Multiblaster"));
+        items.Add(ItemKind.weaponEmpty, Resources.Load<ItemData>(basePath + gunsPath                          + "EmptyGun"));
+        items.Add(ItemKind.weaponDesintegrator, Resources.Load<ItemData>(basePath + gunsPath                + "Desintegrator"));
+        items.Add(ItemKind.weaponMultiblaster, Resources.Load<ItemData>(basePath + gunsPath                 + "Multiblaster"));
         items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                           + "Desintegrator"));
 
-        items.Add(ItemKind.deviceEmpty, Resources.Load<BaseItemData>(basePath + devicesPath                     + "EmptyDevice"));
-        items.Add(ItemKind.deviceTourbine, Resources.Load<BaseItemData>(basePath + devicesPath                  + "Tourbine"));
+        items.Add(ItemKind.deviceEmpty, Resources.Load<ItemData>(basePath + devicesPath                     + "EmptyDevice"));
+        items.Add(ItemKind.deviceTourbine, Resources.Load<ItemData>(basePath + devicesPath                  + "Tourbine"));
 
-        items.Add(ItemKind.blueLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                      + "BlueLaser"));
-        items.Add(ItemKind.redLaserAmmo, Resources.Load<BaseItemData>(basePath + ammoPath                       + "RedLaser"));
+        items.Add(ItemKind.blueLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                      + "BlueLaser"));
+        items.Add(ItemKind.redLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                       + "RedLaser"));
 
-        asteroids.Add(AsteroidType.GoldAsteroid, Resources.Load<BaseAsteroidData>(basePath + asteroidsPath      + "GoldAsteroid"));
-        asteroids.Add(AsteroidType.FerrumAsteroid, Resources.Load<BaseAsteroidData>(basePath + asteroidsPath    + "FerrumAsteroid"));
-        asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<BaseAsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
-        asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<BaseAsteroidData>($""));
+        asteroids.Add(AsteroidType.GoldAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath      + "GoldAsteroid"));
+        asteroids.Add(AsteroidType.FerrumAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "FerrumAsteroid"));
+        asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
+        asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<AsteroidData>($""));
 
         ammo.Add(AmmoKind.Multiblaster, Resources.Load<AmmoData>(basePath + ammoPath                            + "Multiblaster"));
 

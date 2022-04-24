@@ -13,11 +13,11 @@ public class GunViewGame : MonoBehaviour, Interactable, IObservable
 
     private List<IObserver> observers = new List<IObserver>();
 
-    public BaseItemState State => state;
+    public ItemState State => state;
 
     private bool triggerWorked = false;
 
-    private Action<ItemKind, BaseItemState> onItemDrop;
+    private Action<ItemKind, ItemState> onItemDrop;
     public void Init(ItemKind kind,int ammoMax)
     {
         var data = Managers.Resources.DownloadData(kind);

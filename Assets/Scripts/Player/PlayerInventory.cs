@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerInventory : IInventory
 {
-    private Dictionary<ItemKind, BaseItemState> items;
+    private Dictionary<ItemKind, ItemState> items;
+    private Dictionary<int, ItemState> itemsDic;
 
     public PlayerInventory()
     {
-        items = new Dictionary<ItemKind, BaseItemState>();
+        items = new Dictionary<ItemKind, ItemState>();
+        itemsDic = new Dictionary<int,ItemState>();
     }
 
-    public void AddItem(ItemKind kind, BaseItemState state)
+
+    public void AddItem(ItemKind kind, ItemState state)
     {
         foreach (var item in items)
         {
@@ -26,7 +30,7 @@ public class PlayerInventory : IInventory
 
 
         GameObject newItemStateObj;
-        BaseItemState newItemState;
+        ItemState newItemState;
 
         if (state.IsWeapon)
         {
@@ -42,8 +46,8 @@ public class PlayerInventory : IInventory
         }
         else
         {
-            newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(BaseItemState));
-            newItemState = newItemStateObj.GetComponent<BaseItemState>();
+            newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(ItemState));
+            newItemState = newItemStateObj.GetComponent<ItemState>();
             newItemState.Init(kind, state.Count);
         }
         GameObject.Destroy(state.gameObject);
@@ -51,7 +55,7 @@ public class PlayerInventory : IInventory
         ShowInventory();
     }
 
-    public BaseItemState GetItem(ItemKind kind)
+    public ItemState GetItem(ItemKind kind)
     {
         if (items.ContainsKey(kind))
         {
@@ -59,6 +63,8 @@ public class PlayerInventory : IInventory
         }
         return null;
     }
+
+
 
     public void RemoveItem(ItemKind kind)
     {
@@ -75,10 +81,59 @@ public class PlayerInventory : IInventory
         ShowInventory();
     }
 
+
+
     public void ShowInventory()
     {
         CanvasUI.Inventory.ShowInventory(this, items);
+        //CanvasUI.Inventory.ShowInventory(this, itemsDic);
     }
 
+
+    public void AddItem(ItemState state)
+    {
+        if (state.IsItem)
+        {
+            foreach (var item in itemsDic.Values)
+            {
+                if (item.Data.ItemKind == state.Data.ItemKind)
+                {
+                    item.IncreaseNumber();
+                    return;
+                }
+            }
+            itemsDic.Add(state.Id, state);
+            return;
+        }
+        else
+        {
+            itemsDic.Add(state.Id, state);
+        }
+    }
+    public ItemState GetItem(int id)
+    {
+        if (itemsDic.ContainsKey(id))
+            return itemsDic[id];
+        return null;
+    }
+
+    public void RemoveItem(ItemState state)
+    {
+        if (itemsDic.ContainsKey(state.Id))
+        {
+            if (state.IsItem)
+            {
+                itemsDic[state.Id].DecreaseNumber();
+                if (itemsDic[state.Id].Count < 0)
+                {
+                    itemsDic.Remove(state.Id);
+                }
+            }
+            else
+            {
+                itemsDic.Remove(state.Id);
+            }
+        }
+    }
 
 }

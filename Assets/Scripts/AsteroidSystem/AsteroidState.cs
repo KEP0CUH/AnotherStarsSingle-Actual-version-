@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAsteroidState : MonoBehaviour
+public class AsteroidState : MonoBehaviour
 {
-    [SerializeField] private BaseAsteroidData data;
+    [SerializeField] private AsteroidData data;
 
     [SerializeField] private float maxHealth;
     [SerializeField] private float health;
 
-    public BaseAsteroidData Data => data;
+    public AsteroidData Data => data;
     public float MaxHealth => maxHealth;
     public float Health => health;
 
@@ -23,9 +23,9 @@ public class BaseAsteroidState : MonoBehaviour
             var angle = Random.Range(0, 360);
             var radius = Random.Range(radiusMin, radiusMax);
 
-            var gameObj = new GameObject("New", typeof(BaseItemState), typeof(SpriteRenderer));
-            gameObj.GetComponent<BaseItemState>().Init(ItemKind.rudaGold, 1);
-            gameObj.GetComponent<SpriteRenderer>().sprite = gameObj.GetComponent<BaseItemState>().Data.Icon;
+            var gameObj = new GameObject("New", typeof(ItemState), typeof(SpriteRenderer));
+            gameObj.GetComponent<ItemState>().Init(ItemKind.rudaGold, 1);
+            gameObj.GetComponent<SpriteRenderer>().sprite = gameObj.GetComponent<ItemState>().Data.Icon;
             gameObj.transform.position = new Vector3(transform.position.x + radius * Mathf.Sin(angle),
                                                      transform.position.y + radius * Mathf.Cos(angle),
                                                      0);
@@ -33,7 +33,7 @@ public class BaseAsteroidState : MonoBehaviour
 
     }
 
-    public void Init(BaseAsteroidData data)
+    public void Init(AsteroidData data)
     {
         this.data = data;
 

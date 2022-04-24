@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8b259ca8c15eb4f8c88f88784766eb, type: 3}
+  m_Script: {fileID: 11500000, guid: ae127a0eef4cdcb4daa0e1e73cc80b3c, type: 3}
   m_Name: BlueLaser
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e9dde53efd1e06a45b234d9eaa1e9c97, type: 3}
-  title: "\u0421\u0438\u043D\u0438\u0439 \u043B\u0430\u0437\u0435\u0440\u043D\u044B\u0439
-    \u043F\u0430\u0442\u0440\u043E\u043D"
-  description: "\u0421\u0438\u043D\u0438\u0439 \u043F\u0430\u0442\u0440\u043E\u043D,
-    \u043D\u0430\u0438\u0431\u043E\u043B\u0435\u0435 \u043C\u043E\u0449\u043D\u044B\u0439
-    \u0438\u0437 \u0438\u043C\u0435\u044E\u0449\u0438\u0445\u0441\u044F."
+  title: BlueLaser
+  icon: {fileID: 21300000, guid: 3f29f025adfbdd84f9d54d6ada453de2, type: 3}
+  clip: {fileID: 8300000, guid: 2154bb280ce40d542aa174e5ae62183d, type: 3}
   kind: 1002

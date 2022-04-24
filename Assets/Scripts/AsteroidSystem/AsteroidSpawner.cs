@@ -35,7 +35,7 @@ public class AsteroidSpawner : MonoBehaviour
             GameObject newAsteroid = new GameObject(data.Title);
             newAsteroid.transform.parent = this.transform;
 
-            var state = newAsteroid.AddComponent<BaseAsteroidState>();
+            var state = newAsteroid.AddComponent<AsteroidState>();
             state.Init(data);
             newAsteroid.AddComponent<AsteroidController>().Init(this.transform, state);
             currentExistNum++;
@@ -47,7 +47,7 @@ public class AsteroidSpawner : MonoBehaviour
         currentExistNum--;
     }
 
-    private BaseAsteroidData GetRandomAsteroidData()
+    private AsteroidData GetRandomAsteroidData()
     {
         var type = asteroids[Random.Range(0, asteroids.Count)];
         var data = Managers.Resources.DownloadData(type);

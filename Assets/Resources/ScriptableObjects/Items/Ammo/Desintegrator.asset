@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae127a0eef4cdcb4daa0e1e73cc80b3c, type: 3}
   m_Name: Desintegrator
   m_EditorClassIdentifier: 
-  title: bulletDesintegrator
-  icon: {fileID: 21300000, guid: 2e651905ec166224e906586f3312d63a, type: 3}
-  clip: {fileID: 8300000, guid: 405e6c27e5b9df6448afd46f1b004d0b, type: 3}
-  kind: 1006
+  title: bulletMultiblaster
+  icon: {fileID: 21300000, guid: 7b93d1dc89176d1438eecc331066c56c, type: 3}
+  clip: {fileID: 8300000, guid: 2154bb280ce40d542aa174e5ae62183d, type: 3}
+  kind: 1005

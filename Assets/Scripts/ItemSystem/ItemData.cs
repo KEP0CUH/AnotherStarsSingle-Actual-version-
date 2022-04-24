@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items", fileName = "NewItem", order = 51)]
-public class BaseItemData : ScriptableObject
+[CreateAssetMenu(menuName = "Item", fileName = "NewItem", order = 51)]
+public class ItemData : ScriptableObject
 {
     [SerializeField]
     private Sprite icon;
@@ -18,6 +18,11 @@ public class BaseItemData : ScriptableObject
     public string Title => title;
     public string Description => description;
     public ItemKind ItemKind => kind;
+
+    public virtual bool IsItem()
+    {
+        return true;
+    }
 
     public virtual bool IsWeapon()
     {
@@ -39,7 +44,7 @@ public class BaseItemData : ScriptableObject
 
         switch (kind)
         {
-            case ItemKind.EmptyItem:
+            case ItemKind.weaponEmpty:
                 name = "Заглушка";
                 icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
                 title = "Заглушка";

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8b259ca8c15eb4f8c88f88784766eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 4feb8c6aa29cca741bbed9f49f07894f, type: 3}
   m_Name: Nickel
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 59ca804770b33cb4b964a5a78624d981, type: 3}

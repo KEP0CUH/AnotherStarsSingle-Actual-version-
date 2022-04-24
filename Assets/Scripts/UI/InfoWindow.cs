@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class InfoWindow : MonoBehaviour
 {
-    private BaseAsteroidState data;
+    private AsteroidState data;
     private AsteroidController controller;
 
     private GameObject icon;

@@ -21,8 +21,7 @@ public class Bullet : MonoBehaviour
         var audioObj = new GameObject("Sound of shoot.", typeof(AudioSource));
         var audio = audioObj.GetComponent<AudioSource>();
 
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(ItemKind.redLaserAmmo).Icon;
-        //this.gameObject.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(gun.AmmoKind).Icon;
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(gun.AmmoKind).Icon;
 
 
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -38,7 +37,7 @@ public class Bullet : MonoBehaviour
             case ItemKind.weaponDesintegrator:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotEnergetic2);
                 break;
-            case ItemKind.EmptyItem:
+            case ItemKind.weaponEmpty:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
                 break;
         }

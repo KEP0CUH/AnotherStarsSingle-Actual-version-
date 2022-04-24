@@ -9,7 +9,7 @@ public class AsteroidController : MonoBehaviour
     private float moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
     private Vector3 originPoint = new Vector3();
     private GameObject spawner;
-    private BaseAsteroidState asteroid;
+    private AsteroidState asteroid;
 
 
     private GameObject infoWindow = null;
@@ -18,7 +18,7 @@ public class AsteroidController : MonoBehaviour
     [SerializeField] private AsteroidType asteroidType;
     [SerializeField] private string name;
 
-    public BaseAsteroidState Asteroid => asteroid;
+    public AsteroidState Asteroid => asteroid;
 
     public enum AsteroidType
     {
@@ -27,7 +27,7 @@ public class AsteroidController : MonoBehaviour
         empty
     }
 
-    public void Init(Transform spawner,BaseAsteroidState asteroidState)
+    public void Init(Transform spawner,AsteroidState asteroidState)
     {
         this.originPoint = spawner.transform.position;
         this.spawner = spawner.gameObject;
@@ -137,7 +137,7 @@ public class AsteroidController : MonoBehaviour
         if(other.GetComponent<Bullet>())
         {
             var bullet = other.GetComponent<Bullet>();
-            this.GetComponent<BaseAsteroidState>().ChangeHealth(-bullet.Strength);
+            this.GetComponent<AsteroidState>().ChangeHealth(-bullet.Strength);
             Destroy(other.gameObject);
         }    
         Debug.Log($"Trigger of asteroid and {other.gameObject.name}");
@@ -148,7 +148,7 @@ public class AsteroidController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        var data = this.gameObject.GetComponent<BaseAsteroidState>();
+        var data = this.gameObject.GetComponent<AsteroidState>();
         Debug.Log($"Это объект: {data.Data.Title} {data.Data.Description} {data.Health}/{data.MaxHealth}");
 
         if(infoWindow == null)

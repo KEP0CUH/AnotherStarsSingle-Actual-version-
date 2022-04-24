@@ -19,28 +19,27 @@ public enum UIModuleKind
 }
 public enum ItemKind
 {
-    EmptyItem,
-
-    #region weapons
+    #region WEAPONS
+    weaponEmpty,
     weaponRocket,
     weaponMultiblaster,
     weaponDesintegrator,
     weaponKinetic,
     #endregion
 
-    #region engines
+    #region ENGINES
     engineReactive = 191,
     engineIon,
     enginePhoton,
     #endregion
 
-    #region devices
+    #region DEVICES
     deviceUnknown = 291,
     deviceEmpty,
     deviceTourbine,
     #endregion
 
-    #region resources
+    #region RUDA
 
     rudaGold = 491,
     rudaFerrum,
@@ -49,10 +48,11 @@ public enum ItemKind
 
     #endregion
 
-    #region other
+    #region OTHER
     otherRubbish,
     #endregion
-    #region Ammo
+
+    #region AMMO
     redLaserAmmo = 1001,
     blueLaserAmmo = 1002,
     yellowLaserAmmo = 1003,
@@ -84,7 +84,7 @@ public enum ShipKind
 public enum SoundKind
 {
     ShotKinetic1 = 10,
-    ShotKinetic2 = 11,
+    ShotKinetic2,
     ShotEnergetic2
 }
 

@@ -21,7 +21,8 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     private List<GameObject> gunSlots = new List<GameObject>();
     private List<GameObject> deviceSlots = new List<GameObject>();
 
-    private Dictionary<ItemKind, BaseItemState> itemStates = new Dictionary<ItemKind, BaseItemState>();
+    private Dictionary<ItemKind, ItemState> itemStates = new Dictionary<ItemKind, ItemState>();
+    private Dictionary<int, ItemState> itemStates2 = new Dictionary<int, ItemState>();
     private List<GunState> gunStates = new List<GunState>();
     private List<DeviceState> deviceStates = new List<DeviceState>();
 
@@ -51,7 +52,30 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         Debug.Log("InventoryUI started.");
     }
 
-    public void ShowInventory(IInventory inventory, Dictionary<ItemKind, BaseItemState> items)
+    public void ShowInventory(IInventory inventory,Dictionary<int,ItemState> items)
+    {
+        foreach (var item in itemSlots)
+        {
+            if (item != null)
+            {
+                Destroy(item.gameObject);
+            }
+        }
+        this.itemStates.Clear();
+        itemSlots.Clear();
+
+        foreach(var item in items)
+        {
+            this.itemStates2.Add(item.Key, item.Value);
+        }
+
+        foreach(var item in this.itemStates2)
+        {
+            CreateItemSlot(inventory, item.Value);
+        }
+    }
+
+    public void ShowInventory(IInventory inventory, Dictionary<ItemKind, ItemState> items)
     {
         foreach (var item in itemSlots)
         {
@@ -102,11 +126,11 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     public void ShowInventory(IShipInventory inventory, List<DeviceState> devices)
     {
-        foreach (var device in devices)
+        for(int i = 0; i < deviceSlots.Count; i++)
         {
-            if (device != null)
+            if (deviceSlots[i] != null)
             {
-                Destroy(device.gameObject);
+                GameObject.Destroy(deviceSlots[i].gameObject);
             }
         }
 
@@ -365,21 +389,21 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
 
     [ContextMenu("CreateItemSlot")]
-    private void CreateItemSlot(IInventory inventory, BaseItemState state)
+    private void CreateItemSlot(IInventory inventory, ItemState state)
     {
         var itemSlot = new GameObject("Item" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
         itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform, inventory, state);
         itemSlots.Add(itemSlot);
     }
 
-    private void CreateGunSlot(IShipInventory inventory, BaseItemState state)
+    private void CreateGunSlot(IShipInventory inventory, ItemState state)
     {
         var gunSlot = new GameObject("Gun" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
         gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
         gunSlots.Add(gunSlot);
     }
 
-    private void CreateDeviceSlot(IShipInventory inventory, BaseItemState state)
+    private void CreateDeviceSlot(IShipInventory inventory, ItemState state)
     {
         var deviceSlot = new GameObject("Device" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
         deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);

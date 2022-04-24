@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunState : BaseItemState
+public class GunState : ItemState
 {
     [SerializeField] private AmmoKind ammoKind;
     private int maxAmmo;
@@ -12,8 +12,7 @@ public class GunState : BaseItemState
 
     public override void Init(ItemKind kind, int count)
     {
-        this.data = Managers.Resources.DownloadData(kind);
-        this.count = count;
+        base.Init(kind, count);
 
         switch(kind)
         {
@@ -23,7 +22,7 @@ public class GunState : BaseItemState
             case ItemKind.weaponDesintegrator:
                 ammoKind = AmmoKind.Desintegrator;
                 break;
-            case ItemKind.EmptyItem:
+            case ItemKind.weaponEmpty:
                 ammoKind = AmmoKind.Multiblaster;
                 break;
         }

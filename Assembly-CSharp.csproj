@@ -61,12 +61,11 @@
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceData.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\BaseItemData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
-    <Compile Include="Assets\Scripts\AsteroidSystem\BaseAsteroidData.cs" />
+    <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
-    <Compile Include="Assets\Scripts\AsteroidSystem\BaseAsteroidState.cs" />
+    <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidState.cs" />
     <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
@@ -82,7 +81,7 @@
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunData.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\BaseItemState.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\ItemState.cs" />
     <Compile Include="Assets\Scripts\TestScripts\CircleGeneration.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ShipSlot.cs" />
@@ -112,6 +111,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\ItemData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

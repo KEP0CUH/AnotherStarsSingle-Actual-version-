@@ -8,11 +8,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 {
     protected GameObject slot;
     protected Transform parent;
-    protected BaseItemState state;
+    protected ItemState state;
 
     private IInventory inventory;
 
-    public void Init(Transform transform, IInventory inventory, BaseItemState state)
+    public void Init(Transform transform, IInventory inventory, ItemState state)
     {
         this.inventory = inventory;
         this.parent = transform;
@@ -111,17 +111,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         TryInteract();
     }
 
-    protected virtual void TryInteract()
+    protected void TryInteract()
     {
-        if (this.state.IsWeapon)
-        {
-            var gunState = (GunState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.SetGun(gunState, inventory);
-        }
-        else if (this.state.IsDevice)
-        {
-            var deviceState = (DeviceState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.SetDevice(deviceState, inventory);
-        }
+        Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
     }
 }

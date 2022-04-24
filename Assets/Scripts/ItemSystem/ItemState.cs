@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseItemState : MonoBehaviour, Interactable
+public class ItemState : MonoBehaviour, Interactable
 {
-    [SerializeField] protected BaseItemData data;
+    private static int ID = 1;
+    [SerializeField] protected ItemData data;
     [SerializeField] protected int count;
     [SerializeField] protected bool isSet;
+    [SerializeField] protected int id;
 
-    public BaseItemData Data => data;
+    public ItemData Data => data;
     public int Count => count;
+    public int Id => id;
 
     public bool IsSet => isSet;
 
+    public bool IsItem => data.IsItem();
     public bool IsWeapon => data.IsWeapon();
     public bool IsDevice => data.IsDevice();
 
@@ -20,7 +24,16 @@ public class BaseItemState : MonoBehaviour, Interactable
     {
         this.data = Managers.Resources.DownloadData(kind);
         this.count = count;
-        this.isSet = true;
+        this.isSet = false;
+        this.id = ItemState.GetId();
+    }
+
+    public virtual void Init(ItemKind kind,int count,int id)
+    {
+        this.data = Managers.Resources.DownloadData(kind);
+        this.count = count;
+        this.isSet = false;
+        this.id = id;
     }
 
     public void SetIsTrue()
@@ -49,5 +62,11 @@ public class BaseItemState : MonoBehaviour, Interactable
     public void DecreaseNumber()
     {
         this.count--;
+    }
+
+    private static int GetId()
+    {
+        ID++;
+        return ID;
     }
 }

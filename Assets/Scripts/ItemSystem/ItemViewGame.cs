@@ -8,14 +8,14 @@ using UnityEngine;
 public class ItemViewGame : MonoBehaviour, Interactable, IObservable
 {
     [SerializeField]
-    private BaseItemState state;
+    private ItemState state;
     private IInventory inventory;
     private List<IObserver> observers = new List<IObserver>();
-    public BaseItemState State => state;
+    public ItemState State => state;
 
     private bool triggerWorked = false;
 
-    private Action<ItemKind,BaseItemState> onItemDrop;
+    private Action<ItemKind,ItemState> onItemDrop;
     private Action<ItemKind, int> inItemAddedInventory;
 
     public virtual void Init(ItemKind kind, int count)
@@ -57,8 +57,8 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
 
     private void CreateBaseItem(ItemKind kind, int itemCount)
     {
-        gameObject.AddComponent<BaseItemState>();
-        state = gameObject.GetComponent<BaseItemState>();
+        gameObject.AddComponent<ItemState>();
+        state = gameObject.GetComponent<ItemState>();
         this.state.Init(kind, itemCount);
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;

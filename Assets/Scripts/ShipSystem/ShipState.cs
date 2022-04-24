@@ -41,6 +41,15 @@ public class ShipState : MonoBehaviour
         return this;
     }
 
+    public void TryInteractWithItem(ItemState state)
+    {
+        this.inventory.TryInteractWithItem(state);
+    }
+
+    public void TryInteractWithItemFromInventory(ItemState state,IInventory inventory)
+    {
+        this.inventory.TryInteractWithItemFromInventory(state, inventory);
+    }
     public void SetGun(GunState gun)
     {
         this.inventory.TrySetGun(gun);

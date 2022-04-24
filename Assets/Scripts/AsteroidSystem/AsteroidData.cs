@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName="Asteroids",fileName ="New Asteroid",order = 52)]
-public class BaseAsteroidData : ScriptableObject
+public class AsteroidData : ScriptableObject
 {
     [SerializeField] private string title;
     [SerializeField] private string description;

@@ -10,11 +10,11 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
 {
     private GameObject slot;
     private Transform parent;
-    private BaseItemState state;
+    private ItemState state;
 
     private IShipInventory inventory;
 
-    public void Init(Transform transform, IShipInventory shipInventory, BaseItemState state)
+    public void Init(Transform transform, IShipInventory shipInventory, ItemState state)
     {
         this.parent = transform;
         this.inventory = shipInventory;
@@ -94,11 +94,12 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(this.state.Data.ItemKind != ItemKind.EmptyItem)
-        {
-            this.inventory.TryUnsetGun((GunState)this.state);
-            Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind, this.state);
-        }
+        /*        if(this.state.Data.ItemKind != ItemKind.weaponEmpty)
+                {
+                    this.inventory.TryUnsetGun((GunState)this.state);
+                    Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind, this.state);
+                }*/
+        Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
 
     }
 

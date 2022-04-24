@@ -11,7 +11,7 @@ public class DeviceSlot : ItemSlot
 {
     private IShipInventory inventory;
 
-    public void Init(Transform transform, IShipInventory shipInventory, BaseItemState state)
+    public void Init(Transform transform, IShipInventory shipInventory, ItemState state)
     {
         this.parent = transform;
         this.inventory = shipInventory;
@@ -46,7 +46,7 @@ public class DeviceSlot : ItemSlot
 
         //Destroy(this.gameObject);
     }
-
+/*
     protected override void TryInteract()
     {
         if (this.state.Data.ItemKind != ItemKind.deviceEmpty)
@@ -61,5 +61,5 @@ public class DeviceSlot : ItemSlot
                 this.inventory.TrySetDevice((DeviceState)this.state);
             }
         }
-    }
+    }*/
 }

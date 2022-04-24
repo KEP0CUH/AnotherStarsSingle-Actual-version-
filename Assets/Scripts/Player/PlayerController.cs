@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour, IObserver
             view.AddObserver(this.gameObject.GetComponent<PlayerController>(), EventType.OnItemDrop);
         }
     }
-    public void Invoke(EventType eventType, ItemKind kind, BaseItemState state)
+    public void Invoke(EventType eventType, ItemKind kind, ItemState state)
     {
         if (eventType == EventType.OnItemDrop)
         {
