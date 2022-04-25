@@ -75,30 +75,6 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         }
     }
 
-    public void ShowInventory(IInventory inventory, Dictionary<ItemKind, ItemState> items)
-    {
-        foreach (var item in itemSlots)
-        {
-            if (item != null)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-        this.itemStates.Clear();
-        itemSlots.Clear();
-
-
-        foreach (var item in items)
-        {
-            this.itemStates[item.Key] = item.Value;
-        }
-
-        foreach (var item in this.itemStates)
-        {
-            CreateItemSlot(inventory, item.Value);
-        }
-    }
-
     public void ShowInventory(IShipInventory inventory, List<GunState> guns)
     {
         foreach (var gun in gunSlots)

@@ -14,7 +14,7 @@ public class PlayerInventory : IInventory
         itemsDic = new Dictionary<int,ItemState>();
     }
 
-
+/*
     public void AddItem(ItemKind kind, ItemState state)
     {
         foreach (var item in items)
@@ -48,7 +48,7 @@ public class PlayerInventory : IInventory
         {
             newItemStateObj = new GameObject(($"{state.Data.Title}"),typeof(ItemState));
             newItemState = newItemStateObj.GetComponent<ItemState>();
-            newItemState.Init(kind, state.Count);
+            newItemState.Init(state);
         }
         GameObject.Destroy(state.gameObject);
         items.Add(kind, newItemState);
@@ -80,7 +80,7 @@ public class PlayerInventory : IInventory
         }
         ShowInventory();
     }
-
+*/
 
 
     public void ShowInventory()

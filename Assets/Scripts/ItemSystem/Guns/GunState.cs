@@ -12,9 +12,7 @@ public class GunState : ItemState
 
     public override void Init(ItemKind kind, int count)
     {
-        base.Init(kind, count);
-
-        switch(kind)
+        switch (kind)
         {
             case ItemKind.weaponMultiblaster:
                 ammoKind = AmmoKind.Multiblaster;
@@ -26,7 +24,28 @@ public class GunState : ItemState
                 ammoKind = AmmoKind.Multiblaster;
                 break;
         }
+
+        base.Init(kind, count);
     }
+
+    public override void Init(ItemState state)
+    {
+        switch (state.Data.ItemKind)
+        {
+            case ItemKind.weaponMultiblaster:
+                ammoKind = AmmoKind.Multiblaster;
+                break;
+            case ItemKind.weaponDesintegrator:
+                ammoKind = AmmoKind.Desintegrator;
+                break;
+            case ItemKind.weaponEmpty:
+                ammoKind = AmmoKind.Multiblaster;
+                break;
+        }
+
+        base.Init(state);
+    }
+
     public void Shoot(Transform parent,GunState gun)
     {
         Debug.Log("Стреляю");

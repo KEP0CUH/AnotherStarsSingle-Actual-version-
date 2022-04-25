@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10e741ce75dc41849ba5134ad3a4b5e2, type: 3}
-  m_Name: Multiblaster
+  m_Name: Desintegrator
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3f29f025adfbdd84f9d54d6ada453de2, type: 3}
-  title: "\u041C\u0443\u043B\u044C\u0442\u0438\u0431\u043B\u0430\u0441\u0442\u0435\u0440"
+  icon: {fileID: 21300000, guid: 2e651905ec166224e906586f3312d63a, type: 3}
+  title: "\u0414\u0435\u0437\u0438\u043D\u0442\u0435\u0433\u0440\u0430\u0442\u043E\u0440"
   description: 
-  kind: 2
+  kind: 3

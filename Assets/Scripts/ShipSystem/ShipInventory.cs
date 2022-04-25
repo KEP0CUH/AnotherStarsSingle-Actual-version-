@@ -38,6 +38,11 @@ public class ShipInventory : IShipInventory
             devices.Add(CreateEmptyDeviceState());
         }
 
+   /*     var defaultGun = new GameObject("GunDefault", typeof(GunState));
+        defaultGun.GetComponent<GunState>().Init(ItemKind.weaponMultiblaster, 1);
+        TrySetGun(defaultGun.GetComponent<GunState>());*/
+
+
         ShowInventory();
     }
 
@@ -117,6 +122,7 @@ public class ShipInventory : IShipInventory
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
                 guns[i].SetIsTrue();
+                Managers.Player.Controller.Inventory.RemoveItem(state);
                 ShowInventory();
                 return;
             }
@@ -132,9 +138,8 @@ public class ShipInventory : IShipInventory
             {
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
-                Managers.Player.Controller.Inventory.RemoveItem(state);
                 guns[i].SetIsTrue();
-                Debug.Log($"{guns[i].IsSet}");
+                state.SetIsTrue();
                 inventory.RemoveItem(state);
                 ShowInventory();
                 return;
@@ -150,8 +155,8 @@ public class ShipInventory : IShipInventory
             if (guns[i] == state)
             {
                 guns[i] = CreateEmptyGunState();
-                Object.Destroy(state.gameObject);
                 guns[i].SetIsFalse();
+                state.SetIsFalse();
                 Managers.Player.Controller.Inventory.AddItem(state);
                 ShowInventory();
                 return;
@@ -167,8 +172,8 @@ public class ShipInventory : IShipInventory
             if (guns[i] == state)
             {
                 guns[i] = CreateEmptyGunState();
-                Object.Destroy(state.gameObject);
                 guns[i].SetIsFalse();
+                state.SetIsFalse();
                 inventory.AddItem(state);
                 ShowInventory();
                 return;
@@ -412,12 +417,12 @@ public class ShipInventory : IShipInventory
         {
             if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
             {
-                GameObject.Destroy(guns[i].gameObject);
+                Object.Destroy(guns[i].gameObject);
                 guns[i] = null;
             }
             else
             {
-                Managers.Player.Controller.Inventory.AddItem(guns[i].Data.ItemKind, guns[i]);
+                Managers.Player.Controller.Inventory.AddItem(guns[i]);
             }
         }
 
@@ -425,12 +430,12 @@ public class ShipInventory : IShipInventory
         {
             if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
             {
-                GameObject.Destroy(devices[i].gameObject);
+                Object.Destroy(devices[i].gameObject);
                 devices[i] = null;
             }
             else
             {
-                Managers.Player.Controller.Inventory.AddItem(devices[i].Data.ItemKind, devices[i]);
+                Managers.Player.Controller.Inventory.AddItem(devices[i]);
             }
         }
 
@@ -466,7 +471,7 @@ public class ShipInventory : IShipInventory
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
         newItemState = newItemStateObj.GetComponent<GunState>();
 
-        newItemState.Init(state.Data.ItemKind, state.Count);
+        newItemState.Init(state);
         return (GunState)newItemState;
     }
 
@@ -477,7 +482,7 @@ public class ShipInventory : IShipInventory
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
         newItemState = newItemStateObj.GetComponent<DeviceState>();
 
-        newItemState.Init(state.Data.ItemKind, state.Count);
+        newItemState.Init(state);
         return (DeviceState)newItemState;
     }
     #endregion
