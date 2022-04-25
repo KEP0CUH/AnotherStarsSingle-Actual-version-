@@ -61,7 +61,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
                 Destroy(item.gameObject);
             }
         }
-        this.itemStates.Clear();
+        this.itemStates2.Clear();
         itemSlots.Clear();
 
         foreach(var item in items)

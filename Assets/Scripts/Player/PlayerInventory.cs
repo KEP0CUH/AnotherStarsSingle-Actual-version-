@@ -85,30 +85,60 @@ public class PlayerInventory : IInventory
 
     public void ShowInventory()
     {
-        CanvasUI.Inventory.ShowInventory(this, items);
-        //CanvasUI.Inventory.ShowInventory(this, itemsDic);
+        Debug.Log("Показ инвентаря");
+        CanvasUI.Inventory.ShowInventory(this, itemsDic);
     }
 
 
     public void AddItem(ItemState state)
     {
-        if (state.IsItem)
+        if(itemsDic.ContainsKey(state.Id))
         {
-            foreach (var item in itemsDic.Values)
-            {
-                if (item.Data.ItemKind == state.Data.ItemKind)
-                {
-                    item.IncreaseNumber();
-                    return;
-                }
-            }
-            itemsDic.Add(state.Id, state);
             return;
         }
         else
         {
-            itemsDic.Add(state.Id, state);
+            Debug.Log("Добавление предмета");
+            if (state.IsItem)
+            {
+                foreach (var item in itemsDic.Values)
+                {
+                    if (item.Data.ItemKind == state.Data.ItemKind)
+                    {
+                        item.IncreaseNumber();
+                        ShowInventory();
+                        return;
+                    }
+                }
+
+            }
+
+            GameObject newItemStateObj;
+            ItemState newItemState;
+
+            if (state.IsWeapon)
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
+                newItemState = newItemStateObj.GetComponent<GunState>();
+                newItemState.Init((GunState)state);
+            }
+            else if (state.IsDevice)
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
+                newItemState = newItemStateObj.GetComponent<DeviceState>();
+                newItemState.Init((DeviceState)state);
+            }
+            else
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(ItemState));
+                newItemState = newItemStateObj.GetComponent<ItemState>();
+                newItemState.Init(state);
+            }
+            Object.Destroy(state.gameObject);
+            itemsDic.Add(newItemState.Id, newItemState);
+            ShowInventory();
         }
+        
     }
     public ItemState GetItem(int id)
     {
@@ -127,11 +157,15 @@ public class PlayerInventory : IInventory
                 if (itemsDic[state.Id].Count < 0)
                 {
                     itemsDic.Remove(state.Id);
+                    Object.Destroy(state.gameObject);
                 }
+                ShowInventory();
             }
             else
             {
                 itemsDic.Remove(state.Id);
+                Object.Destroy(state.gameObject);
+                ShowInventory();
             }
         }
     }

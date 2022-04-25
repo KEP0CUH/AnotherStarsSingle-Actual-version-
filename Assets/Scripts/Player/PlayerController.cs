@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour, IObserver
         if (eventType == EventType.OnItemDrop)
         {
             Debug.Log("Invoked event OnItemDrop.");
-            inventory.AddItem(kind, state);
+            inventory.AddItem(state);
         }
     }
 }

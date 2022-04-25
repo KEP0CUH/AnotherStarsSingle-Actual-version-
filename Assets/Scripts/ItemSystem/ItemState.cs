@@ -28,6 +28,14 @@ public class ItemState : MonoBehaviour, Interactable
         this.id = ItemState.GetId();
     }
 
+     public virtual void Init(ItemState state)
+    {
+        this.data = Managers.Resources.DownloadData(state.Data.ItemKind);
+        this.count = state.Count;
+        this.isSet = state.IsSet;
+        this.id = state.Id;
+    }
+
     public virtual void Init(ItemKind kind,int count,int id)
     {
         this.data = Managers.Resources.DownloadData(kind);

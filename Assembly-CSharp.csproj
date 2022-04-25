@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\UI\Inventory\DeviceSlot.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipInventory.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\ItemData.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\ItemData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

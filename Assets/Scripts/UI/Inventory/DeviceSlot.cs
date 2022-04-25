@@ -28,7 +28,7 @@ public class DeviceSlot : ItemSlot
         if (this.state.IsDevice)
         {
             var deviceState = (DeviceState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.SetDevice(deviceState);
+            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(deviceState);
         }
 
     }
@@ -38,7 +38,7 @@ public class DeviceSlot : ItemSlot
     {
         if (state.Data.ItemKind != ItemKind.deviceEmpty)
         {
-            inventory.TryUnsetDevice((DeviceState)state);
+            inventory.TryInteractWithItem((DeviceState)state);
             var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
             item.GetComponent<ItemViewGame>().Init(((DeviceState)state).Data.ItemKind, 1);
         }

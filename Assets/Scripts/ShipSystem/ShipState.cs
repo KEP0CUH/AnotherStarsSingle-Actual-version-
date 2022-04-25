@@ -50,30 +50,6 @@ public class ShipState : MonoBehaviour
     {
         this.inventory.TryInteractWithItemFromInventory(state, inventory);
     }
-    public void SetGun(GunState gun)
-    {
-        this.inventory.TrySetGun(gun);
-    }
-    public void SetDevice(DeviceState device)
-    {
-        this.inventory.TrySetDevice(device);
-    }
-    public void SetGun(GunState gun,IInventory inventory)
-    {
-        this.inventory.TrySetGun(gun,inventory);
-    }
-    public void SetDevice(DeviceState device, IInventory inventory)
-    {
-        this.inventory.TrySetDevice(device,inventory);
-    }
-    public void SetGun(ItemKind gunKind)
-    {
-        inventory.TrySetGun(gunKind);
-    }
-    public void SetDevice(ItemKind deviceKind)
-    {
-        inventory.TrySetDevice(deviceKind);
-    }
 
 
 }

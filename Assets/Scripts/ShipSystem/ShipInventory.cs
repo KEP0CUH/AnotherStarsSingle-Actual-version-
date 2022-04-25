@@ -45,31 +45,27 @@ public class ShipInventory : IShipInventory
 
     public void TryInteractWithItem(ItemState state)
     {
-        bool success = false;
         if (state.IsWeapon)
         {
             if (state.IsSet)
             {
-                TryUnsetGun((GunState)state, out success);
-                if (success) state.SetIsFalse();
+                TryUnsetGun((GunState)state);
             }
             else if (state.IsSet == false)
             {
-                TrySetGun((GunState)state, out success);
-                if (success) state.SetIsTrue();
+                TrySetGun((GunState)state);
             }
         }
         else if (state.IsDevice)
         {
             if (state.IsSet)
             {
-                TryUnsetDevice((DeviceState)state);
+                //TryUnsetDevice((DeviceState)state);
                 state.SetIsFalse();
             }
             else if (state.IsSet == false)
             {
-                TrySetDevice((DeviceState)state, out success);
-                if (success) state.SetIsTrue();
+                //TrySetDevice((DeviceState)state);
             }
         }
         else
@@ -81,18 +77,15 @@ public class ShipInventory : IShipInventory
 
     public void TryInteractWithItemFromInventory(ItemState state,IInventory inventory)
     {
-        bool success = false;
         if (state.IsWeapon)
         {
             if (state.IsSet)
             {
-                TryUnsetGun((GunState)state,inventory, out success);
-                if (success) state.SetIsFalse();
+                TryUnsetGun((GunState)state,inventory);
             }
             else if (state.IsSet == false)
             {
-                TrySetGun((GunState)state,inventory, out success);
-                if (success) state.SetIsTrue();
+                TrySetGun((GunState)state,inventory);
             }
         }
         else if (state.IsDevice)
@@ -105,7 +98,6 @@ public class ShipInventory : IShipInventory
             else if (state.IsSet == false)
             {
                 //TrySetDevice((DeviceState)state,inventory, out success);
-                if (success) state.SetIsTrue();
             }
         }
         else
@@ -115,49 +107,16 @@ public class ShipInventory : IShipInventory
         }
     }
 
-    /// <summary>
-    /// Вызывается при попытке одеть пушку на корабль, как правило при начальной инициализации корабля. Part 1 \ 3
-    /// </summary>
-    /// <param name="state">Состояние пушки.</param>
-    public void TrySetGun(GunState state)
-    {
-        if (guns.Count < maxNumGuns)
-        {
-            var newState = CreateGunStateObject(state);
-            this.guns.Add(newState);
-            newState.SetIsTrue();
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumGuns; i++)
-            {
-                if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
-                {
-                    var newState = CreateGunStateObject(state);
-                    newState.SetIsTrue();
-                    if (guns[i] != null) GameObject.Destroy(guns[i].gameObject);
-                    guns[i] = newState;
-                    ShowInventory();
-                    return;
-                }
-            }
-        }
-    }
-
-
     #region TRY_SET/UNSET_GUN
-    private void TrySetGun(GunState state, out bool success)
+    private void TrySetGun(GunState state)
     {
-        success = false;
         for (int i = 0; i < maxNumGuns; i++)
         {
             if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
             {
-                GameObject.Destroy(guns[i].gameObject);
+                Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
                 guns[i].SetIsTrue();
-                success = true;
                 ShowInventory();
                 return;
             }
@@ -165,31 +124,35 @@ public class ShipInventory : IShipInventory
         return;
     }
 
-    private void TrySetGun(GunState state,IInventory inventory,out bool success)
+    private void TrySetGun(GunState state,IInventory inventory)
     {
-        TrySetGun(state, out success);
-        if(success)
+        for (int i = 0; i < maxNumGuns; i++)
         {
-            inventory.RemoveItem(state.Data.ItemKind);
+            if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+            {
+                Object.Destroy(guns[i].gameObject);
+                guns[i] = CreateGunStateObject(state);
+                Managers.Player.Controller.Inventory.RemoveItem(state);
+                guns[i].SetIsTrue();
+                Debug.Log($"{guns[i].IsSet}");
+                inventory.RemoveItem(state);
+                ShowInventory();
+                return;
+            }
         }
-        else if(success == false)
-        {
-            return;
-        }
+        return;
     }
 
-    private void TryUnsetGun(GunState state, out bool success)
+    private void TryUnsetGun(GunState state)
     {
-        success = false;
         for (int i = 0; i < guns.Count; i++)
         {
             if (guns[i] == state)
             {
                 guns[i] = CreateEmptyGunState();
-                GameObject.Destroy(state.gameObject);
-                success = true;
+                Object.Destroy(state.gameObject);
                 guns[i].SetIsFalse();
-                Managers.Player.Controller.Inventory.AddItem(state.Data.ItemKind,state);
+                Managers.Player.Controller.Inventory.AddItem(state);
                 ShowInventory();
                 return;
             }
@@ -197,192 +160,196 @@ public class ShipInventory : IShipInventory
         return;
     }
 
-    private void TryUnsetGun(GunState state,IInventory inventory, out bool success)
+    private void TryUnsetGun(GunState state,IInventory inventory)
     {
-        TryUnsetGun(state, out success);
-        if (success)
+        for (int i = 0; i < guns.Count; i++)
         {
-            inventory.AddItem(state.Data.ItemKind,state);
-        }
-        else if (success == false)
-        {
-            return;
-        }
-    }
-    #endregion
-
-    /// <summary>
-    /// Вызывается при попытке одеть устройство на корабль, как правило при начальной инициализации корабля. Part 1 \ 3
-    /// </summary>
-    /// <param name="state">Состояние пушки.</param>
-    public void TrySetDevice(DeviceState state)
-    {
-        if (devices.Count < maxNumDevices)
-        {
-            var newState = CreateDeviceStateObject(state);
-            newState.SetIsTrue();
-            this.devices.Add(newState);
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumDevices; i++)
+            if (guns[i] == state)
             {
-                if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
-                {
-                    var newState = CreateDeviceStateObject(state);
-                    newState.SetIsTrue();
-                    GameObject.Destroy(devices[i].gameObject);
-                    devices[i] = newState;
-                    ShowInventory();
-                    return;
-                }
-            }
-        }
-    }
-
-    private void TrySetDevice(DeviceState state, out bool success)
-    {
-        success = false;
-        for (int i = 0; i < devices.Count; i++)
-        {
-            if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
-            {
-                GameObject.Destroy(devices[i].gameObject);
-                devices[i] = CreateDeviceStateObject(state);
-                success = true;
+                guns[i] = CreateEmptyGunState();
+                Object.Destroy(state.gameObject);
+                guns[i].SetIsFalse();
+                inventory.AddItem(state);
+                ShowInventory();
                 return;
             }
         }
         return;
     }
-
-    /// <summary>
-    /// Вызывается при попытке одеть пушку из инвентаря игрока на корабль. Part 2 \ 3
-    /// </summary>
-    /// <param name="state"></param>
-    /// <param name="inventory"></param>
-    public void TrySetGun(GunState state, IInventory inventory)
-    {
-        if (guns.Count < maxNumGuns)
+    #endregion
+    /*
+        /// <summary>
+        /// Вызывается при попытке одеть устройство на корабль, как правило при начальной инициализации корабля. Part 1 \ 3
+        /// </summary>
+        /// <param name="state">Состояние пушки.</param>
+        public void TrySetDevice(DeviceState state)
         {
-            var newState = CreateGunStateObject(state);
-            newState.SetIsTrue();
-            this.guns.Add(newState);
-            inventory.RemoveItem(newState.Data.ItemKind);
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumGuns; i++)
+            if (devices.Count < maxNumDevices)
             {
-                if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+                var newState = CreateDeviceStateObject(state);
+                newState.SetIsTrue();
+                this.devices.Add(newState);
+                ShowInventory();
+            }
+            else
+            {
+                for (int i = 0; i < maxNumDevices; i++)
                 {
-                    var newState = CreateGunStateObject(state);
-                    newState.SetIsTrue();
-                    if (guns[i] != null) GameObject.Destroy(guns[i].gameObject);
-                    guns[i] = newState;
-                    inventory.RemoveItem(newState.Data.ItemKind);
-                    ShowInventory();
-                    return;
+                    if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                    {
+                        var newState = CreateDeviceStateObject(state);
+                        newState.SetIsTrue();
+                        GameObject.Destroy(devices[i].gameObject);
+                        devices[i] = newState;
+                        ShowInventory();
+                        return;
+                    }
                 }
             }
         }
-    }
 
-    /// <summary>
-    /// Вызывается при попытке одеть устройство из инвентаря игрока на корабль. Part 2 \ 3
-    /// </summary>
-    /// <param name="state"></param>
-    /// <param name="inventory"></param>
-    public void TrySetDevice(DeviceState state, IInventory inventory)
-    {
-        if (devices.Count < maxNumDevices)
+        private void TrySetDevice(DeviceState state, out bool success)
         {
-            var newState = CreateDeviceStateObject(state);
-            newState.SetIsTrue();
-            this.devices.Add(newState);
-            inventory.RemoveItem(newState.Data.ItemKind);
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumDevices; i++)
+            success = false;
+            for (int i = 0; i < devices.Count; i++)
             {
                 if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
                 {
-                    var newState = CreateDeviceStateObject(state);
                     GameObject.Destroy(devices[i].gameObject);
-                    devices[i] = newState;
-                    newState.SetIsTrue();
-                    inventory.RemoveItem(newState.Data.ItemKind);
-                    ShowInventory();
+                    devices[i] = CreateDeviceStateObject(state);
+                    success = true;
                     return;
                 }
             }
-        }
-    }
-
-
-    /// <summary>
-    /// Вызывается при попытке одеть пушку на корабль.  Part 3 \ 3
-    /// </summary>
-    /// <param name="gunKind"></param>
-    public void TrySetGun(ItemKind gunKind)
-    {
-        if (guns.Count < maxNumGuns)
+            return;
+        }*/
+    /*
+        /// <summary>
+        /// Вызывается при попытке одеть пушку из инвентаря игрока на корабль. Part 2 \ 3
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="inventory"></param>
+        public void TrySetGun(GunState state, IInventory inventory)
         {
-            var newState = CreateGunStateObject(gunKind);
-            newState.SetIsTrue();
-            this.guns.Add(newState);
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumGuns; i++)
+            if (guns.Count < maxNumGuns)
             {
-                if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
-                {
-                    var newState = CreateGunStateObject(gunKind);
-                    newState.SetIsTrue();
-                    if (guns[i] != null) GameObject.Destroy(guns[i].gameObject);
-                    guns[i] = newState;
-                    ShowInventory();
-                    return;
-                }
+                var newState = CreateGunStateObject(state);
+                newState.SetIsTrue();
+                this.guns.Add(newState);
+                inventory.RemoveItem(newState.Data.ItemKind);
+                ShowInventory();
             }
-        }
-    }
-
-    /// <summary>
-    /// Вызывается при попытке одеть устройство на корабль.  Part 3 \ 3
-    /// </summary>
-    /// <param name="gunKind"></param>
-    public void TrySetDevice(ItemKind deviceKind)
-    {
-        if (devices.Count < maxNumDevices)
-        {
-            var newState = CreateDeviceStateObject(deviceKind);
-            newState.SetIsTrue();
-            this.devices.Add(newState);
-            ShowInventory();
-        }
-        else
-        {
-            for (int i = 0; i < maxNumDevices; i++)
+            else
             {
-                if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                for (int i = 0; i < maxNumGuns; i++)
                 {
-                    var newState = CreateDeviceStateObject(deviceKind);
-                    newState.SetIsTrue();
-                    if (devices[i] != null) GameObject.Destroy(devices[i].gameObject);
-                    devices[i] = newState;
-                    ShowInventory();
-                    return;
+                    if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+                    {
+                        var newState = CreateGunStateObject(state);
+                        newState.SetIsTrue();
+                        if (guns[i] != null) GameObject.Destroy(guns[i].gameObject);
+                        guns[i] = newState;
+                        inventory.RemoveItem(newState.Data.ItemKind);
+                        ShowInventory();
+                        return;
+                    }
                 }
             }
         }
-    }
+
+        /// <summary>
+        /// Вызывается при попытке одеть устройство из инвентаря игрока на корабль. Part 2 \ 3
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="inventory"></param>
+        public void TrySetDevice(DeviceState state, IInventory inventory)
+        {
+            if (devices.Count < maxNumDevices)
+            {
+                var newState = CreateDeviceStateObject(state);
+                newState.SetIsTrue();
+                this.devices.Add(newState);
+                inventory.RemoveItem(newState.Data.ItemKind);
+                ShowInventory();
+            }
+            else
+            {
+                for (int i = 0; i < maxNumDevices; i++)
+                {
+                    if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                    {
+                        var newState = CreateDeviceStateObject(state);
+                        GameObject.Destroy(devices[i].gameObject);
+                        devices[i] = newState;
+                        newState.SetIsTrue();
+                        inventory.RemoveItem(newState.Data.ItemKind);
+                        ShowInventory();
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Вызывается при попытке одеть пушку на корабль.  Part 3 \ 3
+        /// </summary>
+        /// <param name="gunKind"></param>
+        public void TrySetGun(ItemKind gunKind)
+        {
+            if (guns.Count < maxNumGuns)
+            {
+                var newState = CreateGunStateObject(gunKind);
+                newState.SetIsTrue();
+                this.guns.Add(newState);
+                ShowInventory();
+            }
+            else
+            {
+                for (int i = 0; i < maxNumGuns; i++)
+                {
+                    if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+                    {
+                        var newState = CreateGunStateObject(gunKind);
+                        newState.SetIsTrue();
+                        if (guns[i] != null) GameObject.Destroy(guns[i].gameObject);
+                        guns[i] = newState;
+                        ShowInventory();
+                        return;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Вызывается при попытке одеть устройство на корабль.  Part 3 \ 3
+        /// </summary>
+        /// <param name="gunKind"></param>
+        public void TrySetDevice(ItemKind deviceKind)
+        {
+            if (devices.Count < maxNumDevices)
+            {
+                var newState = CreateDeviceStateObject(deviceKind);
+                newState.SetIsTrue();
+                this.devices.Add(newState);
+                ShowInventory();
+            }
+            else
+            {
+                for (int i = 0; i < maxNumDevices; i++)
+                {
+                    if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+                    {
+                        var newState = CreateDeviceStateObject(deviceKind);
+                        newState.SetIsTrue();
+                        if (devices[i] != null) Object.Destroy(devices[i].gameObject);
+                        devices[i] = newState;
+                        ShowInventory();
+                        return;
+                    }
+                }
+            }
+        }*/
     #endregion
 
 
@@ -404,7 +371,7 @@ public class ShipInventory : IShipInventory
     #endregion
 
 
-    #region Снять определенное оборудование с корабля
+/*    #region Снять определенное оборудование с корабля
     /// <summary>
     /// Выкинуть\снять пушку с корабля.
     /// </summary>
@@ -435,7 +402,7 @@ public class ShipInventory : IShipInventory
         }
         ShowInventory();
     }
-    #endregion
+    #endregion*/
 
 
     #region Снять всё оборудования с корабля. Обычно используется при покупке нового корабля.

@@ -73,7 +73,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.RemoveItem(state.Data.ItemKind);
+        inventory.RemoveItem(state);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
         if (state.IsWeapon)
         {
@@ -97,12 +97,12 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         if (this.state.IsWeapon)
         {
             var gunState = (GunState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.SetGun(gunState, inventory);
+            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItemFromInventory(gunState, inventory);
         }
         else if (this.state.IsDevice)
         {
             var deviceState = (DeviceState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.SetDevice(deviceState, inventory);
+            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItemFromInventory(deviceState, inventory);
         }
     }
 
