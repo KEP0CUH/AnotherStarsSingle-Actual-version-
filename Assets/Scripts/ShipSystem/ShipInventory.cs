@@ -65,12 +65,12 @@ public class ShipInventory : IShipInventory
         {
             if (state.IsSet)
             {
-                //TryUnsetDevice((DeviceState)state);
+                TryUnsetDevice((DeviceState)state);
                 state.SetIsFalse();
             }
             else if (state.IsSet == false)
             {
-                //TrySetDevice((DeviceState)state);
+                TrySetDevice((DeviceState)state);
             }
         }
         else
@@ -80,7 +80,7 @@ public class ShipInventory : IShipInventory
         }
     }
 
-    public void TryInteractWithItemFromInventory(ItemState state,IInventory inventory)
+    public void TryInteractWithItemFromInventory(ItemState state,IPlayerInventory inventory)
     {
         if (state.IsWeapon)
         {
@@ -97,12 +97,11 @@ public class ShipInventory : IShipInventory
         {
             if (state.IsSet)
             {
-                //TryUnsetDevice((DeviceState)state,inventory);
-                state.SetIsFalse();
+                TryUnsetDevice((DeviceState)state,inventory);
             }
             else if (state.IsSet == false)
             {
-                //TrySetDevice((DeviceState)state,inventory, out success);
+                TrySetDevice((DeviceState)state,inventory);
             }
         }
         else
@@ -130,7 +129,7 @@ public class ShipInventory : IShipInventory
         return;
     }
 
-    private void TrySetGun(GunState state,IInventory inventory)
+    private void TrySetGun(GunState state,IPlayerInventory inventory)
     {
         for (int i = 0; i < maxNumGuns; i++)
         {
@@ -165,7 +164,7 @@ public class ShipInventory : IShipInventory
         return;
     }
 
-    private void TryUnsetGun(GunState state,IInventory inventory)
+    private void TryUnsetGun(GunState state,IPlayerInventory inventory)
     {
         for (int i = 0; i < guns.Count; i++)
         {
@@ -182,6 +181,74 @@ public class ShipInventory : IShipInventory
         return;
     }
     #endregion
+
+    #region TRY_SET/UNSET_DEVICE
+    private void TrySetDevice(DeviceState state)
+    {
+        for(int i = 0; i < maxNumDevices; i++)
+        {
+            if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+            {
+                Object.Destroy(devices[i]);
+                devices[i] = CreateDeviceStateObject(state);
+                devices[i].SetIsTrue();
+                Managers.Player.Controller.Inventory.RemoveItem(devices[i]);
+                ShowInventory();
+                return;
+            }
+        }
+    }
+
+    private void TrySetDevice(DeviceState state,IPlayerInventory inventory)
+    {
+        for (int i = 0; i < maxNumDevices; i++)
+        {
+            if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+            {
+                Object.Destroy(devices[i]);
+                devices[i] = CreateDeviceStateObject(state);
+                devices[i].SetIsTrue();
+                state.SetIsTrue();
+                inventory.RemoveItem(state);
+                ShowInventory();
+                return;
+            }
+        }
+    }
+
+    private void TryUnsetDevice(DeviceState state)
+    {
+        for(int i = 0; i < devices.Count;i++)
+        {
+            if(devices[i] == state)
+            {
+                devices[i] = CreateEmptyDeviceState();
+                devices[i].SetIsFalse();
+                state.SetIsFalse();
+                Managers.Player.Controller.Inventory.AddItem(state);
+                ShowInventory();
+            }
+        }
+    }
+
+    private void TryUnsetDevice(DeviceState state,IPlayerInventory inventory)
+    {
+        for(int i = 0; i < devices.Count;i++)
+        {
+            if (devices[i] == state)
+            {
+                devices[i] = CreateEmptyDeviceState();
+                devices[i].SetIsFalse();
+                state.SetIsFalse();
+                inventory.AddItem(state);
+                ShowInventory();
+            }
+        }
+    }
+    #endregion
+
+
+
     /*
         /// <summary>
         /// Вызывается при попытке одеть устройство на корабль, как правило при начальной инициализации корабля. Part 1 \ 3
@@ -422,7 +489,7 @@ public class ShipInventory : IShipInventory
             }
             else
             {
-                Managers.Player.Controller.Inventory.AddItem(guns[i]);
+                TryUnsetGun(guns[i]);
             }
         }
 
@@ -442,6 +509,20 @@ public class ShipInventory : IShipInventory
         guns.Clear();
         devices.Clear();
         ShowInventory();
+    }
+    #endregion
+
+    #region ВЫБРОСИТЬ УКАЗАННОЕ ОБОРУДОВАНИЕ С КОРАБЛЯ(УСТАНОВЛЕННАЯ ПУШКА ИЛИ УСТРОЙСТВО)
+    public void TryDropItemFromShip(ItemState state)
+    {
+        if(state.IsSet)
+        {
+            TryInteractWithItem(state);
+            var item = CreateDrop(state);
+            Managers.Player.Controller.Inventory.RemoveItem(state);
+        }
+
+
     }
     #endregion
 
@@ -522,5 +603,22 @@ public class ShipInventory : IShipInventory
     }
     #endregion
 
+    private GameObject CreateDrop(ItemState state)
+    {
+        var item = new GameObject(state.Data.Title);
+        if (state.IsWeapon)
+        {
+            item.AddComponent<GunViewGame>().Init(((GunState)state).Data.ItemKind, 1);
+        }
+        else if (state.IsDevice)
+        {
+            item.AddComponent<DeviceViewGame>().Init(((DeviceState)state).Data.ItemKind, 1);
+        }
+        else
+        {
+            item.AddComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
+        }
+        return item;
+    }
 
 }

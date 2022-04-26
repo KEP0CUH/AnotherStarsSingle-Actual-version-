@@ -84,7 +84,7 @@
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemState.cs" />
     <Compile Include="Assets\Scripts\TestScripts\CircleGeneration.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IInventory.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IPlayerInventory.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ShipSlot.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetData.cs" />

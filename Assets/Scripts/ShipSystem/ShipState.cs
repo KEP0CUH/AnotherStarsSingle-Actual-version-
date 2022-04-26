@@ -46,7 +46,7 @@ public class ShipState : MonoBehaviour
         this.inventory.TryInteractWithItem(state);
     }
 
-    public void TryInteractWithItemFromInventory(ItemState state,IInventory inventory)
+    public void TryInteractWithItemFromInventory(ItemState state,IPlayerInventory inventory)
     {
         this.inventory.TryInteractWithItemFromInventory(state, inventory);
     }

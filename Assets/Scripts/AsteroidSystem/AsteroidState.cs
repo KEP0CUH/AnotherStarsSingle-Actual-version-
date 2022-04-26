@@ -64,7 +64,7 @@ public class AsteroidState : MonoBehaviour
 
             var dataTest = Managers.Resources.DownloadData(ItemKind.weaponMultiblaster);
 
-            dropTest.AddComponent<ItemViewGame>().Init(dataTest.ItemKind, 4);
+            dropTest.AddComponent<GunViewGame>().Init(dataTest.ItemKind, 1);
 
 
 
@@ -73,7 +73,7 @@ public class AsteroidState : MonoBehaviour
 
             var dataTest2 = Managers.Resources.DownloadData(ItemKind.deviceTourbine);
 
-            dropTest2.AddComponent<ItemViewGame>().Init(dataTest2.ItemKind, 4);
+            dropTest2.AddComponent<DeviceViewGame>().Init(dataTest2.ItemKind, 1);
         }
     }
 

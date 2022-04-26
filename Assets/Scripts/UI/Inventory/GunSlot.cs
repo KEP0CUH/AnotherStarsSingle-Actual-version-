@@ -70,37 +70,15 @@ public class GunSlot : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    [ContextMenu("Set Gun")]
-    private void SetGun()
-    {
-        Debug.Log($"{this.state.IsWeapon}");
-        if (this.state.IsWeapon)
-        {
-            var gunState = (GunState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(gunState);
-        }
-
-    }
-
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.TryInteractWithItem((GunState)state);
-        var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind, 1);
-
-        //Destroy(this.gameObject);
+        inventory.TryDropItemFromShip((GunState)state);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        /*        if(this.state.Data.ItemKind != ItemKind.weaponEmpty)
-                {
-                    this.inventory.TryUnsetGun((GunState)this.state);
-                    Managers.Player.Controller.Inventory.AddItem(this.state.Data.ItemKind, this.state);
-                }*/
         Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
-
     }
 
 }

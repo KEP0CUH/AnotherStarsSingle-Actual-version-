@@ -8,8 +8,8 @@ using UnityEngine;
 public class ItemViewGame : MonoBehaviour, Interactable, IObservable
 {
     [SerializeField]
-    private ItemState state;
-    private IInventory inventory;
+    protected ItemState state;
+    private IPlayerInventory inventory;
     private List<IObserver> observers = new List<IObserver>();
     public ItemState State => state;
 
@@ -65,7 +65,7 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (triggerWorked == false)
         {
@@ -79,11 +79,6 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
                 }
             }
         }
-    }
-
-    public void OnDrop()
-    {
-        
     }
 
     public void AddObserver(IObserver observer,EventType eventType)
@@ -104,12 +99,17 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         }
     }
 
-    public void RemoveObserver(IObserver observer)
+    public void OnPickup()
     {
-        //
+        throw new NotImplementedException();
     }
 
-    public void OnPickup()
+    public void OnDrop()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveObserver(IObserver observer)
     {
         throw new NotImplementedException();
     }

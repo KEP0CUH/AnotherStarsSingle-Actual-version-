@@ -1,4 +1,4 @@
-public interface IInventory 
+public interface IPlayerInventory 
 {
     //public void AddItem(ItemKind kind, ItemState state);
     //public ItemState GetItem(ItemKind kind);

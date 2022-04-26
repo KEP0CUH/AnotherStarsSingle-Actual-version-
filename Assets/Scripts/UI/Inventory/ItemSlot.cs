@@ -10,11 +10,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     protected Transform parent;
     protected ItemState state;
 
-    private IInventory inventory;
+    private IPlayerInventory playerInventory;
 
-    public void Init(Transform transform, IInventory inventory, ItemState state)
+    public void Init(Transform transform, IPlayerInventory inventory, ItemState state)
     {
-        this.inventory = inventory;
+        this.playerInventory = inventory;
         this.parent = transform;
         this.state = state;
 
@@ -73,7 +73,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        inventory.RemoveItem(state);
+        playerInventory.RemoveItem(state);
         var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
         if (state.IsWeapon)
         {
@@ -91,21 +91,6 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         //Destroy(this.gameObject);
 
     }
-
-    private void SetItem()
-    {
-        if (this.state.IsWeapon)
-        {
-            var gunState = (GunState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItemFromInventory(gunState, inventory);
-        }
-        else if (this.state.IsDevice)
-        {
-            var deviceState = (DeviceState)this.state;
-            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItemFromInventory(deviceState, inventory);
-        }
-    }
-
     public void OnPointerDown(PointerEventData data)
     {
         TryInteract();
