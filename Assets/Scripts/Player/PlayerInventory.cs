@@ -16,6 +16,9 @@ public class PlayerInventory : IPlayerInventory
     #region днаюбхрэ б хмбемрюпэ опедлер
     public void AddItem(ItemState state)
     {
+        if (state.Data.ItemKind == ItemKind.deviceEmpty || state.Data.ItemKind == ItemKind.weaponEmpty)
+            return;
+
         if (itemsDic.ContainsKey(state.Id))
         {
             return;
@@ -30,6 +33,7 @@ public class PlayerInventory : IPlayerInventory
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
                         item.IncreaseNumber();
+                        Object.Destroy(state.gameObject);
                         ShowInventory();
                         return;
                     }

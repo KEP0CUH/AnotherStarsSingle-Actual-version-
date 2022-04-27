@@ -44,11 +44,7 @@ public class ItemData : ScriptableObject
 
         switch (kind)
         {
-            case ItemKind.weaponEmpty:
-                name = "Заглушка";
-                icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
-                title = "Заглушка";
-                break;
+
 
             #region Ruda
 
@@ -76,9 +72,15 @@ public class ItemData : ScriptableObject
                 title = "Титан";
                 description = "";
                 break;
-                #endregion
+            #endregion
 
-                #region Guns
+            #region Guns
+            case ItemKind.weaponEmpty:
+                name = "EmptyGun";
+                icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
+                title = "Заглушка";
+                description = "";
+                break;
             case ItemKind.weaponMultiblaster:
                 name = "Multiblaster";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
@@ -102,7 +104,7 @@ public class ItemData : ScriptableObject
 
             #region Devices
             case ItemKind.deviceEmpty:
-                name = "Empty";
+                name = "EmptyDevice";
                 icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
                 title = "Заглушка";
                 description = "";

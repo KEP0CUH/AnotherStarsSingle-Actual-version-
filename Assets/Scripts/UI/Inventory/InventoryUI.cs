@@ -364,21 +364,21 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     [ContextMenu("CreateItemSlot")]
     private void CreateItemSlot(IPlayerInventory inventory, ItemState state)
     {
-        var itemSlot = new GameObject("Item" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
+        var itemSlot = new GameObject("Item " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
         itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform, inventory, state);
         itemSlots.Add(itemSlot);
     }
 
     private void CreateGunSlot(IShipInventory inventory, ItemState state)
     {
-        var gunSlot = new GameObject("Gun" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
+        var gunSlot = new GameObject("Gun " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
         gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
         gunSlots.Add(gunSlot);
     }
 
     private void CreateDeviceSlot(IShipInventory inventory, ItemState state)
     {
-        var deviceSlot = new GameObject("Device" + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
+        var deviceSlot = new GameObject("Device " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
         deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);
         deviceSlots.Add(deviceSlot);
     }

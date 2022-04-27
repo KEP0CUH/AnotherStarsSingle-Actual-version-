@@ -37,6 +37,13 @@ public class PlayerState
 
     public void SetShip(ShipKind kind)
     {
+        if(this.Ship.Inventory != null)
+        {
+            Debug.Log("Удаление оборудования с корабля...");
+            this.Ship.Inventory.RemoveAllEquipmentFromShip();
+            Debug.Log("Оборудование удалено...");
+        }
+        Debug.Log("Начата смена корабля...");
         this.ship = this.ship.Init(kind);
         Managers.Player.Controller.UpdateState();
     }

@@ -73,23 +73,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     [ContextMenu("DropItem")]
     private void DropItem()
     {
-        playerInventory.RemoveItem(state);
-        var item = new GameObject("Item" + state.Data.Title, typeof(ItemViewGame));
-        if (state.IsWeapon)
-        {
-            item.GetComponent<ItemViewGame>().Init(((GunState)state).Data.ItemKind, 1);
-        }
-        else if (state.IsDevice)
-        {
-            item.GetComponent<ItemViewGame>().Init(((DeviceState)state).Data.ItemKind, 1);
-        }
-        else
-        {
-            item.GetComponent<ItemViewGame>().Init(state.Data.ItemKind, 1);
-        }
-
-        //Destroy(this.gameObject);
-
+        Managers.Player.Controller.PlayerState.Ship.Inventory.TryDropItemFromShip(this.state);
     }
     public void OnPointerDown(PointerEventData data)
     {
