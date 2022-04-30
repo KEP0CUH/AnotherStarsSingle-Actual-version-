@@ -70,18 +70,22 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
 
 
-    [ContextMenu("DropItem")]
-    private void DropItem()
+    protected virtual void DropItem()
     {
         Managers.Player.Controller.PlayerState.Ship.Inventory.TryDropItemFromShip(this.state);
     }
     public void OnPointerDown(PointerEventData data)
     {
+
         TryInteract();
+
     }
 
-    protected void TryInteract()
+    protected virtual void TryInteract()
     {
-        Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
+        if (state.Data.ItemKind != ItemKind.deviceEmpty && state.Data.ItemKind != ItemKind.weaponEmpty)
+        {
+            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
+        }
     }
 }

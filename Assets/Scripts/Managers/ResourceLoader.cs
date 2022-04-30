@@ -185,6 +185,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         icons.Add(IconType.Land, Resources.Load<Sprite>(iconsPath                                               + "Land"));
         icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));
-        icons.Add(IconType.ShipShop,Resources.Load<Sprite>(iconsPath                                            + "ShipShop"));     
+        icons.Add(IconType.ShipShop,Resources.Load<Sprite>(iconsPath                                            + "ShipShop"));
+        icons.Add(IconType.ItemShop, Resources.Load<Sprite>(iconsPath                                           + "ItemShop"));
     }
 }

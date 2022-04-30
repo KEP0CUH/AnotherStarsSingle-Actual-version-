@@ -395,9 +395,12 @@
 "Assets/Scripts/UI/Inventory/ItemSlot.cs"
 "Assets/Scripts/UI/Minimap/RadarUI.cs"
 "Assets/Scripts/UI/Planet/InfoPlanetWindow.cs"
+"Assets/Scripts/UI/Planet/ItemShop/ItemShop.cs"
+"Assets/Scripts/UI/Planet/ItemShop/ItemSlotShop.cs"
+"Assets/Scripts/UI/Planet/ItemShop/NewBehaviourScript.cs"
 "Assets/Scripts/UI/Planet/PlanetWindow.cs"
-"Assets/Scripts/UI/Planet/ShipShop.cs"
-"Assets/Scripts/UI/Planet/ShipSlot.cs"
+"Assets/Scripts/UI/Planet/ShipShop/ShipShop.cs"
+"Assets/Scripts/UI/Planet/ShipShop/ShipSlot.cs"
 -langversion:8.0
 
 /deterministic

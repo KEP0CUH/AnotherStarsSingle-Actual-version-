@@ -136,4 +136,5 @@ public enum IconType
     Land,
     Rise,
     ShipShop,
+    ItemShop,
 }

@@ -398,6 +398,8 @@ public class ShipInventory : IShipInventory
     private GameObject CreateDrop(ItemState state)
     {
         var item = new GameObject(state.Data.Title);
+        item.transform.position = shipState.gameObject.transform.position;
+
         if (state.IsWeapon)
         {
             item.AddComponent<GunViewGame>().Init(((GunState)state).Data.ItemKind, 1);

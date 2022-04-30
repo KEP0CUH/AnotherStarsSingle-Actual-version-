@@ -20,4 +20,12 @@ public class DeviceSlot : ItemSlot
         CreateItemSlot();
         CanvasUI.Inventory.AddDeviceSlot(slot);
     }
+
+    protected override void DropItem()
+    {
+        if(this.state.Data.ItemKind != ItemKind.deviceEmpty)
+        {
+            shipInventory.TryDropItemFromShip(this.state);
+        }
+    }
 }

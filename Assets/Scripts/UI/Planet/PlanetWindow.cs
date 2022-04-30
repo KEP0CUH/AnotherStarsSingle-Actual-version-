@@ -7,6 +7,7 @@ public class PlanetWindow : MonoBehaviour
 {
     private PlanetState planetState;
     private GameObject shipShop = null;
+    private GameObject itemShop = null;
     public PlanetState PlanetState => planetState;
 
     public void Init(PlanetState state)
@@ -23,6 +24,7 @@ public class PlanetWindow : MonoBehaviour
 
         CreateRiseButton();
         CreateShipShop();
+        CreateItemShop();
     }
     private void Start()
     {
@@ -68,6 +70,24 @@ public class PlanetWindow : MonoBehaviour
         button.onClick.AddListener(OnOpenShipShop);
     }
 
+    private void CreateItemShop()
+    {
+        var buttonItemShop = new GameObject("openItemShop", typeof(Image), typeof(Button));
+        var rect = buttonItemShop.GetComponent<RectTransform>();
+        rect.SetParent(this.gameObject.transform, false);
+        rect.anchorMin = new Vector2(1, 0);
+        rect.anchorMax = new Vector2(1, 0);
+        rect.pivot = new Vector2(1, 1);
+        rect.offsetMin = new Vector2(-110, 5);
+        rect.offsetMax = new Vector2(-60, 55);
+
+        var image = buttonItemShop.GetComponent<Image>();
+        image.sprite = Managers.Resources.DownloadData(IconType.ItemShop);
+
+        var button = buttonItemShop.GetComponent<Button>();
+        button.onClick.AddListener(OnOpenItemShop);
+    }
+
     private void OnRise()
     {
         Managers.Player.Rise();
@@ -88,6 +108,34 @@ public class PlanetWindow : MonoBehaviour
             rect.offsetMax = new Vector2(250, 150);
 
             shipShop.GetComponent<ShipShop>().Init();
+        }
+        else if(shipShop != null)
+        {
+            shipShop.SetActive(!shipShop.activeInHierarchy);
+        }
+    }
+
+    private void OnOpenItemShop()
+    {
+        if(itemShop == null)
+        {
+            itemShop = new GameObject("ItemShop", typeof(Image), typeof(ShipShop), typeof(Mask),typeof(ItemShop));
+            var rect = itemShop.GetComponent<RectTransform>();
+            rect.SetParent(this.gameObject.transform, false);
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.offsetMin = new Vector2(-250, -150);
+            rect.offsetMax = new Vector2(250, 250);
+
+            var image = itemShop.GetComponent<Image>();
+            image.color = new UnityEngine.Color(24f, 78f, 231f, 152f) / 256.0f;
+
+            itemShop.GetComponent<ItemShop>().Init();
+        }
+        else if(itemShop != null)
+        {
+            itemShop.SetActive(!itemShop.activeInHierarchy);
         }
     }
 

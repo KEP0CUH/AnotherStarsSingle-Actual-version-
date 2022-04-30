@@ -203,12 +203,11 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
         CreateRightDownInventory(rightInventory.transform);
         CreateRightMiddleInventory(rightInventory.transform);
-
     }
 
     private void CreateRightMiddleInventory(Transform parent)
     {
-        rightMiddleInventory = new GameObject("RightMiddlePanel",typeof(Image),typeof(LayoutElement),typeof(ScrollRect), typeof(Mask));
+        rightMiddleInventory = new GameObject("RightMiddleInventory",typeof(Image),typeof(LayoutElement),typeof(ScrollRect), typeof(Mask));
         rightMiddleInventory.transform.parent = parent.transform;
 
         rightMiddleInventory.GetComponent<LayoutElement>().ignoreLayout = true;
@@ -234,7 +233,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private void CreateRightDownInventory(Transform parent)
     {
-        rightDownInventory = new GameObject("RightDownPanel", typeof(Image), typeof(LayoutElement), typeof(ScrollRect), typeof(Mask));
+        rightDownInventory = new GameObject("RightDownInventory", typeof(Image), typeof(LayoutElement), typeof(ScrollRect), typeof(Mask));
         rightDownInventory.transform.parent = parent.transform;
 
         rightDownInventory.GetComponent<LayoutElement>().ignoreLayout = true;
@@ -260,7 +259,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private void CreateRightMiddleInventoryList(Transform rightMiddle)
     {
-        rightMiddleInventoryList = new GameObject("Devices",typeof(RectTransform),typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+        rightMiddleInventoryList = new GameObject("Devices(RightMiddleInventoryList)",typeof(RectTransform),typeof(GridLayoutGroup), typeof(ContentSizeFitter));
 
         var rect = rightMiddleInventoryList.GetComponent<RectTransform>();
         rect.SetParent(rightMiddle.transform);
@@ -286,7 +285,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
     private void CreateRightDownInventoryList(Transform rightDown)
     {
-        rightDownInventoryList = new GameObject("Items",typeof(ScrollRect), typeof(GridLayoutGroup), typeof(ContentSizeFitter));
+        rightDownInventoryList = new GameObject("Items", typeof(GridLayoutGroup), typeof(ContentSizeFitter));
         rightDownInventoryList.transform.parent = rightDown.transform;
 
         var rect = rightDownInventoryList.GetComponent<RectTransform>();
@@ -308,7 +307,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
 
-        rightDownInventory.GetComponent<ScrollRect>().content = rightDownInventoryList.GetComponent<RectTransform>();
+        rightDownInventory.GetComponent<ScrollRect>().content = rect;
     }
 
 
