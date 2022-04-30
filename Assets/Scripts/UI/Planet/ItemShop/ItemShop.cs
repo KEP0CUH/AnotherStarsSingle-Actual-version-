@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class ItemShop : MonoBehaviour
 {
     private List<ItemData> itemsForBuyingData;
-    private List<ItemState> itemsForBuyingStates;
     private List<ItemSlotShop> itemsForBuyingSlots;
+
+    private Dictionary<int,ItemState> shopItems;
 
     private GameObject shopList;
 
@@ -20,12 +21,41 @@ public class ItemShop : MonoBehaviour
         scroll.scrollSensitivity = 15;
 
         CreateUpPart();
+
         itemsForBuyingData = new List<ItemData>();
-        itemsForBuyingStates = new List<ItemState>();
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaGold));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaFerrum));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponMultiblaster));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponDesintegrator));
+
+
         itemsForBuyingSlots = new List<ItemSlotShop>();
 
+        shopItems = new Dictionary<int, ItemState>();
+
+        CreateStatesForData();
         ShowItems();
     }
+
+    public void RemoveItemState(ItemState state)
+    {
+        if(shopItems.ContainsKey(state.Id))
+        {
+            shopItems.Remove(state.Id);
+
+            foreach (var item in itemsForBuyingSlots)
+            {
+                if(item.gameObject != null)
+                    Object.Destroy(item.gameObject);
+            }
+
+            itemsForBuyingSlots.Clear();
+            CreateStatesForData();
+            ShowItems();
+        }
+    }
+
+
 
     private void CreateUpPart()
     {
@@ -59,25 +89,101 @@ public class ItemShop : MonoBehaviour
 
     private void ShowItems()
     {
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaGold));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaFerrum));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponMultiblaster));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponDesintegrator));
+        Debug.Log("Показ магазина предметов");
 
-
-        for(int i = 0; i < itemsForBuyingData.Count; i++)
+        foreach(var item in shopItems)
         {
-            var newState = new GameObject($"ItemForBuying:{itemsForBuyingData[i].Title}", typeof(ItemState));
-            newState.GetComponent<ItemState>().Init(itemsForBuyingData[i].ItemKind, 1);
-            itemsForBuyingStates.Add(newState.GetComponent<ItemState>());
-        }
-
-        for(int i = 0; i < itemsForBuyingStates.Count;i++)
-        {
-            var newObj = new GameObject($"{itemsForBuyingStates[i].Data.Title}", typeof(ItemSlotShop));
-            newObj.GetComponent<ItemSlot>().Init(shopList.transform, Managers.Player.Controller.Inventory, itemsForBuyingStates[i].GetComponent<ItemState>());
-            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(shopList.transform, itemsForBuyingStates[i].GetComponent<ItemState>()));
+            var newObj = new GameObject($"{item.Value.Data.Title}", typeof(ItemSlotShop));
+            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(this, shopList.transform, item.Value.GetComponent<ItemState>()));
         }
 
     }
+
+    private void CreateStatesForData()
+    {
+        for (int i = 0; i < itemsForBuyingData.Count; i++)
+        {
+            var newStateObj = new GameObject($"ItemForBuying:{itemsForBuyingData[i].Title}");
+            if (itemsForBuyingData[i].IsWeapon())
+            {
+                newStateObj.AddComponent<GunState>().Init(itemsForBuyingData[i].ItemKind, 1);
+
+                var state = newStateObj.GetComponent<GunState>();
+                AddItem(state);
+            }
+            else if (itemsForBuyingData[i].IsDevice())
+            {
+                newStateObj.AddComponent<DeviceState>().Init(itemsForBuyingData[i].ItemKind, 1);
+
+                var state = newStateObj.GetComponent<DeviceState>();
+                AddItem(state);
+            }
+            else
+            {
+                newStateObj.AddComponent<ItemState>().Init(itemsForBuyingData[i].ItemKind, 1);
+
+                var state = newStateObj.GetComponent<ItemState>();
+                AddItem(state);
+
+            }
+            Object.Destroy(newStateObj);
+        }
+    }
+
+    #region ДОБАВИТЬ В ИНВЕНТАРЬ ПРЕДМЕТ
+    public void AddItem(ItemState state)
+    {
+        if (state.Data.ItemKind == ItemKind.deviceEmpty || state.Data.ItemKind == ItemKind.weaponEmpty)
+            return;
+
+        if (shopItems.ContainsKey(state.Id))
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("Добавление предмета");
+            if (state.IsItem)
+            {
+                foreach (var item in shopItems.Values)
+                {
+                    if (item.Data.ItemKind == state.Data.ItemKind)
+                    {
+                        item.IncreaseNumber();
+                        Object.Destroy(state.gameObject);
+                        ShowItems();
+                        return;
+                    }
+                }
+
+            }
+
+            GameObject newItemStateObj;
+            ItemState newItemState;
+
+            if (state.IsWeapon)
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
+                newItemState = newItemStateObj.GetComponent<GunState>();
+                newItemState.Init((GunState)state);
+            }
+            else if (state.IsDevice)
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
+                newItemState = newItemStateObj.GetComponent<DeviceState>();
+                newItemState.Init((DeviceState)state);
+            }
+            else
+            {
+                newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(ItemState));
+                newItemState = newItemStateObj.GetComponent<ItemState>();
+                newItemState.Init(state);
+            }
+            Object.Destroy(state.gameObject);
+            shopItems.Add(newItemState.Id, newItemState);
+            ShowItems();
+        }
+    }
+    #endregion
+
 }

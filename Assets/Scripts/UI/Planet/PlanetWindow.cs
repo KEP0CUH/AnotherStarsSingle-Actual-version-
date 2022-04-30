@@ -126,7 +126,7 @@ public class PlanetWindow : MonoBehaviour
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
             rect.offsetMin = new Vector2(-250, -150);
-            rect.offsetMax = new Vector2(250, 250);
+            rect.offsetMax = new Vector2(250, 200);
 
             var image = itemShop.GetComponent<Image>();
             image.color = new UnityEngine.Color(24f, 78f, 231f, 152f) / 256.0f;
