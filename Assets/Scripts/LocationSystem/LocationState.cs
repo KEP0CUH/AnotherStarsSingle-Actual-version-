@@ -20,5 +20,7 @@ public class LocationState : MonoBehaviour
             var planet = new GameObject("Planet");
             planet.AddComponent<PlanetController>().Init(controller, i * 3);
         }
+
+        CanvasUI.GlobalMap.AddLocationOnMap(this);
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidData.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\SellWindow.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShop.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Planet\SellWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\GlobalMap\GlobalMapUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

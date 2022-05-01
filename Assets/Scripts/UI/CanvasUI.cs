@@ -12,6 +12,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
 
     public static InventoryUI Inventory;
     public static RadarUI Radar;
+    public static GlobalMapUI GlobalMap;
     
     private List<IUIModule> modules = new List<IUIModule>();
 
@@ -30,6 +31,10 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         canvas.AddComponent<RadarUI>();
         Radar = canvas.GetComponent<RadarUI>();
         modules.Add(Radar);
+
+        canvas.AddComponent<GlobalMapUI>();
+        GlobalMap = canvas.GetComponent<GlobalMapUI>();
+        modules.Add(GlobalMap);
 
         StartCoroutine(StartupModules());
 

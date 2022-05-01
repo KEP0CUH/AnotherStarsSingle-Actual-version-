@@ -15,7 +15,8 @@ public enum UIModuleKind
     Canvas = 2,
     Inventory = 4,
     Skills = 8,
-    Radar = 16
+    Radar = 16,
+    GlobalMap
 }
 public enum ItemKind
 {

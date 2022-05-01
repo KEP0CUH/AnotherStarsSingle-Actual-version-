@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IObserver
     private float moveSpeed = 1 / Constants.TICKS_PER_SEC;
     private Camera mainCamera;
     private Camera radarCamera;
+    private Camera globalMapCamera;
 
     public PlayerState PlayerState => playerState;
     public PlayerInventory Inventory => inventory;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
         SetupCamera();
         SetupRadar();
+        SetupGlobalMap();
         UpdateState();
     }
 
@@ -77,6 +79,11 @@ public class PlayerController : MonoBehaviour, IObserver
             {
                 CanvasUI.Radar.Enable();
             }
+
+            if(Input.GetKey(KeyCode.L))
+            {
+                CanvasUI.GlobalMap.Enable();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -90,6 +97,8 @@ public class PlayerController : MonoBehaviour, IObserver
         {
             Managers.Canvas.DisableAllModules();
         }
+
+
     }
 
 
@@ -101,6 +110,7 @@ public class PlayerController : MonoBehaviour, IObserver
     {
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
+        globalMapCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
 
     /// <summary>
@@ -160,6 +170,20 @@ public class PlayerController : MonoBehaviour, IObserver
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         cam.targetTexture = Resources.Load<RenderTexture>("Textures/Radar");
         radarCamera = cam;
+    }
+
+    private void SetupGlobalMap()
+    {
+        GameObject globalMapCameraObj = new GameObject("GlobalMap");
+        globalMapCameraObj.AddComponent<Camera>();
+
+        var cam = globalMapCameraObj.GetComponent<Camera>();
+        cam.orthographicSize = 20;
+        cam.backgroundColor = UnityEngine.Color.grey;
+        cam.orthographic = true;
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        cam.targetTexture = Resources.Load<RenderTexture>("Textures/GlobalMap");
+        globalMapCamera = cam;
     }
 
 
