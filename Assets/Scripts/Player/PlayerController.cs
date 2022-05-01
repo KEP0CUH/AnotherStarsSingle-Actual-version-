@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour, IObserver
         globalMapCameraObj.AddComponent<Camera>();
 
         var cam = globalMapCameraObj.GetComponent<Camera>();
+        cam.cullingMask = 6;
         cam.orthographicSize = 20;
         cam.backgroundColor = UnityEngine.Color.grey;
         cam.orthographic = true;

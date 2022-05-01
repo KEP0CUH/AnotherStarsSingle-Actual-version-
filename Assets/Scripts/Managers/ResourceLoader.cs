@@ -13,6 +13,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<Location, LocationData> locations;
     private Dictionary<Planet, PlanetData> planets;
     private Dictionary<IconType, Sprite> icons;
+    private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
 
 
     public Dictionary<ItemKind, ItemData> Items => items;
@@ -32,6 +33,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         locations = new Dictionary<Location, LocationData>();
         planets = new Dictionary<Planet, PlanetData>();
         icons = new Dictionary<IconType, Sprite>();
+        asteroidFields = new Dictionary<AsteroidFieldType,AsteroidFieldData>();
 
         LoadAllResources();
 
@@ -44,6 +46,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if(items.ContainsKey(kind))
         {
             return items[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public AsteroidFieldData DownloadData(AsteroidFieldType kind)
+    {
+        if (asteroidFields.ContainsKey(kind))
+        {
+            return asteroidFields[kind];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -141,6 +153,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string planetsPath = $"Planets/";
         string iconsPath = $"Icons/Interactive/";
         string soundsPath = $"Sounds/";
+        string asteroidFieldsPath = $"AsteroidFields/";
 
         
         items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + mineralsPath                     + "Ferrum"));
@@ -187,5 +200,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));
         icons.Add(IconType.ShipShop,Resources.Load<Sprite>(iconsPath                                            + "ShipShop"));
         icons.Add(IconType.ItemShop, Resources.Load<Sprite>(iconsPath                                           + "ItemShop"));
+
+        asteroidFields.Add(AsteroidFieldType.GoldField,Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath          + "GoldField"));
+        asteroidFields.Add(AsteroidFieldType.FerrumField, Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath       + "FerrumField"));
     }
 }

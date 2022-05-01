@@ -104,6 +104,14 @@ public enum AsteroidType
     TitanAsteroid
 }
 
+public enum AsteroidFieldType
+{
+    GoldField,
+    FerrumField,
+    NickelField,
+    TitanField
+}
+
 public enum EntityKind
 {
     #region Пираты

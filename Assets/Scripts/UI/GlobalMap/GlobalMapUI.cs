@@ -53,7 +53,8 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         image.sprite = location.Data.Icon;
 
 
-
+        var button = newLocation.GetComponent<Button>();
+        button.onClick.AddListener(()=> TeleportPlayer(location.transform.position));
 
     }
 
@@ -67,7 +68,7 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         var raw = globalMap.GetComponent<RawImage>();
         raw.raycastTarget = false;
         raw.texture = Resources.Load<Texture>("Textures/GlobalMap");
-        raw.color = new UnityEngine.Color(166f, 166f, 166f, 154f) / 256f;
+        raw.color = new UnityEngine.Color(166f, 166f, 166f, 255) / 256f;
 
         var rect = globalMap.GetComponent<RectTransform>();
         /*        rect.anchorMax = new Vector2(1, 1);
@@ -82,5 +83,11 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         rect.anchorMax = new Vector2(0.5f,0.5f);
         rect.offsetMin = new Vector2(-200, -200);
         rect.offsetMax = new Vector2(200, 200);
+    }
+
+    private void TeleportPlayer(Vector3 targetPos)
+    {
+        Managers.Player.Controller.gameObject.transform.position = targetPos;
+        Managers.Player.Controller.UpdateCameraPosition();
     }
 }
