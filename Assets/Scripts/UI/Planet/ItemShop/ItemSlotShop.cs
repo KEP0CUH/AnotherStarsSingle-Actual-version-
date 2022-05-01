@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class ItemSlotShop : ItemSlot
 {
     private ItemShop itemShop;
+    private bool forBuy;
     public ItemState ItemState => state;
-    public ItemSlotShop Init(ItemShop itemShop,Transform parent,ItemState state)
+
+    public ItemSlotShop Init(ItemShop itemShop,Transform parent,ItemState state,bool forBuy)
     {
         this.itemShop = itemShop;
         this.parent = parent;
         this.state = state;
+        this.forBuy = forBuy;
 
         CreateItemSlot();
         return this;
@@ -27,8 +30,16 @@ public class ItemSlotShop : ItemSlot
     {
         if (state.Data.ItemKind != ItemKind.deviceEmpty && state.Data.ItemKind != ItemKind.weaponEmpty)
         {
-            Debug.Log("запрос на покупку итема");
-            CreateBuyWindow();
+            Debug.Log("запрос на покупку / продажу итема");
+            if(forBuy)
+            {
+                CreateBuyWindow();
+            }
+            else if(forBuy == false)
+            {
+                CreateSellWindow();
+            }
+
         }
     }
 
@@ -45,5 +56,20 @@ public class ItemSlotShop : ItemSlot
         rect.offsetMax = new Vector2(96, 70);
 
         tradeWindow.AddComponent<BuyWindow>().Init(itemShop,tradeWindow.transform, this);
+    }
+
+    private void CreateSellWindow()
+    {
+        var tradeWindow = new GameObject("Confirm selling.", typeof(RectTransform), typeof(Image));
+
+        var rect = tradeWindow.GetComponent<RectTransform>();
+        rect.transform.SetParent(this.itemShop.gameObject.transform);
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.offsetMin = new Vector2(-96, -120);
+        rect.offsetMax = new Vector2(96, 70);
+
+        tradeWindow.AddComponent<SellWindow>().Init(itemShop, tradeWindow.transform, this);
     }
 }

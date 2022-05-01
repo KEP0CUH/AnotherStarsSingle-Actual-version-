@@ -125,7 +125,7 @@ public class PlanetWindow : MonoBehaviour
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.offsetMin = new Vector2(-250, -150);
+            rect.offsetMin = new Vector2(-250, -200);
             rect.offsetMax = new Vector2(250, 200);
 
             var image = itemShop.GetComponent<Image>();

@@ -79,6 +79,7 @@ public class BuyWindow : MonoBehaviour
     {
         itemShop.RemoveItemState(this.itemSlot.ItemState);
         Managers.Player.Controller.Inventory.AddItem(this.itemSlot.ItemState);
+        itemShop.ShowItems();
         Object.Destroy(this.gameObject);
     }
 

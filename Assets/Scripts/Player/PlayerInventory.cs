@@ -73,11 +73,16 @@ public class PlayerInventory : IPlayerInventory
     #region онйюгюрэ хмбемрюпэ
     public void ShowInventory()
     {
-        Debug.Log("оНЙЮГ ХМБЕМРЮПЪ");
         CanvasUI.Inventory.ShowInventory(this, itemsDic);
     }
     #endregion
 
+    #region онксвхрэ якнбюпэ бяеу опедлернб, йнрнпше еярэ с хцпнйю
+    public Dictionary<int,ItemState> GetAllItems()
+    {
+        return this.itemsDic;
+    }
+    #endregion
 
     #region онксвхрэ хрел хг хмбемрюпъ он хдс, еякх рюйни хлееряъ
     public ItemState GetItem(int id)
