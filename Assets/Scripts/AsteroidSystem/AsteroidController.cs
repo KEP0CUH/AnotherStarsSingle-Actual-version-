@@ -44,7 +44,7 @@ public class AsteroidController : MonoBehaviour
         this.GetComponent<SphereCollider>().isTrigger = true;
     }
 
-    public void RemoveInfoWindow()
+    public void CloseInfoWindow()
     {
         if(infoWindow != null)
         {
@@ -176,7 +176,7 @@ public class AsteroidController : MonoBehaviour
     {
         if (gameObject.scene.isLoaded)
         {
-            spawner.GetComponent<AsteroidSpawner>().RemoveAsteroid();
+            spawner.gameObject.GetComponent<AsteroidFieldView>().DestroyAsteroid(this.gameObject.GetComponent<AsteroidState>().Id);
 
             if (infoWindow != null && !isClicked)
             {

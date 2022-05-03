@@ -9,25 +9,26 @@ public class AsteroidFieldData : ScriptableObject
 
     [SerializeField] private AsteroidFieldType fieldType;
     [SerializeField] private Sprite iconField;
-    [SerializeField] private ItemData dropItemData;
+    [SerializeField] private AsteroidData asteroidData;
 
     public string Title => title;
     public AsteroidFieldType Type => fieldType;
     public Sprite Icon => iconField;
+    public AsteroidData AsteroidData => asteroidData;
 
     private void OnValidate()
     {
         iconField = Resources.Load<Sprite>("Images/Asteroids/AsteroidField");
-        string dropPath = $"ScriptableObjects/Items/Minerals/";
+        string dropPath = $"ScriptableObjects/Asteroids/";
         switch (fieldType)
         {
             case AsteroidFieldType.GoldField:
                 title = "Золотое поле астероидов";
-                dropItemData = Resources.Load<ItemData>(dropPath + "Gold");
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "GoldAsteroid");
                 break;
             case AsteroidFieldType.FerrumField:
                 title = "Железное поле астероидов";
-                dropItemData = Resources.Load<ItemData>(dropPath + "Ferrum");
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "FerrumAsteroid");
                 break;
 
         }

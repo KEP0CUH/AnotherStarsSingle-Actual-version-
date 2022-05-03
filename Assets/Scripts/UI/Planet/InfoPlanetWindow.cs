@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InfoPlanetWindow : MonoBehaviour
 {
     private PlanetState planetState;
-    private PlanetController controller;
+    private GameObject controller;
 
     private GameObject icon;
     private GameObject title;
@@ -16,12 +16,22 @@ public class InfoPlanetWindow : MonoBehaviour
 
     public void Init(PlanetController controller)
     {
-        this.controller = controller;
+        this.controller = controller.gameObject;
         planetState = controller.State;
         CreateWindow();
-        CreateIcon();
-        CreateTitle();
+        CreateIcon(planetState.Data.Icon);
+        CreateTitle(planetState.Data.Title);
         //CreateDescription();
+        CreateButtonClose();
+        CreateButtonLand();
+    }
+
+    public void Init(AsteroidFieldView controller, AsteroidFieldData data)
+    {
+        this.controller = controller.gameObject;
+        CreateWindow();
+        CreateIcon(data.Icon);
+        CreateTitle(data.Title);
         CreateButtonClose();
         CreateButtonLand();
     }
@@ -44,14 +54,14 @@ public class InfoPlanetWindow : MonoBehaviour
 
     }
 
-    private void CreateIcon()
+    private void CreateIcon(Sprite content)
     {
         icon = new GameObject("Icon", typeof(RectTransform), typeof(Image));
 
         var rect = icon.GetComponent<RectTransform>();
         rect.SetParent(transform, false);
 
-        icon.GetComponent<Image>().sprite = planetState.Data.Icon;
+        icon.GetComponent<Image>().sprite = content;
         rect.anchorMin = new Vector2(0.5f, 1);
         rect.anchorMax = new Vector2(0.5f, 1);
         rect.pivot = new Vector2(1, 1);
@@ -61,7 +71,7 @@ public class InfoPlanetWindow : MonoBehaviour
         Debug.Log("InfoIcon created.");
     }
 
-    private void CreateTitle()
+    private void CreateTitle(string content)
     {
         title = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -80,7 +90,7 @@ public class InfoPlanetWindow : MonoBehaviour
         text.font = font;
         text.fontSize = 18;
 
-        text.text = planetState.Data.Title;
+        text.text = content;
     }
 
     private void CreateDescription()
@@ -121,7 +131,7 @@ public class InfoPlanetWindow : MonoBehaviour
 
     private void CreateButtonLand()
     {
-        var buttonLand = new GameObject("Land",typeof(Image),typeof(Button));
+        var buttonLand = new GameObject("Land", typeof(Image), typeof(Button));
         var rect = buttonLand.GetComponent<RectTransform>();
         rect.SetParent(this.gameObject.transform, false);
         rect.anchorMin = new Vector2(0, 0);
@@ -139,17 +149,40 @@ public class InfoPlanetWindow : MonoBehaviour
 
     private void OnLand()
     {
-        Managers.Player.Land(controller.transform);
 
-        var planet = new GameObject("PlanetInside", typeof(RectTransform));
-        planet.AddComponent<PlanetWindow>().Init(planetState);
-        planet.GetComponent<RectTransform>().SetAsFirstSibling();
+        if (controller.GetComponent<AsteroidFieldView>())
+        {
+            Managers.Player.Land(controller.transform, true);
 
-        Close();
+            var asteroidField = new GameObject("AsteroidFieldInside", typeof(RectTransform));
+            asteroidField.GetComponent<RectTransform>().SetAsFirstSibling();
+            //asteroidField.AddComponent<AsteroidFieldWindow>().Init()
+
+            Close();
+        }
+        else if (controller.GetComponent<PlanetController>())
+        {
+            Managers.Player.Land(controller.transform);
+
+            var planet = new GameObject("PlanetInside", typeof(RectTransform));
+            planet.AddComponent<PlanetWindow>().Init(planetState);
+            planet.GetComponent<RectTransform>().SetAsFirstSibling();
+
+            Close();
+        }
+
     }
 
     private void Close()
     {
-        controller.RemoveInfoWindow();
+        if (controller.GetComponent<AsteroidFieldView>())
+        {
+            controller.GetComponent<AsteroidFieldView>().CloseInfoWindow();
+        }
+        else if (controller.GetComponent<PlanetController>())
+        {
+            controller.GetComponent<PlanetController>().RemoveInfoWindow();
+        }
+
     }
 }

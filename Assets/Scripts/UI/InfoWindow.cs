@@ -5,7 +5,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class InfoWindow : MonoBehaviour
 {
-    private AsteroidState data;
     private AsteroidController controller;
 
     private GameObject icon;
@@ -17,11 +16,22 @@ public class InfoWindow : MonoBehaviour
     public void Init(AsteroidController controller)
     {
         this.controller = controller;
-        data = controller.Asteroid;
+        var data = controller.Asteroid;
         CreateWindow();
-        CreateIcon();
-        CreateTitle();
-        CreateDescription();
+        CreateIcon(data.Data.Icon);
+        CreateTitle(data.Data.Title);
+        CreateDescription(data.Data.Description);
+        CreateButtonClose();
+    }
+
+    public void Init(AsteroidController controller,AsteroidFieldData data)
+    {
+        this.controller = controller;
+
+        CreateWindow();
+        CreateIcon(data.Icon);
+        CreateTitle(data.Title);
+        CreateDescription("");
         CreateButtonClose();
     }
 
@@ -42,14 +52,14 @@ public class InfoWindow : MonoBehaviour
 
     }
 
-    private void CreateIcon()
+    private void CreateIcon(Sprite content)
     {
         icon = new GameObject("Icon",typeof(RectTransform),typeof(Image));
 
         var rect = icon.GetComponent<RectTransform>();
         rect.SetParent(transform,false);
 
-        icon.GetComponent<Image>().sprite = data.Data.Icon;
+        icon.GetComponent<Image>().sprite = content;
         rect.anchorMin = new Vector2(0.5f, 1);
         rect.anchorMax = new Vector2(0.5f, 1);
         rect.pivot = new Vector2(1, 1);
@@ -59,7 +69,7 @@ public class InfoWindow : MonoBehaviour
         Debug.Log("InfoIcon created.");
     }
 
-    private void CreateTitle()
+    private void CreateTitle(string content)
     {
         title = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -78,10 +88,10 @@ public class InfoWindow : MonoBehaviour
         text.font = font;
         text.fontSize = 18;
 
-        text.text = data.Data.Title;
+        text.text = content;
     }
 
-    private void CreateDescription()
+    private void CreateDescription(string content)
     {
         description = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -100,7 +110,7 @@ public class InfoWindow : MonoBehaviour
         text.font = font;
         text.fontSize = 16;
 
-        text.text = data.Data.Description;
+        text.text = content;
     }
 
     private void CreateButtonClose()
@@ -114,11 +124,11 @@ public class InfoWindow : MonoBehaviour
         rect.offsetMax = new Vector2(-8, -8);
         buttonClose.GetComponent<Image>().color = new UnityEngine.Color(255, 0, 0, 140) / 256f;
         var buttonDrop = buttonClose.GetComponent<Button>();
-        buttonDrop.onClick.AddListener(Close);
+        buttonDrop.onClick.AddListener(CloseInfoWindow);
     }
 
-    private void Close()
+    private void CloseInfoWindow()
     {
-        controller.RemoveInfoWindow();
+        controller.CloseInfoWindow();
     }
 }

@@ -200,6 +200,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));
         icons.Add(IconType.ShipShop,Resources.Load<Sprite>(iconsPath                                            + "ShipShop"));
         icons.Add(IconType.ItemShop, Resources.Load<Sprite>(iconsPath                                           + "ItemShop"));
+        icons.Add(IconType.Asteroid, Resources.Load<Sprite>(iconsPath                                           + "Asteroid"));
+        icons.Add(IconType.AsteroidField, Resources.Load<Sprite>(iconsPath                                      + "AsteroidField"));
 
         asteroidFields.Add(AsteroidFieldType.GoldField,Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath          + "GoldField"));
         asteroidFields.Add(AsteroidFieldType.FerrumField, Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath       + "FerrumField"));

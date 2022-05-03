@@ -146,4 +146,6 @@ public enum IconType
     Rise,
     ShipShop,
     ItemShop,
+    Asteroid,
+    AsteroidField,
 }

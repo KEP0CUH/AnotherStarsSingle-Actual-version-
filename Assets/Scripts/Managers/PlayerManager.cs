@@ -38,6 +38,14 @@ public class PlayerManager : MonoBehaviour, IGameManager
         isLanded = true;
     }
 
+    public void Land(Transform transform,bool onAsteroids = true)
+    {
+        this.landPlace = transform;
+        controller.gameObject.transform.position = new Vector3(transform.position.x + 150, transform.position.y + 150, 0);
+        controller.UpdateCameraPosition();
+        isLanded = true;
+    }
+
     public void Rise()
     {
         controller.gameObject.transform.position = new Vector2(this.landPlace.position.x,this.landPlace.position.y);

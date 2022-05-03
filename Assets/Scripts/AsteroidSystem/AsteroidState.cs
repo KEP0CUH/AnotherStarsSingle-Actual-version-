@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class AsteroidState : MonoBehaviour
 {
+    private static int ID = 1;
     [SerializeField] private AsteroidData data;
 
     [SerializeField] private float maxHealth;
     [SerializeField] private float health;
 
+    [SerializeField] protected int id;
+
     public AsteroidData Data => data;
     public float MaxHealth => maxHealth;
     public float Health => health;
+
+    public int Id => id;
 
     float radiusMax = 3;
     float radiusMin = 0.1f;
@@ -39,6 +44,7 @@ public class AsteroidState : MonoBehaviour
 
         maxHealth = Random.Range(400, 800);
         health = maxHealth;
+        this.id = GetId();
     }
 
     public void ChangeHealth(float value)
@@ -91,5 +97,9 @@ public class AsteroidState : MonoBehaviour
                                                  0);
     }
 
-
+    private static int GetId()
+    {
+        ID++;
+        return ID;
+    }
 }
