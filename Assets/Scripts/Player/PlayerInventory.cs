@@ -33,7 +33,7 @@ public class PlayerInventory : IPlayerInventory
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
                         item.IncreaseNumber();
-                        Object.Destroy(state.gameObject);
+                        //Object.Destroy(state.gameObject);
                         ShowInventory();
                         return;
                     }
@@ -62,7 +62,7 @@ public class PlayerInventory : IPlayerInventory
                 newItemState = newItemStateObj.GetComponent<ItemState>();
                 newItemState.Init(state);
             }
-            Object.Destroy(state.gameObject);
+            //Object.Destroy(state.gameObject);
             itemsDic.Add(newItemState.Id, newItemState);
             ShowInventory();
         }

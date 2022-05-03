@@ -122,6 +122,7 @@ public class ShipInventory : IShipInventory
                 guns[i] = CreateGunStateObject(state);
                 guns[i].SetIsTrue();
                 Managers.Player.Controller.Inventory.RemoveItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -140,6 +141,7 @@ public class ShipInventory : IShipInventory
                 guns[i].SetIsTrue();
                 state.SetIsTrue();
                 inventory.RemoveItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -157,6 +159,7 @@ public class ShipInventory : IShipInventory
                 guns[i].SetIsFalse();
                 state.SetIsFalse();
                 Managers.Player.Controller.Inventory.AddItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -174,6 +177,7 @@ public class ShipInventory : IShipInventory
                 guns[i].SetIsFalse();
                 state.SetIsFalse();
                 inventory.AddItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -193,6 +197,7 @@ public class ShipInventory : IShipInventory
                 devices[i] = CreateDeviceStateObject(state);
                 devices[i].SetIsTrue();
                 Managers.Player.Controller.Inventory.RemoveItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -210,6 +215,7 @@ public class ShipInventory : IShipInventory
                 devices[i].SetIsTrue();
                 state.SetIsTrue();
                 inventory.RemoveItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -226,6 +232,7 @@ public class ShipInventory : IShipInventory
                 devices[i].SetIsFalse();
                 state.SetIsFalse();
                 Managers.Player.Controller.Inventory.AddItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -242,6 +249,7 @@ public class ShipInventory : IShipInventory
                 devices[i].SetIsFalse();
                 state.SetIsFalse();
                 inventory.AddItem(state);
+                Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -309,11 +317,13 @@ public class ShipInventory : IShipInventory
             TryInteractWithItem(state);
             var item = CreateDrop(state);
             Managers.Player.Controller.Inventory.RemoveItem(state);
+            Object.Destroy(state.gameObject);
         }
         else
         {
             var item = CreateDrop(state);
             Managers.Player.Controller.Inventory.RemoveItem(state);
+            Object.Destroy(state.gameObject);
         }
     }
     #endregion

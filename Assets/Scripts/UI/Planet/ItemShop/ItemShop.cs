@@ -194,6 +194,7 @@ public class ItemShop : MonoBehaviour
 
                 var state = newStateObj.GetComponent<GunState>();
                 AddItem(state);
+                Object.Destroy(state.gameObject);
             }
             else if (itemsForBuyingData[i].IsDevice())
             {
@@ -201,6 +202,7 @@ public class ItemShop : MonoBehaviour
 
                 var state = newStateObj.GetComponent<DeviceState>();
                 AddItem(state);
+                Object.Destroy(state.gameObject);
             }
             else
             {
@@ -208,7 +210,7 @@ public class ItemShop : MonoBehaviour
 
                 var state = newStateObj.GetComponent<ItemState>();
                 AddItem(state);
-
+                Object.Destroy(state.gameObject);
             }
             Object.Destroy(newStateObj);
         }
@@ -234,7 +236,7 @@ public class ItemShop : MonoBehaviour
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
                         item.IncreaseNumber();
-                        Object.Destroy(state.gameObject);
+                        //Object.Destroy(state.gameObject);
                         ShowItems();
                         return;
                     }
@@ -263,7 +265,7 @@ public class ItemShop : MonoBehaviour
                 newItemState = newItemStateObj.GetComponent<ItemState>();
                 newItemState.Init(state);
             }
-            Object.Destroy(state.gameObject);
+            //Object.Destroy(state.gameObject);
             shopItems.Add(newItemState.Id, newItemState);
             ShowItems();
         }
