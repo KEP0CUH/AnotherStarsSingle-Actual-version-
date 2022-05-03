@@ -46,6 +46,10 @@ public class AsteroidData : ScriptableObject
                 icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
                 dropKind = ItemKind.rudaNickel;
                 break;
+            case AsteroidType.EmptyAsteroid:
+                title = "EmptyAsteroid";
+                description = "";
+                break;
         }
     }
 }

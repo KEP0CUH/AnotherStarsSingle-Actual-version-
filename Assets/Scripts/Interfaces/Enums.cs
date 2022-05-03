@@ -101,7 +101,8 @@ public enum AsteroidType
     GoldAsteroid = 1,
     FerrumAsteroid,
     NickelAsteroid,
-    TitanAsteroid
+    TitanAsteroid,
+    EmptyAsteroid
 }
 
 public enum AsteroidFieldType
@@ -148,4 +149,6 @@ public enum IconType
     ItemShop,
     Asteroid,
     AsteroidField,
+    Skill,
+    Inventory,
 }

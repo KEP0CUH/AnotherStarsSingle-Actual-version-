@@ -33,10 +33,10 @@ public class AsteroidController : MonoBehaviour
         this.spawner = spawner.gameObject;
         this.asteroid = asteroidState;
 
-        xMax += originPoint.x;
-        xMin += originPoint.x;
-        yMax += originPoint.y;
-        yMin += originPoint.y;
+        xMax += originPoint.x + 150;
+        xMin += originPoint.x + 150;
+        yMax += originPoint.y + 150;
+        yMin += originPoint.y + 150;
 
         this.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
 

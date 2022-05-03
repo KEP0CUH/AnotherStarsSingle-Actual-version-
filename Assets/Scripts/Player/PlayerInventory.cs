@@ -105,14 +105,14 @@ public class PlayerInventory : IPlayerInventory
                 if (itemsDic[state.Id].Count <= 0)
                 {
                     itemsDic.Remove(state.Id);
-                    Object.Destroy(state.gameObject);
+                    //Object.Destroy(state.gameObject);
                 }
                 ShowInventory();
             }
             else
             {
                 itemsDic.Remove(state.Id);
-                Object.Destroy(state.gameObject);
+                //Object.Destroy(state.gameObject);
                 ShowInventory();
             }
         }
