@@ -94,8 +94,21 @@ public class ConstantUI : MonoBehaviour
         //button.image = Managers.Resources.DownloadData(IconType.Skill);
     }
 
-    private void CreateInventoryButton(RectTransform rect)
+    private void CreateInventoryButton(RectTransform parentRect)
     {
+        var inventoryButton = new GameObject("InventoryButton", typeof(RectTransform), typeof(Image), typeof(LayoutElement), typeof(Button));
 
+        var rect = inventoryButton.GetComponent<RectTransform>();
+        rect.SetParent(parentRect);
+
+        var image = inventoryButton.GetComponent<Image>().sprite = Managers.Resources.DownloadData(IconType.Inventory);
+
+        var button = inventoryButton.GetComponent<Button>();
+        button.onClick.AddListener(OpenInventory);
+    }
+
+    private void OpenInventory()
+    {
+        CanvasUI.Inventory.Enable();
     }
 }

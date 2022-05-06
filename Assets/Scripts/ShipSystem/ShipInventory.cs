@@ -323,7 +323,10 @@ public class ShipInventory : IShipInventory
         {
             var item = CreateDrop(state);
             Managers.Player.Controller.Inventory.RemoveItem(state);
-            Object.Destroy(state.gameObject);
+            if(state.Count <= 0)
+            {
+                Object.Destroy(state.gameObject);
+            }
         }
     }
     #endregion

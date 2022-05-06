@@ -54,9 +54,17 @@ public class PlanetController : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        isClicked = true;
+    }
+
     private void OnMouseExit()
     {
-        //RemoveInfoWindow();
+        if (infoWindow != null && !isClicked)
+        {
+            RemoveInfoWindow();
+        }
     }
 
     public void RemoveInfoWindow()

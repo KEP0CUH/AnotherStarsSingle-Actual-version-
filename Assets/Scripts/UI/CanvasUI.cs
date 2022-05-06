@@ -89,6 +89,17 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         }
     }
 
+    public void DisableModule(UIModuleKind kind)
+    {
+        foreach (IUIModule module in modules)
+        {
+            if (module.Kind == kind)
+            {
+                module.Disable();
+            }
+        }
+    }
+
     private IEnumerator StartupModules()
     {
         foreach(IUIModule module in modules)

@@ -22,9 +22,10 @@ public class Managers : MonoBehaviour
         Resources = GetComponent<ResourceLoader>();
 
         gameManagers = new List<IGameManager>();
+        gameManagers.Add(Resources);
         gameManagers.Add(Player);
         gameManagers.Add(Canvas);
-        gameManagers.Add(Resources);
+
 
         StartCoroutine(StartupManagers());
 

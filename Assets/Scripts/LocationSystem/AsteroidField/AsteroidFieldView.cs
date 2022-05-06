@@ -25,7 +25,6 @@ public class AsteroidFieldView : MonoBehaviour
         this.maxNumAsteroids = 50;
         this.currentNumAsteroids = 0;
 
-        var data = Managers.Resources.DownloadData(type);
         this.state = gameObject.GetComponent<AsteroidFieldState>();
         this.state.Init(type);
 

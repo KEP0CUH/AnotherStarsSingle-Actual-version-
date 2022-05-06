@@ -7,20 +7,13 @@ using UnityEngine;
 [RequireComponent(typeof(AsteroidFieldView))]
 public class AsteroidFieldController : MonoBehaviour
 {
-    private AsteroidFieldState state;
     private LocationController locationController;
-    private AsteroidFieldType type;
-    private int offset;
-
-
 
     public AsteroidFieldView view;
 
     public void Init(LocationController controller,AsteroidFieldType type,int offset)
     {
         this.locationController = controller;
-        this.offset = offset;
-        this.type = type;
 
         this.view = gameObject.GetComponent<AsteroidFieldView>();
         this.view.Init(this.transform, type);

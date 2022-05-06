@@ -50,6 +50,30 @@ public class AsteroidData : ScriptableObject
                 title = "EmptyAsteroid";
                 description = "";
                 break;
+            case AsteroidType.MineralAsteroid:
+                title = "MineralAsteroid";
+                description = "Asteroid from mineral";
+                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
+                dropKind = ItemKind.rudaMineral;
+                break;
+            case AsteroidType.OrganicAsteroid:
+                title = "OrganicAsteroid";
+                description = "Asteroid from organic";
+                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
+                dropKind = ItemKind.rudaOrganic;
+                break;
+            case AsteroidType.TitanAsteroid:
+                title = "TitanAsteroid";
+                description = "Asteroid from titan";
+                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
+                dropKind = ItemKind.rudaTitan;
+                break;
+            case AsteroidType.OsmiumAsteroid:
+                title = "OsmiumAsteroid";
+                description = "Asteroid from osmium";
+                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
+                dropKind = ItemKind.rudaOsmium;
+                break;
         }
     }
 }

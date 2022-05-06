@@ -83,6 +83,32 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         rect.anchorMax = new Vector2(0.5f,0.5f);
         rect.offsetMin = new Vector2(-200, -200);
         rect.offsetMax = new Vector2(200, 200);
+
+        CreateButtonClose(rect);
+    }
+
+    private void CreateButtonClose(RectTransform rectParent)
+    {
+        var buttonClose = new GameObject("CloseGlobalMap", typeof(RectTransform), typeof(Image),typeof(Button));
+
+        var rect = buttonClose.GetComponent<RectTransform>();
+        rect.SetParent(rectParent, false);
+
+        rect.anchorMin = new Vector2(1, 1);
+        rect.anchorMax = new Vector2(1,1);
+        rect.pivot = new Vector2(1, 1);
+        rect.offsetMin = new Vector2(-60, -60);
+        rect.offsetMax= new Vector2(-10, -10);
+
+        buttonClose.GetComponent<Image>().sprite = Managers.Resources.DownloadData(IconType.CloseWindow);
+
+        var button = buttonClose.GetComponent<Button>();
+        button.onClick.AddListener(CloseGlobalMap);
+    }
+
+    private void CloseGlobalMap()
+    {
+        CanvasUI.GlobalMap.Disable();
     }
 
     private void TeleportPlayer(Vector3 targetPos)

@@ -46,6 +46,9 @@ public enum ItemKind
     rudaFerrum,
     rudaNickel,
     rudaTitan,
+    rudaMineral,
+    rudaOrganic,
+    rudaOsmium,
 
     #endregion
 
@@ -100,9 +103,15 @@ public enum AsteroidType
 {
     GoldAsteroid = 1,
     FerrumAsteroid,
-    NickelAsteroid,
     TitanAsteroid,
-    EmptyAsteroid
+
+    MineralAsteroid,
+    OrganicAsteroid,
+
+    OsmiumAsteroid,
+
+    NickelAsteroid,
+    EmptyAsteroid,
 }
 
 public enum AsteroidFieldType
@@ -151,4 +160,8 @@ public enum IconType
     AsteroidField,
     Skill,
     Inventory,
+    CloseWindow,
+    ButtonOK,
+    ButtonOpenMap,
+    ButtonSettings,
 }

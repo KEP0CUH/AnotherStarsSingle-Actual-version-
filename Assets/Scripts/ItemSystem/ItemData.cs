@@ -37,7 +37,7 @@ public class ItemData : ScriptableObject
 
     protected void OnValidate()
     {
-        string mineralsSpritesPath = "Icons/Items/Minerals/";
+        string oreSpritesPath = "Icons/Items/Ores/";
         string gunSpritesPath = "Icons/Items/Guns/";
         string deviceSpritesPath = "Icons/Items/Devices/";
         string ammoSpritesPath = "Icons/Items/Ammo/";
@@ -49,27 +49,45 @@ public class ItemData : ScriptableObject
             #region Ruda
 
             case ItemKind.rudaFerrum:
-                name = "Ferrum";
-                icon = Resources.Load<Sprite>(mineralsSpritesPath + name);
+                name = "FerrumOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Железо";
                 description = "Металл с высокой химической реакционной способностью. Широко распространен во Вселенной \"Иные звёзды\"";
                 break;
             case ItemKind.rudaGold:
-                name = "Gold";
-                icon = Resources.Load<Sprite>(mineralsSpritesPath + name);
+                name = "GoldOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Золото";
                 description = "Золото – это ценный металл, известный человечеству с древних времён.Полезное ископаемое имеет характерный жёлтый цвет.";
                 break;
             case ItemKind.rudaNickel:
-                name = "Nickel";
-                icon = Resources.Load<Sprite>(mineralsSpritesPath + name);
+                name = "NickelOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Никель";
                 description = "";
                 break;
             case ItemKind.rudaTitan:
-                name = "Titan";
-                icon = Resources.Load<Sprite>(mineralsSpritesPath + name);
+                name = "TitanOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Титан";
+                description = "";
+                break;
+            case ItemKind.rudaMineral:
+                name = "MineralOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
+                title = "Минерал";
+                description = "";
+                break;
+            case ItemKind.rudaOrganic:
+                name = "OrganicOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
+                title = "Органические материалы";
+                description = "";
+                break;
+            case ItemKind.rudaOsmium:
+                name = "OsmiumOre";
+                icon = Resources.Load<Sprite>(oreSpritesPath + name);
+                title = "Осмиевая руда";
                 description = "";
                 break;
             #endregion

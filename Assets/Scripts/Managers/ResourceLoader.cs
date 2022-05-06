@@ -143,7 +143,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private void LoadAllResources()
     {
         string basePath = $"ScriptableObjects/";
-        string mineralsPath = $"Items/Minerals/";
+        string oresPath = $"Items/Ores/";
         string ammoPath = $"Items/Ammo/";
         string gunsPath = $"Items/Guns/";
         string devicesPath = $"Items/Devices/";
@@ -156,10 +156,13 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string asteroidFieldsPath = $"AsteroidFields/";
 
         
-        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + mineralsPath                     + "Ferrum"));
-        items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + mineralsPath                       + "Gold"));
-        items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + mineralsPath                     + "Nickel"));
-        items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>($""));
+        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + oresPath                     + $"FerrumOre"));
+        items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + oresPath                       + $"GoldOre"));
+        items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + oresPath                     + $"NickelOre"));
+        items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>(basePath + oresPath                      + $"TitanOre"));
+        items.Add(ItemKind.rudaMineral, Resources.Load<ItemData>(basePath + oresPath                    + $"MineralOre"));
+        items.Add(ItemKind.rudaOrganic, Resources.Load<ItemData>(basePath + oresPath                    + $"OrganicOre"));
+        items.Add(ItemKind.rudaOsmium, Resources.Load<ItemData>(basePath + oresPath                     + $"OsmiumOre"));
 
         items.Add(ItemKind.weaponEmpty, Resources.Load<ItemData>(basePath + gunsPath                          + "EmptyGun"));
         items.Add(ItemKind.weaponDesintegrator, Resources.Load<ItemData>(basePath + gunsPath                + "Desintegrator"));
@@ -204,6 +207,11 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         icons.Add(IconType.AsteroidField, Resources.Load<Sprite>(iconsPath                                      + "AsteroidField"));
         icons.Add(IconType.Skill, Resources.Load<Sprite>(iconsPath                                              + "Skills"));
         icons.Add(IconType.Inventory, Resources.Load<Sprite>(iconsPath                                          + "Inventory"));
+        icons.Add(IconType.CloseWindow, Resources.Load<Sprite>(iconsPath                                        + "CloseWindow"));
+        icons.Add(IconType.ButtonOK, Resources.Load<Sprite>(iconsPath                                           + "ButtonOK"));
+        icons.Add(IconType.ButtonOpenMap, Resources.Load<Sprite>(iconsPath                                      + "ButtonOpenMap"));
+        icons.Add(IconType.ButtonSettings, Resources.Load<Sprite>(iconsPath                                     + "ButtonSettings"));
+
 
         asteroidFields.Add(AsteroidFieldType.GoldField,Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath          + "GoldField"));
         asteroidFields.Add(AsteroidFieldType.FerrumField, Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath       + "FerrumField"));

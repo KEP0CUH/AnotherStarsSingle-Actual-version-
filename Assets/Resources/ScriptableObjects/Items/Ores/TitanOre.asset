@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4feb8c6aa29cca741bbed9f49f07894f, type: 3}
+  m_Name: TitanOre
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: d77440c9b6a067b47a8ed52ae2450137, type: 3}
+  title: "\u0422\u0438\u0442\u0430\u043D"
+  description: 
+  kind: 494

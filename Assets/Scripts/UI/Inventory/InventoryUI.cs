@@ -46,6 +46,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         CreateLeftInventoryList();
         CreateRightInventory();
         CreateRightInventoryList();
+        CreateButtonClose();
         OnValidate();
         Status = ManagerStatus.Started;
         Debug.Log("InventoryUI started.");
@@ -359,6 +360,28 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
         rightInventory.GetComponent<ScrollRect>().content = rightInventoryList.GetComponent<RectTransform>();
     }
 
+    private void CreateButtonClose()
+    {
+        var buttonClose = new GameObject("CloseInventory", typeof(RectTransform),typeof(Image),typeof(Button));
+
+        var rect = buttonClose.GetComponent<RectTransform>();
+        rect.SetParent(inventory.transform, false);
+        rect.anchorMin = new Vector2(1, 1);
+        rect.anchorMax = new Vector2(1, 1);
+        rect.pivot = new Vector2(1, 1);
+        rect.offsetMin = new Vector2(-32, -32);
+        rect.offsetMax = new Vector2(0, 0);
+
+        var image = buttonClose.GetComponent<Image>().sprite = Managers.Resources.DownloadData(IconType.CloseWindow);
+
+        var button = buttonClose.GetComponent<Button>();
+        button.onClick.AddListener(Disable);
+    }
+
+    private void CloseInventory()
+    {
+        Managers.Canvas.DisableModule(UIModuleKind.Inventory);
+    }
 
     [ContextMenu("CreateItemSlot")]
     private void CreateItemSlot(IPlayerInventory inventory, ItemState state)
