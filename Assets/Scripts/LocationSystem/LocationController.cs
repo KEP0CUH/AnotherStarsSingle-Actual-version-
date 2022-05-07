@@ -21,6 +21,5 @@ public class LocationController : MonoBehaviour
         this.state.Init(controller,Location.Krinul);
 
         this.gameObject.name = this.state.Data.Title;
-        this.GetComponent<SpriteRenderer>().sprite = this.state.Data.Icon;
     }
 }

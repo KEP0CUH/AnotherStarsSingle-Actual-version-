@@ -7,24 +7,46 @@ public class LocationState : MonoBehaviour
 {
     [SerializeField] private LocationData data;
     [SerializeField] private List<Planet> planets;
-    [SerializeField] private AsteroidFieldType type;
+    [SerializeField] private AsteroidFieldType asteroidFieldType;
+    [SerializeField] private SunType sunType;
+
+    private LocationController controller;
 
 
     public LocationData Data => data;
 
     public void Init(LocationController controller,Location location)
     {
+        this.controller = controller;
         this.data = Managers.Resources.DownloadData(location);
 
-        for(int i = 0; i < planets.Count; i++)
-        {
-            var planet = new GameObject("Planet");
-            planet.AddComponent<PlanetController>().Init(controller, i * 3);
-        }
+        SpawnPlanets();
+        SpawnAsteroidFieldIfHave();
 
-        var asteroidField = new GameObject("AsteroidField");
-        asteroidField.AddComponent<AsteroidFieldController>().Init(controller,type, 3);
+        this.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(sunType);
 
         CanvasUI.GlobalMap.AddLocationOnMap(this);
+    }
+
+    private void SpawnPlanets()
+    {
+        for (int i = 0; i < planets.Count; i++)
+        {
+            var planet = new GameObject($"Planet{planets[i]}");
+            planet.AddComponent<PlanetController>().    Init(controller, planets[i], i * 3);
+        }
+    }
+
+    private void SpawnAsteroidFieldIfHave()
+    {
+        if (asteroidFieldType == AsteroidFieldType.EmptyField)
+        {
+
+        }
+        else
+        {
+            var asteroidField = new GameObject($"{asteroidFieldType}");
+            asteroidField.AddComponent<AsteroidFieldController>().Init(controller, asteroidFieldType, 3);
+        }
     }
 }

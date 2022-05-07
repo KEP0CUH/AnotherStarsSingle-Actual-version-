@@ -119,8 +119,11 @@ public enum AsteroidFieldType
     GoldField,
     FerrumField,
     NickelField,
-    TitanField
+    TitanField,
+    EmptyField
 }
+
+
 
 public enum EntityKind
 {
@@ -148,6 +151,35 @@ public enum Planet
     Earth,
     Mars,
     Arcea
+}
+
+public enum SunType
+{
+    YellowSun,
+    GreenSun,
+    BlueSun,
+    WhiteSun,
+    OrangeSun,
+}
+
+public enum PlanetIconType
+{
+    planetType1,
+    planetType2,
+    planetType3,
+    planetType4,
+    planetType5,
+    planetType6,
+    planetType7,
+    planetType8,
+    planetType9,
+    planetType10,
+    planetType11,
+    planetType12,
+    planetType13,
+    planetType14,
+    planetType15,
+    planetType16,
 }
 
 public enum IconType

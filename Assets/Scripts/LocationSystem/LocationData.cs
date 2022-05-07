@@ -9,11 +9,9 @@ public class LocationData : ScriptableObject
     [SerializeField] private string title;
     [SerializeField] private string description;
     [SerializeField] private Location location;
-    [SerializeField] private Sprite iconSun;
 
 
     public string Title => title;
-    public Sprite Icon => iconSun;
 
     private void OnValidate()
     {
@@ -22,8 +20,12 @@ public class LocationData : ScriptableObject
             case Location.Krinul:
                 title = "Кринул";
                 description = "Центр вселенной Иные Звёзды";
-                iconSun = Resources.Load<Sprite>("Icons/Planets/YellowSun");
                 break;
+            case Location.Lambda:
+                title = "Лямбда";
+                description = "";
+                break;
+
         }
     }
 

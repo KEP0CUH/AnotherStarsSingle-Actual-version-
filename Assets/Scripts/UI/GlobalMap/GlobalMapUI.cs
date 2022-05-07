@@ -43,14 +43,14 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         rect.anchorMax = new Vector2(0.5f, 0.5f);
         rect.pivot = new Vector2(0.5f, 0.5f);
 
-        var locGlobalPos = new Vector2(location.transform.position.x,location.transform.position.y);
+        var locGlobalPos = new Vector2(location.transform.position.x,location.transform.position.y) / 10;
 
         rect.offsetMin = new Vector2(-8,-8) + locGlobalPos;
         rect.offsetMax = new Vector2(8, 8) + locGlobalPos;
 
 
         var image = newLocation.GetComponent<Image>();
-        image.sprite = location.Data.Icon;
+        image.sprite = location.GetComponent<SpriteRenderer>().sprite;
 
 
         var button = newLocation.GetComponent<Button>();

@@ -14,6 +14,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<Planet, PlanetData> planets;
     private Dictionary<IconType, Sprite> icons;
     private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
+    private Dictionary<SunType, Sprite> sunIcons;
 
 
     public Dictionary<ItemKind, ItemData> Items => items;
@@ -34,6 +35,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         planets = new Dictionary<Planet, PlanetData>();
         icons = new Dictionary<IconType, Sprite>();
         asteroidFields = new Dictionary<AsteroidFieldType,AsteroidFieldData>();
+        sunIcons = new Dictionary<SunType, Sprite>();
 
         LoadAllResources();
 
@@ -131,6 +133,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
+    public Sprite DownloadData(SunType type)
+    {
+        if(sunIcons.ContainsKey(type))
+        {
+            return sunIcons[type];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
     public Sprite DownloadData(IconType icon)
     {
         if(icons.ContainsKey(icon))
@@ -154,6 +166,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string iconsPath = $"Icons/Interactive/";
         string soundsPath = $"Sounds/";
         string asteroidFieldsPath = $"AsteroidFields/";
+        string sunIconsPath = $"Icons/Suns/";
 
         
         items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + oresPath                     + $"FerrumOre"));
@@ -197,7 +210,15 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));
 
-        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + "Arcea"));
+        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + Planet.Arcea));
+        planets.Add(Planet.Earth, Resources.Load<PlanetData>(basePath + planetsPath                             + Planet.Earth));
+        planets.Add(Planet.Mars, Resources.Load<PlanetData>(basePath + planetsPath                              + Planet.Mars));
+
+        sunIcons.Add(SunType.YellowSun, Resources.Load<Sprite>(sunIconsPath                                     + SunType.YellowSun));
+        sunIcons.Add(SunType.GreenSun, Resources.Load<Sprite>(sunIconsPath                                      + SunType.GreenSun));
+        sunIcons.Add(SunType.OrangeSun, Resources.Load<Sprite>(sunIconsPath                                     + SunType.OrangeSun));
+        sunIcons.Add(SunType.BlueSun, Resources.Load<Sprite>(sunIconsPath                                       + SunType.BlueSun));
+        sunIcons.Add(SunType.WhiteSun, Resources.Load<Sprite>(sunIconsPath                                      + SunType.WhiteSun));
 
         icons.Add(IconType.Land, Resources.Load<Sprite>(iconsPath                                               + "Land"));
         icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));

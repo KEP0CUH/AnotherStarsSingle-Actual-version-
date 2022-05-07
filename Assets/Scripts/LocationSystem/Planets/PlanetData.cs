@@ -8,6 +8,7 @@ public class PlanetData : ScriptableObject
     [SerializeField] private string title;
     [SerializeField] private string description;
     [SerializeField] private Planet planet;
+    [SerializeField] private PlanetIconType iconType;
     [SerializeField] private Sprite iconPlanet;
     [SerializeField] private Sprite iconBG;
 
@@ -23,10 +24,17 @@ public class PlanetData : ScriptableObject
             case Planet.Arcea:
                 title = "Арсея";
                 description = "";
-                iconPlanet = Resources.Load<Sprite>("Icons/Planets/Planet1");
-                iconBG = Resources.Load<Sprite>("Icons/Cosmoports/Planet1");
                 break;
+            case Planet.Mars:
+                title = "Марс";
+                break;
+            case Planet.Earth:
+                title = "Земля";
+                break;
+
         }
+        iconPlanet = Resources.Load<Sprite>("Icons/Planets/" + iconType);
+        iconBG = Resources.Load<Sprite>("Icons/Cosmoports/" + iconType);
     }
 
 }

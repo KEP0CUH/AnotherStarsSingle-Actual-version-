@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlanetController : MonoBehaviour
 {
     private PlanetState state;
+    private Planet planetKind;
     private LocationController controller;
     private int offset;
 
@@ -17,29 +18,30 @@ public class PlanetController : MonoBehaviour
 
     public PlanetState State => state;
 
-    public void Init(LocationController controller,int offset)
+    public void Init(LocationController controller,Planet kind,int offset)
     {
         this.controller = controller;
+        this.planetKind = kind;
         this.offset = offset;
     }
 
     private void Start()
     {
         this.state = gameObject.GetComponent<PlanetState>();
-        this.state.Init(Planet.Arcea);
+        this.state.Init(planetKind);
 
         this.gameObject.name = this.state.Data.Title;
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.gameObject.AddComponent<SphereCollider>();
-        this.gameObject.transform.parent = controller.gameObject.transform;
-        this.gameObject.transform.position = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
-        this.gameObject.transform.RotateAround(controller.transform.position, new Vector3(0, 0, 1), Random.Range(0,360));
+        this.gameObject.transform.SetParent(controller.transform, true);
+        this.gameObject.transform.localPosition = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
+        this.gameObject.transform.RotateAround(controller.transform.position, controller.transform.forward, Random.Range(0,360));
 
     }
 
     private void FixedUpdate()
     {
-        transform.RotateAround(controller.transform.position, new Vector3(0,0,1), 4.0f * Time.deltaTime);
+        transform.RotateAround(controller.transform.position, controller.transform.forward, 4.0f * Time.fixedDeltaTime);
     }
 
     private void OnMouseEnter()
