@@ -28,10 +28,10 @@ public class ItemShop : MonoBehaviour
         CreateDownPart();
 
         itemsForBuyingData = new List<ItemData>();
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaGold));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.rudaFerrum));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponMultiblaster));
-        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.weaponDesintegrator));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.GoldOre));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.FerrumOre));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.MultiblasterGun));
+        itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.DesintegratorGun));
 
 
         itemsForBuyingSlots = new List<ItemSlotShop>();
@@ -219,7 +219,7 @@ public class ItemShop : MonoBehaviour
     #region ƒŒ¡¿¬»“‹ ¬ »Õ¬≈Õ“¿–‹ Ã¿√¿«»Õ¿ œ–≈ƒÃ≈“
     public void AddItem(ItemState state)
     {
-        if (state.Data.ItemKind == ItemKind.deviceEmpty || state.Data.ItemKind == ItemKind.weaponEmpty)
+        if (state.Data.ItemKind == ItemKind.EmptyDevice || state.Data.ItemKind == ItemKind.EmptyGun)
             return;
 
         if (shopItems.ContainsKey(state.Id))

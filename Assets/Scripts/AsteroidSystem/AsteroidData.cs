@@ -26,25 +26,18 @@ public class AsteroidData : ScriptableObject
 
     private void OnValidate()
     {
+        icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
         switch (type)
         {
             case AsteroidType.GoldAsteroid:
                 title = "GoldAsteroid";
                 description = "Астероид, содержащий в себе до 5% золота.";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.GoldAsteroid.ToString());
-                dropKind = ItemKind.rudaGold;
+                dropKind = ItemKind.GoldOre;
                 break;
             case AsteroidType.FerrumAsteroid:
                 title = "FerrumAsteroid";
                 description = "Астероид с примесями железа.";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
-                dropKind = ItemKind.rudaFerrum;
-                break;
-            case AsteroidType.NickelAsteroid:
-                title = "NickelAsteroid";
-                description = "Asteroid from nickel.";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + AsteroidType.FerrumAsteroid.ToString());
-                dropKind = ItemKind.rudaNickel;
+                dropKind = ItemKind.FerrumOre;
                 break;
             case AsteroidType.EmptyAsteroid:
                 title = "EmptyAsteroid";
@@ -53,26 +46,22 @@ public class AsteroidData : ScriptableObject
             case AsteroidType.MineralAsteroid:
                 title = "MineralAsteroid";
                 description = "Asteroid from mineral";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
-                dropKind = ItemKind.rudaMineral;
+                dropKind = ItemKind.MineralOre;
                 break;
             case AsteroidType.OrganicAsteroid:
                 title = "OrganicAsteroid";
                 description = "Asteroid from organic";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
-                dropKind = ItemKind.rudaOrganic;
+                dropKind = ItemKind.OrganicOre;
                 break;
             case AsteroidType.TitanAsteroid:
                 title = "TitanAsteroid";
                 description = "Asteroid from titan";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
-                dropKind = ItemKind.rudaTitan;
+                dropKind = ItemKind.TitanOre;
                 break;
             case AsteroidType.OsmiumAsteroid:
                 title = "OsmiumAsteroid";
                 description = "Asteroid from osmium";
-                icon = Resources.Load<Sprite>("Images/Asteroids/" + "Asteroid");
-                dropKind = ItemKind.rudaOsmium;
+                dropKind = ItemKind.OsmiumOre;
                 break;
         }
     }

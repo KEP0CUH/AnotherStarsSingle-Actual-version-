@@ -30,7 +30,22 @@ public class AsteroidFieldData : ScriptableObject
                 title = "Железное поле астероидов";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + "FerrumAsteroid");
                 break;
-
+            case AsteroidFieldType.TitanField:
+                title = "Титаново поле астероидов";
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "TitanAsteroid");
+                break;
+            case AsteroidFieldType.MineralField:
+                title = "Минеральное поле астероидов";
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "MineralAsteroid");
+                break;
+            case AsteroidFieldType.OrganicField:
+                title = "Органическое поле астероидов";
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "OrganicAsteroid");
+                break;
+            case AsteroidFieldType.OsmiumField:
+                title = "Осмиевое поле астероидов";
+                asteroidData = Resources.Load<AsteroidData>(dropPath + "OsmiumAsteroid");
+                break;
         }
     }
 }

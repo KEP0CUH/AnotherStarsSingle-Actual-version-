@@ -410,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   planets: 0100000002000000020000000100000000000000
-  asteroidFieldType: 0
+  asteroidFieldsTypes: 01000000020000000300000004000000
   sunType: 1
 --- !u!1 &674429199
 GameObject:
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   planets: 0200000002000000020000000200000002000000
-  asteroidFieldType: 0
+  asteroidFieldsTypes: 
   sunType: 3
 --- !u!212 &1184439886
 SpriteRenderer:
@@ -756,7 +756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   planets: 0200000000000000010000000200000002000000
-  asteroidFieldType: 4
+  asteroidFieldsTypes: 
   sunType: 2
 --- !u!212 &1514895623
 SpriteRenderer:

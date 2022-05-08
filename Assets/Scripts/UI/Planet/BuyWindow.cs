@@ -18,6 +18,18 @@ public class BuyWindow : MonoBehaviour
         CreateIconItem();
     }
 
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Return))
+        {
+            ConfirmBuying();
+        }
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            CancelBuying();
+        }
+    }
+
     private void CreateIconItem()
     {
         var itemInfo = new GameObject("ItemIcon", typeof(RectTransform),typeof(Image));

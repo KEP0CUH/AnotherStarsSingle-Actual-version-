@@ -21,11 +21,17 @@ public enum UIModuleKind
 public enum ItemKind
 {
     #region WEAPONS
-    weaponEmpty,
-    weaponRocket,
-    weaponMultiblaster,
-    weaponDesintegrator,
-    weaponKinetic,
+    EmptyGun,
+    RocketGun,
+    MultiblasterGun,
+    DesintegratorGun,
+    KineticGun,
+
+    PulsarGun,
+    RezakGun, 
+
+    PulemetGun,
+    PhotonGun,
     #endregion
 
     #region ENGINES
@@ -35,20 +41,18 @@ public enum ItemKind
     #endregion
 
     #region DEVICES
-    deviceUnknown = 291,
-    deviceEmpty,
-    deviceTourbine,
+    //deviceUnknown,
+    EmptyDevice,
+    TourbineDevice,
     #endregion
 
-    #region RUDA
-
-    rudaGold = 491,
-    rudaFerrum,
-    rudaNickel,
-    rudaTitan,
-    rudaMineral,
-    rudaOrganic,
-    rudaOsmium,
+    #region ORE
+    GoldOre,
+    FerrumOre,
+    TitanOre,
+    MineralOre,
+    OrganicOre,
+    OsmiumOre,
 
     #endregion
 
@@ -57,39 +61,53 @@ public enum ItemKind
     #endregion
 
     #region AMMO
-    redLaserAmmo = 1001,
-    blueLaserAmmo = 1002,
-    yellowLaserAmmo = 1003,
-    GreenLaserAmmo = 1004
+    redLaserAmmo,
+    blueLaserAmmo,
+    yellowLaserAmmo,
+    GreenLaserAmmo,
     #endregion
 
 }
 public enum AmmoKind
 {
-    redLaserAmmo = 1001,
-    blueLaserAmmo = 1002,
-    yellowLaserAmmo = 1003,
-    GreenLaserAmmo = 1004,
-    Multiblaster,
-    Desintegrator,
+    //redLaserAmmo = 1001,
+    //blueLaserAmmo = 1002,
+    //yellowLaserAmmo = 1003,
+    //GreenLaserAmmo = 1004,
+    MultiblasterAmmo,
+    DesintegratorAmmo,
 }
 
 public enum ShipKind
 {
-    GreenIndus = 1,
+    //GreenIndus,
     GreenKorvet,
-    GreenIstrebitel,
-    GreenHeavyIstrebitel,
+    //GreenIstrebitel,
+    //GreenHeavyIstrebitel,
     GreenLinkor,
     GreenFrigate,
-
 }
 
 public enum SoundKind
 {
-    ShotKinetic1 = 10,
+    ChargeBattery,
+    Click1,
+    Click2,
+    Click3,
+    ClickError,
+    ClickMove,
+    Destroyed1,
+    Destroyed2,
+    Destroyed3,
+    RepairShip,
+    ShotBiochemisry,
+    ShotKinetic1,
     ShotKinetic2,
-    ShotEnergetic2
+    ShotEnergetic1,
+    ShotEnergetic2,
+    ShotRocket,
+
+    Tourbine,
 }
 
 public enum EntityType
@@ -101,7 +119,9 @@ public enum EntityType
 
 public enum AsteroidType
 {
-    GoldAsteroid = 1,
+    EmptyAsteroid,
+
+    GoldAsteroid,
     FerrumAsteroid,
     TitanAsteroid,
 
@@ -111,16 +131,19 @@ public enum AsteroidType
     OsmiumAsteroid,
 
     NickelAsteroid,
-    EmptyAsteroid,
+
 }
 
 public enum AsteroidFieldType
 {
+    EmptyField,
     GoldField,
     FerrumField,
-    NickelField,
     TitanField,
-    EmptyField
+    MineralField,
+    OrganicField,
+    OsmiumField,
+    NickelField,
 }
 
 
@@ -190,7 +213,7 @@ public enum IconType
     ItemShop,
     Asteroid,
     AsteroidField,
-    Skill,
+    Skills,
     Inventory,
     CloseWindow,
     ButtonOK,

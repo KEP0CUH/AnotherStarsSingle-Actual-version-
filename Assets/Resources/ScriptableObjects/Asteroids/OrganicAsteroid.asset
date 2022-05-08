@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30e891dc8567d947b906ada09aa0d6b, type: 3}
   m_Name: OrganicAsteroid
   m_EditorClassIdentifier: 
-  title: 
-  description: 
-  type: 0
-  icon: {fileID: 0}
-  dropKind: 0
+  title: OrganicAsteroid
+  description: Asteroid from organic
+  type: 5
+  icon: {fileID: 21300000, guid: acb9e4bd148702b45945db7ff241c57b, type: 3}
+  dropKind: 496

@@ -152,7 +152,7 @@ public class InfoPlanetWindow : MonoBehaviour
 
         if (controller.GetComponent<AsteroidFieldView>())
         {
-            Managers.Player.LandOnAsteroidField(controller.transform);
+            Managers.Player.LandOnAsteroidField(controller.transform,controller.GetComponent<AsteroidFieldView>().Quarter);
 
             var asteroidField = new GameObject("AsteroidFieldInside", typeof(RectTransform));
             asteroidField.GetComponent<RectTransform>().SetAsFirstSibling();

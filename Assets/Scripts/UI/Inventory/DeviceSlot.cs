@@ -23,7 +23,7 @@ public class DeviceSlot : ItemSlot
 
     protected override void DropItem()
     {
-        if(this.state.Data.ItemKind != ItemKind.deviceEmpty)
+        if(this.state.Data.ItemKind != ItemKind.EmptyDevice)
         {
             shipInventory.TryDropItemFromShip(this.state);
         }

@@ -28,7 +28,7 @@ public class ItemSlotShop : ItemSlot
 
     protected override void TryInteract()
     {
-        if (state.Data.ItemKind != ItemKind.deviceEmpty && state.Data.ItemKind != ItemKind.weaponEmpty)
+        if (state.Data.ItemKind != ItemKind.EmptyDevice && state.Data.ItemKind != ItemKind.EmptyGun)
         {
             Debug.Log("запрос на покупку / продажу итема");
             if(forBuy)

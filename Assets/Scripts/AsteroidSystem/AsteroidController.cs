@@ -15,28 +15,21 @@ public class AsteroidController : MonoBehaviour
     private GameObject infoWindow = null;
     private bool isClicked = false;
 
-    [SerializeField] private AsteroidType asteroidType;
     [SerializeField] private string name;
 
     public AsteroidState Asteroid => asteroid;
 
-    public enum AsteroidType
-    {
-        gold,
-        mineral,
-        empty
-    }
 
-    public void Init(Transform spawner,AsteroidState asteroidState)
+    public void Init(Transform spawner,AsteroidState asteroidState,Vector2 quarter)
     {
         this.originPoint = spawner.transform.position;
         this.spawner = spawner.gameObject;
         this.asteroid = asteroidState;
 
-        xMax += originPoint.x + 150;
-        xMin += originPoint.x + 150;
-        yMax += originPoint.y + 150;
-        yMin += originPoint.y + 150;
+        xMax += originPoint.x + 150 * quarter.x;
+        xMin += originPoint.x + 150 * quarter.x;
+        yMax += originPoint.y + 150 * quarter.y;
+        yMin += originPoint.y + 150 * quarter.y;
 
         this.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
 
@@ -51,22 +44,6 @@ public class AsteroidController : MonoBehaviour
             Destroy(infoWindow.gameObject);
             infoWindow = null;
             isClicked = false;
-        }
-    }
-
-    private void OnValidate()
-    {
-        switch (asteroidType)
-        {
-            case AsteroidType.gold:
-                name = "Золотой астероид";
-                break;
-            case AsteroidType.mineral:
-                name = "Минеральный астероид";
-                break;
-            case AsteroidType.empty:
-                name = "Пустой астероид";
-                break;
         }
     }
 

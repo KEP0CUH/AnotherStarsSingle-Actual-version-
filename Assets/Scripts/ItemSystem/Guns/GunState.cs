@@ -14,14 +14,14 @@ public class GunState : ItemState
     {
         switch (kind)
         {
-            case ItemKind.weaponMultiblaster:
-                ammoKind = AmmoKind.Multiblaster;
+            case ItemKind.MultiblasterGun:
+                ammoKind = AmmoKind.MultiblasterAmmo;
                 break;
-            case ItemKind.weaponDesintegrator:
-                ammoKind = AmmoKind.Desintegrator;
+            case ItemKind.DesintegratorGun:
+                ammoKind = AmmoKind.DesintegratorAmmo;
                 break;
-            case ItemKind.weaponEmpty:
-                ammoKind = AmmoKind.Multiblaster;
+            case ItemKind.EmptyGun:
+                ammoKind = AmmoKind.MultiblasterAmmo;
                 break;
         }
 
@@ -32,14 +32,14 @@ public class GunState : ItemState
     {
         switch (state.Data.ItemKind)
         {
-            case ItemKind.weaponMultiblaster:
-                ammoKind = AmmoKind.Multiblaster;
+            case ItemKind.MultiblasterGun:
+                ammoKind = AmmoKind.MultiblasterAmmo;
                 break;
-            case ItemKind.weaponDesintegrator:
-                ammoKind = AmmoKind.Desintegrator;
+            case ItemKind.DesintegratorGun:
+                ammoKind = AmmoKind.DesintegratorAmmo;
                 break;
-            case ItemKind.weaponEmpty:
-                ammoKind = AmmoKind.Multiblaster;
+            case ItemKind.EmptyGun:
+                ammoKind = AmmoKind.MultiblasterAmmo;
                 break;
         }
 

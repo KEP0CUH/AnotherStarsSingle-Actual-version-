@@ -15,15 +15,21 @@ public class AsteroidFieldView : MonoBehaviour
     private int maxNumAsteroids;
     private int currentNumAsteroids;
 
+    [SerializeField] private Vector2 quarter;
+
     private GameObject infoWindow;
     private bool isClicked;
 
-    public void Init(Transform locationCoord, AsteroidFieldType type)
+
+    public Vector2 Quarter => quarter;
+    public void Init(Transform locationCoord, AsteroidFieldType type,Vector2 quarter)
     {
         this.asteroids = new List<GameObject>();
         this.asteroidsDic = new Dictionary<int, AsteroidState>();
         this.maxNumAsteroids = 50;
         this.currentNumAsteroids = 0;
+
+        this.quarter = quarter;
 
         this.state = gameObject.GetComponent<AsteroidFieldState>();
         this.state.Init(type);
@@ -49,7 +55,7 @@ public class AsteroidFieldView : MonoBehaviour
         newAsteroid.transform.SetParent(this.gameObject.transform, false);
         var asteroidState = newAsteroid.GetComponent<AsteroidState>();
         asteroidState.Init(data);
-        newAsteroid.AddComponent<AsteroidController>().Init(this.transform, asteroidState);
+        newAsteroid.AddComponent<AsteroidController>().Init(this.transform, asteroidState,quarter);
 
         this.asteroidsDic.Add(asteroidState.Id, asteroidState);
     }

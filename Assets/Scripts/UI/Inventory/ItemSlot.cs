@@ -83,7 +83,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
     protected virtual void TryInteract()
     {
-        if (state.Data.ItemKind != ItemKind.deviceEmpty && state.Data.ItemKind != ItemKind.weaponEmpty)
+        if (state.Data.ItemKind != ItemKind.EmptyDevice && state.Data.ItemKind != ItemKind.EmptyGun)
         {
             Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
         }

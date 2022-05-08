@@ -35,25 +35,18 @@ public class PlanetController : MonoBehaviour
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.SetParent(controller.transform, true);
         this.gameObject.transform.localPosition = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
-        this.gameObject.transform.RotateAround(controller.transform.position, controller.transform.forward, Random.Range(0,360));
-
+     
+        SetRandomPositionAroundSun();
     }
 
     private void FixedUpdate()
     {
-        transform.RotateAround(controller.transform.position, controller.transform.forward, 4.0f * Time.fixedDeltaTime);
+        SaveRotationAboutSun();
     }
 
     private void OnMouseEnter()
     {
-        var data = this.gameObject.GetComponent<PlanetState>();
-        Debug.Log($"Это объект: {data.Data.Title}");
-
-        if (infoWindow == null)
-        {
-            infoWindow = new GameObject("InfoWindow");
-            infoWindow.AddComponent<InfoPlanetWindow>().Init(this.gameObject.GetComponent<PlanetController>());
-        }
+        TryCreateInfoWindow();
     }
 
     private void OnMouseDown()
@@ -76,6 +69,24 @@ public class PlanetController : MonoBehaviour
             Destroy(infoWindow.gameObject);
             infoWindow = null;
             isClicked = false;
+        }
+    }
+
+    private void SetRandomPositionAroundSun()
+    {
+        this.gameObject.transform.RotateAround(controller.transform.position, controller.transform.forward, Random.Range(0, 360));
+    }
+    private void SaveRotationAboutSun()
+    {
+        transform.RotateAround(controller.transform.position, controller.transform.forward, 4.0f * Time.fixedDeltaTime);
+    }
+
+    private void TryCreateInfoWindow()
+    {
+        if (infoWindow == null)
+        {
+            infoWindow = new GameObject("InfoWindow");
+            infoWindow.AddComponent<InfoPlanetWindow>().Init(this.gameObject.GetComponent<PlanetController>());
         }
     }
 }

@@ -16,7 +16,7 @@ public class PlayerInventory : IPlayerInventory
     #region днаюбхрэ б хмбемрюпэ опедлер
     public void AddItem(ItemState state)
     {
-        if (state.Data.ItemKind == ItemKind.deviceEmpty || state.Data.ItemKind == ItemKind.weaponEmpty)
+        if (state.Data.ItemKind == ItemKind.EmptyDevice || state.Data.ItemKind == ItemKind.EmptyGun)
             return;
 
         if (itemsDic.ContainsKey(state.Id))

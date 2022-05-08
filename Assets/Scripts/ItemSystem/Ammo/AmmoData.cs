@@ -22,12 +22,12 @@ public class AmmoData : ScriptableObject
         switch (kind)
         {
 
-            case AmmoKind.Multiblaster:
+            case AmmoKind.MultiblasterAmmo:
                 title = "bulletMultiblaster";
                 icon = Resources.Load<Sprite>(pathAmmo + "AmmoMultiblaster");
                 clip = Resources.Load<AudioClip>(pathSounds + "ShotKinetic2");
                 break;
-            case AmmoKind.Desintegrator:
+            case AmmoKind.DesintegratorAmmo:
                 title = "bulletDesintegrator";
                 icon = Resources.Load<Sprite>(pathAmmo + "AmmoDesintegrator");
                 clip = Resources.Load <AudioClip>(pathSounds + "ShotEnergetic2");  

@@ -116,7 +116,7 @@ public class ShipInventory : IShipInventory
     {
         for (int i = 0; i < maxNumGuns; i++)
         {
-            if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+            if (guns[i].Data.ItemKind == ItemKind.EmptyGun)
             {
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
@@ -134,7 +134,7 @@ public class ShipInventory : IShipInventory
     {
         for (int i = 0; i < maxNumGuns; i++)
         {
-            if (guns[i].Data.ItemKind == ItemKind.weaponEmpty)
+            if (guns[i].Data.ItemKind == ItemKind.EmptyGun)
             {
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
@@ -191,7 +191,7 @@ public class ShipInventory : IShipInventory
     {
         for(int i = 0; i < maxNumDevices; i++)
         {
-            if(devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+            if(devices[i].Data.ItemKind == ItemKind.EmptyDevice)
             {
                 Object.Destroy(devices[i]);
                 devices[i] = CreateDeviceStateObject(state);
@@ -208,7 +208,7 @@ public class ShipInventory : IShipInventory
     {
         for (int i = 0; i < maxNumDevices; i++)
         {
-            if (devices[i].Data.ItemKind == ItemKind.deviceEmpty)
+            if (devices[i].Data.ItemKind == ItemKind.EmptyDevice)
             {
                 Object.Destroy(devices[i]);
                 devices[i] = CreateDeviceStateObject(state);
@@ -280,14 +280,14 @@ public class ShipInventory : IShipInventory
     {
         for (int i = 0; i < guns.Count; i++)
         {
-            if(guns[i].Data.ItemKind != ItemKind.weaponEmpty)
+            if(guns[i].Data.ItemKind != ItemKind.EmptyGun)
             {
                 TryUnsetGun(guns[i]);
             }
         }
         for(int i = 0; i < devices.Count;i++)
         {
-            if(devices[i].Data.ItemKind != ItemKind.deviceEmpty)
+            if(devices[i].Data.ItemKind != ItemKind.EmptyDevice)
             {
                 TryUnsetDevice(devices[i]);
             }
@@ -399,12 +399,12 @@ public class ShipInventory : IShipInventory
 
     private GunState CreateEmptyGunState()
     {
-        return CreateGunStateObject(ItemKind.weaponEmpty);
+        return CreateGunStateObject(ItemKind.EmptyGun);
     }
 
     private DeviceState CreateEmptyDeviceState()
     {
-        return CreateDeviceStateObject(ItemKind.deviceEmpty);
+        return CreateDeviceStateObject(ItemKind.EmptyDevice);
     }
     #endregion
 

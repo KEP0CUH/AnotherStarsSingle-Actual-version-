@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<IconType, Sprite> icons;
     private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
     private Dictionary<SunType, Sprite> sunIcons;
-
 
     public Dictionary<ItemKind, ItemData> Items => items;
     public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
@@ -154,87 +154,130 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     }
     private void LoadAllResources()
     {
-        string basePath = $"ScriptableObjects/";
-        string oresPath = $"Items/Ores/";
-        string ammoPath = $"Items/Ammo/";
-        string gunsPath = $"Items/Guns/";
-        string devicesPath = $"Items/Devices/";
-        string shipsPath = "Ships/";
-        string asteroidsPath = $"Asteroids/";
-        string locationsPath = $"Locations/";
-        string planetsPath = $"Planets/";
-        string iconsPath = $"Icons/Interactive/";
-        string soundsPath = $"Sounds/";
-        string asteroidFieldsPath = $"AsteroidFields/";
-        string sunIconsPath = $"Icons/Suns/";
+        string oresPath                         = $"ScriptableObjects/Items/Ores/";
+        string gunsPath                         = $"ScriptableObjects/Items/Guns/";
+        string devicesPath                      = $"ScriptableObjects/Items/Devices/";
+        string ammoPath                         = $"ScriptableObjects/Items/Ammo/";
+
+        string shipsPath                        = $"ScriptableObjects/Ships/";
+        string asteroidsPath                    = $"ScriptableObjects/Asteroids/";
+        string asteroidFieldsPath               = $"ScriptableObjects/AsteroidFields/";
+
+        string locationsPath                    = $"ScriptableObjects/Locations/";
+        string planetsPath                      = $"ScriptableObjects/Planets/";
+        string iconsPath                        = $"Icons/Interactive/";
+        string soundsPath                       = $"Sounds/";
+
+        string sunIconsPath                     = $"Icons/Suns/";
 
         
-        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + oresPath                     + $"FerrumOre"));
-        items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + oresPath                       + $"GoldOre"));
-        items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + oresPath                     + $"NickelOre"));
-        items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>(basePath + oresPath                      + $"TitanOre"));
-        items.Add(ItemKind.rudaMineral, Resources.Load<ItemData>(basePath + oresPath                    + $"MineralOre"));
-        items.Add(ItemKind.rudaOrganic, Resources.Load<ItemData>(basePath + oresPath                    + $"OrganicOre"));
-        items.Add(ItemKind.rudaOsmium, Resources.Load<ItemData>(basePath + oresPath                     + $"OsmiumOre"));
+        foreach(ItemKind itemKind in Enum.GetValues(typeof(ItemKind)))
+        {
+            var itemData = Resources.Load<ItemData>(oresPath + itemKind);
+            if (itemData != null)
+            {
+                items.Add(itemKind, itemData);
+                continue;
+            }
 
-        items.Add(ItemKind.weaponEmpty, Resources.Load<ItemData>(basePath + gunsPath                          + "EmptyGun"));
-        items.Add(ItemKind.weaponDesintegrator, Resources.Load<ItemData>(basePath + gunsPath                + "Desintegrator"));
-        items.Add(ItemKind.weaponMultiblaster, Resources.Load<ItemData>(basePath + gunsPath                 + "Multiblaster"));
-        items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                           + "Desintegrator"));
+            itemData = Resources.Load<ItemData>(gunsPath + itemKind);
+            if (itemData != null)
+            {
+                items.Add(itemKind, itemData);
+                continue;
+            }
 
-        items.Add(ItemKind.deviceEmpty, Resources.Load<ItemData>(basePath + devicesPath                     + "EmptyDevice"));
-        items.Add(ItemKind.deviceTourbine, Resources.Load<ItemData>(basePath + devicesPath                  + "Tourbine"));
+            itemData = Resources.Load<ItemData>(devicesPath + itemKind);
+            if (itemData != null)
+            {
+                items.Add(itemKind, itemData);
+                continue;
+            }
 
-        items.Add(ItemKind.blueLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                      + "BlueLaser"));
-        items.Add(ItemKind.redLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                       + "RedLaser"));
+            itemData = Resources.Load<ItemData>(ammoPath + itemKind);
+            if (itemData != null)
+            {
+                items.Add(itemKind, itemData);
+                continue;
+            }
+        }
 
-        asteroids.Add(AsteroidType.GoldAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath      + "GoldAsteroid"));
-        asteroids.Add(AsteroidType.FerrumAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "FerrumAsteroid"));
-        asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
-        asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<AsteroidData>($""));
+        foreach(AmmoKind ammoKind in Enum.GetValues(typeof(AmmoKind)))
+        {
+            ammo.Add(ammoKind, Resources.Load<AmmoData>(ammoPath + ammoKind));
+        }
 
-        ammo.Add(AmmoKind.Multiblaster, Resources.Load<AmmoData>(basePath + ammoPath                            + "Multiblaster"));
+        //ammo.Add(AmmoKind.MultiblasterAmmo, Resources.Load<AmmoData>(basePath + ammoPath + "Multiblaster"));
 
-        sounds.Add(SoundKind.ShotKinetic1, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic1"));
-        sounds.Add(SoundKind.ShotKinetic2, Resources.Load<AudioClip>(soundsPath                                 + "ShotKinetic2"));
-        sounds.Add(SoundKind.ShotEnergetic2, Resources.Load<AudioClip>(soundsPath                               + "ShotEnergetic2"));
+        /*        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + oresPath                     + $"FerrumOre"));
+                items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + oresPath                       + $"GoldOre"));
+                items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + oresPath                     + $"NickelOre"));
+                items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>(basePath + oresPath                      + $"TitanOre"));
+                items.Add(ItemKind.rudaMineral, Resources.Load<ItemData>(basePath + oresPath                    + $"MineralOre"));
+                items.Add(ItemKind.rudaOrganic, Resources.Load<ItemData>(basePath + oresPath                    + $"OrganicOre"));
+                items.Add(ItemKind.rudaOsmium, Resources.Load<ItemData>(basePath + oresPath                     + $"OsmiumOre"));
 
-        ships.Add(ShipKind.GreenLinkor, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenLinkor"));
-        ships.Add(ShipKind.GreenFrigate, Resources.Load <ShipData>(basePath + shipsPath                         + "GreenFrigate"));
-        ships.Add(ShipKind.GreenKorvet, Resources.Load<ShipData>(basePath + shipsPath                           + "GreenKorvet"));
+                items.Add(ItemKind.weaponEmpty, Resources.Load<ItemData>(basePath + gunsPath                          + "EmptyGun"));
+                items.Add(ItemKind.DesintegratorGun, Resources.Load<ItemData>(basePath + gunsPath                + "Desintegrator"));
+                items.Add(ItemKind.MultiblasterGun, Resources.Load<ItemData>(basePath + gunsPath                 + "Multiblaster"));
+                items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                           + "Desintegrator"));
+
+                items.Add(ItemKind.deviceEmpty, Resources.Load<ItemData>(basePath + devicesPath                     + "EmptyDevice"));
+                items.Add(ItemKind.deviceTourbine, Resources.Load<ItemData>(basePath + devicesPath                  + "Tourbine"));
+
+                items.Add(ItemKind.blueLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                      + "BlueLaser"));
+                items.Add(ItemKind.redLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                       + "RedLaser"));
+
+               */
+
+        /*        asteroids.Add(AsteroidType.GoldAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath      + "GoldAsteroid"));
+                asteroids.Add(AsteroidType.FerrumAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "FerrumAsteroid"));
+                asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
+                asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<AsteroidData>($""));*/
+
+        foreach (var asteroidType in Enum.GetValues(typeof(AsteroidType)))
+        {
+            asteroids.Add((AsteroidType)asteroidType, Resources.Load<AsteroidData>(asteroidsPath + asteroidType));
+        }
+
+     
+        foreach (var soundKind in Enum.GetValues(typeof(SoundKind)))
+        {
+            sounds.Add((SoundKind)soundKind, Resources.Load<AudioClip>(soundsPath + soundKind));
+        }
+
+        foreach(var shipKind in Enum.GetValues(typeof(ShipKind)))
+        {
+            ships.Add((ShipKind)shipKind, Resources.Load<ShipData>(shipsPath + shipKind));
+        }
 
 /*        guns.Add(GunKind.weaponMultiblaster, Resources.Load<GunData>(basePath + gunsPath                        + "Multiblaster"));
         guns.Add(GunKind.weaponDesintegrator, Resources.Load<GunData>(basePath + gunsPath                       + "Desintegrator"));
         guns.Add(GunKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                             + "Desintegrator"));*/
         
+        foreach(var locationKind in Enum.GetValues(typeof(Location)))
+        {
+            locations.Add((Location)locationKind, Resources.Load<LocationData>(locationsPath + locationKind));
+        }
 
-        locations.Add(Location.Krinul, Resources.Load<LocationData>(basePath + locationsPath                    + "Krinul"));
+        foreach(var planetKind in Enum.GetValues(typeof(Planet)))
+        {
+            planets.Add((Planet)planetKind, Resources.Load<PlanetData>(planetsPath + planetKind));
+        }
 
-        planets.Add(Planet.Arcea, Resources.Load<PlanetData>(basePath + planetsPath                             + Planet.Arcea));
-        planets.Add(Planet.Earth, Resources.Load<PlanetData>(basePath + planetsPath                             + Planet.Earth));
-        planets.Add(Planet.Mars, Resources.Load<PlanetData>(basePath + planetsPath                              + Planet.Mars));
+        foreach(var sunIcon in Enum.GetValues(typeof(SunType)))
+        {
+            sunIcons.Add((SunType)sunIcon, Resources.Load<Sprite>(sunIconsPath + sunIcon));
+        }
 
-        sunIcons.Add(SunType.YellowSun, Resources.Load<Sprite>(sunIconsPath                                     + SunType.YellowSun));
-        sunIcons.Add(SunType.GreenSun, Resources.Load<Sprite>(sunIconsPath                                      + SunType.GreenSun));
-        sunIcons.Add(SunType.OrangeSun, Resources.Load<Sprite>(sunIconsPath                                     + SunType.OrangeSun));
-        sunIcons.Add(SunType.BlueSun, Resources.Load<Sprite>(sunIconsPath                                       + SunType.BlueSun));
-        sunIcons.Add(SunType.WhiteSun, Resources.Load<Sprite>(sunIconsPath                                      + SunType.WhiteSun));
+        foreach(var icon in Enum.GetValues(typeof(IconType)))
+        {
+            icons.Add((IconType)icon, Resources.Load<Sprite>(iconsPath + icon));
+        }
 
-        icons.Add(IconType.Land, Resources.Load<Sprite>(iconsPath                                               + "Land"));
-        icons.Add(IconType.Rise, Resources.Load<Sprite>(iconsPath                                               + "Rise"));
-        icons.Add(IconType.ShipShop,Resources.Load<Sprite>(iconsPath                                            + "ShipShop"));
-        icons.Add(IconType.ItemShop, Resources.Load<Sprite>(iconsPath                                           + "ItemShop"));
-        icons.Add(IconType.Asteroid, Resources.Load<Sprite>(iconsPath                                           + "Asteroid"));
-        icons.Add(IconType.AsteroidField, Resources.Load<Sprite>(iconsPath                                      + "AsteroidField"));
-        icons.Add(IconType.Skill, Resources.Load<Sprite>(iconsPath                                              + "Skills"));
-        icons.Add(IconType.Inventory, Resources.Load<Sprite>(iconsPath                                          + "Inventory"));
-        icons.Add(IconType.CloseWindow, Resources.Load<Sprite>(iconsPath                                        + "CloseWindow"));
-        icons.Add(IconType.ButtonOK, Resources.Load<Sprite>(iconsPath                                           + "ButtonOK"));
-        icons.Add(IconType.ButtonOpenMap, Resources.Load<Sprite>(iconsPath                                      + "ButtonOpenMap"));
-        icons.Add(IconType.ButtonSettings, Resources.Load<Sprite>(iconsPath                                     + "ButtonSettings"));
-
-
-        asteroidFields.Add(AsteroidFieldType.GoldField,Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath          + "GoldField"));
-        asteroidFields.Add(AsteroidFieldType.FerrumField, Resources.Load<AsteroidFieldData>(basePath + asteroidFieldsPath       + "FerrumField"));
+        foreach(var asteroidField in Enum.GetValues(typeof(AsteroidFieldType)))
+        {
+            asteroidFields.Add((AsteroidFieldType)asteroidField, Resources.Load<AsteroidFieldData>(asteroidFieldsPath + asteroidField));
+        }
     }
 }

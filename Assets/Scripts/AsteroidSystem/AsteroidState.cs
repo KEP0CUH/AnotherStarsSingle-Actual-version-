@@ -18,7 +18,7 @@ public class AsteroidState : MonoBehaviour
 
     public int Id => id;
 
-    float radiusMax = 3;
+    float radiusMax = 2;
     float radiusMin = 0.1f;
 
     private void Update()
@@ -29,7 +29,7 @@ public class AsteroidState : MonoBehaviour
             var radius = Random.Range(radiusMin, radiusMax);
 
             var gameObj = new GameObject("New", typeof(ItemState), typeof(SpriteRenderer));
-            gameObj.GetComponent<ItemState>().Init(ItemKind.rudaGold, 1);
+            gameObj.GetComponent<ItemState>().Init(ItemKind.GoldOre, 1);
             gameObj.GetComponent<SpriteRenderer>().sprite = gameObj.GetComponent<ItemState>().Data.Icon;
             gameObj.transform.position = new Vector3(transform.position.x + radius * Mathf.Sin(angle),
                                                      transform.position.y + radius * Mathf.Cos(angle),
@@ -65,7 +65,7 @@ public class AsteroidState : MonoBehaviour
             CreateDrop();
 
 
-            GameObject dropTest = new GameObject("Item: " + ItemKind.weaponMultiblaster.ToString());
+/*            GameObject dropTest = new GameObject("Item: " + ItemKind.weaponMultiblaster.ToString());
             dropTest.transform.position = this.gameObject.transform.position;
 
             var dataTest = Managers.Resources.DownloadData(ItemKind.weaponMultiblaster);
@@ -79,7 +79,7 @@ public class AsteroidState : MonoBehaviour
 
             var dataTest2 = Managers.Resources.DownloadData(ItemKind.deviceTourbine);
 
-            dropTest2.AddComponent<DeviceViewGame>().Init(dataTest2.ItemKind, 1);
+            dropTest2.AddComponent<DeviceViewGame>().Init(dataTest2.ItemKind, 1);*/
         }
     }
 

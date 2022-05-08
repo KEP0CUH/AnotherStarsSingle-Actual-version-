@@ -7,7 +7,7 @@ public class LocationState : MonoBehaviour
 {
     [SerializeField] private LocationData data;
     [SerializeField] private List<Planet> planets;
-    [SerializeField] private AsteroidFieldType asteroidFieldType;
+    [SerializeField] private List<AsteroidFieldType> asteroidFieldsTypes = new List<AsteroidFieldType>();
     [SerializeField] private SunType sunType;
 
     private LocationController controller;
@@ -19,7 +19,6 @@ public class LocationState : MonoBehaviour
     {
         this.controller = controller;
         this.data = Managers.Resources.DownloadData(location);
-
         SpawnPlanets();
         SpawnAsteroidFieldIfHave();
 
@@ -33,20 +32,32 @@ public class LocationState : MonoBehaviour
         for (int i = 0; i < planets.Count; i++)
         {
             var planet = new GameObject($"Planet{planets[i]}");
-            planet.AddComponent<PlanetController>().    Init(controller, planets[i], i * 3);
+            planet.AddComponent<PlanetController>().Init(controller, planets[i], i * 3);
         }
     }
 
     private void SpawnAsteroidFieldIfHave()
     {
-        if (asteroidFieldType == AsteroidFieldType.EmptyField)
+        for(int i = 0; i < asteroidFieldsTypes.Count; i++)
         {
+            var type = asteroidFieldsTypes[i];
+            if (asteroidFieldsTypes[i] == AsteroidFieldType.EmptyField) continue;
 
-        }
-        else
-        {
-            var asteroidField = new GameObject($"{asteroidFieldType}");
-            asteroidField.AddComponent<AsteroidFieldController>().Init(controller, asteroidFieldType, 3);
+            var quarter = new Vector2();
+            switch(i)
+            {
+                case 0: quarter = Vector2.one;
+                    break;
+                case 1: quarter = Vector2.left + Vector2.up;
+                    break;
+                case 2: quarter = Vector2.one * (-1);
+                    break;
+                case 3: quarter = Vector2.right + Vector2.down;
+                    break;
+            }
+
+            var newAsteroidField = new GameObject($"{asteroidFieldsTypes}");
+            newAsteroidField.AddComponent<AsteroidFieldController>().Init(controller, type, 3,quarter);
         }
     }
 }

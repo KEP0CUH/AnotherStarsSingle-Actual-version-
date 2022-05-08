@@ -15,7 +15,7 @@ public class CircleGeneration : MonoBehaviour
             var radius = Random.Range(radiusMin, radiusMax);
 
             var gameObj = new GameObject("New", typeof(ItemState), typeof(SpriteRenderer));
-            gameObj.GetComponent<ItemState>().Init(ItemKind.rudaGold, 1);
+            gameObj.GetComponent<ItemState>().Init(ItemKind.GoldOre, 1);
             gameObj.GetComponent<SpriteRenderer>().sprite = gameObj.GetComponent<ItemState>().Data.Icon;
             gameObj.transform.position = new Vector3(transform.position.x + radius * Mathf.Sin(angle),
                                                      transform.position.y + radius * Mathf.Cos(angle),

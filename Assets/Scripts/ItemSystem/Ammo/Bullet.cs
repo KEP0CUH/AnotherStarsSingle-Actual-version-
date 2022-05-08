@@ -31,13 +31,13 @@ public class Bullet : MonoBehaviour
 
         switch (gun.Data.ItemKind)
         {
-            case ItemKind.weaponMultiblaster:
+            case ItemKind.MultiblasterGun:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
                 break;
-            case ItemKind.weaponDesintegrator:
+            case ItemKind.DesintegratorGun:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotEnergetic2);
                 break;
-            case ItemKind.weaponEmpty:
+            case ItemKind.EmptyGun:
                 audio.clip = Managers.Resources.DownloadData(SoundKind.ShotKinetic2);
                 break;
         }

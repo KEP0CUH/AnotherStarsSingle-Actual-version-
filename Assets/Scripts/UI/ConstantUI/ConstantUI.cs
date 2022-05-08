@@ -88,7 +88,7 @@ public class ConstantUI : MonoBehaviour
         var rect = skillButton.GetComponent<RectTransform>();
         rect.SetParent(parentRect);
 
-        var image = skillButton.GetComponent<Image>().sprite = Managers.Resources.DownloadData(IconType.Skill);
+        var image = skillButton.GetComponent<Image>().sprite = Managers.Resources.DownloadData(IconType.Skills);
 
         var button = skillButton.GetComponent<Button>();
         //button.image = Managers.Resources.DownloadData(IconType.Skill);

@@ -20,7 +20,7 @@ public class GunSlot : ItemSlot
 
     protected override void DropItem()
     {
-        if(this.state.Data.ItemKind != ItemKind.weaponEmpty)
+        if(this.state.Data.ItemKind != ItemKind.EmptyGun)
         {
             shipInventory.TryDropItemFromShip(this.state);
         }

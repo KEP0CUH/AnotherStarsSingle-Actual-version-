@@ -11,17 +11,17 @@ public class AsteroidFieldController : MonoBehaviour
 
     public AsteroidFieldView view;
 
-    public void Init(LocationController controller,AsteroidFieldType type,int offset)
+    public void Init(LocationController controller,AsteroidFieldType type,int offset,Vector2 quarter)
     {
         this.locationController = controller;
 
         this.view = gameObject.GetComponent<AsteroidFieldView>();
-        this.view.Init(this.transform, type);
+        this.view.Init(this.transform, type,quarter);
 
         
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.parent = locationController.gameObject.transform;
-        this.gameObject.transform.position = new Vector3(offset, offset, 0) + new Vector3(locationController.transform.position.x, locationController.transform.position.y, 0);
+        this.gameObject.transform.position = new Vector3(offset * quarter.x, offset * quarter.y, 0) + new Vector3(locationController.transform.position.x, locationController.transform.position.y, 0);
     }
 
     private void Start()

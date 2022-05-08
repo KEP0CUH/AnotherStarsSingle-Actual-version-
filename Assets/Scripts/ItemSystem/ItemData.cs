@@ -42,49 +42,45 @@ public class ItemData : ScriptableObject
         string deviceSpritesPath = "Icons/Items/Devices/";
         string ammoSpritesPath = "Icons/Items/Ammo/";
 
+        name = kind.ToString();
+        icon = Resources.Load<Sprite>(gunSpritesPath + kind);
+
         switch (kind)
         {
 
 
             #region Ruda
-
-            case ItemKind.rudaFerrum:
+            case ItemKind.FerrumOre:
                 name = "FerrumOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Железо";
                 description = "Металл с высокой химической реакционной способностью. Широко распространен во Вселенной \"Иные звёзды\"";
                 break;
-            case ItemKind.rudaGold:
+            case ItemKind.GoldOre:
                 name = "GoldOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Золото";
                 description = "Золото – это ценный металл, известный человечеству с древних времён.Полезное ископаемое имеет характерный жёлтый цвет.";
                 break;
-            case ItemKind.rudaNickel:
-                name = "NickelOre";
-                icon = Resources.Load<Sprite>(oreSpritesPath + name);
-                title = "Никель";
-                description = "";
-                break;
-            case ItemKind.rudaTitan:
+            case ItemKind.TitanOre:
                 name = "TitanOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Титан";
                 description = "";
                 break;
-            case ItemKind.rudaMineral:
+            case ItemKind.MineralOre:
                 name = "MineralOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Минерал";
                 description = "";
                 break;
-            case ItemKind.rudaOrganic:
+            case ItemKind.OrganicOre:
                 name = "OrganicOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Органические материалы";
                 description = "";
                 break;
-            case ItemKind.rudaOsmium:
+            case ItemKind.OsmiumOre:
                 name = "OsmiumOre";
                 icon = Resources.Load<Sprite>(oreSpritesPath + name);
                 title = "Осмиевая руда";
@@ -93,41 +89,48 @@ public class ItemData : ScriptableObject
             #endregion
 
             #region Guns
-            case ItemKind.weaponEmpty:
+            case ItemKind.EmptyGun:
                 name = "EmptyGun";
                 icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
                 title = "Заглушка";
                 description = "";
                 break;
-            case ItemKind.weaponMultiblaster:
+            case ItemKind.MultiblasterGun:
                 name = "Multiblaster";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Мультибластер";
                 description = "";
                 break;
-            case ItemKind.weaponDesintegrator:
+            case ItemKind.DesintegratorGun:
                 name = "Desintegrator";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Дезинтегратор";
                 description = "";
                 break;
-            case ItemKind.weaponKinetic:
+            case ItemKind.KineticGun:
                 name = "Desintegrator";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Кинетик";
                 description = "";
                 break;
+            case ItemKind.PulsarGun:
+                name = kind.ToString();
+                icon = Resources.Load<Sprite>(gunSpritesPath + kind);
+                title = kind.ToString();
+                description = "";
+                break;
+            
 
             #endregion
 
             #region Devices
-            case ItemKind.deviceEmpty:
+            case ItemKind.EmptyDevice:
                 name = "EmptyDevice";
                 icon = Resources.Load<Sprite>("Icons/Items/EmptySlot");
                 title = "Заглушка";
                 description = "";
                 break;
-            case ItemKind.deviceTourbine:
+            case ItemKind.TourbineDevice:
                 name = "Tourbine";
                 icon = Resources.Load<Sprite>(deviceSpritesPath + name);
                 title = "Турбина";

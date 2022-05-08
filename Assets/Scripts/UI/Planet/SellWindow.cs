@@ -18,6 +18,18 @@ public class SellWindow : MonoBehaviour
         CreateIconItem();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            ConfirmSelling();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            CancelSelling();
+        }
+    }
+
     private void CreateIconItem()
     {
         var itemInfo = new GameObject("ItemIcon", typeof(RectTransform), typeof(Image));

@@ -33,16 +33,16 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void Land(Transform transform)
     {
         this.landPlace = transform;
-        controller.gameObject.transform.position = new Vector3(transform.position.x + 150, transform.position.y + 150, 0);
+        controller.gameObject.transform.position = new Vector3(transform.position.x + 450, transform.position.y + 450, 0);
         controller.UpdateCameraPosition();
         isLanded = true;
         CanvasUI.Radar.Disable();
     }
 
-    public void LandOnAsteroidField(Transform transform)
+    public void LandOnAsteroidField(Transform transform,Vector2 quarter)
     {
         this.landPlace = transform;
-        controller.gameObject.transform.position = new Vector3(transform.position.x + 150, transform.position.y + 150, 0);
+        controller.gameObject.transform.position = new Vector3(transform.position.x + 150 * quarter.x, transform.position.y + 150 * quarter.y, 0);
         controller.UpdateCameraPosition();
         //isLanded = true;
     }
