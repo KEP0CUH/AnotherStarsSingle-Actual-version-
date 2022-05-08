@@ -16,6 +16,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<IconType, Sprite> icons;
     private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
     private Dictionary<SunType, Sprite> sunIcons;
+    private Dictionary<MobKind, MobData> mobs;
 
     public Dictionary<ItemKind, ItemData> Items => items;
     public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
@@ -36,6 +37,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         icons = new Dictionary<IconType, Sprite>();
         asteroidFields = new Dictionary<AsteroidFieldType,AsteroidFieldData>();
         sunIcons = new Dictionary<SunType, Sprite>();
+        mobs = new Dictionary<MobKind, MobData>();
 
         LoadAllResources();
 
@@ -48,6 +50,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if(items.ContainsKey(kind))
         {
             return items[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public MobData DownloadData(MobKind kind)
+    {
+        if(mobs.ContainsKey(kind))
+        {
+            return mobs[kind];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -160,8 +172,11 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string ammoPath                         = $"ScriptableObjects/Items/Ammo/";
 
         string shipsPath                        = $"ScriptableObjects/Ships/";
+
         string asteroidsPath                    = $"ScriptableObjects/Asteroids/";
         string asteroidFieldsPath               = $"ScriptableObjects/AsteroidFields/";
+
+        string mobsPath                         = $"ScriptableObject/Mobs";
 
         string locationsPath                    = $"ScriptableObjects/Locations/";
         string planetsPath                      = $"ScriptableObjects/Planets/";
@@ -200,6 +215,11 @@ public class ResourceLoader : MonoBehaviour, IGameManager
                 items.Add(itemKind, itemData);
                 continue;
             }
+        }
+
+        foreach(MobKind mobKind in Enum.GetValues(typeof(MobKind)))
+        {
+            mobs.Add(mobKind,Resources.Load<MobData>(mobsPath + mobKind));
         }
 
         foreach(AmmoKind ammoKind in Enum.GetValues(typeof(AmmoKind)))

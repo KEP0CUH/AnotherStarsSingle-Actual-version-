@@ -114,7 +114,11 @@ public enum EntityType
 {
     Player,
     Enemy,
- 
+}
+
+public enum MobKind
+{
+    PirateIndus1,
 }
 
 public enum AsteroidType
