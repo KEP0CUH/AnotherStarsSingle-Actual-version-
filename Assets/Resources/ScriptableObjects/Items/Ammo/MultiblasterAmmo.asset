@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MultiblasterAmmo
   m_EditorClassIdentifier: 
   title: bulletMultiblaster
-  icon: {fileID: 21300000, guid: 3f29f025adfbdd84f9d54d6ada453de2, type: 3}
+  icon: {fileID: 21300000, guid: 7b93d1dc89176d1438eecc331066c56c, type: 3}
   clip: {fileID: 8300000, guid: 2154bb280ce40d542aa174e5ae62183d, type: 3}
-  kind: 1005
+  kind: 0

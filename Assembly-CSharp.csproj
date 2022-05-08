@@ -57,10 +57,12 @@
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGameManager.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IShipInventory.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidData.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\MobSpawner\MobSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\PlanetWindow.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Assets\Scripts\UI\Planet\InfoPlanetWindow.cs" />
     <Compile Include="Assets\Scripts\UI\GlobalMap\GlobalMapUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindow.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Enums.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ShipShop\ShipShop.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationData.cs" />
@@ -119,14 +123,10 @@
     <Compile Include="Assets\Scripts\Managers\ResourceLoader.cs" />
     <Compile Include="Assets\Scripts\UI\AsteroidField\AsteroidFieldWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobView.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\MobSystem\MobData.cs" />
-    <Compile Include="Assets\Scripts\MobSystem\MobState.cs" />
-    <Compile Include="Assets\Scripts\MobSystem\MobController.cs" />
-    <Compile Include="Assets\Scripts\MobSystem\MobView.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\MobSpawner\MobSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

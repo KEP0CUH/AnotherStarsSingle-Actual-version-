@@ -16,3 +16,4 @@ MonoBehaviour:
   title: PulsarGun
   description: 
   kind: 5
+  ammoKind: 0

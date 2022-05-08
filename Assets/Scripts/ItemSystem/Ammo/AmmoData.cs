@@ -19,20 +19,18 @@ public class AmmoData : ScriptableObject
     {
         var pathAmmo = "Icons/Items/Ammo/";
         var pathSounds = "Sounds/";
+
+        icon = Resources.Load<Sprite>(pathAmmo + kind);
         switch (kind)
         {
-
             case AmmoKind.MultiblasterAmmo:
                 title = "bulletMultiblaster";
-                icon = Resources.Load<Sprite>(pathAmmo + "AmmoMultiblaster");
                 clip = Resources.Load<AudioClip>(pathSounds + "ShotKinetic2");
                 break;
             case AmmoKind.DesintegratorAmmo:
                 title = "bulletDesintegrator";
-                icon = Resources.Load<Sprite>(pathAmmo + "AmmoDesintegrator");
                 clip = Resources.Load <AudioClip>(pathSounds + "ShotEnergetic2");  
                 break;
-
         }
 
     }

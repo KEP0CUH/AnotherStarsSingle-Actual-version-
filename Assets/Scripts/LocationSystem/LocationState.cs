@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class LocationState : MonoBehaviour
 {
     [SerializeField] private LocationData data;
     [SerializeField] private List<Planet> planets;
     [SerializeField] private List<AsteroidFieldType> asteroidFieldsTypes = new List<AsteroidFieldType>();
     [SerializeField] private SunType sunType;
+    [SerializeField] private MobSpawner mobSpawner;
 
     private LocationController controller;
 
@@ -19,12 +21,18 @@ public class LocationState : MonoBehaviour
     {
         this.controller = controller;
         this.data = Managers.Resources.DownloadData(location);
+        //this.mobSpawner = this.gameObject.GetComponent<MobSpawner>();
         SpawnPlanets();
         SpawnAsteroidFieldIfHave();
-
+        //if(this.mobSpawner != null) SpawnMobs();
         this.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(sunType);
 
         CanvasUI.GlobalMap.AddLocationOnMap(this);
+    }
+
+    private void SpawnMobs()
+    {
+        //this.mobSpawner.SpawnMobs();
     }
 
     private void SpawnPlanets()
@@ -57,7 +65,7 @@ public class LocationState : MonoBehaviour
             }
 
             var newAsteroidField = new GameObject($"{asteroidFieldsTypes}");
-            newAsteroidField.AddComponent<AsteroidFieldController>().Init(controller, type, 3,quarter);
+            newAsteroidField.AddComponent<AsteroidFieldController>().Init(controller, type, 12,quarter);
         }
     }
 }

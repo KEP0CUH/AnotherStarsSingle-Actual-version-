@@ -12,6 +12,7 @@ public class GunState : ItemState
 
     public override void Init(ItemKind kind, int count)
     {
+
         switch (kind)
         {
             case ItemKind.MultiblasterGun:
@@ -26,6 +27,7 @@ public class GunState : ItemState
         }
 
         base.Init(kind, count);
+        this.ammoKind = ((GunData)data).AmmoKind;
     }
 
     public override void Init(ItemState state)

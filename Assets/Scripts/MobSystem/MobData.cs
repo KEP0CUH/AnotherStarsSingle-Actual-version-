@@ -7,8 +7,10 @@ public class MobData : ScriptableObject
 {
     [SerializeField] private string title;
     [SerializeField] private MobKind kind;
+    [SerializeField] private ShipKind ship;
 
     public string Title => title;
+    public ShipKind Ship => ship;
 
     private void OnValidate()
     {
@@ -16,6 +18,7 @@ public class MobData : ScriptableObject
         {
             case MobKind.PirateIndus1:
                 title = "PirateIndus1";
+                ship = ShipKind.GreenKorvet;
                 break;
         }
     }

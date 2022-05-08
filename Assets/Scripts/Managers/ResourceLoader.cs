@@ -176,7 +176,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string asteroidsPath                    = $"ScriptableObjects/Asteroids/";
         string asteroidFieldsPath               = $"ScriptableObjects/AsteroidFields/";
 
-        string mobsPath                         = $"ScriptableObject/Mobs";
+        string mobsPath                         = $"ScriptableObjects/Mobs/";
 
         string locationsPath                    = $"ScriptableObjects/Locations/";
         string planetsPath                      = $"ScriptableObjects/Planets/";
