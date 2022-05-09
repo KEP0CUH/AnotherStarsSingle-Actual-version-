@@ -39,11 +39,11 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
 
         var rect = newLocation.GetComponent<RectTransform>();
         rect.SetParent(globalMap.transform);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMax = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchorMin = new Vector2(0, 0);
+        rect.anchorMax = new Vector2(0, 0);
+        rect.pivot = new Vector2(0, 0);
 
-        var locGlobalPos = new Vector2(location.transform.position.x,location.transform.position.y) / 10;
+        var locGlobalPos = new Vector2(location.transform.position.x,location.transform.position.y) / 5;
 
         rect.offsetMin = new Vector2(-8,-8) + locGlobalPos;
         rect.offsetMax = new Vector2(8, 8) + locGlobalPos;

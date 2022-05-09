@@ -25,11 +25,11 @@ public class AmmoData : ScriptableObject
         {
             case AmmoKind.MultiblasterAmmo:
                 title = "bulletMultiblaster";
-                clip = Resources.Load<AudioClip>(pathSounds + "ShotKinetic2");
+                clip = Resources.Load<AudioClip>(pathSounds + SoundKind.ShotKinetic2);
                 break;
             case AmmoKind.DesintegratorAmmo:
                 title = "bulletDesintegrator";
-                clip = Resources.Load <AudioClip>(pathSounds + "ShotEnergetic2");  
+                clip = Resources.Load <AudioClip>(pathSounds + SoundKind.ShotEnergetic2);  
                 break;
         }
 

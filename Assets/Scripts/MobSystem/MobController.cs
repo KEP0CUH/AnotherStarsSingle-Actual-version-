@@ -4,28 +4,33 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(MobState))]
+[RequireComponent(typeof(MobView))]
 public class MobController : MonoBehaviour
 {
     private float moveSpeed;
     private MobState mobState;
+    private MobView mobView;
 
     private GameObject spawner;
 
     public void Init(Transform spawner,MobKind kind)
     {
         this.mobState = this.gameObject.GetComponent<MobState>();
+        this.mobView = this.gameObject.GetComponent<MobView>();
         this.spawner = spawner.gameObject;
 
         this.moveSpeed = 5.0f / Constants.TICKS_PER_SEC;
         this.mobState.Init(kind);
+        this.mobView.Init(mobState);
+        transform.localPosition = new Vector3(0, 0, 0);
     }
 
     #region Movement
     //  оординаты, в пределах которых осуществл€етс€ движение
-    public float xMax = +50;
-    public float xMin = -50;
-    public float yMax = 50;
-    public float yMin = -50;
+    public float xMax = +15;
+    public float xMin = -15;
+    public float yMax = 15;
+    public float yMin = -15;
 
     // –адиус и углы не используютс€, но в будущем возможно генераци€ позиции будет именно по окружности, а не по пр€моугольнику.
     public int radius = 50;
@@ -55,21 +60,21 @@ public class MobController : MonoBehaviour
             yTarget = UnityEngine.Random.Range(yMin, yMax);
             targetPos = new Vector2(xTarget, yTarget);
 
-            difference = new Vector2(xTarget - transform.position.x, yTarget - transform.position.y);
+            difference = new Vector2(xTarget - transform.localPosition.x, yTarget - transform.localPosition.y);
 
             Vector3 targetDir = difference;
             float angle = Mathf.Atan2(difference.y, targetDir.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
-            Debug.DrawLine(transform.position, targetPos, UnityEngine.Color.yellow, 10);
+            Debug.DrawLine(transform.localPosition, targetPos, UnityEngine.Color.yellow, 10);
 
             StartCoroutine(Delay());
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.fixedDeltaTime);
 
-        if (Mathf.Abs(transform.position.x - difference.x) < 0.1 && Mathf.Abs(transform.position.y - difference.y) < 0.1)
+        if (Mathf.Abs(transform.localPosition.x - difference.x) < 0.1 && Mathf.Abs(transform.localPosition.y - difference.y) < 0.1)
         {
             moveEnd = true;
         }

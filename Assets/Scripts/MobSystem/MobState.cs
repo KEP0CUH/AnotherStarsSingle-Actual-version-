@@ -24,7 +24,6 @@ public class MobState : MonoBehaviour
         {
             Debug.Log($"{this.data.Ship}".SetColor(Color.Magenta));
             this.ship = this.gameObject.GetComponent<ShipState>().Init(data.Ship);
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = ship.Data.Icon;
             id = GetId();
         }
 

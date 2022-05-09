@@ -18,6 +18,9 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     private Action<ItemKind,ItemState> onItemDrop;
     private Action<ItemKind, int> inItemAddedInventory;
 
+    private static GameObject infoWindow = null;
+    private static bool isClicked = false;
+
     public virtual void Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);
@@ -112,5 +115,47 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     public void RemoveObserver(IObserver observer)
     {
         throw new NotImplementedException();
+    }
+
+    private void OnMouseEnter()
+    {
+        CreateInfoWindow();
+    }
+
+    private void OnMouseDown()
+    {
+        isClicked = true;
+    }
+
+    private void OnMouseExit()
+    {
+        if (isClicked == false)
+        {
+            CloseInfoWindow();
+        }
+    }
+
+    private void CreateInfoWindow()
+    {
+        if(infoWindow == null)
+        {
+            infoWindow = new GameObject("InfoWindow", typeof(ItemInfoWindow));
+            infoWindow.GetComponent<ItemInfoWindow>().Init(this,this.state);
+        }
+        else
+        {
+            CloseInfoWindow();
+            CreateInfoWindow();
+        }
+    }
+
+    public void CloseInfoWindow()
+    {
+        if (infoWindow != null)
+        {
+            Destroy(infoWindow.gameObject);
+            infoWindow = null;
+            isClicked = false;
+        }
     }
 }

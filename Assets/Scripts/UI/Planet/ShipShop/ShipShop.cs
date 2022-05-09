@@ -56,10 +56,10 @@ public class ShipShop : MonoBehaviour
     private void ShowShips()
     {
         shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenKorvet));
-        shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenLinkor));
         shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenFrigate));
+        shipData.Add(Managers.Resources.DownloadData(ShipKind.GreenLinkor));
 
-        foreach(var ship in shipData)
+        foreach (var ship in shipData)
         {
             var newObj = new GameObject("Ship", typeof(ShipSlot));
             newObj.GetComponent<ShipSlot>().Init(shipList.transform,ship);

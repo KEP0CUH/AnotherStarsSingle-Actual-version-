@@ -15,4 +15,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6654602c8ce0c27409fd848d513efcd3, type: 3}
   title: "\u041A\u043E\u0440\u0432\u0435\u0442"
   description: 
-  kind: 0
+  kind: 1

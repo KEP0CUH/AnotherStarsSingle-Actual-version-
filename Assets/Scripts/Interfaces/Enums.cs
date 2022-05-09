@@ -80,10 +80,10 @@ public enum AmmoKind
 
 public enum ShipKind
 {
-    //GreenIndus,
+    GreenIndus,
     GreenKorvet,
-    //GreenIstrebitel,
-    //GreenHeavyIstrebitel,
+    GreenIstrebitel,
+    GreenHeavyIstrebitel,
     GreenLinkor,
     GreenFrigate,
 }
