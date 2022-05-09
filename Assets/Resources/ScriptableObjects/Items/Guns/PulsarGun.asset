@@ -17,3 +17,4 @@ MonoBehaviour:
   description: 
   kind: 5
   ammoKind: 0
+  soundKind: 0

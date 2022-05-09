@@ -12,11 +12,15 @@ public class AsteroidState : MonoBehaviour
 
     [SerializeField] protected int id;
 
+    [SerializeField] private float moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
+
     public AsteroidData Data => data;
     public float MaxHealth => maxHealth;
     public float Health => health;
 
     public int Id => id;
+
+    public float MoveSpeed => moveSpeed;
 
     float radiusMax = 2;
     float radiusMin = 0.1f;
@@ -41,6 +45,7 @@ public class AsteroidState : MonoBehaviour
     public void Init(AsteroidData data)
     {
         this.data = data;
+        this.moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
 
         maxHealth = Random.Range(400, 800);
         health = maxHealth;

@@ -10,23 +10,19 @@ public class MobState : MonoBehaviour
 
     private int id;
     private MobData data;
-    private ShipState ship;
+    private ShipState shipState;
 
 
     public int Id => id;
     public MobData Data => data;
-    public ShipState Ship => ship;
+    public ShipState ShipState => shipState;
 
-    public void Init(MobKind kind)
+    public MobState Init(MobKind kind)
     {
         this.data = Managers.Resources.DownloadData(kind);
-        if(this.data != null)
-        {
-            Debug.Log($"{this.data.Ship}".SetColor(Color.Magenta));
-            this.ship = this.gameObject.GetComponent<ShipState>().Init(data.Ship);
-            id = GetId();
-        }
-
+        this.shipState = this.gameObject.GetComponent<ShipState>().Init(data.Ship);
+        id = GetId();
+        return this;
     }
 
     private static int GetId()

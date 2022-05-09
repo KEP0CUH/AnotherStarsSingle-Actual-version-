@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 24b9839ee0157b64fb027819478791cd, type: 3}
   clip: {fileID: 8300000, guid: c5e70a80d11a18a46b402cfc1172758e, type: 3}
   kind: 1
+  baseDamage: 60

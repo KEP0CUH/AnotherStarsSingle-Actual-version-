@@ -41,7 +41,7 @@ public class GunState : ItemState
                 ammoKind = AmmoKind.DesintegratorAmmo;
                 break;
             case ItemKind.EmptyGun:
-                ammoKind = AmmoKind.MultiblasterAmmo;
+                ammoKind = AmmoKind.EmptyAmmo;
                 break;
         }
 
@@ -50,14 +50,21 @@ public class GunState : ItemState
 
     public void Shoot(Transform parent,GunState gun)
     {
-        Debug.Log("Стреляю");
-        GameObject bullet = new GameObject("Bullet");
-        bullet.transform.position = new Vector3(parent.position.x, parent.position.y, 0);
-        bullet.transform.localEulerAngles = new Vector3(0, 0, parent.localEulerAngles.z);
-        bullet.AddComponent<Bullet>().Init(gun);
-        
+        if(ammoKind != AmmoKind.EmptyAmmo)
+        {
+            Debug.Log("Стреляю");
+            GameObject bullet = new GameObject("Bullet");
 
-        Destroy(bullet, 10);
+            var sourcePosition = new Vector3(parent.position.x, parent.position.y, 0);
+            bullet.transform.position = sourcePosition;
+            var sourceAngle = new Vector3(0, 0, parent.localEulerAngles.z);
+            bullet.transform.localEulerAngles = sourceAngle;
+
+
+            bullet.AddComponent<AmmoController>().Init(gun);
+
+            Destroy(bullet, 4);
+        }
     }
 
 }

@@ -16,7 +16,7 @@ public class InfoWindow : MonoBehaviour
     public void Init(AsteroidController controller)
     {
         this.controller = controller;
-        var data = controller.Asteroid;
+        var data = controller.AsteroidState;
         CreateWindow();
         CreateIcon(data.Data.Icon);
         CreateTitle(data.Data.Title);

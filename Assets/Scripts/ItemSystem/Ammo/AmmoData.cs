@@ -9,11 +9,13 @@ public class AmmoData : ScriptableObject
     [SerializeField] private Sprite icon;
     [SerializeField] private AudioClip clip;
     [SerializeField] private AmmoKind kind;
+    [SerializeField] private int baseDamage = 15;
 
     public string Title => title;
     public Sprite Icon => icon;
     public AudioClip Clip => clip;
     public AmmoKind Kind => kind;
+    public int BaseDamage => baseDamage;
 
     private void OnValidate()
     {

@@ -15,39 +15,37 @@ public class MobController : MonoBehaviour
 
     public void Init(Transform spawner,MobKind kind)
     {
-        this.mobState = this.gameObject.GetComponent<MobState>();
-        this.mobView = this.gameObject.GetComponent<MobView>();
+        this.mobState = this.gameObject.GetComponent<MobState>().Init(kind);
+        this.mobView = this.gameObject.GetComponent<MobView>().Init(this.mobState);
         this.spawner = spawner.gameObject;
 
         this.moveSpeed = 5.0f / Constants.TICKS_PER_SEC;
-        this.mobState.Init(kind);
-        this.mobView.Init(mobState);
         transform.localPosition = new Vector3(0, 0, 0);
     }
 
     #region Movement
-    // Координаты, в пределах которых осуществляется движение
+    // РљРѕРѕСЂРґРёРЅР°С‚С‹, РІ РїСЂРµРґРµР»Р°С… РєРѕС‚РѕСЂС‹С… РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ РґРІРёР¶РµРЅРёРµ
     public float xMax = +15;
     public float xMin = -15;
     public float yMax = 15;
     public float yMin = -15;
 
-    // Радиус и углы не используются, но в будущем возможно генерация позиции будет именно по окружности, а не по прямоугольнику.
+    // Р Р°РґРёСѓСЃ Рё СѓРіР»С‹ РЅРµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ, РЅРѕ РІ Р±СѓРґСѓС‰РµРј РІРѕР·РјРѕР¶РЅРѕ РіРµРЅРµСЂР°С†РёСЏ РїРѕР·РёС†РёРё Р±СѓРґРµС‚ РёРјРµРЅРЅРѕ РїРѕ РѕРєСЂСѓР¶РЅРѕСЃС‚Рё, Р° РЅРµ РїРѕ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєСѓ.
     public int radius = 50;
     public float angle = 0f;
 
-    // Различие между текущей позицией и целевой. Это нужно для движения от и до.
+    // Р Р°Р·Р»РёС‡РёРµ РјРµР¶РґСѓ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРµР№ Рё С†РµР»РµРІРѕР№. Р­С‚Рѕ РЅСѓР¶РЅРѕ РґР»СЏ РґРІРёР¶РµРЅРёСЏ РѕС‚ Рё РґРѕ.
     Vector2 difference;
     Vector2 targetPos;
 
-    // Прибыл ли враг в целевую точку?
+    // РџСЂРёР±С‹Р» Р»Рё РІСЂР°Рі РІ С†РµР»РµРІСѓСЋ С‚РѕС‡РєСѓ?
     bool moveEnd = true;
 
-    // Целевые координаты - генерируются рандомно.
+    // Р¦РµР»РµРІС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ - РіРµРЅРµСЂРёСЂСѓСЋС‚СЃСЏ СЂР°РЅРґРѕРјРЅРѕ.
     private float xTarget;
     private float yTarget;
 
-    // Максимальное время полета. Если враг раньше прибудет в целевую точку, то он сразу отправится в другую.
+    // РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РїРѕР»РµС‚Р°. Р•СЃР»Рё РІСЂР°Рі СЂР°РЅСЊС€Рµ РїСЂРёР±СѓРґРµС‚ РІ С†РµР»РµРІСѓСЋ С‚РѕС‡РєСѓ, С‚Рѕ РѕРЅ СЃСЂР°Р·Сѓ РѕС‚РїСЂР°РІРёС‚СЃСЏ РІ РґСЂСѓРіСѓСЋ.
     [SerializeField]
     private float delayTime = 10f;
 

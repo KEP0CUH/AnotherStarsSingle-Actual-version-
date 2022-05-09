@@ -12,13 +12,15 @@ public class MobView : MonoBehaviour
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
 
-    public void Init(MobState state)
+    public MobView Init(MobState state)
     {
         this.mobState = state;
 
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = state.Ship.Data.Icon;
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = state.ShipState.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
+
+        return this;
     }
 
     private void OnMouseEnter()

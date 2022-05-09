@@ -76,6 +76,7 @@ public enum AmmoKind
     //GreenLaserAmmo = 1004,
     MultiblasterAmmo,
     DesintegratorAmmo,
+    EmptyAmmo,
 }
 
 public enum ShipKind

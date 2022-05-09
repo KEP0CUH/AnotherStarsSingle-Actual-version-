@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void LandOnAsteroidField(Transform transform,Vector2 quarter)
     {
         this.landPlace = transform;
-        controller.gameObject.transform.position = new Vector3(transform.position.x + 150 * quarter.x, transform.position.y + 150 * quarter.y, 0);
+        controller.gameObject.transform.localPosition = new Vector3(transform.localPosition.x + 150 * quarter.x, transform.localPosition.y + 150 * quarter.y, 0);
         controller.UpdateCameraPosition();
         //isLanded = true;
     }

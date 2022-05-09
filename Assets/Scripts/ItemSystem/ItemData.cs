@@ -35,7 +35,7 @@ public class ItemData : ScriptableObject
     }
     
 
-    protected void OnValidate()
+    protected virtual void OnValidate()
     {
         string oreSpritesPath = "Icons/Items/Ores/";
         string gunSpritesPath = "Icons/Items/Guns/";

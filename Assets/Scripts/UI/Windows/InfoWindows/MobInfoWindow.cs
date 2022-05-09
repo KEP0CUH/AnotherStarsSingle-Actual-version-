@@ -19,7 +19,7 @@ public class MobInfoWindow : MonoBehaviour
         this.controller = controller;
 
         CreateWindow();
-        CreateIcon(state.Ship.Data.Icon);
+        CreateIcon(state.ShipState.Data.Icon);
         CreateTitle(state.Data.Title);
         CreateButtonClose();
     }
