@@ -119,7 +119,8 @@ public class PlanetWindow : MonoBehaviour
     {
         if(itemShop == null)
         {
-            itemShop = new GameObject("ItemShop", typeof(Image), typeof(ShipShop), typeof(Mask),typeof(ItemShop));
+            var itemShopPrefab = Managers.Resources.DownloadData(ObjectType.ItemShop);
+            itemShop = Instantiate(itemShopPrefab, this.transform);
             var rect = itemShop.GetComponent<RectTransform>();
             rect.SetParent(this.gameObject.transform, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -127,9 +128,6 @@ public class PlanetWindow : MonoBehaviour
             rect.pivot = new Vector2(0.5f, 0.5f);
             rect.offsetMin = new Vector2(-250, -200);
             rect.offsetMax = new Vector2(250, 200);
-
-            var image = itemShop.GetComponent<Image>();
-            image.color = new UnityEngine.Color(24f, 78f, 231f, 152f) / 256.0f;
 
             itemShop.GetComponent<ItemShop>().Init();
         }

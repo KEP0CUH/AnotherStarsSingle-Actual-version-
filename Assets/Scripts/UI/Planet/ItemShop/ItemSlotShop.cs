@@ -61,7 +61,8 @@ public class ItemSlotShop : ItemSlot
 
     private void CreateSellWindow()
     {
-        var tradeWindow = new GameObject("Confirm selling.", typeof(RectTransform), typeof(Image));
+        var tradeWindowPrefab = Managers.Resources.DownloadData(ObjectType.ConfirmSelling);
+        var tradeWindow = Instantiate(tradeWindowPrefab,this.transform);
 
         var rect = tradeWindow.GetComponent<RectTransform>();
         rect.transform.SetParent(this.itemShop.gameObject.transform);

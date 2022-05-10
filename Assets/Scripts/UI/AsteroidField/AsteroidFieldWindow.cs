@@ -117,7 +117,9 @@ public class AsteroidFieldWindow : MonoBehaviour
     {
         if (itemShop == null)
         {
-            itemShop = new GameObject("ItemShop", typeof(Image), typeof(ShipShop), typeof(Mask), typeof(ItemShop));
+            var itemShopPrefab = Managers.Resources.DownloadData(ObjectType.ItemShop);
+
+            itemShop = Instantiate(itemShopPrefab, this.transform);
             var rect = itemShop.GetComponent<RectTransform>();
             rect.SetParent(this.gameObject.transform, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);

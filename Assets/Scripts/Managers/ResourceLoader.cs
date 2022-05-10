@@ -18,6 +18,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<SunType, Sprite> sunIcons;
     private Dictionary<MobKind, MobData> mobs;
     private Dictionary<ObjectType, GameObject> objects;
+    private Dictionary<ItemShopType,ItemShopData> itemShops;
 
     public Dictionary<ItemKind, ItemData> Items => items;
     public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
@@ -40,6 +41,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         sunIcons = new Dictionary<SunType, Sprite>();
         mobs = new Dictionary<MobKind, MobData>();
         objects = new Dictionary<ObjectType, GameObject>();
+        itemShops = new Dictionary<ItemShopType, ItemShopData>();
 
         LoadAllResources();
 
@@ -72,6 +74,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if(objects.ContainsKey(type))
         {
             return objects[type];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public ItemShopData DownloadData(ItemShopType type)
+    {
+        if(itemShops.ContainsKey(type))
+        {
+            return itemShops[type];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -198,6 +210,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         string sunIconsPath                     = $"Icons/Suns/";
 
         string objectsPath = $"Prefabs/";
+        string itemShopsPath = $"ScriptableObjects/ItemShops/";
 
         
         foreach(ItemKind itemKind in Enum.GetValues(typeof(ItemKind)))
@@ -244,6 +257,11 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         foreach(ObjectType objectType in Enum.GetValues(typeof(ObjectType)))
         {
             objects.Add(objectType, Resources.Load<GameObject>(objectsPath + objectType));
+        }
+
+        foreach(ItemShopType itemShopType in Enum.GetValues(typeof(ItemShopType)))
+        {
+            itemShops.Add(itemShopType, Resources.Load<ItemShopData>(itemShopsPath + itemShopType));
         }
 
         //ammo.Add(AmmoKind.MultiblasterAmmo, Resources.Load<AmmoData>(basePath + ammoPath + "Multiblaster"));

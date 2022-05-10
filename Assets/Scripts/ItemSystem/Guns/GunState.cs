@@ -10,7 +10,7 @@ public class GunState : ItemState
     public AmmoKind AmmoKind => ammoKind;
     public int MaxAmmo => maxAmmo;
 
-    public override void Init(ItemKind kind, int count)
+    public override ItemState Init(ItemKind kind, int count)
     {
 
         switch (kind)
@@ -28,6 +28,7 @@ public class GunState : ItemState
 
         base.Init(kind, count);
         this.ammoKind = ((GunData)data).AmmoKind;
+        return this;
     }
 
     public override void Init(ItemState state)

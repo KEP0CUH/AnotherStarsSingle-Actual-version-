@@ -20,12 +20,14 @@ public class ItemState : MonoBehaviour, Interactable
     public bool IsWeapon => data.IsWeapon();
     public bool IsDevice => data.IsDevice();
 
-    public virtual void Init(ItemKind kind, int count)
+    public virtual ItemState Init(ItemKind kind, int count)
     {
         this.data = Managers.Resources.DownloadData(kind);
         this.count = count;
         this.isSet = false;
         this.id = ItemState.GetId();
+
+        return this;
     }
 
      public virtual void Init(ItemState state)
@@ -63,13 +65,13 @@ public class ItemState : MonoBehaviour, Interactable
         Debug.Log("Item was picked up.");
     }
 
-    public void IncreaseNumber()
+    public void IncreaseNumber(int num = 1)
     {
-        this.count++;
+        this.count += num;
     }
-    public void DecreaseNumber()
+    public void DecreaseNumber(int num = 1)
     {
-        this.count--;
+        this.count -= num;
     }
 
     private static int GetId()

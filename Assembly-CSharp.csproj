@@ -68,7 +68,7 @@
     <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\MobInfoWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidData.cs" />
-    <Compile Include="Assets\Scripts\UI\Windows\SellWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\SellWindow.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShop.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
-    <Compile Include="Assets\Scripts\UI\Windows\BuyWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\BuyWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\DeviceSlot.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemSlotShop.cs" />
@@ -132,6 +132,10 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopData.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopView.cs" />
+    <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

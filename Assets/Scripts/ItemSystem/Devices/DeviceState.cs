@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DeviceState : ItemState
 {
-    public override void Init(ItemKind kind, int count)
+    public override ItemState Init(ItemKind kind, int count)
     {
         base.Init(kind, count);
+        return this;
     }
 }
