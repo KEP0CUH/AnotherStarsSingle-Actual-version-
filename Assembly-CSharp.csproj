@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobState.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceData.cs" />
     <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\MobInfoWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidState.cs" />
     <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
     <Compile Include="Assets\Scripts\UI\Windows\BuyWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipState.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunData.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoView.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemState.cs" />
     <Compile Include="Assets\Scripts\TestScripts\CircleGeneration.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPlayerInventory.cs" />
@@ -126,12 +129,9 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobView.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
+    <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoView.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoState.cs" />
-    <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

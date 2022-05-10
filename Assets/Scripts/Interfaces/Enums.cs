@@ -225,3 +225,9 @@ public enum IconType
     ButtonOpenMap,
     ButtonSettings,
 }
+
+public enum ObjectType
+{
+    BuyWindow,
+    ConfirmBuying,
+}

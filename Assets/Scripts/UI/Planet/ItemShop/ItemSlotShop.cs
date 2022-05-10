@@ -45,7 +45,8 @@ public class ItemSlotShop : ItemSlot
 
     private void CreateBuyWindow()
     {
-        var tradeWindow = new GameObject("Confirm buying.",typeof(RectTransform),typeof(Image));
+        var tradeWindowPrefab = Managers.Resources.DownloadData(ObjectType.ConfirmBuying);
+        var tradeWindow = Instantiate(tradeWindowPrefab,this.transform);
 
         var rect = tradeWindow.GetComponent<RectTransform>();
         rect.transform.SetParent(this.itemShop.gameObject.transform);
@@ -55,7 +56,7 @@ public class ItemSlotShop : ItemSlot
         rect.offsetMin = new Vector2(-96, -120);
         rect.offsetMax = new Vector2(96, 70);
 
-        tradeWindow.AddComponent<BuyWindow>().Init(itemShop,tradeWindow.transform, this);
+        tradeWindow.GetComponent<BuyWindow>().Init(itemShop,tradeWindow.transform, this);
     }
 
     private void CreateSellWindow()

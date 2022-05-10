@@ -17,6 +17,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
     private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
     private Dictionary<SunType, Sprite> sunIcons;
     private Dictionary<MobKind, MobData> mobs;
+    private Dictionary<ObjectType, GameObject> objects;
 
     public Dictionary<ItemKind, ItemData> Items => items;
     public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
@@ -38,6 +39,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         asteroidFields = new Dictionary<AsteroidFieldType,AsteroidFieldData>();
         sunIcons = new Dictionary<SunType, Sprite>();
         mobs = new Dictionary<MobKind, MobData>();
+        objects = new Dictionary<ObjectType, GameObject>();
 
         LoadAllResources();
 
@@ -60,6 +62,16 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         if(mobs.ContainsKey(kind))
         {
             return mobs[kind];
+        }
+        Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
+        return null;
+    }
+
+    public GameObject DownloadData(ObjectType type)
+    { 
+        if(objects.ContainsKey(type))
+        {
+            return objects[type];
         }
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
@@ -185,6 +197,8 @@ public class ResourceLoader : MonoBehaviour, IGameManager
 
         string sunIconsPath                     = $"Icons/Suns/";
 
+        string objectsPath = $"Prefabs/";
+
         
         foreach(ItemKind itemKind in Enum.GetValues(typeof(ItemKind)))
         {
@@ -225,6 +239,11 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         foreach(AmmoKind ammoKind in Enum.GetValues(typeof(AmmoKind)))
         {
             ammo.Add(ammoKind, Resources.Load<AmmoData>(ammoPath + ammoKind));
+        }
+
+        foreach(ObjectType objectType in Enum.GetValues(typeof(ObjectType)))
+        {
+            objects.Add(objectType, Resources.Load<GameObject>(objectsPath + objectType));
         }
 
         //ammo.Add(AmmoKind.MultiblasterAmmo, Resources.Load<AmmoData>(basePath + ammoPath + "Multiblaster"));

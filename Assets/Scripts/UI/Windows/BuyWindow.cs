@@ -8,83 +8,76 @@ public class BuyWindow : MonoBehaviour
 {
     ItemShop itemShop;
     ItemSlotShop itemSlot;
-    
-    public void Init(ItemShop shop,Transform parent,ItemSlotShop itemSlot)
+
+    [SerializeField] private GameObject itemIcon;
+    [SerializeField] private GameObject inputField;
+    [SerializeField] private GameObject inputFieldComponentText;
+    [SerializeField] private GameObject slider;
+    [SerializeField] private GameObject buttonYes;
+    [SerializeField] private GameObject buttonNo;
+
+    public void Init(ItemShop shop, Transform parent, ItemSlotShop itemSlot)
     {
         this.itemShop = shop;
         this.GetComponent<RectTransform>().SetParent(parent);
         this.itemSlot = itemSlot;
-
-        CreateIconItem();
+        SettingElements();
+        //CreateIconItem();
+        //CreateSlider();
     }
-
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Return))
         {
             ConfirmBuying();
         }
-        if(Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             CancelBuying();
         }
     }
 
-    private void CreateIconItem()
+    private void SettingElements()
     {
-        var itemInfo = new GameObject("ItemIcon", typeof(RectTransform),typeof(Image));
-
-        var rect = itemInfo.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(-32, -32 + 48);
-        rect.offsetMax = new Vector2(32, 32 + 48);
-
-        var image = itemInfo.GetComponent<Image>();
-        image.sprite = this.itemSlot.ItemState.Data.Icon;
-
-        var textBuy = new GameObject("Buy?",typeof(RectTransform),typeof(Text));
-        rect = textBuy.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(-32, -96);
-        rect.offsetMax = new Vector2(112, -32);
-
-        var text = textBuy.GetComponent<Text>();
-        Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        text.font = font;
-        text.fontSize = 18;
-        text.text = "йсохрэ?";
-        text.color = new UnityEngine.Color(0,55,255,255) / 255;
+        itemIcon.GetComponent<Image>().sprite = this.itemSlot.ItemState.Data.Icon;
 
 
-        var buttonYes = new GameObject("Yes",typeof(RectTransform),typeof(Image), typeof(Button));
-        rect = buttonYes.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(-32, -96);
-        rect.offsetMax = new Vector2(0, -64);
+
+        var sliderComponent = slider.GetComponent<Slider>();
+        sliderComponent.minValue = 1;
+        sliderComponent.maxValue = this.itemSlot.ItemState.Count;
+        sliderComponent.wholeNumbers = true;
+        sliderComponent.value = 1;
+        sliderComponent.onValueChanged.AddListener((content) => UpdateTextField(content));
+
+        inputFieldComponentText.GetComponent<Text>().text = sliderComponent.value.ToString();
+        inputField.GetComponent<InputField>().onValueChanged.AddListener((content) => UpdateSlider(content));
 
         buttonYes.GetComponent<Image>().color = new UnityEngine.Color(24, 171, 64, 255) / 256;
         buttonYes.GetComponent<Button>().onClick.AddListener(ConfirmBuying);
 
-        var buttonNo = new GameObject("No",typeof(RectTransform),typeof(Image),typeof(Button));
-        rect = buttonNo.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(0, -96);
-        rect.offsetMax = new Vector2(32, -64);
-
         buttonNo.GetComponent<Image>().color = new UnityEngine.Color(230, 59, 24, 255) / 256;
         buttonNo.GetComponent<Button>().onClick.AddListener(CancelBuying);
+
+    }
+
+    public void UpdateTextField(float a)
+    {
+        Debug.Log("UpdateTextField worked");
+        inputField.GetComponent<InputField>().text = a.ToString();
+    }
+
+    public void UpdateSlider(string content)
+    {
+        Debug.Log("UpdateTextField");
+        try
+        {
+            slider.GetComponent<Slider>().value = int.Parse(content);
+        }
+        catch(System.FormatException ex)
+        {
+            return;
+        }
     }
 
     private void ConfirmBuying()
