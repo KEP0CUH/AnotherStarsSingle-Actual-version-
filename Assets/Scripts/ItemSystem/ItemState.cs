@@ -30,12 +30,14 @@ public class ItemState : MonoBehaviour, Interactable
         return this;
     }
 
-     public virtual void Init(ItemState state)
+     public virtual ItemState Init(ItemState state)
     {
         this.data = Managers.Resources.DownloadData(state.Data.ItemKind);
         this.count = state.Count;
         this.isSet = state.IsSet;
         this.id = state.Id;
+
+        return this;
     }
 
     public virtual void Init(ItemKind kind,int count,int id)

@@ -169,10 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2042accd4665cd94e8ccc795e0e70819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopPanel: {fileID: 8299800455672474850}
-  shopList: {fileID: 7859091920638971802}
-  playerItemsPanel: {fileID: 7097683401457914227}
-  playerItemsList: {fileID: 505946907851101637}
+  shopType: 0
+  listShopItems: {fileID: 7859091920638971802}
+  listPlayerItems: {fileID: 505946907851101637}
 --- !u!222 &7839630167714424033
 CanvasRenderer:
   m_ObjectHideFlags: 0

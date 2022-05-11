@@ -7,17 +7,20 @@ using UnityEngine.UI;
 public class SellWindow : MonoBehaviour
 {
     ItemShop itemShop;
+    private ItemShopView itemShopView; 
     ItemSlotShop itemSlot;
 
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private GameObject inputField;
     [SerializeField] private GameObject inputFieldComponentText;
     [SerializeField] private GameObject slider;
+    private Slider sliderComponent;
     [SerializeField] private GameObject buttonYes;
     [SerializeField] private GameObject buttonNo;
 
-    public void Init(ItemShop shop, Transform parent, ItemSlotShop itemSlot)
+    public void Init(ItemShopView itemShopView,ItemShop shop, Transform parent, ItemSlotShop itemSlot)
     {
+        this.itemShopView = itemShopView;
         this.itemShop = shop;
         this.GetComponent<RectTransform>().SetParent(parent);
         this.itemSlot = itemSlot;
@@ -40,7 +43,7 @@ public class SellWindow : MonoBehaviour
     {
         itemIcon.GetComponent<Image>().sprite = this.itemSlot.ItemState.Data.Icon;
 
-        var sliderComponent = slider.GetComponent<Slider>();
+        sliderComponent = slider.GetComponent<Slider>();
         sliderComponent.minValue = 1;
         sliderComponent.maxValue = this.itemSlot.ItemState.Count;
         sliderComponent.wholeNumbers = true;
@@ -78,10 +81,14 @@ public class SellWindow : MonoBehaviour
 
     private void ConfirmSelling()
     {
-        itemShop.AddItem(this.itemSlot.ItemState);
-        Managers.Player.Controller.Inventory.RemoveItem(this.itemSlot.ItemState);
-        itemShop.ShowItems();
+        //itemShop.AddItem(this.itemSlot.ItemState);
+        itemShopView.AddItem(this.itemSlot.ItemState,(int)sliderComponent.value);
+        Managers.Player.Controller.Inventory.RemoveItem(this.itemSlot.ItemState,(int)sliderComponent.value);
+        //itemShop.ShowItems();
+
+        //itemShop.AddItem()
         Object.Destroy(this.gameObject);
+        itemShopView.ShowListItemShop();
     }
 
     private void CancelSelling()

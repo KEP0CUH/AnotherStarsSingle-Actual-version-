@@ -9,18 +9,28 @@ public class ItemShopView : MonoBehaviour
     private GameObject prefabItemShop;
     private GameObject objectItemShop;
 
+    private ItemShop itemShop;
+
     private Dictionary<int, ItemState> playerItems;
     private Dictionary<int, ItemState> shopItems;
+
+    private List<ItemSlotShop> shopItemsSlots;
+    private List<ItemSlotShop> playerItemsSlots;
+
+    public ItemShopState ItemShopState => ItemShopState;
 
     public ItemShopView Init(ItemShopState state)
     {
         if (state.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
             this.itemShopState = state;
-            OpenItemShop();
+
             playerItems = new Dictionary<int, ItemState>();
             shopItems = new Dictionary<int, ItemState>();
+            shopItemsSlots = new List<ItemSlotShop>();
+            playerItemsSlots = new List<ItemSlotShop>();
 
+            OpenItemShop();
             CreateStatesForShopItems();
         }
         return this;
@@ -40,7 +50,7 @@ public class ItemShopView : MonoBehaviour
             rect.offsetMin = new Vector2(-250, -200);
             rect.offsetMax = new Vector2(250, 200);
 
-            //objectItemShop.GetComponent<ItemShop>().Init();
+            itemShop = objectItemShop.GetComponent<ItemShop>().Init(this);
         }
         else if (objectItemShop != null)
         {
@@ -77,11 +87,10 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemState state, bool needDestroying = true)
+    public void AddItem(ItemState state,int count = 1, bool needDestroying = false)
     {
         if (state.Data.ItemKind == ItemKind.EmptyDevice ||
-            state.Data.ItemKind == ItemKind.EmptyGun ||
-            state.Data.ItemKind == ItemKind.EmptyDevice)
+            state.Data.ItemKind == ItemKind.EmptyGun)
             return;
 
         if (shopItems.ContainsKey(state.Id))
@@ -97,7 +106,7 @@ public class ItemShopView : MonoBehaviour
                 {
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
-                        item.IncreaseNumber(state.Count);
+                        item.IncreaseNumber(count);
                         if (needDestroying) Object.Destroy(state.gameObject);
                         ShowListItemShop();
                         return;
@@ -131,9 +140,60 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    private void ShowListItemShop()
+    public void RemoveItem(ItemState state,int count = 1, bool needDestroying = false)
+    {
+        if(shopItems.ContainsKey(state.Id))
+        {
+            if(shopItems[state.Id].IsItem)
+            {
+                shopItems[state.Id].DecreaseNumber(count);
+                if(shopItems[state.Id].Count <= 0)
+                {
+                    Object.Destroy(shopItems[state.Id]);
+                    shopItems.Remove(state.Id);
+                    if (needDestroying) Object.Destroy(state.gameObject);
+                }
+            }
+            else
+            {
+                Object.Destroy(shopItems[state.Id]);
+                shopItems.Remove(state.Id);
+                if (needDestroying) Object.Destroy(state.gameObject);
+            }
+        }
+    }
+
+    public void ShowListItemShop()
     {
         Debug.Log("«десь надо спавнить слоты дл€ состо€ние в словаре shopItems");
+
+        foreach(var item in shopItemsSlots)
+        {
+            if(item != null)
+            {
+                Object.Destroy(item.gameObject);
+            }
+        }
+
+        shopItemsSlots.Clear();
+
+        foreach(var item in shopItems)
+        {
+            var newSlot = new GameObject("Slot", typeof(ItemSlotShop));
+
+            var shopSlotItemComponent = newSlot.GetComponent<ItemSlotShop>().Init(this, itemShop, itemShop.ListShopItems.transform, item.Value.GetComponent<ItemState>(), true);
+            shopItemsSlots.Add(shopSlotItemComponent);
+        }
+
+        playerItems = Managers.Player.Controller.Inventory.GetAllItems();
+
+        foreach (var item in playerItems)
+        {
+            var newSlot = new GameObject("Slot", typeof(ItemSlotShop));
+
+            var shopSlotItemComponent = newSlot.GetComponent<ItemSlotShop>().Init(this, itemShop, itemShop.ListPlayerItems.transform, item.Value.GetComponent<ItemState>(), false);
+            shopItemsSlots.Add(shopSlotItemComponent);
+        }
     }
 
 }

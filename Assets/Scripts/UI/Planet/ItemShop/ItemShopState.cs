@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class ItemShopState : MonoBehaviour
 {
-    private static int ID = 1;
 
-    private int id;
-    private ItemShopData data;
+    [SerializeField] private int id;
+    [SerializeField] private ItemShopData data;
 
     public int Id => id;
     public ItemShopData Data => data;
-
-    public ItemShopState Init(ItemShopType type)
+    public ItemShopState Init(ItemShopType type, int id)
     {
-        id = GetId();
+        this.id = id;
         this.data = Managers.Resources.DownloadData(type);
 
 
         return this;
-    }
-
-    private static int GetId()
-    {
-        ID++;
-        return ID;
     }
 }

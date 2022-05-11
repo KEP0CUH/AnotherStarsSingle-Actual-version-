@@ -11,11 +11,13 @@ public class PlanetData : ScriptableObject
     [SerializeField] private PlanetIconType iconType;
     [SerializeField] private Sprite iconPlanet;
     [SerializeField] private Sprite iconBG;
+    [SerializeField] private ItemShopType itemShopType;
 
 
     public string Title => title;
     public Sprite Icon => iconPlanet;
     public Sprite IconBG => iconBG;
+    public ItemShopType ItemShopType => itemShopType;
 
     private void OnValidate()
     {
@@ -24,12 +26,15 @@ public class PlanetData : ScriptableObject
             case Planet.Arcea:
                 title = "Арсея";
                 description = "";
+                itemShopType = ItemShopType.GreenShop1;
                 break;
             case Planet.Mars:
                 title = "Марс";
+                itemShopType = ItemShopType.ShopEmpty;
                 break;
             case Planet.Earth:
                 title = "Земля";
+                itemShopType = ItemShopType.ShopEmpty;
                 break;
 
         }

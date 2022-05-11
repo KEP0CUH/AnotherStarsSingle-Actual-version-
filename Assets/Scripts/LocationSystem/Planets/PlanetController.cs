@@ -5,33 +5,30 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlanetState))]
+[RequireComponent(typeof(PlanetView))]
 
 public class PlanetController : MonoBehaviour
 {
-    private PlanetState state;
-    private Planet planetKind;
+    private PlanetState planetState;
+    private PlanetView planetView;
     private LocationController controller;
     private int offset;
-
-    private GameObject infoWindow = null;
-    private bool isClicked = false;
-
-    public PlanetState State => state;
+    public PlanetState State => planetState;
 
     public void Init(LocationController controller,Planet kind,int offset)
     {
         this.controller = controller;
-        this.planetKind = kind;
+        this.planetState = this.GetComponent<PlanetState>().Init(this,kind);
+        this.planetView = this.GetComponent<PlanetView>().Init(this,planetState);
         this.offset = offset;
+    }
+    public void RemoveInfoWindow()
+    {
+        planetView.BreakInfoPlanetWindow();
     }
 
     private void Start()
     {
-        this.state = gameObject.GetComponent<PlanetState>();
-        this.state.Init(planetKind);
-
-        this.gameObject.name = this.state.Data.Title;
-        this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.SetParent(controller.transform, true);
         this.gameObject.transform.localPosition = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
@@ -43,35 +40,6 @@ public class PlanetController : MonoBehaviour
     {
         SaveRotationAboutSun();
     }
-
-    private void OnMouseEnter()
-    {
-        TryCreateInfoWindow();
-    }
-
-    private void OnMouseDown()
-    {
-        isClicked = true;
-    }
-
-    private void OnMouseExit()
-    {
-        if (infoWindow != null && !isClicked)
-        {
-            RemoveInfoWindow();
-        }
-    }
-
-    public void RemoveInfoWindow()
-    {
-        if (infoWindow != null)
-        {
-            Destroy(infoWindow.gameObject);
-            infoWindow = null;
-            isClicked = false;
-        }
-    }
-
     private void SetRandomPositionAroundSun()
     {
         this.gameObject.transform.RotateAround(controller.transform.position, controller.transform.forward, Random.Range(0, 360));
@@ -79,14 +47,5 @@ public class PlanetController : MonoBehaviour
     private void SaveRotationAboutSun()
     {
         transform.RotateAround(controller.transform.position, controller.transform.forward, 4.0f * Time.fixedDeltaTime);
-    }
-
-    private void TryCreateInfoWindow()
-    {
-        if (infoWindow == null)
-        {
-            infoWindow = new GameObject("InfoWindow");
-            infoWindow.AddComponent<InfoPlanetWindow>().Init(this.gameObject.GetComponent<PlanetController>());
-        }
     }
 }

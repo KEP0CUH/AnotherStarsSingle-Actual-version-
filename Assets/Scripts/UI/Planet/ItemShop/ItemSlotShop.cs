@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class ItemSlotShop : ItemSlot
 {
+    private ItemShopView itemShopView;
     private ItemShop itemShop;
     private bool forBuy;
     public ItemState ItemState => state;
 
-    public ItemSlotShop Init(ItemShop itemShop,Transform parent,ItemState state,bool forBuy)
+    public ItemSlotShop Init(ItemShopView itemShopView,ItemShop itemShop,Transform parent,ItemState state,bool forBuy)
     {
+        this.itemShopView = itemShopView;
         this.itemShop = itemShop;
         this.parent = parent;
         this.state = state;
@@ -56,7 +58,7 @@ public class ItemSlotShop : ItemSlot
         rect.offsetMin = new Vector2(-96, -120);
         rect.offsetMax = new Vector2(96, 70);
 
-        tradeWindow.GetComponent<BuyWindow>().Init(itemShop,tradeWindow.transform, this);
+        tradeWindow.GetComponent<BuyWindow>().Init(itemShopView,itemShop,tradeWindow.transform, this);
     }
 
     private void CreateSellWindow()
@@ -72,6 +74,6 @@ public class ItemSlotShop : ItemSlot
         rect.offsetMin = new Vector2(-96, -120);
         rect.offsetMax = new Vector2(96, 70);
 
-        tradeWindow.AddComponent<SellWindow>().Init(itemShop, tradeWindow.transform, this);
+        tradeWindow.GetComponent<SellWindow>().Init(itemShopView,itemShop, tradeWindow.transform, this);
     }
 }

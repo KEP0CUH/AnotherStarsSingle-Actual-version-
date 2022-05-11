@@ -14,7 +14,7 @@ public class PlayerInventory : IPlayerInventory
 
 
     #region днаюбхрэ б хмбемрюпэ опедлер
-    public void AddItem(ItemState state)
+    public void AddItem(ItemState state,int count = 1, bool needDestroying = false)
     {
         if (state.Data.ItemKind == ItemKind.EmptyDevice || state.Data.ItemKind == ItemKind.EmptyGun)
             return;
@@ -32,8 +32,8 @@ public class PlayerInventory : IPlayerInventory
                 {
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
-                        item.IncreaseNumber();
-                        //Object.Destroy(state.gameObject);
+                        item.IncreaseNumber(count);
+                        if(needDestroying && item.Count <= 0) Object.Destroy(state.gameObject);
                         ShowInventory();
                         return;
                     }
@@ -59,10 +59,9 @@ public class PlayerInventory : IPlayerInventory
             else
             {
                 newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(ItemState));
-                newItemState = newItemStateObj.GetComponent<ItemState>();
-                newItemState.Init(state);
+                newItemState = newItemStateObj.GetComponent<ItemState>().Init(state);
             }
-            //Object.Destroy(state.gameObject);
+            if (needDestroying) Object.Destroy(state.gameObject);
             itemsDic.Add(newItemState.Id, newItemState);
             ShowInventory();
         }
@@ -95,24 +94,24 @@ public class PlayerInventory : IPlayerInventory
 
 
     #region сдюкхрэ сйюгюммши опедлер хг хмбемрюпъ
-    public void RemoveItem(ItemState state)
+    public void RemoveItem(ItemState state,int count = 1,bool needDestroying = false)
     {
         if (itemsDic.ContainsKey(state.Id))
         {
             if (state.IsItem)
             {
-                itemsDic[state.Id].DecreaseNumber();
+                itemsDic[state.Id].DecreaseNumber(count);
                 if (itemsDic[state.Id].Count <= 0)
                 {
                     itemsDic.Remove(state.Id);
-                    //Object.Destroy(state.gameObject);
+                    if(needDestroying) Object.Destroy(state.gameObject);
                 }
                 ShowInventory();
             }
             else
             {
                 itemsDic.Remove(state.Id);
-                //Object.Destroy(state.gameObject);
+                if (needDestroying) Object.Destroy(state.gameObject);
                 ShowInventory();
             }
         }

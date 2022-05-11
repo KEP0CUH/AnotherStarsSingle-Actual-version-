@@ -31,7 +31,7 @@ public class GunState : ItemState
         return this;
     }
 
-    public override void Init(ItemState state)
+    public override ItemState Init(ItemState state)
     {
         switch (state.Data.ItemKind)
         {
@@ -47,6 +47,7 @@ public class GunState : ItemState
         }
 
         base.Init(state);
+        return this;
     }
 
     public void Shoot(Transform parent,GunState gun)

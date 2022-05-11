@@ -231,7 +231,8 @@ public enum ObjectType
     BuyWindow,
     ConfirmBuying,
     ConfirmSelling,
-    ItemShop
+    ItemShop,
+    InfoPlanetWindow
 }
 
 public enum ItemShopType

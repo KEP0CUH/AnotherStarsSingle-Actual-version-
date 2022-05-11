@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class BuyWindow : MonoBehaviour
 {
+    private ItemShopView itemShopView;
     ItemShop itemShop;
     ItemSlotShop itemSlot;
 
@@ -13,10 +14,12 @@ public class BuyWindow : MonoBehaviour
     [SerializeField] private GameObject inputField;
     [SerializeField] private GameObject inputFieldComponentText;
     [SerializeField] private GameObject slider;
+    private Slider sliderComponent;
     [SerializeField] private GameObject buttonYes;
     [SerializeField] private GameObject buttonNo;
-    public void Init(ItemShop shop, Transform parent, ItemSlotShop itemSlot)
+    public void Init(ItemShopView itemShopView,ItemShop shop, Transform parent, ItemSlotShop itemSlot)
     {
+        this.itemShopView = itemShopView;
         this.itemShop = shop;
         this.GetComponent<RectTransform>().SetParent(parent);
         this.itemSlot = itemSlot;
@@ -38,7 +41,7 @@ public class BuyWindow : MonoBehaviour
     {
         itemIcon.GetComponent<Image>().sprite = this.itemSlot.ItemState.Data.Icon;
 
-        var sliderComponent = slider.GetComponent<Slider>();
+        sliderComponent = slider.GetComponent<Slider>();
         sliderComponent.minValue = 1;
         sliderComponent.maxValue = this.itemSlot.ItemState.Count;
         sliderComponent.wholeNumbers = true;
@@ -77,10 +80,16 @@ public class BuyWindow : MonoBehaviour
 
     private void ConfirmBuying()
     {
-        itemShop.RemoveItemState(this.itemSlot.ItemState);
+/*        itemShop.RemoveItemState(this.itemSlot.ItemState);
         Managers.Player.Controller.Inventory.AddItem(this.itemSlot.ItemState);
         itemShop.ShowItems();
+        Object.Destroy(this.gameObject);*/
+
+
+        Managers.Player.Controller.Inventory.AddItem(this.itemSlot.ItemState,(int)sliderComponent.value ,false);
+        itemShopView.RemoveItem(this.itemSlot.ItemState, itemSlot.ItemState.Count,false);
         Object.Destroy(this.gameObject);
+        itemShopView.ShowListItemShop();
     }
 
     private void CancelBuying()

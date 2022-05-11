@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,14 @@ public class PlanetWindow : MonoBehaviour
     private PlanetState planetState;
     private GameObject shipShop = null;
     private GameObject itemShop = null;
+    private Dictionary<int,ItemShopController> itemShops;
+    //private ItemShopController ItemShopController
     public PlanetState PlanetState => planetState;
 
     public void Init(PlanetState state)
     {
         this.planetState = state;
+        itemShops = new Dictionary<int, ItemShopController>();
         Managers.Canvas.AddModule(this.gameObject);
 
         var rect = this.gameObject.GetComponent<RectTransform>();
@@ -72,20 +76,23 @@ public class PlanetWindow : MonoBehaviour
 
     private void CreateItemShop()
     {
-        var buttonItemShop = new GameObject("openItemShop", typeof(Image), typeof(Button));
-        var rect = buttonItemShop.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform, false);
-        rect.anchorMin = new Vector2(1, 0);
-        rect.anchorMax = new Vector2(1, 0);
-        rect.pivot = new Vector2(1, 1);
-        rect.offsetMin = new Vector2(-110, 5);
-        rect.offsetMax = new Vector2(-60, 55);
+        if(this.planetState.Data.ItemShopType != ItemShopType.ShopEmpty)
+        {
+            var buttonItemShop = new GameObject("openItemShop", typeof(Image), typeof(Button));
+            var rect = buttonItemShop.GetComponent<RectTransform>();
+            rect.SetParent(this.gameObject.transform, false);
+            rect.anchorMin = new Vector2(1, 0);
+            rect.anchorMax = new Vector2(1, 0);
+            rect.pivot = new Vector2(1, 1);
+            rect.offsetMin = new Vector2(-110, 5);
+            rect.offsetMax = new Vector2(-60, 55);
 
-        var image = buttonItemShop.GetComponent<Image>();
-        image.sprite = Managers.Resources.DownloadData(IconType.ItemShop);
+            var image = buttonItemShop.GetComponent<Image>();
+            image.sprite = Managers.Resources.DownloadData(IconType.ItemShop);
 
-        var button = buttonItemShop.GetComponent<Button>();
-        button.onClick.AddListener(OnOpenItemShop);
+            var button = buttonItemShop.GetComponent<Button>();
+            button.onClick.AddListener(OnOpenItemShop);
+        }
     }
 
     private void OnRise()
@@ -117,10 +124,15 @@ public class PlanetWindow : MonoBehaviour
 
     private void OnOpenItemShop()
     {
-        if(itemShop == null)
+        if (itemShops.ContainsKey(planetState.Id))
         {
-            var itemShopPrefab = Managers.Resources.DownloadData(ObjectType.ItemShop);
-            itemShop = Instantiate(itemShopPrefab, this.transform);
+            itemShops[planetState.Id].gameObject.SetActive(!itemShops[planetState.Id].gameObject.activeInHierarchy);
+            return;
+        }
+        else
+        {
+            itemShop = new GameObject("ItemShop", typeof(ItemShopController));
+
             var rect = itemShop.GetComponent<RectTransform>();
             rect.SetParent(this.gameObject.transform, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -129,11 +141,8 @@ public class PlanetWindow : MonoBehaviour
             rect.offsetMin = new Vector2(-250, -200);
             rect.offsetMax = new Vector2(250, 200);
 
-            itemShop.GetComponent<ItemShop>().Init();
-        }
-        else if(itemShop != null)
-        {
-            itemShop.SetActive(!itemShop.activeInHierarchy);
+            itemShop.GetComponent<ItemShopController>().Init(planetState.Data.ItemShopType,planetState.Id);
+            itemShops.Add(planetState.Id, itemShop.GetComponent<ItemShopController>());
         }
     }
 

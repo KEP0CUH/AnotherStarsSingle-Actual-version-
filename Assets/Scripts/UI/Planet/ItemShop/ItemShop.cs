@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ItemShop : MonoBehaviour
 {
     [SerializeField] private ItemShopType shopType;
+    private ItemShopView itemShopView;
 
     private List<ItemData> itemsForBuyingData;
     private List<ItemSlotShop> itemsForBuyingSlots;
@@ -17,15 +18,19 @@ public class ItemShop : MonoBehaviour
     [SerializeField] private GameObject listShopItems;
     [SerializeField] private GameObject listPlayerItems;
 
-    public void Init()
+    public ItemShopView ItemShopView => itemShopView;
+    public GameObject ListShopItems => listShopItems;
+    public GameObject ListPlayerItems => listPlayerItems;
+
+    public ItemShop Init(ItemShopView itemShopView)
     {
+        this.itemShopView = itemShopView;
         this.shopType = ItemShopType.GreenShop1;
         var scroll = GetComponent<ScrollRect>();
         scroll.horizontal = true;
         scroll.vertical = false;
         scroll.scrollSensitivity = 15;
 
-        SettingItemShop();
 
 
         itemsForBuyingSlots = new List<ItemSlotShop>();
@@ -33,23 +38,8 @@ public class ItemShop : MonoBehaviour
         playerItems = new Dictionary<int, ItemState>();
         shopItems = new Dictionary<int, ItemState>();
 
-        CreateStatesForData();
-        ShowItems();
-    }
-
-    private void SettingItemShop()
-    {
-        switch(shopType)
-        {
-            case ItemShopType.GreenShop1:
-                itemsForBuyingData = new List<ItemData>();
-                itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.GoldOre));
-                itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.FerrumOre));
-                itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.MultiblasterGun));
-                itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.DesintegratorGun));
-                break;
-        }
-        
+        itemShopView.ShowListItemShop();
+        return this;
     }
 
     public void RemoveItemState(ItemState state)
@@ -78,7 +68,7 @@ public class ItemShop : MonoBehaviour
         foreach(var item in shopItems)
         {
             var newObj = new GameObject($"{item.Value.Data.Title}", typeof(ItemSlotShop));
-            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(this, listShopItems.transform, item.Value.GetComponent<ItemState>(),true));
+            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(itemShopView,this, listShopItems.transform, item.Value.GetComponent<ItemState>(),true));
         }
 
         Debug.Log("Показ инвентаря игрока в магазине предметов");
@@ -88,7 +78,7 @@ public class ItemShop : MonoBehaviour
         foreach (var item in playerItems)
         {
             var newObj = new GameObject($"{item.Value.Data.Title}", typeof(ItemSlotShop));
-            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(this,listPlayerItems.transform,item.Value.GetComponent<ItemState>(),false));
+            itemsForBuyingSlots.Add(newObj.GetComponent<ItemSlotShop>().Init(itemShopView,this,listPlayerItems.transform,item.Value.GetComponent<ItemState>(),false));
         }
 
     }
