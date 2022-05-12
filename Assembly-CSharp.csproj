@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetView.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldState.cs" />
@@ -136,7 +137,6 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

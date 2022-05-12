@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7cc9f7908b7a8439d59194436ca062, type: 3}
+  m_Name: GreenShop2
+  m_EditorClassIdentifier: 
+  itemShopType: 2
+  itemsForBuyingData:
+  - {fileID: 11400000, guid: ef99ac1ad98cec349b011c074c08891f, type: 2}
+  - {fileID: 11400000, guid: 36889d7baf8330b408266ef24ac39d36, type: 2}
+  - {fileID: 11400000, guid: 2fa9a6908eae0764bb80196c46fabe2a, type: 2}
+  - {fileID: 11400000, guid: d7c5b3d51089c00459293cc4f2ebd625, type: 2}
+  - {fileID: 11400000, guid: b0abfb0384624d24c86837c40ec252ee, type: 2}
+  - {fileID: 11400000, guid: 3ef40b3663f05954aad35e2d3100365b, type: 2}

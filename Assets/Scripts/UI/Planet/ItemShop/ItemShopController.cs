@@ -16,6 +16,6 @@ public class ItemShopController : MonoBehaviour
     public void Init(ItemShopType type, int id)
     {
         this.itemShopState = this.gameObject.GetComponent<ItemShopState>().Init(type,id);
-        this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(itemShopState);
+        this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(this,itemShopState);
     }
 }

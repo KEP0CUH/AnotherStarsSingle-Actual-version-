@@ -34,7 +34,7 @@ public class PlanetData : ScriptableObject
                 break;
             case Planet.Earth:
                 title = "Земля";
-                itemShopType = ItemShopType.ShopEmpty;
+                itemShopType = ItemShopType.GreenShop2;
                 break;
 
         }

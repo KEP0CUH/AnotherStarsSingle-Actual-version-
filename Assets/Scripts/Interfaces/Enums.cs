@@ -239,6 +239,6 @@ public enum ItemShopType
 {
     ShopEmpty,
     GreenShop1,
-    //GreenShop2,
+    GreenShop2,
     //GreenShop3,
 }

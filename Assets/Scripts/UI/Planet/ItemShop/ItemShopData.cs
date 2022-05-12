@@ -16,15 +16,24 @@ public class ItemShopData : ScriptableObject
     {
         if (Managers.Resources != null)
         {
+            itemsForBuyingData = new List<ItemData>();
             switch (itemShopType)
             {
                 case ItemShopType.GreenShop1:
-                    itemsForBuyingData = new List<ItemData>();
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.GoldOre));
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.FerrumOre));
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.MultiblasterGun));
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.DesintegratorGun));
                     break;
+                case ItemShopType.GreenShop2:
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.OsmiumOre));
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.MineralOre));
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.TitanOre));
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.FerrumOre));
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.GoldOre));
+                    itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.OrganicOre));
+                    break;
+
             }
         }
 

@@ -18,3 +18,4 @@ MonoBehaviour:
   iconType: 6
   iconPlanet: {fileID: 21300000, guid: dbe9a8009f0324542a753121870de4b8, type: 3}
   iconBG: {fileID: 21300000, guid: 6c0ea8c3d3663d74883168a615774372, type: 3}
+  itemShopType: 2

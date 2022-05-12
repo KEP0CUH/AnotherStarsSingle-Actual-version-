@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemShopView : MonoBehaviour
 {
     private ItemShopState itemShopState;
+    private ItemShopController itemShopController;
 
     private GameObject prefabItemShop;
     private GameObject objectItemShop;
@@ -18,11 +19,13 @@ public class ItemShopView : MonoBehaviour
     private List<ItemSlotShop> playerItemsSlots;
 
     public ItemShopState ItemShopState => ItemShopState;
+    public ItemShopController ItemShopController => itemShopController;
 
-    public ItemShopView Init(ItemShopState state)
+    public ItemShopView Init(ItemShopController controller,ItemShopState state)
     {
         if (state.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
+            this.itemShopController = controller;
             this.itemShopState = state;
 
             playerItems = new Dictionary<int, ItemState>();
@@ -32,6 +35,7 @@ public class ItemShopView : MonoBehaviour
 
             OpenItemShop();
             CreateStatesForShopItems();
+            ShowListItemShop();
         }
         return this;
     }

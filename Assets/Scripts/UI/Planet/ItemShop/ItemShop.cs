@@ -17,6 +17,7 @@ public class ItemShop : MonoBehaviour
 
     [SerializeField] private GameObject listShopItems;
     [SerializeField] private GameObject listPlayerItems;
+    [SerializeField] private GameObject buttonClose;
 
     public ItemShopView ItemShopView => itemShopView;
     public GameObject ListShopItems => listShopItems;
@@ -37,7 +38,7 @@ public class ItemShop : MonoBehaviour
 
         playerItems = new Dictionary<int, ItemState>();
         shopItems = new Dictionary<int, ItemState>();
-
+        buttonClose.GetComponent<Button>().onClick.AddListener(() => itemShopView.ItemShopController.gameObject.SetActive(false));
         itemShopView.ShowListItemShop();
         return this;
     }
