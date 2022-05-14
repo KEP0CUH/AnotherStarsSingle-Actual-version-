@@ -87,6 +87,9 @@ public enum ShipKind
     GreenHeavyIstrebitel,
     GreenLinkor,
     GreenFrigate,
+    PirateIndus,
+    PirateIstrebitel,
+    PirateFrigate,
 }
 
 public enum SoundKind
@@ -120,6 +123,16 @@ public enum EntityType
 public enum MobKind
 {
     PirateIndus1,
+    PirateIstrebitel1,
+    PirateFrigate1,
+    PirateScience,
+}
+
+public enum MobSpawnerKind
+{
+    pirateSpawner1,
+    pirateSpawner2,
+    pirateSpawner3,
 }
 
 public enum AsteroidType

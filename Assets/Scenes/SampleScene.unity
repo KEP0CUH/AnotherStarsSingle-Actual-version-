@@ -292,7 +292,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -414,6 +414,7 @@ MonoBehaviour:
   asteroidFieldsTypes: 01000000020000000300000004000000
   sunType: 1
   mobSpawner: {fileID: 0}
+  mobSpawnerKind: 0
 --- !u!114 &650259870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56507d0d48cfa0419c1ac35477d11d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobs: 00000000000000000000000000000000
+  mobs: 00000000010000000000000000000000
 --- !u!1 &674429199
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +459,7 @@ Transform:
   - {fileID: 1184439887}
   - {fileID: 1514895620}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &945186596
 GameObject:
@@ -556,49 +557,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1037568377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1037568379}
-  - component: {fileID: 1037568378}
-  m_Layer: 0
-  m_Name: CircleGeneration
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1037568378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1037568377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5765e8a845f38c44092f1d6896f42db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1037568379
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1037568377}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.71561193, y: -0.09990138, z: -1.1364471}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184439883
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +569,7 @@ GameObject:
   - component: {fileID: 1184439886}
   - component: {fileID: 1184439885}
   - component: {fileID: 1184439884}
+  - component: {fileID: 1184439888}
   m_Layer: 0
   m_Name: Location2
   m_TagString: Untagged
@@ -647,6 +606,7 @@ MonoBehaviour:
   asteroidFieldsTypes: 
   sunType: 3
   mobSpawner: {fileID: 0}
+  mobSpawnerKind: 1
 --- !u!212 &1184439886
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -713,6 +673,19 @@ Transform:
   m_Father: {fileID: 674429200}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1184439888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184439883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56507d0d48cfa0419c1ac35477d11d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobs: 01000000020000000100000002000000
 --- !u!1 &1514895619
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +698,7 @@ GameObject:
   - component: {fileID: 1514895623}
   - component: {fileID: 1514895622}
   - component: {fileID: 1514895621}
+  - component: {fileID: 1514895624}
   m_Layer: 0
   m_Name: Location3
   m_TagString: Untagged
@@ -775,6 +749,7 @@ MonoBehaviour:
   asteroidFieldsTypes: 
   sunType: 2
   mobSpawner: {fileID: 0}
+  mobSpawnerKind: 1
 --- !u!212 &1514895623
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -827,6 +802,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1514895624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514895619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56507d0d48cfa0419c1ac35477d11d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobs: 0100000001000000
 --- !u!1 &1842564645
 GameObject:
   m_ObjectHideFlags: 0

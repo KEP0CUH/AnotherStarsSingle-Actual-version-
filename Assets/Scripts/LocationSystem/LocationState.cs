@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 
+[RequireComponent(typeof(MobSpawner))]
 public class LocationState : MonoBehaviour
 {
     [SerializeField] private LocationData data;
@@ -11,6 +12,8 @@ public class LocationState : MonoBehaviour
     [SerializeField] private List<AsteroidFieldType> asteroidFieldsTypes = new List<AsteroidFieldType>();
     [SerializeField] private SunType sunType;
     [SerializeField] private MobSpawner mobSpawner;
+
+    [SerializeField] private MobSpawnerKind mobSpawnerKind;
 
     private LocationController controller;
 
@@ -21,10 +24,10 @@ public class LocationState : MonoBehaviour
     {
         this.controller = controller;
         this.data = Managers.Resources.DownloadData(location);
-        //this.mobSpawner = this.gameObject.GetComponent<MobSpawner>();
+        this.mobSpawner = this.gameObject.GetComponent<MobSpawner>();
         SpawnPlanets();
         SpawnAsteroidFieldIfHave();
-        //if(this.mobSpawner != null) SpawnMobs();
+        this.mobSpawner.Init(mobSpawnerKind);
         this.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(sunType);
 
         CanvasUI.GlobalMap.AddLocationOnMap(this);
@@ -32,7 +35,7 @@ public class LocationState : MonoBehaviour
 
     private void SpawnMobs()
     {
-        //this.mobSpawner.SpawnMobs();
+        this.mobSpawner.SpawnMobs();
     }
 
     private void SpawnPlanets()

@@ -8,12 +8,14 @@ using UnityEngine;
 public class MobView : MonoBehaviour
 {
     private MobState mobState;
+    private MobController mobController;
 
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
 
-    public MobView Init(MobState state)
+    public MobView Init(MobController mobController,MobState state)
     {
+        this.mobController = mobController;
         this.mobState = state;
 
         this.gameObject.GetComponent<SpriteRenderer>().sprite = state.ShipState.Data.Icon;
@@ -39,6 +41,17 @@ public class MobView : MonoBehaviour
         {
             CloseInfoWindow();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<AmmoController>())
+        {
+            Debug.Log("Враг повреждается");
+            Object.Destroy(other.gameObject);
+            this.mobController.ChangeHealth(-1 * other.GetComponent<AmmoController>().AmmoState.Data.BaseDamage);
+        }
+
     }
 
     private void CreateInfoWindow()

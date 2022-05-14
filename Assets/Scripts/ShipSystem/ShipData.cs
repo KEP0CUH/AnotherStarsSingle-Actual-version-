@@ -42,6 +42,21 @@ public class ShipData : ScriptableObject
                 title = "Корвет";
                 description = "";
                 break;
+            case ShipKind.PirateIndus:
+                name = "Indus";
+                title = "Индустриальный";
+                description = "";
+                break;
+            case ShipKind.PirateIstrebitel:
+                name = "Istrebitel";
+                title = "Истребитель";
+                description = "";
+                break;
+            case ShipKind.PirateFrigate:
+                name = "Frigate";
+                title = "Фрегат";
+                description = "";
+                break;
         }
     }
 

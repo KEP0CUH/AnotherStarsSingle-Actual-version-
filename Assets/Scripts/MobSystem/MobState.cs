@@ -12,17 +12,54 @@ public class MobState : MonoBehaviour
     private MobData data;
     private ShipState shipState;
 
+    private MobController mobController;
+    private int health;
+    private int maxHealth;
+
 
     public int Id => id;
     public MobData Data => data;
     public ShipState ShipState => shipState;
 
-    public MobState Init(MobKind kind)
+    public int Health => health;
+    public int MaxHealth => maxHealth;
+
+    public MobState Init(MobController controller,MobKind kind)
     {
+        this.mobController = controller;
         this.data = Managers.Resources.DownloadData(kind);
         this.shipState = this.gameObject.GetComponent<ShipState>().Init(data.Ship);
         id = GetId();
+
+        switch(kind)
+        {
+            case MobKind.PirateIndus1:
+                maxHealth = 350;
+                break;
+            case MobKind.PirateFrigate1:
+                maxHealth = 1200;
+                break;
+            case MobKind.PirateIstrebitel1:
+                maxHealth = 700;
+                break;
+        }
+        this.health = maxHealth;
+
         return this;
+    }
+
+    public void ChangeHealth(int value)
+    {
+        this.health += value;
+        if(this.health < 0)
+        {
+            this.health = 0;
+            mobController.KillMob(this.id);
+        }
+        else if(this.health >= maxHealth)
+        {
+            this.health = maxHealth;
+        }
     }
 
     private static int GetId()
@@ -30,4 +67,5 @@ public class MobState : MonoBehaviour
         ID++;
         return ID;
     }
+
 }

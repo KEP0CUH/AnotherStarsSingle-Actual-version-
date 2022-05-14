@@ -13,6 +13,7 @@ public class MobData : ScriptableObject
 
     public string Title => title;
     public ShipKind Ship => ship;
+    public MobKind MobKind => kind;
 
     private void OnValidate()
     {
@@ -22,9 +23,19 @@ public class MobData : ScriptableObject
         {
             case MobKind.PirateIndus1:
                 title = "PirateIndus1";
-                ship = ShipKind.GreenKorvet;
+                ship = ShipKind.PirateIndus;
                 guns.Add(ItemKind.PulsarGun);
                 devices.Add(ItemKind.TourbineDevice);
+                break;
+            case MobKind.PirateIstrebitel1:
+                title = "PirateIndus1";
+                ship = ShipKind.PirateIstrebitel;
+                break;
+            case MobKind.PirateFrigate1:
+                title = "PirateFrigate1";
+                guns.Add(ItemKind.RezakGun);
+                devices.Add(ItemKind.PhotonGun);
+                ship = ShipKind.PirateFrigate;
                 break;
         }
     }

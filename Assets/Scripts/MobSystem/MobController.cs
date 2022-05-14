@@ -13,14 +13,29 @@ public class MobController : MonoBehaviour
 
     private GameObject spawner;
 
+    public MobState MobState => mobState;
+    public GameObject Spawner => spawner;
+
     public void Init(Transform spawner,MobKind kind)
     {
-        this.mobState = this.gameObject.GetComponent<MobState>().Init(kind);
-        this.mobView = this.gameObject.GetComponent<MobView>().Init(this.mobState);
+        this.mobState = this.gameObject.GetComponent<MobState>().Init(this,kind);
+        this.mobView = this.gameObject.GetComponent<MobView>().Init(this,this.mobState);
         this.spawner = spawner.gameObject;
 
         this.moveSpeed = 5.0f / Constants.TICKS_PER_SEC;
-        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localPosition = new Vector3(0, 0, -10);
+        transform.position = new Vector3(transform.position.x,transform.position.y, -10);
+    }
+
+    public void ChangeHealth(int value)
+    {
+        Debug.Log($"Моб повредился {mobState.Health} / {mobState.MaxHealth}");
+        mobState.ChangeHealth(value);
+    }
+
+    public void KillMob(int id)
+    {
+        this.Spawner.GetComponent<MobSpawner>().RemoveMob(id);
     }
 
     #region Movement
@@ -71,6 +86,7 @@ public class MobController : MonoBehaviour
         }
 
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.fixedDeltaTime);
+        transform.localPosition -= 10 * Vector3.forward;
 
         if (Mathf.Abs(transform.localPosition.x - difference.x) < 0.1 && Mathf.Abs(transform.localPosition.y - difference.y) < 0.1)
         {
