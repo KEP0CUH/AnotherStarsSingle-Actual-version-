@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(LocationState))]
 
+[RequireComponent(typeof(LocationState))]
+[RequireComponent(typeof(LocationView))]
 public class LocationController : MonoBehaviour
 {
     private LocationState state;
-    private LocationController controller;
+    private LocationView view;
+    private LocationController locationController;
+    [SerializeField] private Location location;
 
     public LocationState State => state;
+    public LocationView View => view;
 
     private void Start()
     {
-        this.controller = GetComponent<LocationController>();
+        this.locationController = GetComponent<LocationController>();
 
-        this.state = this.gameObject.GetComponent<LocationState>();
-        this.state.Init(controller,Location.Krinul);
-
-        this.gameObject.name = this.state.Data.Title;
+        this.state = this.gameObject.GetComponent<LocationState>().Init(locationController, location); ;
+        this.view = this.gameObject.GetComponent<LocationView>().Init(locationController);
     }
 }

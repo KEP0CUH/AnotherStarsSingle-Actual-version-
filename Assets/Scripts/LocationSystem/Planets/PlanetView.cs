@@ -3,26 +3,24 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlanetView : MonoBehaviour
 {
-    private PlanetController planetController;
-    private PlanetState planetState;
+    private PlanetController controller;
 
     private GameObject infoPlanetWindowPrefab;
     private static GameObject infoPlanetWindowObject;
     private bool isClicked = false;
-    public PlanetView Init(PlanetController controller,PlanetState state)
+    public PlanetView Init(PlanetController controller)
     {
-        this.planetController = controller;
-        this.planetState = state;
+        this.controller = controller;
 
-        this.gameObject.name                            = planetState.Data.Title;
-        this.GetComponent<SpriteRenderer>().sprite      = planetState.Data.Icon;
+        this.gameObject.name                            = this.controller.State.Data.Title;
+        this.GetComponent<SpriteRenderer>().sprite      = this.controller.State.Data.Icon;
 
         this.infoPlanetWindowPrefab = Managers.Resources.DownloadData(ObjectType.InfoPlanetWindow);
 
         return this;
     }
 
-    public void BreakInfoPlanetWindow()
+    public void CloseInfoPlanetWindow()
     {
         if (infoPlanetWindowObject != null)
         {
@@ -34,7 +32,7 @@ public class PlanetView : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        CreateInfoPlanetWindow();
+        OpenInfoPlanetWindow();
     }
     private void OnMouseDown()
     {
@@ -44,10 +42,10 @@ public class PlanetView : MonoBehaviour
     {
         if(isClicked == false)
         {
-            BreakInfoPlanetWindow();
+            CloseInfoPlanetWindow();
         }
     }
-    private void CreateInfoPlanetWindow()
+    private void OpenInfoPlanetWindow()
     {
         if(infoPlanetWindowObject != null)
         {
@@ -58,7 +56,7 @@ public class PlanetView : MonoBehaviour
         if (infoPlanetWindowObject == null)
         {
             infoPlanetWindowObject = new GameObject("InfoPlanetWindow", typeof(InfoPlanetWindow));
-            infoPlanetWindowObject.GetComponent<InfoPlanetWindow>().Init(planetController);
+            infoPlanetWindowObject.GetComponent<InfoPlanetWindow>().Init(controller);
 
             // Сверху скрипт сам создает окошко, а снизу спавн через префаб. Через префаб большая гибкость, но через скрипт "каменнее".
 

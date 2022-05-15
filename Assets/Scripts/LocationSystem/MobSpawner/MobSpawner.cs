@@ -70,14 +70,14 @@ public class MobSpawner : MonoBehaviour
     {
         if(spawnedMobs.ContainsKey(id))
         {
-            SpawnMob(spawnedMobs[id].MobState.Data.MobKind);
+            RespawnMob(spawnedMobs[id].MobState.Data.MobKind);
             Object.Destroy(spawnedMobs[id].gameObject);
             spawnedMobs.Remove(id);
             currentNumMobs--;
         }
     }
 
-    private void SpawnMob(MobKind kind)
+    private void RespawnMob(MobKind kind)
     {
         this.currentNumMobs++;
         var mob = new GameObject("Mob", typeof(MobController));

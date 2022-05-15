@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -22,11 +20,5 @@ public class AsteroidFieldController : MonoBehaviour
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.parent = locationController.gameObject.transform;
         this.gameObject.transform.position = new Vector3(offset * quarter.x, offset * quarter.y, 0) + new Vector3(locationController.transform.position.x, locationController.transform.position.y, 0);
-    }
-
-    private void Start()
-    {
-        
-        //this.gameObject.transform.RotateAround(locationController.transform.position, new Vector3(0, 0, 1), Random.Range(0, 360));
     }
 }

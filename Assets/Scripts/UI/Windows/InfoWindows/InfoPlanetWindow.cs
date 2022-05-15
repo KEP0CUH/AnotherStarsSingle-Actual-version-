@@ -149,7 +149,6 @@ public class InfoPlanetWindow : MonoBehaviour
 
     private void OnLand()
     {
-
         if (controller.GetComponent<AsteroidFieldView>())
         {
             Managers.Player.LandOnAsteroidField(controller.transform,controller.GetComponent<AsteroidFieldView>().Quarter);
@@ -167,6 +166,8 @@ public class InfoPlanetWindow : MonoBehaviour
             var planet = new GameObject("PlanetInside", typeof(RectTransform));
             planet.AddComponent<PlanetWindow>().Init(planetState);
             planet.GetComponent<RectTransform>().SetAsFirstSibling();
+
+            //controller.GetComponent<PlanetController>().CreateItemShop();
 
             Close();
         }

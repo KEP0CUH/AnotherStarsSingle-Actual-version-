@@ -9,6 +9,7 @@ public class PlanetState : MonoBehaviour
     [SerializeField] private PlanetData data;
     private PlanetController planetController;
     private ItemShopController itemShopController;
+    private GameObject itemShop = null;
 
     public int Id => id;
     public PlanetData Data => data;
@@ -19,9 +20,30 @@ public class PlanetState : MonoBehaviour
         this.id = GetId();
         this.planetController = controller;
         this.data = Managers.Resources.DownloadData(kind);
-        this.CreateItemShop();
+        //this.CreateItemShop();
 
         return this;
+    }
+
+
+    public void CreateItemShop()
+    {
+        if(itemShop == null)
+        {
+            itemShop = new GameObject("ItemShop", typeof(ItemShopController));
+            itemShopController = itemShop.GetComponent<ItemShopController>();
+
+            var rect = itemShop.GetComponent<RectTransform>();
+            Managers.Canvas.AddModule(itemShop);
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.offsetMin = new Vector2(-250, -200);
+            rect.offsetMax = new Vector2(250, 200);
+
+            itemShop.GetComponent<ItemShopController>().Init(this.Data.ItemShopType, this.Id);
+            itemShop.SetActive(false);
+        }
     }
 
     public void SwitchItemShop()
@@ -37,26 +59,10 @@ public class PlanetState : MonoBehaviour
         }
     }
 
+
     private int GetId()
     {
         ID++;
         return ID;
-    }
-
-    private void CreateItemShop()
-    {
-        var itemShop = new GameObject("ItemShop", typeof(ItemShopController));
-        itemShopController = itemShop.GetComponent<ItemShopController>();
-
-        var rect = itemShop.GetComponent<RectTransform>();
-        Managers.Canvas.AddModule(itemShop);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(-250, -200);
-        rect.offsetMax = new Vector2(250, 200);
-
-        itemShop.GetComponent<ItemShopController>().Init(this.Data.ItemShopType, this.Id);
-        itemShop.SetActive(false);
     }
 }

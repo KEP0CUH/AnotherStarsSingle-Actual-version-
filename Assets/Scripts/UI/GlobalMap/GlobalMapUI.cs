@@ -50,7 +50,7 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
 
 
         var image = newLocation.GetComponent<Image>();
-        image.sprite = location.GetComponent<SpriteRenderer>().sprite;
+        image.sprite = Managers.Resources.DownloadData(location.Data.SunType);
 
 
         var button = newLocation.GetComponent<Button>();

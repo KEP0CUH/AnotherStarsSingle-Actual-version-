@@ -376,6 +376,7 @@
 "Assets/Scripts/LocationSystem/LocationController.cs"
 "Assets/Scripts/LocationSystem/LocationData.cs"
 "Assets/Scripts/LocationSystem/LocationState.cs"
+"Assets/Scripts/LocationSystem/LocationView.cs"
 "Assets/Scripts/LocationSystem/MobSpawner/MobSpawner.cs"
 "Assets/Scripts/LocationSystem/Planets/PlanetController.cs"
 "Assets/Scripts/LocationSystem/Planets/PlanetData.cs"

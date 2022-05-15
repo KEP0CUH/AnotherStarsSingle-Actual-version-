@@ -125,26 +125,7 @@ public class PlanetWindow : MonoBehaviour
 
     private void OnOpenItemShop()
     {
-        /*        if (itemShops.ContainsKey(planetState.Id))
-                {
-                    itemShops[planetState.Id].gameObject.SetActive(!itemShops[planetState.Id].gameObject.activeInHierarchy);
-                    return;
-                }
-                else
-                {
-                    itemShop = new GameObject("ItemShop", typeof(ItemShopController));
-
-                    var rect = itemShop.GetComponent<RectTransform>();
-                    rect.SetParent(this.gameObject.transform, false);
-                    rect.anchorMin = new Vector2(0.5f, 0.5f);
-                    rect.anchorMin = new Vector2(0.5f, 0.5f);
-                    rect.pivot = new Vector2(0.5f, 0.5f);
-                    rect.offsetMin = new Vector2(-250, -200);
-                    rect.offsetMax = new Vector2(250, 200);
-
-                    itemShop.GetComponent<ItemShopController>().Init(planetState.Data.ItemShopType,planetState.Id);
-                    itemShops.Add(planetState.Id, itemShop.GetComponent<ItemShopController>());
-                }*/
+        planetState.CreateItemShop();
         this.planetState.SwitchItemShop();
     }
 

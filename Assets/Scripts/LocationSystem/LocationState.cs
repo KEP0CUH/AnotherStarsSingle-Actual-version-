@@ -7,35 +7,32 @@ using UnityEngine;
 [RequireComponent(typeof(MobSpawner))]
 public class LocationState : MonoBehaviour
 {
-    [SerializeField] private LocationData data;
-    [SerializeField] private List<Planet> planets;
+    [SerializeField] private LocationData locationData;
+    
     [SerializeField] private List<AsteroidFieldType> asteroidFieldsTypes = new List<AsteroidFieldType>();
-    [SerializeField] private SunType sunType;
     [SerializeField] private MobSpawner mobSpawner;
 
-    [SerializeField] private MobSpawnerKind mobSpawnerKind;
+
 
     private LocationController controller;
+    private List<Planet> planets;
 
+    public LocationData Data => locationData;
 
-    public LocationData Data => data;
-
-    public void Init(LocationController controller,Location location)
+    public LocationState Init(LocationController controller,Location location)
     {
         this.controller = controller;
-        this.data = Managers.Resources.DownloadData(location);
+        this.locationData = Managers.Resources.DownloadData(location);
         this.mobSpawner = this.gameObject.GetComponent<MobSpawner>();
+        this.planets = locationData.Planets;
         SpawnPlanets();
         SpawnAsteroidFieldIfHave();
-        this.mobSpawner.Init(mobSpawnerKind);
-        this.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(sunType);
+        this.mobSpawner.Init(locationData.MobSpawnerKind);
+
 
         CanvasUI.GlobalMap.AddLocationOnMap(this);
-    }
 
-    private void SpawnMobs()
-    {
-        this.mobSpawner.SpawnMobs();
+        return this;
     }
 
     private void SpawnPlanets()
@@ -52,7 +49,7 @@ public class LocationState : MonoBehaviour
         for(int i = 0; i < asteroidFieldsTypes.Count; i++)
         {
             var type = asteroidFieldsTypes[i];
-            if (asteroidFieldsTypes[i] == AsteroidFieldType.EmptyField) continue;
+            if (type == AsteroidFieldType.EmptyField) continue;
 
             var quarter = new Vector2();
             switch(i)
@@ -67,7 +64,7 @@ public class LocationState : MonoBehaviour
                     break;
             }
 
-            var newAsteroidField = new GameObject($"{asteroidFieldsTypes}");
+            var newAsteroidField = new GameObject($"{type}");
             newAsteroidField.AddComponent<AsteroidFieldController>().Init(controller, type, 12,quarter);
         }
     }
