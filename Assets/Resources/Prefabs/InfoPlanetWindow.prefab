@@ -53,6 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc19711a5d7081d49bcee9962ccef9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 6498427778958873342}
+  title: {fileID: 7117864125162459896}
+  buttonClose: {fileID: 4428427266171048954}
+  buttonLand: {fileID: 2198877214155140548}
 --- !u!222 &1020671274470497636
 CanvasRenderer:
   m_ObjectHideFlags: 0

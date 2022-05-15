@@ -8,7 +8,7 @@ public class SellWindow : MonoBehaviour
 {
     ItemShop itemShop;
     private ItemShopView itemShopView; 
-    ItemSlotShop itemSlot;
+    ItemCell itemCell;
 
     [SerializeField] private GameObject itemIcon;
     [SerializeField] private GameObject inputField;
@@ -18,13 +18,12 @@ public class SellWindow : MonoBehaviour
     [SerializeField] private GameObject buttonYes;
     [SerializeField] private GameObject buttonNo;
 
-    public void Init(ItemShopView itemShopView,ItemShop shop, Transform parent, ItemSlotShop itemSlot)
+    public void Init(ItemShopView itemShopView, Transform parent, ItemCell itemCell)
     {
         this.itemShopView = itemShopView;
-        this.itemShop = shop;
         this.GetComponent<RectTransform>().SetParent(parent);
-        this.itemSlot = itemSlot;
-        SettingElements();
+        this.itemCell = itemCell;
+        SettingElements(itemCell.State);
     }
 
     private void Update()
@@ -39,13 +38,13 @@ public class SellWindow : MonoBehaviour
         }
     }
 
-    private void SettingElements()
+    private void SettingElements(ItemState state)
     {
-        itemIcon.GetComponent<Image>().sprite = this.itemSlot.ItemState.Data.Icon;
+        itemIcon.GetComponent<Image>().sprite = state.Data.Icon;
 
         sliderComponent = slider.GetComponent<Slider>();
         sliderComponent.minValue = 1;
-        sliderComponent.maxValue = this.itemSlot.ItemState.Count;
+        sliderComponent.maxValue = state.Count;
         sliderComponent.wholeNumbers = true;
         sliderComponent.value = 1;
         sliderComponent.onValueChanged.AddListener((content) => UpdateTextField(content));
@@ -81,12 +80,8 @@ public class SellWindow : MonoBehaviour
 
     private void ConfirmSelling()
     {
-        //itemShop.AddItem(this.itemSlot.ItemState);
-        itemShopView.AddItem(this.itemSlot.ItemState,(int)sliderComponent.value);
-        Managers.Player.Controller.Inventory.RemoveItem(this.itemSlot.ItemState,(int)sliderComponent.value);
-        //itemShop.ShowItems();
-
-        //itemShop.AddItem()
+        itemShopView.AddItem(this.itemCell.State, (int)sliderComponent.value);
+        Managers.Player.Controller.Inventory.RemoveItem(this.itemCell.State, (int)sliderComponent.value);
         Object.Destroy(this.gameObject);
         itemShopView.ShowListItemShop();
     }

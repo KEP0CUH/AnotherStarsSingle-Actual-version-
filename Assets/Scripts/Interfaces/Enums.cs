@@ -128,7 +128,7 @@ public enum MobKind
     PirateScience,
 }
 
-public enum MobSpawnerKind
+public enum MobSpawnerType
 {
     pirateSpawner1,
     pirateSpawner2,
@@ -245,7 +245,9 @@ public enum ObjectType
     ConfirmBuying,
     ConfirmSelling,
     ItemShop,
-    InfoPlanetWindow
+    InfoPlanetWindow,
+    InfoAsteroidWindow,
+    ItemCell
 }
 
 public enum ItemShopType

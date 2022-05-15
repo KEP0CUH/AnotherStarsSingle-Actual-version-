@@ -13,19 +13,19 @@ public class MobSpawner : MonoBehaviour
     private int maxNumMobs = 4;
 
 
-    public void Init(MobSpawnerKind kind)
+    public void Init(MobSpawnerType kind)
     {
         mobs = new List<MobKind>();
         spawnedMobs = new Dictionary<int,MobController>();
         switch (kind)
         {
-            case MobSpawnerKind.pirateSpawner1:
+            case MobSpawnerType.pirateSpawner1:
                 maxNumMobs = 3;
                 mobs.Add(MobKind.PirateIndus1);
                 mobs.Add(MobKind.PirateIndus1);
                 mobs.Add(MobKind.PirateIndus1);
                 break;
-            case MobSpawnerKind.pirateSpawner2:
+            case MobSpawnerType.pirateSpawner2:
                 maxNumMobs = 4;
                 mobs.Add(MobKind.PirateIndus1);
                 mobs.Add(MobKind.PirateFrigate1);

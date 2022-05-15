@@ -55,13 +55,12 @@ public class PlanetView : MonoBehaviour
 
         if (infoPlanetWindowObject == null)
         {
-            infoPlanetWindowObject = new GameObject("InfoPlanetWindow", typeof(InfoPlanetWindow));
+            var infoPlanetPrefab = Managers.Resources.DownloadData(ObjectType.InfoPlanetWindow);
+
+            infoPlanetWindowObject = Instantiate(infoPlanetPrefab);
+            Managers.Canvas.AddModule(infoPlanetWindowObject);
             infoPlanetWindowObject.GetComponent<InfoPlanetWindow>().Init(controller);
 
-            // Сверху скрипт сам создает окошко, а снизу спавн через префаб. Через префаб большая гибкость, но через скрипт "каменнее".
-
-            /*            infoPlanetWindowObject = Instantiate(infoPlanetWindowPrefab, planetController.transform);
-                        infoPlanetWindowObject.GetComponent<InfoPlanetWindow>().Init(planetController);*/
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ItemShopController))]
 public class PlanetState : MonoBehaviour
 {
     private static int ID = 1;
@@ -20,7 +21,8 @@ public class PlanetState : MonoBehaviour
         this.id = GetId();
         this.planetController = controller;
         this.data = Managers.Resources.DownloadData(kind);
-        //this.CreateItemShop();
+        this.itemShopController = this.gameObject.GetComponent<ItemShopController>();
+        itemShopController.Init(Data.ItemShopType, id);
 
         return this;
     }
@@ -33,8 +35,9 @@ public class PlanetState : MonoBehaviour
             itemShop = new GameObject("ItemShop", typeof(ItemShopController));
             itemShopController = itemShop.GetComponent<ItemShopController>();
 
-            var rect = itemShop.GetComponent<RectTransform>();
             Managers.Canvas.AddModule(itemShop);
+
+            var rect = itemShop.GetComponent<RectTransform>();
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
@@ -48,14 +51,17 @@ public class PlanetState : MonoBehaviour
 
     public void SwitchItemShop()
     {
-        if(itemShopController.gameObject.activeInHierarchy)
+        if(itemShop != null)
         {
-            itemShopController.gameObject.SetActive(false);
-        }
-        else
-        {
-            itemShopController.ItemShopView.ShowListItemShop();
-            itemShopController.gameObject.SetActive(true);
+            if (itemShopController.gameObject.activeInHierarchy)
+            {
+                itemShopController.gameObject.SetActive(false);
+            }
+            else
+            {
+                itemShopController.View.ShowListItemShop();
+                itemShopController.gameObject.SetActive(true);
+            }
         }
     }
 

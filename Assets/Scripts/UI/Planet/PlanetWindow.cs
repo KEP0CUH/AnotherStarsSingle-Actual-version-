@@ -97,8 +97,8 @@ public class PlanetWindow : MonoBehaviour
 
     private void OnRise()
     {
+        this.planetState.ItemShopController.CloseItemShop();
         Managers.Player.Rise();
-        this.planetState.SwitchItemShop();
         Close();
     }
 

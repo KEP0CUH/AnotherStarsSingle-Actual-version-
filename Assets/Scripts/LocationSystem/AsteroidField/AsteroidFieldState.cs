@@ -7,8 +7,9 @@ public class AsteroidFieldState : MonoBehaviour
     [SerializeField] private AsteroidFieldData data;
     public AsteroidFieldData Data => data;
 
-    public void Init(AsteroidFieldType type)
+    public AsteroidFieldState Init(AsteroidFieldType type)
     {
         this.data = Managers.Resources.DownloadData(type);
+        return this;
     }
 }

@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class ItemShopView : MonoBehaviour
 {
-    private ItemShopState itemShopState;
     private ItemShopController itemShopController;
 
-    private GameObject prefabItemShop;
-    private GameObject objectItemShop;
+    private GameObject itemShopObject;
+    private ItemShop itemShopComponent;
 
-    private ItemShop itemShop;
-
-    private Dictionary<int, ItemState> playerItems;
     private Dictionary<int, ItemState> shopItems;
+    private Dictionary<int, ItemState> playerItems;
 
-    private List<ItemSlotShop> shopItemsSlots;
-    private List<ItemSlotShop> playerItemsSlots;
+    private List<ItemCell> shopItemsCells;
+    private List<ItemCell> playerItemsCells;
 
-    public ItemShopState ItemShopState => ItemShopState;
-    public ItemShopController ItemShopController => itemShopController;
-
-    public ItemShopView Init(ItemShopController controller,ItemShopState state)
+    public ItemShopController controller => itemShopController;
+    public ItemShop Shop => itemShopComponent;
+    public ItemShopView Init(ItemShopController controller)
     {
-        if (state.Data.ItemShopType != ItemShopType.ShopEmpty)
+        if (controller.State.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
             this.itemShopController = controller;
-            this.itemShopState = state;
 
             playerItems = new Dictionary<int, ItemState>();
             shopItems = new Dictionary<int, ItemState>();
-            shopItemsSlots = new List<ItemSlotShop>();
-            playerItemsSlots = new List<ItemSlotShop>();
+            shopItemsCells = new List<ItemCell>();
+            playerItemsCells = new List<ItemCell>();
 
             OpenItemShop();
             CreateStatesForShopItems();
@@ -40,13 +35,21 @@ public class ItemShopView : MonoBehaviour
         return this;
     }
 
-    private void OpenItemShop()
+    public void Close()
     {
-        if (prefabItemShop == null)
+        if(itemShopObject != null)
+        {
+            Object.Destroy(itemShopObject);
+            itemShopObject = null;
+        }
+    }
+    public void OpenItemShop()
+    {
+        if (itemShopObject == null)
         {
             var prefabItemShop = Managers.Resources.DownloadData(ObjectType.ItemShop);
-            objectItemShop = Instantiate(prefabItemShop, this.transform);
-            var rect = objectItemShop.GetComponent<RectTransform>();
+            itemShopObject = Instantiate(prefabItemShop, this.transform);
+            var rect = itemShopObject.GetComponent<RectTransform>();
             rect.SetParent(this.gameObject.transform, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -54,17 +57,15 @@ public class ItemShopView : MonoBehaviour
             rect.offsetMin = new Vector2(-250, -200);
             rect.offsetMax = new Vector2(250, 200);
 
-            itemShop = objectItemShop.GetComponent<ItemShop>().Init(this);
-        }
-        else if (objectItemShop != null)
-        {
-            objectItemShop.SetActive(!objectItemShop.activeInHierarchy);
+            itemShopComponent = itemShopObject.GetComponent<ItemShop>().Init(this);
         }
     }
 
+
+
     private void CreateStatesForShopItems()
     {
-        foreach (var itemData in this.itemShopState.Data.ItemsForBuyingData)
+        foreach (var itemData in controller.State.Data.ItemsForBuyingData)
         {
             var newItemStateObject = new GameObject("shopItem");
             if (itemData.IsWeapon())
@@ -171,32 +172,44 @@ public class ItemShopView : MonoBehaviour
     {
         Debug.Log("«десь надо спавнить слоты дл€ состо€ние в словаре shopItems");
 
-        foreach(var item in shopItemsSlots)
+        foreach(var item in shopItemsCells)
         {
-            if(item != null)
+            if (item != null)
             {
                 Object.Destroy(item.gameObject);
             }
         }
+        shopItemsCells.Clear();
 
-        shopItemsSlots.Clear();
+        foreach(var item in playerItemsCells)
+        {
+            if (item != null)
+            {
+                Object.Destroy(item.gameObject);
+            }
+        }
+        playerItemsCells.Clear();
 
         foreach(var item in shopItems)
         {
-            var newSlot = new GameObject("Slot", typeof(ItemSlotShop));
+            var cellPrefab = Managers.Resources.DownloadData(ObjectType.ItemCell);
+            var newCell = Instantiate(cellPrefab,itemShopComponent.ListShopItems.transform);
 
-            var shopSlotItemComponent = newSlot.GetComponent<ItemSlotShop>().Init(this, itemShop, itemShop.ListShopItems.transform, item.Value.GetComponent<ItemState>(), true);
-            shopItemsSlots.Add(shopSlotItemComponent);
+            var cellComponent = newCell.GetComponent<ItemCell>().Init(this, item.Value.GetComponent<ItemState>(), true);
+            shopItemsCells.Add(cellComponent);
         }
 
+        playerItems = new Dictionary<int, ItemState>();
         playerItems = Managers.Player.Controller.Inventory.GetAllItems();
 
         foreach (var item in playerItems)
         {
-            var newSlot = new GameObject("Slot", typeof(ItemSlotShop));
+            Debug.Log($"{item.Value.Data.Title}");
+            var cellPrefab = Managers.Resources.DownloadData(ObjectType.ItemCell);
+            var newCell = Instantiate(cellPrefab,itemShopComponent.ListPlayerItems.transform);
 
-            var shopSlotItemComponent = newSlot.GetComponent<ItemSlotShop>().Init(this, itemShop, itemShop.ListPlayerItems.transform, item.Value.GetComponent<ItemState>(), false);
-            shopItemsSlots.Add(shopSlotItemComponent);
+            var cellComponent = newCell.GetComponent<ItemCell>().Init(this, item.Value.GetComponent<ItemState>(), false);
+            playerItemsCells.Add(cellComponent);
         }
     }
 

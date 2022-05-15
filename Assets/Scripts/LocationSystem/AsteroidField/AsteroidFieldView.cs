@@ -8,7 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(AsteroidFieldState))]
 public class AsteroidFieldView : MonoBehaviour
 {
-    [SerializeField] private AsteroidFieldState state;
+    private AsteroidFieldState state;
+    private AsteroidFieldController controller;
 
     private List<GameObject> asteroids;
     private Dictionary<int, AsteroidState> asteroidsDic;
@@ -22,8 +23,9 @@ public class AsteroidFieldView : MonoBehaviour
 
 
     public Vector2 Quarter => quarter;
-    public void Init(Transform locationCoord, AsteroidFieldType type,Vector2 quarter)
+    public AsteroidFieldView Init(AsteroidFieldController controller,Transform locationCoord, AsteroidFieldType type,Vector2 quarter)
     {
+        this.controller = controller;
         this.asteroids = new List<GameObject>();
         this.asteroidsDic = new Dictionary<int, AsteroidState>();
         this.maxNumAsteroids = 50;
@@ -37,6 +39,7 @@ public class AsteroidFieldView : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(IconType.AsteroidField);
 
         CreateAsteroid();
+        return this;
     }
     public void DestroyAsteroid(int id)
     {
@@ -73,8 +76,10 @@ public class AsteroidFieldView : MonoBehaviour
     {
         if (infoWindow == null)
         {
-            infoWindow = new GameObject("InfoWindow");
-            infoWindow.AddComponent<InfoPlanetWindow>().Init(this.gameObject.GetComponent<AsteroidFieldView>(),state.Data);
+            var infoWindowPrefab = Managers.Resources.DownloadData(ObjectType.InfoAsteroidWindow);
+            infoWindow = Instantiate(infoWindowPrefab);
+            Managers.Canvas.AddModule(infoWindow);
+            infoWindow.GetComponent<InfoAsteroidWindow>().Init(this.controller);
         }
     }
 

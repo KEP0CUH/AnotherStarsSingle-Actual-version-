@@ -27,7 +27,7 @@ public class LocationState : MonoBehaviour
         this.planets = locationData.Planets;
         SpawnPlanets();
         SpawnAsteroidFieldIfHave();
-        this.mobSpawner.Init(locationData.MobSpawnerKind);
+        this.mobSpawner.Init(locationData.MobSpawnerType);
 
 
         CanvasUI.GlobalMap.AddLocationOnMap(this);

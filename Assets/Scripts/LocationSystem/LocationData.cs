@@ -6,23 +6,24 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Location",fileName ="NewGalaxe",order = 54)]
 public class LocationData : ScriptableObject
 {
-    [SerializeField] private string title;
-    [SerializeField] private string description;
-    [SerializeField] private Location location;
-    [SerializeField] private List<Planet> planets;
-    [SerializeField] private MobSpawnerKind mobSpawnerKind;
-    [SerializeField] private SunType sunType;
+    [SerializeField] private string                     title;
+    [SerializeField] private string                     description;
+    [SerializeField] private Location                   location;
+    [SerializeField] private List<Planet>               planets;
+    [SerializeField] private MobSpawnerType             mobSpawnerType;
+    [SerializeField] private SunType                    sunType;
 
 
 
-    public string Title => title;
-    public List<Planet> Planets => planets;
-    public MobSpawnerKind MobSpawnerKind => mobSpawnerKind;
-    public SunType SunType => sunType;
+    public string                                       Title => title;
+    public List<Planet>                                 Planets => planets;
+    public MobSpawnerType                               MobSpawnerType => mobSpawnerType;
+    public SunType                                      SunType => sunType;
 
     private void OnValidate()
     {
         planets = new List<Planet>();
+        description = "";
         switch (location)
         {
             case Location.Krinul:
@@ -34,20 +35,19 @@ public class LocationData : ScriptableObject
                 planets.Add(Planet.Earth);
                 planets.Add(Planet.Mars);
 
-                mobSpawnerKind = MobSpawnerKind.pirateSpawner1;
+                mobSpawnerType = MobSpawnerType.pirateSpawner1;
 
                 sunType = SunType.WhiteSun;
                 break;
             case Location.Lambda:
                 title = "Лямбда";
-                description = "";
                 location = Location.Lambda;
 
                 planets.Add(Planet.Arcea);
                 planets.Add(Planet.Earth);
                 planets.Add(Planet.Mars);
 
-                mobSpawnerKind = MobSpawnerKind.pirateSpawner2;
+                mobSpawnerType = MobSpawnerType.pirateSpawner2;
 
                 sunType = SunType.BlueSun;
                 break;

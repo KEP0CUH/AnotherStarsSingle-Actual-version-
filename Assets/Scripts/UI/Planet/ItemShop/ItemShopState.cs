@@ -15,7 +15,21 @@ public class ItemShopState : MonoBehaviour
         this.id = id;
         this.data = Managers.Resources.DownloadData(type);
 
-
         return this;
+    }
+
+    public void AddItem()
+    {
+
+    }
+
+    public void RemoveItem()
+    {
+
+    }
+
+    public void GetAllItems()
+    {
+
     }
 }

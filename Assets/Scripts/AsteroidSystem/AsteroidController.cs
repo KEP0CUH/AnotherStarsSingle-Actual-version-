@@ -19,8 +19,8 @@ public class AsteroidController : MonoBehaviour
 
     [SerializeField] private string name;
 
-    public AsteroidState AsteroidState => asteroidState;
-    public AsteroidView AsteroidView => asteroidView;
+    public AsteroidState State => asteroidState;
+    public AsteroidView View => asteroidView;
 
 
     public void Init(Transform spawner,AsteroidState asteroidState,Vector2 quarter)

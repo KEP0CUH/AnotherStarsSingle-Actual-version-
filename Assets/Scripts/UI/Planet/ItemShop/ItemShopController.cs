@@ -10,12 +10,22 @@ public class ItemShopController : MonoBehaviour
     private ItemShopState itemShopState;
     private ItemShopView itemShopView;
 
-    public ItemShopState ItemShopState => itemShopState;
-    public ItemShopView ItemShopView => itemShopView;
+    public ItemShopState State => itemShopState;
+    public ItemShopView View => itemShopView;
 
     public void Init(ItemShopType type, int id)
     {
         this.itemShopState = this.gameObject.GetComponent<ItemShopState>().Init(type,id);
-        this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(this,itemShopState);
+        this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(this);
+    }
+
+    public void OpenItemShop()
+    {
+        this.View.OpenItemShop();
+    }
+
+    public void CloseItemShop()
+    {
+        this.View.Close();
     }
 }

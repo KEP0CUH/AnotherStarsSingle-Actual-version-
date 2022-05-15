@@ -8,8 +8,10 @@ public class InfoPlanetWindow : MonoBehaviour
     private PlanetState planetState;
     private GameObject controller;
 
-    private GameObject icon;
-    private GameObject title;
+    [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject title;
+    [SerializeField] private GameObject buttonClose;
+    [SerializeField] private GameObject buttonLand;
     private GameObject description;
 
 
@@ -18,22 +20,21 @@ public class InfoPlanetWindow : MonoBehaviour
     {
         this.controller = controller.gameObject;
         planetState = controller.State;
-        CreateWindow();
-        CreateIcon(planetState.Data.Icon);
-        CreateTitle(planetState.Data.Title);
+        SettingIcon(planetState.Data.Icon);
+        SettingTitle(planetState.Data.Title);
         //CreateDescription();
-        CreateButtonClose();
-        CreateButtonLand();
+        SettingButtonClose();
+        SettingButtonLand();
     }
 
     public void Init(AsteroidFieldView controller, AsteroidFieldData data)
     {
         this.controller = controller.gameObject;
         CreateWindow();
-        CreateIcon(data.Icon);
-        CreateTitle(data.Title);
-        CreateButtonClose();
-        CreateButtonLand();
+        SettingIcon(data.Icon);
+        SettingTitle(data.Title);
+        SettingButtonClose();
+        SettingButtonLand();
     }
 
 
@@ -54,92 +55,24 @@ public class InfoPlanetWindow : MonoBehaviour
 
     }
 
-    private void CreateIcon(Sprite content)
+    private void SettingIcon(Sprite content)
     {
-        icon = new GameObject("Icon", typeof(RectTransform), typeof(Image));
-
-        var rect = icon.GetComponent<RectTransform>();
-        rect.SetParent(transform, false);
-
         icon.GetComponent<Image>().sprite = content;
-        rect.anchorMin = new Vector2(0.5f, 1);
-        rect.anchorMax = new Vector2(0.5f, 1);
-        rect.pivot = new Vector2(1, 1);
-
-        rect.offsetMin = new Vector2(-32, -74);
-        rect.offsetMax = new Vector2(32, -10);
-        Debug.Log("InfoIcon created.");
     }
 
-    private void CreateTitle(string content)
+    private void SettingTitle(string content)
     {
-        title = new GameObject("Title", typeof(RectTransform), typeof(Text));
-
-        var rect = title.GetComponent<RectTransform>();
-        rect.SetParent(icon.transform, false);
-
-        rect.anchorMin = new Vector2(0.5f, 0);
-        rect.anchorMax = new Vector2(0.5f, 0);
-        rect.pivot = new Vector2(0.5f, 1);
-
-        rect.offsetMin = new Vector2(-80, -30);
-        rect.offsetMax = new Vector2(80, 0);
-
-        var text = title.GetComponent<Text>();
-        Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        text.font = font;
-        text.fontSize = 18;
-
-        text.text = content;
+        var text = title.GetComponent<Text>().text = content;
     }
 
-    private void CreateDescription()
+    private void SettingButtonClose()
     {
-        description = new GameObject("Title", typeof(RectTransform), typeof(Text));
-
-        var rect = description.GetComponent<RectTransform>();
-        rect.SetParent(title.transform, false);
-
-        rect.anchorMin = new Vector2(0.5f, 0);
-        rect.anchorMax = new Vector2(0.5f, 0);
-        rect.pivot = new Vector2(0.5f, 1);
-
-        rect.offsetMin = new Vector2(-80, -120);
-        rect.offsetMax = new Vector2(80, 0);
-
-        var text = description.GetComponent<Text>();
-        Font font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        text.font = font;
-        text.fontSize = 16;
-
-        //text.text = data.Data.
+        var buttonComponent = buttonClose.GetComponent<Button>();
+        buttonComponent.onClick.AddListener(Close);
     }
 
-    private void CreateButtonClose()
+    private void SettingButtonLand()
     {
-        var buttonClose = new GameObject("CloseWindow", typeof(Image), typeof(Button));
-        var rect = buttonClose.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform, false);
-        rect.anchorMin = new Vector2(1, 1);
-        rect.anchorMax = new Vector2(1, 1);
-        rect.offsetMin = new Vector2(-24, -24);
-        rect.offsetMax = new Vector2(-8, -8);
-        buttonClose.GetComponent<Image>().color = new UnityEngine.Color(255, 0, 0, 140) / 256f;
-        var buttonDrop = buttonClose.GetComponent<Button>();
-        buttonDrop.onClick.AddListener(Close);
-    }
-
-    private void CreateButtonLand()
-    {
-        var buttonLand = new GameObject("Land", typeof(Image), typeof(Button));
-        var rect = buttonLand.GetComponent<RectTransform>();
-        rect.SetParent(this.gameObject.transform, false);
-        rect.anchorMin = new Vector2(0, 0);
-        rect.anchorMax = new Vector2(0, 0);
-        rect.pivot = new Vector2(1, 0);
-        rect.offsetMin = new Vector2(-45, 0);
-        rect.offsetMax = new Vector2(-5, 45);
-
         var image = buttonLand.GetComponent<Image>();
         image.sprite = Managers.Resources.DownloadData(IconType.Land);
 

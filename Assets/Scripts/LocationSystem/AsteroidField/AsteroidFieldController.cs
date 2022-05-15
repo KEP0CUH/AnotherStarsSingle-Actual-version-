@@ -2,19 +2,26 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AsteroidFieldState))]
 [RequireComponent(typeof(AsteroidFieldView))]
 public class AsteroidFieldController : MonoBehaviour
 {
+    private AsteroidFieldState fieldState;
+    private AsteroidFieldView fieldView;
+
     private LocationController locationController;
 
-    public AsteroidFieldView view;
+
+    public AsteroidFieldState State => fieldState;
+    public AsteroidFieldView View => fieldView;
+
 
     public void Init(LocationController controller,AsteroidFieldType type,int offset,Vector2 quarter)
     {
         this.locationController = controller;
 
-        this.view = gameObject.GetComponent<AsteroidFieldView>();
-        this.view.Init(this.transform, type,quarter);
+        this.fieldState = gameObject.GetComponent<AsteroidFieldState>().Init(type);
+        this.fieldView = gameObject.GetComponent<AsteroidFieldView>().Init(this,this.transform, type, quarter); ;
 
         
         this.gameObject.AddComponent<SphereCollider>();
