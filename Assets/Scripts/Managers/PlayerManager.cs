@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IGameManager
 {
     private PlayerController controller;
-    private PlayerState playerState;
 
     private Transform landPlace;
     private bool isLanded;                      // Сидит ли на планете?
@@ -27,7 +26,6 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void Init(PlayerController controller, PlayerState state)
     {
         this.controller = controller;
-        this.playerState = state;
     }
 
     public void Land(Transform transform)

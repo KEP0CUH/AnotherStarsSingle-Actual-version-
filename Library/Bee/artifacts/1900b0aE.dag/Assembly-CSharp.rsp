@@ -383,7 +383,6 @@
 "Assets/Scripts/LocationSystem/Planets/PlanetState.cs"
 "Assets/Scripts/LocationSystem/Planets/PlanetView.cs"
 "Assets/Scripts/Managers/AsteroidManager.cs"
-"Assets/Scripts/Managers/GameManager.cs"
 "Assets/Scripts/Managers/Managers.cs"
 "Assets/Scripts/Managers/PlayerManager.cs"
 "Assets/Scripts/Managers/ResourceLoader.cs"

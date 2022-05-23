@@ -57,6 +57,13 @@ public class ItemState : MonoBehaviour, Interactable
         isSet = false;
     }
 
+    public bool IsEmpty()
+    {
+        if (data.ItemKind == ItemKind.EmptyDevice || data.ItemKind == ItemKind.EmptyGun)
+            return true;
+        return false;
+    }
+
     public void OnDrop()
     {
         Debug.Log("Item was dropped.");
@@ -81,4 +88,6 @@ public class ItemState : MonoBehaviour, Interactable
         ID++;
         return ID;
     }
+
+     
 }
