@@ -18,8 +18,8 @@ public class AsteroidFieldView : MonoBehaviour
 
     [SerializeField] private Vector2 quarter;
 
-    private GameObject infoWindow;
-    private bool isClicked;
+    private static GameObject infoWindow = null;
+    private static bool isClicked = false;
 
 
     public Vector2 Quarter => quarter;
@@ -46,6 +46,16 @@ public class AsteroidFieldView : MonoBehaviour
         if (this.asteroidsDic.ContainsKey(id))
         {
             Object.Destroy(asteroidsDic[id].gameObject);
+        }
+    }
+
+    public void CloseInfoWindow()
+    {
+        if (infoWindow != null)
+        {
+            Destroy(infoWindow.gameObject);
+            infoWindow = null;
+            isClicked = false;
         }
     }
 
@@ -76,35 +86,47 @@ public class AsteroidFieldView : MonoBehaviour
     {
         if (infoWindow == null)
         {
-            var infoWindowPrefab = Managers.Resources.DownloadData(ObjectType.InfoAsteroidWindow);
-            infoWindow = Instantiate(infoWindowPrefab);
-            Managers.Canvas.AddModule(infoWindow);
-            infoWindow.GetComponent<InfoAsteroidWindow>().Init(this.controller);
+           CreateInfoWindow();
         }
     }
 
     private void OnMouseDown()
     {
-        isClicked = true;
+        if (isClicked == true)
+        {
+            CreateInfoWindow();
+        }
+        else
+        {
+            isClicked = true;
+        }
     }
 
     private void OnMouseExit()
     {
-        if (infoWindow != null && !isClicked)
+        if (isClicked == false)
         {
-            Destroy(infoWindow.gameObject);
-            infoWindow = null;
+            CloseInfoWindow();
         }
     }
 
-    public void CloseInfoWindow()
+
+
+    private void CreateInfoWindow()
     {
-        if (infoWindow != null)
+        if(infoWindow != null)
         {
-            Destroy(infoWindow.gameObject);
+            Object.Destroy(infoWindow.gameObject);
             infoWindow = null;
-            isClicked = false;
         }
+
+        if(infoWindow == null)
+        {
+            infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.InfoAsteroidFieldWindow));
+            Managers.Canvas.AddModule(infoWindow);
+            infoWindow.GetComponent<InfoAsteroidFieldWindow>().Init(this.controller);
+        }
+
     }
 
 

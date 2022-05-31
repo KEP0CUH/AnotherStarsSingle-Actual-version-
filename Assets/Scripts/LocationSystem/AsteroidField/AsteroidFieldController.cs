@@ -28,4 +28,9 @@ public class AsteroidFieldController : MonoBehaviour
         this.gameObject.transform.parent = locationController.gameObject.transform;
         this.gameObject.transform.position = new Vector3(offset * quarter.x, offset * quarter.y, 0) + new Vector3(locationController.transform.position.x, locationController.transform.position.y, 0);
     }
+
+    public void CloseInfoWindow()
+    {
+        this.fieldView.CloseInfoWindow();
+    }
 }

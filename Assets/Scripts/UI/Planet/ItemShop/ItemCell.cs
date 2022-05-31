@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(RectTransform))]
+
 public class ItemCell : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private GameObject icon;

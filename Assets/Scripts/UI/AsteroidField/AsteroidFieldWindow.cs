@@ -3,14 +3,9 @@ using UnityEngine.UI;
 
 public class AsteroidFieldWindow : MonoBehaviour
 {
-    //private AsteroidFieldState asteroidFieldState;
-    private GameObject shipShop = null;
-    private GameObject itemShop = null;
-   // public AsteroidFieldState AsteroidFieldState => asteroidFieldState;
 
     public void Init()
     {
-        //this.asteroidFieldState = state;
         Managers.Canvas.AddModule(this.gameObject);
 
         var rect = this.gameObject.GetComponent<RectTransform>();
@@ -21,16 +16,7 @@ public class AsteroidFieldWindow : MonoBehaviour
         rect.offsetMax = new Vector2(0, 0);
 
         CreateRiseButton();
-        //CreateShipShop();
-        //CreateItemShop();
     }
-    private void Start()
-    {
-        //this.GetComponent<Image>().sprite = asteroidFieldState.Data.Icon;
-    }
-
-
-
 
     private void CreateRiseButton()
     {
@@ -49,7 +35,6 @@ public class AsteroidFieldWindow : MonoBehaviour
         var button = buttonLand.GetComponent<Button>();
         button.onClick.AddListener(OnRise);
     }
-
     private void OnRise()
     {
         Managers.Player.Rise();

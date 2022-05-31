@@ -247,8 +247,10 @@ public enum ObjectType
     ItemShop,
     InfoPlanetWindow,
     InfoAsteroidWindow,
+    InfoAsteroidFieldWindow,
     ItemCell,
-    ShipShop
+    ShipShop,
+    ShipCell,
 }
 
 public enum ItemShopType

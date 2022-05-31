@@ -53,6 +53,7 @@
     <UnityVersion>2021.1.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\UI\Planet\ShipShop\ShipCell.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="Assets\Scripts\ItemSystem\ItemState.cs" />
     <Compile Include="Assets\Scripts\TestScripts\CircleGeneration.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\UI\Planet\ShipShop\ShipSlot.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerData.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoAsteroidFieldWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
