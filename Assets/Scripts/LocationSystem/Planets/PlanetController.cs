@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlanetState))]
 [RequireComponent(typeof(PlanetView))]
+
+
 
 public class PlanetController : MonoBehaviour
 {
@@ -13,8 +12,9 @@ public class PlanetController : MonoBehaviour
     private PlanetView view;
     private LocationController locationController;
     private int offset;
+
+
     public PlanetState State => state;
-    public PlanetView View => view;
 
     public void Init(LocationController controller,Planet kind,int offset)
     {
@@ -24,9 +24,9 @@ public class PlanetController : MonoBehaviour
         this.offset = offset;
     }
 
-    public void RemoveInfoWindow()
+    public void CloseInfoWindow()
     {
-        view.CloseInfoPlanetWindow();
+        view.CloseInfoWindow();
     }
 
     private void Start()
@@ -42,10 +42,12 @@ public class PlanetController : MonoBehaviour
     {
         SaveRotationAboutSun();
     }
+
     private void SetRandomPositionAroundSun()
     {
         this.gameObject.transform.RotateAround(locationController.transform.position, locationController.transform.forward, Random.Range(0, 360));
     }
+
     private void SaveRotationAboutSun()
     {
         transform.RotateAround(locationController.transform.position, locationController.transform.forward, 4.0f * Time.fixedDeltaTime);

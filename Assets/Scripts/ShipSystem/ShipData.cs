@@ -1,16 +1,13 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName="Ship",fileName="NewShip",order = 54)]
+[CreateAssetMenu(menuName="ScriptableObjects/Ships/NewShip",fileName="NewShip",order = 54)]
 public class ShipData : ScriptableObject
 {
-
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private string title;
-    [SerializeField]
-    private string description;
+    private string title, description;
     [SerializeField]
     private ShipKind kind;
 

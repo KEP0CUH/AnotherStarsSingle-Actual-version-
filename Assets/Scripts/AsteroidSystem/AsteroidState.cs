@@ -27,7 +27,7 @@ public class AsteroidState : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.P))
+/*        if (Input.GetKey(KeyCode.P))
         {
             var angle = Random.Range(0, 360);
             var radius = Random.Range(radiusMin, radiusMax);
@@ -39,7 +39,8 @@ public class AsteroidState : MonoBehaviour
                                                      transform.position.y + radius * Mathf.Cos(angle),
                                                      0);
         }
-
+*/           
+        // Спавн предметов игроком по нажатию буквы Р. Здесь важен алгоритм спавна внутри окружности.
     }
 
     public void Init(AsteroidData data)

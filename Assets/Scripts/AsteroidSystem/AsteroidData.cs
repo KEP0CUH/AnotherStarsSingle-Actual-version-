@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName="Asteroids",fileName ="New Asteroid",order = 52)]
+[CreateAssetMenu(menuName="ScriptableObjects/Asteroids/NewAsteroid",fileName ="New Asteroid",order = 52)]
 public class AsteroidData : ScriptableObject
 {
     [SerializeField] private string title;

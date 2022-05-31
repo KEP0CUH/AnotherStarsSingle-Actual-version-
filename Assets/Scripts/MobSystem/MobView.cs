@@ -25,14 +25,34 @@ public class MobView : MonoBehaviour
         return this;
     }
 
+    public void CloseInfoWindow()
+    {
+        if (infoWindow != null)
+        {
+            Destroy(infoWindow.gameObject);
+            infoWindow = null;
+            isClicked = false;
+        }
+    }
+
     private void OnMouseEnter()
     {
-        CreateInfoWindow();
+        if(isClicked == false)
+        {
+            CreateInfoWindow();
+        }
     }
 
     private void OnMouseDown()
     {
-        isClicked = true;
+        if(isClicked == true)
+        {
+            CreateInfoWindow();
+        }
+        else
+        {
+            isClicked = true;
+        }
     }
 
     private void OnMouseExit()
@@ -49,33 +69,25 @@ public class MobView : MonoBehaviour
         {
             Debug.Log("Враг повреждается");
             Object.Destroy(other.gameObject);
-            this.mobController.ChangeHealth(-1 * other.GetComponent<AmmoController>().AmmoState.Data.BaseDamage);
+            this.mobController.ChangeMobHealth(-1 * other.GetComponent<AmmoController>().AmmoState.Data.BaseDamage);
         }
 
     }
 
     private void CreateInfoWindow()
     {
+        if(infoWindow != null)
+        {
+            Object.Destroy(infoWindow.gameObject);
+            infoWindow = null;
+        }
+
         if (infoWindow == null)
         {
             infoWindow = new GameObject("InfoWindow", typeof(MobInfoWindow));
             infoWindow.GetComponent<MobInfoWindow>().Init(this, this.mobState);
         }
-        else
-        {
-            CloseInfoWindow();
-            CreateInfoWindow();
-        }
     }
 
-    public void CloseInfoWindow()
-    {
-        if (infoWindow != null)
-        {
-            Destroy(infoWindow.gameObject);
-            infoWindow = null;
-            isClicked = false;
-        }
-    }
 
 }

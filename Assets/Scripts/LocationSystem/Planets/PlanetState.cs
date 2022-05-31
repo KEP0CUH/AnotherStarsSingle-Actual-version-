@@ -8,7 +8,7 @@ public class PlanetState : MonoBehaviour
     private static int ID = 1;
     [SerializeField] private int id;
     [SerializeField] private PlanetData data;
-    private PlanetController planetController;
+    private PlanetController controller;
     private ItemShopController itemShopController;
     private GameObject itemShop = null;
 
@@ -19,7 +19,7 @@ public class PlanetState : MonoBehaviour
     public PlanetState Init(PlanetController controller,Planet kind)
     {
         this.id = GetId();
-        this.planetController = controller;
+        this.controller = controller;
         this.data = Managers.Resources.DownloadData(kind);
         this.itemShopController = this.gameObject.GetComponent<ItemShopController>();
         itemShopController.Init(Data.ItemShopType, id);

@@ -2,21 +2,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ScrollRect))]
 public class ShipShop : MonoBehaviour
 {
     private List<ShipData> shipData;
-    private GameObject shipList = null;
+
+    [SerializeField]
+    private GameObject shipList;
 
     public void Init()
     {
-        var scroll = this.gameObject.GetComponent<ScrollRect>();
-        scroll.horizontal = true;
-        scroll.vertical = false;
-        scroll.scrollSensitivity = 15;
+        /*        var scroll = this.gameObject.GetComponent<ScrollRect>();
+                scroll.horizontal = true;
+                scroll.vertical = false;
+                scroll.scrollSensitivity = 15;
 
-        CreateUpPart();
+                CreateUpPart();
 
+
+                
+                ShowShips();*/
 
         shipData = new List<ShipData>();
         ShowShips();

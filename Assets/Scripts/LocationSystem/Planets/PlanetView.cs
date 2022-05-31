@@ -1,17 +1,19 @@
 using UnityEngine;
 
+
 [RequireComponent(typeof(SpriteRenderer))]
+
 public class PlanetView : MonoBehaviour
 {
     private PlanetController controller;
 
-    private GameObject infoPlanetWindowPrefab;
-    private static GameObject infoPlanetWindowObject;
-    private bool isClicked = false;
+    private        GameObject   infoPlanetWindowPrefab;
+    private static GameObject   infoPlanetWindowObject;
+    private static bool         isClicked = false;
+    
     public PlanetView Init(PlanetController controller)
     {
         this.controller = controller;
-
         this.gameObject.name                            = this.controller.State.Data.Title;
         this.GetComponent<SpriteRenderer>().sprite      = this.controller.State.Data.Icon;
 
@@ -20,7 +22,7 @@ public class PlanetView : MonoBehaviour
         return this;
     }
 
-    public void CloseInfoPlanetWindow()
+    public void CloseInfoWindow()
     {
         if (infoPlanetWindowObject != null)
         {
@@ -32,20 +34,33 @@ public class PlanetView : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        OpenInfoPlanetWindow();
-    }
-    private void OnMouseDown()
-    {
-        isClicked = true;
-    }
-    private void OnMouseExit()
-    {
         if(isClicked == false)
         {
-            CloseInfoPlanetWindow();
+            OpenInfoWindow();
         }
     }
-    private void OpenInfoPlanetWindow()
+
+    private void OnMouseDown()
+    {
+        if(isClicked == true)
+        {
+            OpenInfoWindow();
+        }
+        else
+        {
+            isClicked = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (isClicked == false)
+        {
+            CloseInfoWindow();
+        }
+    }
+
+    private void OpenInfoWindow()
     {
         if(infoPlanetWindowObject != null)
         {

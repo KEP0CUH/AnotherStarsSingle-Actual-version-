@@ -14,6 +14,7 @@ public class MobController : MonoBehaviour
     private GameObject spawner;
 
     public MobState MobState => mobState;
+    public MobView MobView => mobView;
     public GameObject Spawner => spawner;
 
     public void Init(Transform spawner,MobKind kind)
@@ -27,7 +28,17 @@ public class MobController : MonoBehaviour
         transform.position = new Vector3(transform.position.x,transform.position.y, -10);
     }
 
-    public void ChangeHealth(int value)
+    public void OnMouseDown()
+    {
+        SelectMob();
+    }
+
+    public void SelectMob()
+    {
+        Debug.Log("Замечен щелчок по мобу");
+    }
+
+    public void ChangeMobHealth(int value)
     {
         Debug.Log($"Моб повредился {mobState.Health} / {mobState.MaxHealth}");
         mobState.ChangeHealth(value);
@@ -38,7 +49,7 @@ public class MobController : MonoBehaviour
         this.Spawner.GetComponent<MobSpawner>().RemoveMob(id);
     }
 
-    #region Movement
+    #region MOVEMENT
     // Координаты, в пределах которых осуществляется движение
     public float xMax = +15;
     public float xMin = -15;

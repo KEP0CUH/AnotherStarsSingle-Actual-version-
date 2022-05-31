@@ -9,14 +9,13 @@ public class PlanetWindow : MonoBehaviour
     private PlanetState planetState;
     private GameObject shipShop = null;
     private GameObject itemShop = null;
-    private Dictionary<int,ItemShopController> itemShops;
     //private ItemShopController ItemShopController
     public PlanetState PlanetState => planetState;
 
     public void Init(PlanetState state)
     {
         this.planetState = state;
-        itemShops = new Dictionary<int, ItemShopController>();
+
         Managers.Canvas.AddModule(this.gameObject);
 
         var rect = this.gameObject.GetComponent<RectTransform>();
@@ -106,7 +105,14 @@ public class PlanetWindow : MonoBehaviour
     {
         if(shipShop == null)
         {
-            shipShop = new GameObject("ShipShop", typeof(Image), typeof(ShipShop),typeof(Mask));
+            shipShop = Instantiate(Managers.Resources.DownloadData(ObjectType.ShipShop));
+            Managers.Canvas.AddModule(shipShop);
+            shipShop.GetComponent<RectTransform>().SetParent(this.gameObject.transform, false);
+
+            shipShop.GetComponent<ShipShop>().Init();
+
+
+            /*shipShop = new GameObject("ShipShop", typeof(Image), typeof(ShipShop),typeof(Mask));
             var rect = shipShop.GetComponent<RectTransform>();
             rect.SetParent(this.gameObject.transform, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -115,7 +121,7 @@ public class PlanetWindow : MonoBehaviour
             rect.offsetMin = new Vector2(-250, -150);
             rect.offsetMax = new Vector2(250, 150);
 
-            shipShop.GetComponent<ShipShop>().Init();
+            shipShop.GetComponent<ShipShop>().Init();*/
         }
         else if(shipShop != null)
         {
