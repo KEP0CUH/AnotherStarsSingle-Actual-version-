@@ -6,15 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class PlanetWindow : MonoBehaviour
 {
-    private PlanetState planetState;
+    private PlanetController planetController;
     private GameObject shipShop = null;
     private GameObject itemShop = null;
     //private ItemShopController ItemShopController
-    public PlanetState PlanetState => planetState;
+    public PlanetController PlanetController => planetController;
 
-    public void Init(PlanetState state)
+    public void Init(PlanetController state)
     {
-        this.planetState = state;
+        this.planetController = state;
 
         Managers.Canvas.AddModule(this.gameObject);
 
@@ -31,7 +31,7 @@ public class PlanetWindow : MonoBehaviour
     }
     private void Start()
     {
-        this.GetComponent<Image>().sprite = planetState.Data.IconBG;
+        this.GetComponent<Image>().sprite = planetController.State.Data.IconBG;
     }
 
 
@@ -75,7 +75,7 @@ public class PlanetWindow : MonoBehaviour
 
     private void CreateItemShop()
     {
-        if(this.planetState.Data.ItemShopType != ItemShopType.ShopEmpty)
+        if(this.planetController.State.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
             var buttonItemShop = new GameObject("openItemShop", typeof(Image), typeof(Button));
             var rect = buttonItemShop.GetComponent<RectTransform>();
@@ -96,7 +96,7 @@ public class PlanetWindow : MonoBehaviour
 
     private void OnRise()
     {
-        this.planetState.ItemShopController.CloseItemShop();
+        this.planetController.OnRise();
         Managers.Player.Rise();
         Close();
     }
@@ -131,8 +131,7 @@ public class PlanetWindow : MonoBehaviour
 
     private void OnOpenItemShop()
     {
-        planetState.CreateItemShop();
-        this.planetState.SwitchItemShop();
+        planetController.OnOpenItemShop();
     }
 
     private void Close()

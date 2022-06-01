@@ -1,10 +1,7 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(PlanetState))]
 [RequireComponent(typeof(PlanetView))]
-
-
 
 public class PlanetController : MonoBehaviour
 {
@@ -13,8 +10,12 @@ public class PlanetController : MonoBehaviour
     private LocationController locationController;
     private int offset;
 
+    private ItemShopController itemShopController = null;
+
 
     public PlanetState State => state;
+    public PlanetView View => view;
+    public ItemShopController ItemShopController => itemShopController;
 
     public void Init(LocationController controller,Planet kind,int offset)
     {
@@ -27,6 +28,33 @@ public class PlanetController : MonoBehaviour
     public void CloseInfoWindow()
     {
         view.CloseInfoWindow();
+    }
+
+    public void OnLand()
+    {
+        
+    }
+
+    public void OnOpenItemShop()
+    {
+        if(itemShopController == null)
+        {
+            var obj = new GameObject("ItemShopController", typeof(ItemShopController));
+            obj.GetComponent<Transform>().SetParent(this.gameObject.transform);
+            itemShopController = obj.GetComponent<ItemShopController>().Init(state.Data.ItemShopType, state.Id);
+        }
+        else
+        {
+            itemShopController.SwitchItemShop();
+        }
+    }
+
+    public void OnRise()
+    {
+        if(itemShopController != null)
+        {
+            itemShopController.CloseItemShop();
+        }
     }
 
     private void Start()

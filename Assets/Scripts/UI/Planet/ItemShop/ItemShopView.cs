@@ -6,8 +6,9 @@ public class ItemShopView : MonoBehaviour
 {
     private ItemShopController itemShopController;
 
-    private GameObject itemShopObject;
+    private GameObject itemShopObject = null;
     private ItemShop itemShopComponent;
+    private bool shopIsOpen = false;
 
     private Dictionary<int, ItemState> shopItems;
     private Dictionary<int, ItemState> playerItems;
@@ -17,6 +18,9 @@ public class ItemShopView : MonoBehaviour
 
     public ItemShopController controller => itemShopController;
     public ItemShop Shop => itemShopComponent;
+    public bool ShopIsOpen => shopIsOpen;
+
+
     public ItemShopView Init(ItemShopController controller)
     {
         if (controller.State.Data.ItemShopType != ItemShopType.ShopEmpty)
@@ -35,33 +39,27 @@ public class ItemShopView : MonoBehaviour
         return this;
     }
 
-    public void Close()
-    {
-        if(itemShopObject != null)
-        {
-            Object.Destroy(itemShopObject);
-            itemShopObject = null;
-        }
-    }
     public void OpenItemShop()
     {
         if (itemShopObject == null)
         {
-            var prefabItemShop = Managers.Resources.DownloadData(ObjectType.ItemShop);
-            itemShopObject = Instantiate(prefabItemShop, this.transform);
-            var rect = itemShopObject.GetComponent<RectTransform>();
-            rect.SetParent(this.gameObject.transform, false);
-            rect.anchorMin = new Vector2(0.5f, 0.5f);
-            rect.anchorMin = new Vector2(0.5f, 0.5f);
-            rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.offsetMin = new Vector2(-250, -200);
-            rect.offsetMax = new Vector2(250, 200);
-
+            shopIsOpen = true;
+            itemShopObject = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemShop));
+            this.itemShopComponent = itemShopObject.GetComponent<ItemShop>();
+            Managers.Canvas.AddModule(itemShopObject);
             itemShopComponent = itemShopObject.GetComponent<ItemShop>().Init(this);
         }
     }
 
-
+    public void CloseItemShop()
+    {
+        if (itemShopObject != null)
+        {
+            shopIsOpen = false;
+            Object.Destroy(itemShopObject);
+            itemShopObject = null;
+        }
+    }
 
     private void CreateStatesForShopItems()
     {
@@ -94,9 +92,10 @@ public class ItemShopView : MonoBehaviour
 
     public void AddItem(ItemState state,int count = 1, bool needDestroying = false)
     {
-        if (state.Data.ItemKind == ItemKind.EmptyDevice ||
-            state.Data.ItemKind == ItemKind.EmptyGun)
+        if(state.IsEmpty())
+        {
             return;
+        }
 
         if (shopItems.ContainsKey(state.Id))
         {
@@ -125,20 +124,20 @@ public class ItemShopView : MonoBehaviour
             {
                 newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
                 newItemState = newItemStateObj.GetComponent<GunState>();
-                newItemState.Init((GunState)state);
             }
             else if (state.IsDevice)
             {
                 newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
                 newItemState = newItemStateObj.GetComponent<DeviceState>();
-                newItemState.Init((DeviceState)state);
             }
             else
             {
                 newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(ItemState));
                 newItemState = newItemStateObj.GetComponent<ItemState>();
-                newItemState.Init(state);
             }
+
+            newItemState.Init(state);
+            newItemStateObj.GetComponent<Transform>().SetParent(this.gameObject.transform);
             if(needDestroying) Object.Destroy(state.gameObject);
             shopItems.Add(newItemState.Id, newItemState);
             ShowListItemShop();

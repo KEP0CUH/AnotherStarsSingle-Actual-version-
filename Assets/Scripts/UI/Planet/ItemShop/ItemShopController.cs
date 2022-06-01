@@ -13,10 +13,31 @@ public class ItemShopController : MonoBehaviour
     public ItemShopState State => itemShopState;
     public ItemShopView View => itemShopView;
 
-    public void Init(ItemShopType type, int id)
+    public ItemShopController Init(ItemShopType type, int id)
     {
-        this.itemShopState = this.gameObject.GetComponent<ItemShopState>().Init(type,id);
-        this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(this);
+        if(type != ItemShopType.ShopEmpty)
+        {
+            this.itemShopState = this.gameObject.GetComponent<ItemShopState>().Init(type, id);
+            this.itemShopView = this.gameObject.GetComponent<ItemShopView>().Init(this);
+
+            return this;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void SwitchItemShop()
+    {
+        if(this.View.ShopIsOpen)
+        {
+            this.View.CloseItemShop();
+        }
+        else
+        {
+            this.View.OpenItemShop();
+        }
     }
 
     public void OpenItemShop()
@@ -26,6 +47,6 @@ public class ItemShopController : MonoBehaviour
 
     public void CloseItemShop()
     {
-        this.View.Close();
+        this.View.CloseItemShop();
     }
 }

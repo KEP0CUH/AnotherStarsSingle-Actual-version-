@@ -42,7 +42,7 @@ public class InfoPlanetWindow : MonoBehaviour
             Managers.Player.Land(controller.transform);
 
             var planet = new GameObject("PlanetInside", typeof(RectTransform));
-            planet.AddComponent<PlanetWindow>().Init(state);
+            planet.AddComponent<PlanetWindow>().Init(controller);
 
             //controller.GetComponent<PlanetController>().CreateItemShop();
 

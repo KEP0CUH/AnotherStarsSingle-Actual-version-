@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(ScrollRect))]
 public class ItemShop : MonoBehaviour
 {
     private ItemShopView itemShopView;
@@ -23,7 +22,7 @@ public class ItemShop : MonoBehaviour
         scroll.horizontal = true;
         scroll.vertical = false;
         scroll.scrollSensitivity = 15;
-        buttonClose.GetComponent<Button>().onClick.AddListener(() => itemShopView.controller.gameObject.SetActive(false));
+        buttonClose.GetComponent<Button>().onClick.AddListener(() => itemShopView.CloseItemShop());
         itemShopView.ShowListItemShop();
         return this;
     }

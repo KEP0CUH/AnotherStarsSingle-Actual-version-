@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this.landPlace = transform;
         controller.gameObject.transform.localPosition = new Vector3(transform.localPosition.x + 150 * quarter.x, transform.localPosition.y + 150 * quarter.y, 0);
         controller.UpdateCameraPosition();
-        //isLanded = true;
+        isLanded = true;
     }
 
     public void Rise()
