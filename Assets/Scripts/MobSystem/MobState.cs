@@ -13,8 +13,11 @@ public class MobState : MonoBehaviour
     private ShipState shipState;
 
     private MobController mobController;
-    private int health;
-    private int maxHealth;
+
+    [Range(0, 10000)] 
+        private int health;
+    [Range(0, 10000)]
+        private int maxHealth;
 
 
     public int Id => id;

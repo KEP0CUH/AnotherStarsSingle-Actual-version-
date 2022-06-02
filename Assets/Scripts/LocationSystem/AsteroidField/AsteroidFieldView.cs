@@ -12,7 +12,7 @@ public class AsteroidFieldView : MonoBehaviour
     private AsteroidFieldController controller;
 
     private List<GameObject> asteroids;
-    private Dictionary<int, AsteroidState> asteroidsDic;
+    private Dictionary<int, AsteroidController> asteroidControllers;
     private int maxNumAsteroids;
     private int currentNumAsteroids;
 
@@ -27,7 +27,7 @@ public class AsteroidFieldView : MonoBehaviour
     {
         this.controller = controller;
         this.asteroids = new List<GameObject>();
-        this.asteroidsDic = new Dictionary<int, AsteroidState>();
+        this.asteroidControllers = new Dictionary<int, AsteroidController>();
         this.maxNumAsteroids = 50;
         this.currentNumAsteroids = 0;
 
@@ -43,9 +43,9 @@ public class AsteroidFieldView : MonoBehaviour
     }
     public void DestroyAsteroid(int id)
     {
-        if (this.asteroidsDic.ContainsKey(id))
+        if(this.asteroidControllers.ContainsKey(id))
         {
-            Object.Destroy(asteroidsDic[id].gameObject);
+            Object.Destroy(asteroidControllers[id].gameObject);
         }
     }
 
@@ -61,16 +61,16 @@ public class AsteroidFieldView : MonoBehaviour
 
     private void CreateAsteroid()
     {
-        var data = this.state.Data.AsteroidData;
+        AsteroidType type = this.state.Data.AsteroidData.Type;
+        var newAsteroid = new GameObject($"{type} + asteroid",typeof(AsteroidController));
 
-        var newAsteroid = new GameObject($"Asteroid {data.DropKind}", typeof(AsteroidState));
-        this.asteroids.Add(newAsteroid);
         newAsteroid.transform.SetParent(this.gameObject.transform, false);
-        var asteroidState = newAsteroid.GetComponent<AsteroidState>();
-        asteroidState.Init(data);
-        newAsteroid.AddComponent<AsteroidController>().Init(this.transform, asteroidState,quarter);
+        this.asteroids.Add(newAsteroid);
 
-        this.asteroidsDic.Add(asteroidState.Id, asteroidState);
+        var newAsteroidController = newAsteroid.GetComponent<AsteroidController>().Init(this.transform, type, quarter);
+        //this.asteroidsDic.Add(newAsteroidController.State.Id, newAsteroidController.State);
+
+        this.asteroidControllers.Add(newAsteroidController.State.Id, newAsteroidController);
     }
 
     private void FixedUpdate()

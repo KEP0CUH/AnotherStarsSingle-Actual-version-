@@ -6,22 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(AsteroidView))]
 public class AsteroidController : MonoBehaviour
 {
-    private float moveSpeed = 2.0f / Constants.TICKS_PER_SEC;
-    private Vector3 originPoint = new Vector3();
     private GameObject spawner;
 
     private AsteroidState asteroidState;
     private AsteroidView asteroidView;
 
-
     private GameObject infoWindow = null;
     private bool isClicked = false;
-
-    [SerializeField] private string name;
 
     public AsteroidState State => asteroidState;
     public AsteroidView View => asteroidView;
 
+    public AsteroidController Init(Transform spawner, AsteroidType type, Vector2 quarter)
+    {
+        this.spawner = spawner.gameObject;
+        this.asteroidState = this.gameObject.GetComponent<AsteroidState>().Init(type);
+        this.asteroidView = this.gameObject.GetComponent<AsteroidView>().Init(asteroidState, spawner, quarter);
+
+        return this;
+    }
 
     public void Init(Transform spawner,AsteroidState asteroidState,Vector2 quarter)
     {
@@ -56,7 +59,7 @@ public class AsteroidController : MonoBehaviour
     private void OnMouseEnter()
     {
         var data = this.gameObject.GetComponent<AsteroidState>();
-        Debug.Log($"Это объект: {data.Data.Title} {data.Data.Description} {data.Health}/{data.MaxHealth}");
+        Debug.Log($"Это объект: {data.Data.Title} {data.Data.Description} {data.Health}");
 
         if(infoWindow == null)
         {

@@ -9,7 +9,6 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     public static PlayerManager Player { get; private set; }
-
     public static CanvasUI Canvas { get; private set; }
     public static ResourceLoader Resources { get; private set; }
 
@@ -32,6 +31,10 @@ public class Managers : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
+    /// <summary>
+    /// Начать запуск всех менеджеров.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator StartupManagers()
     {
         foreach(IGameManager manager in gameManagers)
@@ -63,7 +66,6 @@ public class Managers : MonoBehaviour
             }
             yield return null;
         }
-
         Debug.Log("All managers started up.".SetColor(Color.Green));
     }
 }

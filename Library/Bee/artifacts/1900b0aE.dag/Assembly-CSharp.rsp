@@ -420,7 +420,6 @@
 "Assets/Scripts/UI/Planet/ShipShop/ShipCell.cs"
 "Assets/Scripts/UI/Planet/ShipShop/ShipShop.cs"
 "Assets/Scripts/UI/Windows/InfoWindows/InfoAsteroidFieldWindow.cs"
-"Assets/Scripts/UI/Windows/InfoWindows/InfoAsteroidWindow.cs"
 "Assets/Scripts/UI/Windows/InfoWindows/InfoPlanetWindow.cs"
 "Assets/Scripts/UI/Windows/InfoWindows/InfoWindow.cs"
 "Assets/Scripts/UI/Windows/InfoWindows/ItemInfoWindow.cs"

@@ -62,7 +62,6 @@
     <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopView.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IShipInventory.cs" />
-    <Compile Include="Assets\Scripts\UI\Windows\InfoWindows\InfoAsteroidWindow.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobState.cs" />

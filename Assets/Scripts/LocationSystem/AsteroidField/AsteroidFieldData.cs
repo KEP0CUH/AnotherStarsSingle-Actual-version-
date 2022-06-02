@@ -1,26 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AsteroidField", fileName = "newAsteroidField", order = 54)]
+[CreateAssetMenu(menuName = "ScriptableObjects/AsteroidFields/AsteroidField", fileName = "newAsteroidField", order = 52)]
 public class AsteroidFieldData : ScriptableObject
 {
     [SerializeField] private string title;
 
-    [SerializeField] private AsteroidFieldType fieldType;
+    [SerializeField] private AsteroidFieldType type;
     [SerializeField] private Sprite iconField;
+    [SerializeField] private string iconPath = "Images/Asteroids/AsteroidField";
     [SerializeField] private AsteroidData asteroidData;
 
     public string Title => title;
-    public AsteroidFieldType Type => fieldType;
+    public AsteroidFieldType Type => type;
     public Sprite Icon => iconField;
     public AsteroidData AsteroidData => asteroidData;
 
     private void OnValidate()
     {
-        iconField = Resources.Load<Sprite>("Images/Asteroids/AsteroidField");
+        iconField = Resources.Load<Sprite>(iconPath);
         string dropPath = $"ScriptableObjects/Asteroids/";
-        switch (fieldType)
+        switch (type)
         {
             case AsteroidFieldType.GoldField:
                 title = "Золотое поле астероидов";

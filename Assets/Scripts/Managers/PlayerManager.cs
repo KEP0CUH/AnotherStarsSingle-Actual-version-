@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IGameManager
@@ -37,17 +35,17 @@ public class PlayerManager : MonoBehaviour, IGameManager
         CanvasUI.Radar.Disable();
     }
 
-    public void LandOnAsteroidField(Transform transform,Vector2 quarter)
+    public void LandOnAsteroidField(Transform transform, Vector2 quarter)
     {
         this.landPlace = transform;
         controller.gameObject.transform.localPosition = new Vector3(transform.localPosition.x + 150 * quarter.x, transform.localPosition.y + 150 * quarter.y, 0);
         controller.UpdateCameraPosition();
-        isLanded = true;
+        //isLanded = true;
     }
 
     public void Rise()
     {
-        controller.gameObject.transform.position = new Vector2(this.landPlace.position.x,this.landPlace.position.y);
+        controller.gameObject.transform.position = new Vector2(this.landPlace.position.x, this.landPlace.position.y);
         controller.UpdateCameraPosition();
         isLanded = false;
         CanvasUI.Radar.Enable();

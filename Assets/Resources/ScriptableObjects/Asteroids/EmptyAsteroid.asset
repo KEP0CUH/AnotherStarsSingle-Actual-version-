@@ -16,4 +16,9 @@ MonoBehaviour:
   description: 
   type: 0
   icon: {fileID: 21300000, guid: acb9e4bd148702b45945db7ff241c57b, type: 3}
-  dropKind: 493
+  iconPath: Images/Asteroids/Asteroid
+  dropKind: 196
+  minHealth: 400
+  maxHealth: 900
+  moveSpeedMin: 0.2
+  moveSpeedMax: 0.3
