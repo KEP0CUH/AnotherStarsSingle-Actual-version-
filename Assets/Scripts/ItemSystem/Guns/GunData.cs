@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Guns",fileName ="NewGun",order =53)]
+[CreateAssetMenu(menuName ="ScriptableObjects/Items/Guns/newGun",fileName ="NewGun",order =54)]
 public class GunData : ItemData
 {
     [SerializeField] private AmmoKind ammoKind;
     [SerializeField] private SoundKind soundKind;
-
 
     public AmmoKind AmmoKind => ammoKind;
     public SoundKind SoundKind => soundKind;
@@ -27,9 +24,11 @@ public class GunData : ItemData
         switch(ItemKind)
         {
             case ItemKind.DesintegratorGun:
+                ammoKind = AmmoKind.DesintegratorAmmo;
                 soundKind = SoundKind.ShotEnergetic2;
                 break;
             case ItemKind.MultiblasterGun:
+                ammoKind = AmmoKind.MultiblasterAmmo;
                 soundKind = SoundKind.ShotKinetic2;
                 break;
         }

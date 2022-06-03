@@ -49,7 +49,7 @@ public class AsteroidController : MonoBehaviour
         if(other.GetComponent<AmmoController>())
         {
             var bullet = other.GetComponent<AmmoController>();
-            this.gameObject.GetComponent<AsteroidState>().ChangeHealth(-bullet.AmmoState.Data.BaseDamage);
+            this.gameObject.GetComponent<AsteroidState>().ChangeHealth(-bullet.State.Data.BaseDamage);
             Destroy(other.gameObject);
         }
     }

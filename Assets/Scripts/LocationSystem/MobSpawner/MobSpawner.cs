@@ -60,7 +60,6 @@ public class MobSpawner : MonoBehaviour
             var controller = mob.GetComponent<MobController>();
             controller.Init(this.transform, mobs[i]);
 
-            Debug.Log(controller.MobState.Id);
             spawnedMobs.Add(controller.MobState.Id, controller);
             i++;
         }

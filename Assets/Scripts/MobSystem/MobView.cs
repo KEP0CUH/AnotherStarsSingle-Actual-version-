@@ -69,7 +69,7 @@ public class MobView : MonoBehaviour
         {
             Debug.Log("Враг повреждается");
             Object.Destroy(other.gameObject);
-            this.mobController.ChangeMobHealth(-1 * other.GetComponent<AmmoController>().AmmoState.Data.BaseDamage);
+            this.mobController.ChangeMobHealth(-1 * other.GetComponent<AmmoController>().State.Data.BaseDamage);
         }
 
     }

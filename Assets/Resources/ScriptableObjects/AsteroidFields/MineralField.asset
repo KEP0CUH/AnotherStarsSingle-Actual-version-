@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\u041C\u0438\u043D\u0435\u0440\u0430\u043B\u044C\u043D\u043E\u0435 \u043F\u043E\u043B\u0435
     \u0430\u0441\u0442\u0435\u0440\u043E\u0438\u0434\u043E\u0432"
-  fieldType: 4
+  type: 4
   iconField: {fileID: 21300000, guid: 9c542fdf91e1da847a89656800828661, type: 3}
+  iconPath: Images/Asteroids/AsteroidField
   asteroidData: {fileID: 11400000, guid: 512545eaf6ac33843b27e7f45807e1be, type: 2}

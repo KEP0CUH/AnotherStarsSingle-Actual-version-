@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: bulletDesintegrator
   icon: {fileID: 21300000, guid: 24b9839ee0157b64fb027819478791cd, type: 3}
+  iconPath: Icons/Items/Ammo/
   clip: {fileID: 8300000, guid: c5e70a80d11a18a46b402cfc1172758e, type: 3}
+  soundPath: Sounds/
   kind: 1
   baseDamage: 60
+  speed: 0.2

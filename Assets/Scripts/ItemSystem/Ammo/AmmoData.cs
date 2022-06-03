@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ammo", fileName = "newAmmo", order = 54)]
+[CreateAssetMenu(menuName = "ScriptableObjects/Ammo/newAmmo", fileName = "newAmmo", order = 54)]
 public class AmmoData : ScriptableObject
 {
     [SerializeField] private string title;
     [SerializeField] private Sprite icon;
+    [SerializeField] private string iconPath = "Icons/Items/Ammo/";
     [SerializeField] private AudioClip clip;
+    [SerializeField] private string soundPath = "Sounds/";
     [SerializeField] private AmmoKind kind;
-    [SerializeField] private int baseDamage = 15;
+
+
+    [SerializeField] [Range(15,50)] private int baseDamage = 25;
+
+    [SerializeField] [Range(2f / Constants.TICKS_PER_SEC, 5f / Constants.TICKS_PER_SEC)]
+        private float speed = 2f / Constants.TICKS_PER_SEC;
 
     public string Title => title;
     public Sprite Icon => icon;
-    public AudioClip Clip => clip;
+    public AudioClip Sound => clip;
     public AmmoKind Kind => kind;
     public int BaseDamage => baseDamage;
+    public float Speed => speed;
 
     private void OnValidate()
     {
-        var pathAmmo = "Icons/Items/Ammo/";
-        var pathSounds = "Sounds/";
+        var pathAmmo = iconPath;
+        var pathSounds = soundPath;
 
         icon = Resources.Load<Sprite>(pathAmmo + kind);
         switch (kind)

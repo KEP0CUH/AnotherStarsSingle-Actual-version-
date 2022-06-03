@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: bulletMultiblaster
   icon: {fileID: 21300000, guid: 7b93d1dc89176d1438eecc331066c56c, type: 3}
+  iconPath: Icons/Items/Ammo/
   clip: {fileID: 8300000, guid: 2154bb280ce40d542aa174e5ae62183d, type: 3}
+  soundPath: Sounds/
   kind: 0
   baseDamage: 35
+  speed: 0.2624

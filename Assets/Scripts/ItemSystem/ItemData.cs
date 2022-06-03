@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item", fileName = "NewItem", order = 51)]
+[CreateAssetMenu(menuName = "ScriptableObjects/Items/newItem", fileName = "NewItem", order = 53)]
 public class ItemData : ScriptableObject
 {
     [SerializeField]
@@ -33,7 +31,6 @@ public class ItemData : ScriptableObject
     {
         return false;
     }
-    
 
     protected virtual void OnValidate()
     {
@@ -47,8 +44,6 @@ public class ItemData : ScriptableObject
 
         switch (kind)
         {
-
-
             #region Ruda
             case ItemKind.FerrumOre:
                 name = "FerrumOre";

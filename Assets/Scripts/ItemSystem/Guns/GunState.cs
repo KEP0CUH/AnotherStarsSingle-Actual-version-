@@ -4,55 +4,25 @@ using UnityEngine;
 
 public class GunState : ItemState
 {
-    [SerializeField] private AmmoKind ammoKind;
-    private int maxAmmo;
 
-    public AmmoKind AmmoKind => ammoKind;
+    private int maxAmmo;
     public int MaxAmmo => maxAmmo;
 
     public override ItemState Init(ItemKind kind, int count)
     {
-
-        switch (kind)
-        {
-            case ItemKind.MultiblasterGun:
-                ammoKind = AmmoKind.MultiblasterAmmo;
-                break;
-            case ItemKind.DesintegratorGun:
-                ammoKind = AmmoKind.DesintegratorAmmo;
-                break;
-            case ItemKind.EmptyGun:
-                ammoKind = AmmoKind.MultiblasterAmmo;
-                break;
-        }
-
         base.Init(kind, count);
-        this.ammoKind = ((GunData)data).AmmoKind;
         return this;
     }
 
     public override ItemState Init(ItemState state)
     {
-        switch (state.Data.ItemKind)
-        {
-            case ItemKind.MultiblasterGun:
-                ammoKind = AmmoKind.MultiblasterAmmo;
-                break;
-            case ItemKind.DesintegratorGun:
-                ammoKind = AmmoKind.DesintegratorAmmo;
-                break;
-            case ItemKind.EmptyGun:
-                ammoKind = AmmoKind.EmptyAmmo;
-                break;
-        }
-
         base.Init(state);
         return this;
     }
 
     public void Shoot(Transform parent,GunState gun)
     {
-        if(ammoKind != AmmoKind.EmptyAmmo)
+        if(((GunData)data).AmmoKind != AmmoKind.EmptyAmmo)
         {
             Debug.Log("Стреляю");
             GameObject bullet = new GameObject("Bullet");

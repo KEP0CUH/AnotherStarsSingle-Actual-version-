@@ -8,27 +8,22 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AmmoView : MonoBehaviour
 {
-    private AmmoState ammoState;
-    public AmmoView Init(AmmoState state,SoundKind sound)
+    private AmmoController ammoController;
+    public AmmoView Init(AmmoController controller)
     {
-        this.ammoState = state;
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = ammoState.Data.Icon;
+        this.ammoController = controller;
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = ammoController.State.Data.Icon;
         this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        CreateAudioSound(sound);
-
-        var audio = gameObject.GetComponent<AudioSource>();
-        audio.clip = Managers.Resources.DownloadData(sound);
-        audio.Play();
-
+        CreateAudioSound(ammoController.State.Data.Sound);
         return this;
     }
 
-    private void CreateAudioSound(SoundKind sound)
+    private void CreateAudioSound(AudioClip sound)
     {
         var audioObj = new GameObject("SoundObject",typeof(AudioSource));
         var audioComponent = audioObj.GetComponent<AudioSource>();
-        audioComponent.clip = Managers.Resources.DownloadData(sound);
+        audioComponent.clip = sound;
         audioComponent.Play();
 
         Destroy(audioObj, 3);
@@ -36,8 +31,6 @@ public class AmmoView : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(transform.up * ammoState.MoveSpeed, Space.World);
+        transform.Translate(transform.up * ammoController.State.MoveSpeed, Space.World);
     }
-
-
 }
