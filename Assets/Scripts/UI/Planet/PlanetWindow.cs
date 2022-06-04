@@ -1,15 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 [RequireComponent(typeof(Image))]
 public class PlanetWindow : MonoBehaviour
 {
     private PlanetController planetController;
     private GameObject shipShop = null;
-    private GameObject itemShop = null;
-    //private ItemShopController ItemShopController
     public PlanetController PlanetController => planetController;
 
     public void Init(PlanetController state)
@@ -33,9 +29,6 @@ public class PlanetWindow : MonoBehaviour
     {
         this.GetComponent<Image>().sprite = planetController.State.Data.IconBG;
     }
-
-
-
 
     private void CreateRiseButton()
     {
@@ -110,18 +103,6 @@ public class PlanetWindow : MonoBehaviour
             shipShop.GetComponent<RectTransform>().SetParent(this.gameObject.transform, false);
 
             shipShop.GetComponent<ShipShop>().Init();
-
-
-            /*shipShop = new GameObject("ShipShop", typeof(Image), typeof(ShipShop),typeof(Mask));
-            var rect = shipShop.GetComponent<RectTransform>();
-            rect.SetParent(this.gameObject.transform, false);
-            rect.anchorMin = new Vector2(0.5f, 0.5f);
-            rect.anchorMax = new Vector2(0.5f, 0.5f);
-            rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.offsetMin = new Vector2(-250, -150);
-            rect.offsetMax = new Vector2(250, 150);
-
-            shipShop.GetComponent<ShipShop>().Init();*/
         }
         else if(shipShop != null)
         {

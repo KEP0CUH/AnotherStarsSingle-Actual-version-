@@ -7,8 +7,8 @@ public enum ManagerStatus
 
 public enum EventType
 {
-    OnItemDrop,
-    OnItemPick,
+    OnItemDropped,
+    OnItemPicked,
 }
 public enum UIModuleKind
 {
@@ -70,10 +70,6 @@ public enum ItemKind
 }
 public enum AmmoKind
 {
-    //redLaserAmmo = 1001,
-    //blueLaserAmmo = 1002,
-    //yellowLaserAmmo = 1003,
-    //GreenLaserAmmo = 1004,
     MultiblasterAmmo,
     DesintegratorAmmo,
     EmptyAmmo,
@@ -87,6 +83,7 @@ public enum ShipKind
     GreenHeavyIstrebitel,
     GreenLinkor,
     GreenFrigate,
+
     PirateIndus,
     PirateIstrebitel,
     PirateFrigate,
@@ -110,7 +107,6 @@ public enum SoundKind
     ShotEnergetic1,
     ShotEnergetic2,
     ShotRocket,
-
     Tourbine,
 }
 
@@ -147,9 +143,6 @@ public enum AsteroidType
     OrganicAsteroid,
 
     OsmiumAsteroid,
-
-    NickelAsteroid,
-
 }
 
 public enum AsteroidFieldType
@@ -161,7 +154,6 @@ public enum AsteroidFieldType
     MineralField,
     OrganicField,
     OsmiumField,
-    NickelField,
 }
 
 
@@ -237,6 +229,8 @@ public enum IconType
     ButtonOK,
     ButtonOpenMap,
     ButtonSettings,
+    ButtonApproach,
+    ButtonAttack,
 }
 
 public enum ObjectType

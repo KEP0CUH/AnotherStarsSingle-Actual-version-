@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 
 [RequireComponent(typeof(MobSpawner))]
 public class LocationState : MonoBehaviour
@@ -40,7 +37,7 @@ public class LocationState : MonoBehaviour
         for (int i = 0; i < planets.Count; i++)
         {
             var planet = new GameObject($"Planet{planets[i]}");
-            planet.AddComponent<PlanetController>().Init(controller, planets[i], i * 3);
+            planet.AddComponent<PlanetController>().Init(this.transform, planets[i], i * 3);
         }
     }
 

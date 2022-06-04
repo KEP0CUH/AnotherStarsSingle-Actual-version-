@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +5,6 @@ using UnityEngine.UI;
 public class BuyWindow : MonoBehaviour
 {
     private ItemShopView itemShopView;
-    ItemShop itemShop;
     private ItemCell itemCell;
 
     [SerializeField] private GameObject itemIcon;
@@ -61,20 +58,18 @@ public class BuyWindow : MonoBehaviour
 
     private void UpdateTextField(float a)
     {
-        Debug.Log("UpdateTextField worked");
         inputField.GetComponent<InputField>().text = a.ToString();
     }
 
     private void UpdateSlider(string content)
     {
-        Debug.Log("UpdateTextField");
         try
         {
             slider.GetComponent<Slider>().value = int.Parse(content);
         }
         catch(System.FormatException ex)
         {
-            return;
+            Debug.Log($"{ex.ToString().SetColor(Color.Red)}");
         }
     }
 

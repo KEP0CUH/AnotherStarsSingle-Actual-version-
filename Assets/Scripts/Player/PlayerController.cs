@@ -203,12 +203,12 @@ public class PlayerController : MonoBehaviour, IObserver
         if (other.gameObject.GetComponent<ItemViewGame>())
         {
             var view = other.gameObject.GetComponent<ItemViewGame>();
-            view.AddObserver(this.gameObject.GetComponent<PlayerController>(), EventType.OnItemDrop);
+            view.AddObserver(this.gameObject.GetComponent<PlayerController>(), EventType.OnItemDropped);
         }
     }
     public void Invoke(EventType eventType, ItemKind kind, ItemState state)
     {
-        if (eventType == EventType.OnItemDrop)
+        if (eventType == EventType.OnItemDropped)
         {
             Debug.Log("Invoked event OnItemDrop.");
             inventory.AddItem(state);

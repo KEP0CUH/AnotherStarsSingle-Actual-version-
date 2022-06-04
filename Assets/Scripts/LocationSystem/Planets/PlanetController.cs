@@ -7,19 +7,18 @@ public class PlanetController : MonoBehaviour
 {
     private PlanetState state;
     private PlanetView view;
-    private LocationController locationController;
+    private Transform parent;
     private int offset;
 
     private ItemShopController itemShopController = null;
-
 
     public PlanetState State => state;
     public PlanetView View => view;
     public ItemShopController ItemShopController => itemShopController;
 
-    public void Init(LocationController controller,Planet kind,int offset)
+    public void Init(Transform parent,Planet kind,int offset)
     {
-        this.locationController = controller;
+        this.parent = parent;
         this.state = this.GetComponent<PlanetState>().Init(this,kind);
         this.view = this.GetComponent<PlanetView>().Init(this);
         this.offset = offset;
@@ -28,11 +27,6 @@ public class PlanetController : MonoBehaviour
     public void CloseInfoWindow()
     {
         view.CloseInfoWindow();
-    }
-
-    public void OnLand()
-    {
-        
     }
 
     public void OnOpenItemShop()
@@ -60,7 +54,7 @@ public class PlanetController : MonoBehaviour
     private void Start()
     {
         this.gameObject.AddComponent<SphereCollider>();
-        this.gameObject.transform.SetParent(locationController.transform, true);
+        this.gameObject.transform.SetParent(parent, true);
         this.gameObject.transform.localPosition = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
      
         SetRandomPositionAroundSun();
@@ -73,11 +67,11 @@ public class PlanetController : MonoBehaviour
 
     private void SetRandomPositionAroundSun()
     {
-        this.gameObject.transform.RotateAround(locationController.transform.position, locationController.transform.forward, Random.Range(0, 360));
+        this.gameObject.transform.RotateAround(parent.position, parent.forward, Random.Range(0, 360));
     }
 
     private void SaveRotationAboutSun()
     {
-        transform.RotateAround(locationController.transform.position, locationController.transform.forward, 4.0f * Time.fixedDeltaTime);
+        transform.RotateAround(parent.position, parent.forward, 4.0f * Time.fixedDeltaTime);
     }
 }

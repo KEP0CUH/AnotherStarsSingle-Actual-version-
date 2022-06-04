@@ -8,9 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class GunViewGame : ItemViewGame
 {
-    public GunState State => (GunState)this.state;
-
-
     public override void Init(ItemKind kind, int ammoMax)
     {
         var data = Managers.Resources.DownloadData(kind);

@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     private int id = 1;
-
-    [SerializeField] private string title;
-    [SerializeField] private string name;
     [SerializeField] private Sprite icon;
 
 
@@ -16,7 +13,6 @@ public class PlayerData : MonoBehaviour
     public void Init()
     {
         id = 1;
-        title = "Игрок";
         icon = Resources.Load<Sprite>("Images/Ships/Frigate");
     }
 

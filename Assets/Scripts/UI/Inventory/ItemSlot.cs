@@ -12,10 +12,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
     private IPlayerInventory playerInventory;
 
-    public void Init(Transform transform, IPlayerInventory inventory, ItemState state)
+    public void Init(Transform parent, IPlayerInventory inventory, ItemState state)
     {
         this.playerInventory = inventory;
-        this.parent = transform;
+        this.parent = parent;
         this.state = state;
 
         CreateItemSlot();
@@ -67,18 +67,13 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
             rect.offsetMax = new Vector2(100, 0);
         }
     }
-
-
-
     protected virtual void DropItem()
     {
         Managers.Player.Controller.PlayerState.Ship.Inventory.TryDropItemFromShip(this.state);
     }
     public void OnPointerDown(PointerEventData data)
     {
-
         TryInteract();
-
     }
 
     protected virtual void TryInteract()

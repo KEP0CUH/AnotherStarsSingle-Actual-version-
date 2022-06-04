@@ -8,7 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class DeviceViewGame : ItemViewGame
 {
-    public DeviceState State => (DeviceState)this.state;
     public override void Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);

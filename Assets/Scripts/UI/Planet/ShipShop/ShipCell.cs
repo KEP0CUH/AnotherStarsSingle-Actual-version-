@@ -4,7 +4,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(Button))]
-
 public class ShipCell : MonoBehaviour
 {
     private ShipShop shipShop;

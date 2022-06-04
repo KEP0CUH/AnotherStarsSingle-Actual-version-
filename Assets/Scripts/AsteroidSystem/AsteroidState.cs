@@ -1,9 +1,7 @@
 using UnityEngine;
-
 public class AsteroidState : MonoBehaviour
 {
     private static int ID = 1;
-
 
     [SerializeField]
     private int id;

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(SphereCollider))]
@@ -19,8 +17,6 @@ public class AsteroidView : MonoBehaviour
         return this;
     }
 
-
-
     private void ConfigMovementParameters(Transform spawner,Vector2 quarter)
     {
         var originPoint = spawner.transform.localPosition;
@@ -28,7 +24,6 @@ public class AsteroidView : MonoBehaviour
         xMin += originPoint.x + 150 * quarter.x;
         yMax += originPoint.y + 150 * quarter.y;
         yMin += originPoint.y + 150 * quarter.y;
-
 
         this.transform.position = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
     }

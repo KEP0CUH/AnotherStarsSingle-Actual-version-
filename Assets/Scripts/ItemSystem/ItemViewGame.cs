@@ -91,7 +91,7 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
             return;
         }
 
-        if(eventType == EventType.OnItemDrop)
+        if(eventType == EventType.OnItemDropped)
         {
             onItemDrop += (kind, state) =>
             {

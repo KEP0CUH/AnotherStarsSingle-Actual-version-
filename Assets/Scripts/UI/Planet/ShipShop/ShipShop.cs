@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShipShop : MonoBehaviour
 {
@@ -25,9 +24,6 @@ public class ShipShop : MonoBehaviour
         {
             var shipCell = Instantiate(Managers.Resources.DownloadData(ObjectType.ShipCell));
             shipCell.GetComponent<ShipCell>().Init(shipList.transform, ship);
-
-            //var newObj = new GameObject("Ship", typeof(ShipSlot));
-            //newObj.GetComponent<ShipSlot>().Init(shipList.transform,ship);
         }
     }
 

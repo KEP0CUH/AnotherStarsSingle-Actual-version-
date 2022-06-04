@@ -17,12 +17,10 @@ public class InfoAsteroidFieldWindow : MonoBehaviour
         this.fieldController = controller;
         this.fieldState = controller.State;
 
-
         icon.GetComponent<Image>().sprite = fieldState.Data.Icon;
         title.GetComponent<Text>().text = fieldState.Data.Title;
         InitButtonLand();
         InitButtonClose();
-
 
         return this;
     }
@@ -60,6 +58,4 @@ public class InfoAsteroidFieldWindow : MonoBehaviour
     {
         fieldController.CloseInfoWindow();
     }
-
-
 }

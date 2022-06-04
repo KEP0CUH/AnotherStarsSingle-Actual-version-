@@ -74,7 +74,7 @@ public class SellWindow : MonoBehaviour
         }
         catch (System.FormatException ex)
         {
-            return;
+            Debug.Log($"{ex.ToString().SetColor(Color.Red)}");
         }
     }
 
