@@ -76,32 +76,10 @@ public class AsteroidFieldView : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
-    {
-        if (infoWindow == null)
-        {
-            CreateInfoWindow();
-        }
-    }
-
     private void OnMouseDown()
     {
-        if (isClicked == true)
-        {
-            CreateInfoWindow();
-        }
-        else
-        {
-            isClicked = true;
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (isClicked == false)
-        {
-            CloseInfoWindow();
-        }
+        isClicked = true;
+        CreateInfoWindow();
     }
 
     private void CreateInfoWindow()
@@ -111,9 +89,9 @@ public class AsteroidFieldView : MonoBehaviour
             Object.Destroy(infoWindow.gameObject);
         }
 
-        infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.InfoAsteroidFieldWindow));
+        infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.FieldWindow));
         Managers.Canvas.AddModule(infoWindow);
-        infoWindow.GetComponent<InfoAsteroidFieldWindow>().Init(this.controller);
+        infoWindow.GetComponent<FieldWindow>().Init(this.controller);
 
     }
 }

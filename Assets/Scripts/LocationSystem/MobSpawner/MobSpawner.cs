@@ -60,7 +60,7 @@ public class MobSpawner : MonoBehaviour
             var controller = mob.GetComponent<MobController>();
             controller.Init(this.transform, mobs[i]);
 
-            spawnedMobs.Add(controller.MobState.Id, controller);
+            spawnedMobs.Add(controller.State.Id, controller);
             i++;
         }
     }
@@ -69,7 +69,7 @@ public class MobSpawner : MonoBehaviour
     {
         if(spawnedMobs.ContainsKey(id))
         {
-            RespawnMob(spawnedMobs[id].MobState.Data.MobKind);
+            RespawnMob(spawnedMobs[id].State.Data.MobKind);
             Object.Destroy(spawnedMobs[id].gameObject);
             spawnedMobs.Remove(id);
             currentNumMobs--;
@@ -85,7 +85,7 @@ public class MobSpawner : MonoBehaviour
         var controller = mob.GetComponent<MobController>();
         controller.Init(this.transform, kind);
 
-        Debug.Log(controller.MobState.Id);
-        spawnedMobs.Add(controller.MobState.Id, controller);
+        Debug.Log(controller.State.Id);
+        spawnedMobs.Add(controller.State.Id, controller);
     }
 }

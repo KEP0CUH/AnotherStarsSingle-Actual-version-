@@ -20,6 +20,7 @@ public class AsteroidState : MonoBehaviour
 
     public AsteroidData Data => data;
     public float Health => currentHealth;
+    public float MaxHealth => maxHealth;
     public int Id => id;
     public float MoveSpeed => moveSpeed;
 

@@ -9,8 +9,10 @@ public class AsteroidController : MonoBehaviour
     private AsteroidState asteroidState;
     private AsteroidView asteroidView;
 
-    private GameObject infoWindow = null;
-    private bool isClicked = false;
+    private static GameObject infoWindow = null;
+    private static bool isClicked = false;
+
+    public event System.Action OnDamagedAsteroid;
 
     public AsteroidState State => asteroidState;
     public AsteroidView View => asteroidView;
@@ -36,7 +38,7 @@ public class AsteroidController : MonoBehaviour
     {
         if(infoWindow != null)
         {
-            Destroy(infoWindow.gameObject);
+            Object.Destroy(infoWindow.gameObject);
             infoWindow = null;
             isClicked = false;
         }
@@ -47,28 +49,21 @@ public class AsteroidController : MonoBehaviour
         if(other.GetComponent<AmmoController>())
         {
             var bullet = other.GetComponent<AmmoController>();
-            this.gameObject.GetComponent<AsteroidState>().ChangeHealth(-bullet.State.Data.BaseDamage);
+            this.asteroidState.ChangeHealth(-bullet.State.Data.BaseDamage);
+            OnDamagedAsteroid?.Invoke();
             Destroy(other.gameObject);
-        }
-    }
-
-
-
-    private void OnMouseEnter()
-    {
-        var data = this.gameObject.GetComponent<AsteroidState>();
-        Debug.Log($"Это объект: {data.Data.Title} {data.Data.Description} {data.Health}");
-
-        if(infoWindow == null)
-        {
-            infoWindow = new GameObject("InfoWindow");
-            infoWindow.AddComponent<InfoWindow>().Init(this.gameObject.GetComponent<AsteroidController>());
         }
     }
 
     private void OnMouseDown()
     {
         isClicked = true;
+        if (infoWindow == null)
+        {
+            infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.AsteroidWindow));
+            Managers.Canvas.AddModule(infoWindow);
+            infoWindow.GetComponent<AsteroidWindow>().Init(this);
+        }
     }
 
     private void OnMouseExit()
@@ -86,7 +81,7 @@ public class AsteroidController : MonoBehaviour
         {
             spawner.gameObject.GetComponent<AsteroidFieldView>().DestroyAsteroid(this.gameObject.GetComponent<AsteroidState>().Id);
 
-            if (infoWindow != null && !isClicked)
+            if (infoWindow != null)
             {
                 Destroy(infoWindow.gameObject);
                 infoWindow = null;

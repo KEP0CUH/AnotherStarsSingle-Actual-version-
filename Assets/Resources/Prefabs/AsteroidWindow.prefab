@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 172335068322813015}
   - component: {fileID: 172335068322813017}
   - component: {fileID: 172335068322813014}
-  - component: {fileID: -3638481481363026127}
+  - component: {fileID: 513208223085300771}
   m_Layer: 5
   m_Name: AsteroidWindow
   m_TagString: Untagged
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-3638481481363026127
+--- !u!114 &513208223085300771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,8 +331,10 @@ MonoBehaviour:
   icon: {fileID: 3565935603272798656}
   health: {fileID: 172335068411571357}
   size: {fileID: 172335067772172773}
+  slider: {fileID: 4062635398730041956}
   buttonAttack: {fileID: 2356395410292116962}
   buttonApproach: {fileID: 6433421795051567213}
+  buttonClose: {fileID: 7574608930054538529}
 --- !u!1 &172335068411571355
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,9 +394,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -793,8 +795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 55.242188, y: 3}
-  m_SizeDelta: {x: 162.4844, y: 29}
+  m_AnchoredPosition: {x: -96.69498, y: 0}
+  m_SizeDelta: {x: 193.39, y: 29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8053657666457576022
 CanvasRenderer:
@@ -818,7 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7169812, g: 0.26717696, b: 0.26717696, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -846,6 +848,7 @@ GameObject:
   - component: {fileID: 4062635398730041882}
   - component: {fileID: 4062635398730041957}
   - component: {fileID: 4062635398730041956}
+  - component: {fileID: 292888326114116818}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -871,8 +874,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.5}
-  m_SizeDelta: {x: -10, y: -3}
+  m_AnchoredPosition: {x: 2.5, y: 1.5}
+  m_SizeDelta: {x: -5, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4062635398730041882
 CanvasRenderer:
@@ -896,7 +899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.81189924, g: 0.8396226, b: 0.8394199, a: 0.6666667}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -955,12 +958,25 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4062635398730041957}
   m_HandleRect: {fileID: 3055506090540064621}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.2
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &292888326114116818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4062635398730041958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5544658758215342004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,7 +1219,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -1.5}
-  m_SizeDelta: {x: -50, y: -29}
+  m_SizeDelta: {x: 0, y: -29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7895430699952305277
 GameObject:
@@ -1336,7 +1352,6 @@ GameObject:
   - component: {fileID: 8089423968176344899}
   - component: {fileID: 9024061721923699933}
   - component: {fileID: 5010224560823785845}
-  - component: {fileID: 1022744258607686762}
   m_Layer: 5
   m_Name: RightPanel
   m_TagString: Untagged
@@ -1404,15 +1419,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1022744258607686762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7964493026143732156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9bf69d02edf52645bc22cbeae9e04fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

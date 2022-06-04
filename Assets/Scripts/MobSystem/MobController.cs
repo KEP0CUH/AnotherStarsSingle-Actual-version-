@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -13,8 +12,10 @@ public class MobController : MonoBehaviour
 
     private GameObject spawner;
 
-    public MobState MobState => mobState;
-    public MobView MobView => mobView;
+    public event System.Action onDamagedMob;
+
+    public MobState State => mobState;
+    public MobView View => mobView;
     public GameObject Spawner => spawner;
 
     public void Init(Transform spawner,MobKind kind)
@@ -33,6 +34,11 @@ public class MobController : MonoBehaviour
         SelectMob();
     }
 
+    public void CloseInfoWindow()
+    {
+        this.View.CloseInfoWindow();
+    }
+
     public void SelectMob()
     {
         Debug.Log("Замечен щелчок по мобу");
@@ -40,13 +46,24 @@ public class MobController : MonoBehaviour
 
     public void ChangeMobHealth(int value)
     {
-        Debug.Log($"Моб повредился {mobState.Health} / {mobState.MaxHealth}");
         mobState.ChangeHealth(value);
     }
 
     public void KillMob(int id)
     {
         this.Spawner.GetComponent<MobSpawner>().RemoveMob(id);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<AmmoController>())
+        {
+            Debug.Log("Враг повреждается");
+            Object.Destroy(other.gameObject);
+            ChangeMobHealth(-1 * other.GetComponent<AmmoController>().State.Data.BaseDamage);
+            onDamagedMob?.Invoke();
+        }
+
     }
 
     #region MOVEMENT

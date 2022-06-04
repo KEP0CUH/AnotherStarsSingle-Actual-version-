@@ -35,43 +35,11 @@ public class MobView : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
-    {
-        if(isClicked == false)
-        {
-            CreateInfoWindow();
-        }
-    }
 
     private void OnMouseDown()
     {
-        if(isClicked == true)
-        {
-            CreateInfoWindow();
-        }
-        else
-        {
-            isClicked = true;
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (isClicked == false)
-        {
-            CloseInfoWindow();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.GetComponent<AmmoController>())
-        {
-            Debug.Log("Враг повреждается");
-            Object.Destroy(other.gameObject);
-            this.mobController.ChangeMobHealth(-1 * other.GetComponent<AmmoController>().State.Data.BaseDamage);
-        }
-
+        isClicked = true;
+        CreateInfoWindow();
     }
 
     private void CreateInfoWindow()
@@ -84,8 +52,23 @@ public class MobView : MonoBehaviour
 
         if (infoWindow == null)
         {
-            infoWindow = new GameObject("InfoWindow", typeof(MobInfoWindow));
-            infoWindow.GetComponent<MobInfoWindow>().Init(this, this.mobState);
+            infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.MobWindow));
+            Managers.Canvas.AddModule(infoWindow);
+            infoWindow.GetComponent<MobWindow>().Init(this.mobController);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameObject.scene.isLoaded)
+        {
+            this.mobController.Spawner.gameObject.GetComponent<MobSpawner>().RemoveMob(this.mobState.Id);
+
+            if (infoWindow != null)
+            {
+                Destroy(infoWindow.gameObject);
+                infoWindow = null;
+            }
         }
     }
 

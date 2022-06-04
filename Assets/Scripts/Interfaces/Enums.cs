@@ -240,11 +240,12 @@ public enum ObjectType
     ConfirmSelling,
     ItemShop,
     InfoPlanetWindow,
-    InfoAsteroidWindow,
-    InfoAsteroidFieldWindow,
     ItemCell,
     ShipShop,
     ShipCell,
+    AsteroidWindow,
+    FieldWindow,
+    MobWindow,
 }
 
 public enum ItemShopType

@@ -15,17 +15,17 @@ public class MobState : MonoBehaviour
     private MobController mobController;
 
     [Range(0, 10000)] 
-        private int health;
+        private float health;
     [Range(0, 10000)]
-        private int maxHealth;
+        private float maxHealth;
 
 
     public int Id => id;
     public MobData Data => data;
     public ShipState ShipState => shipState;
 
-    public int Health => health;
-    public int MaxHealth => maxHealth;
+    public float Health => health;
+    public float MaxHealth => maxHealth;
 
     public MobState Init(MobController controller,MobKind kind)
     {
