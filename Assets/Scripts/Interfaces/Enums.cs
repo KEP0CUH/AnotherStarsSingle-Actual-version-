@@ -219,6 +219,7 @@ public enum IconType
 {
     Land,
     Rise,
+    Take,
     ShipShop,
     ItemShop,
     Asteroid,
@@ -239,13 +240,13 @@ public enum ObjectType
     ConfirmBuying,
     ConfirmSelling,
     ItemShop,
-    InfoPlanetWindow,
     ItemCell,
     ShipShop,
     ShipCell,
     AsteroidWindow,
     FieldWindow,
     MobWindow,
+    PlanetWindow,
 }
 
 public enum ItemShopType

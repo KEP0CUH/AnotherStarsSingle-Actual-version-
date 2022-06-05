@@ -1,14 +1,11 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(SpriteRenderer))]
-
 public class PlanetView : MonoBehaviour
 {
     private PlanetController controller;
 
-    private        GameObject   infoPlanetWindowPrefab;
-    private static GameObject   infoPlanetWindowObject;
+    private static GameObject   infoWindow;
     private static bool         isClicked = false;
     
     public PlanetView Init(PlanetController controller)
@@ -17,65 +14,41 @@ public class PlanetView : MonoBehaviour
         this.gameObject.name                            = this.controller.State.Data.Title;
         this.GetComponent<SpriteRenderer>().sprite      = this.controller.State.Data.Icon;
 
-        this.infoPlanetWindowPrefab = Managers.Resources.DownloadData(ObjectType.InfoPlanetWindow);
 
         return this;
     }
 
     public void CloseInfoWindow()
     {
-        if (infoPlanetWindowObject != null)
+        if (infoWindow != null)
         {
-            Object.Destroy(infoPlanetWindowObject.gameObject);
-            infoPlanetWindowObject = null;
+            Object.Destroy(infoWindow.gameObject);
+            infoWindow = null;
             isClicked = false;
-        }
-    }
-
-    private void OnMouseEnter()
-    {
-        if(isClicked == false)
-        {
-            OpenInfoWindow();
         }
     }
 
     private void OnMouseDown()
     {
-        if(isClicked == true)
-        {
-            OpenInfoWindow();
-        }
-        else
-        {
-            isClicked = true;
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (isClicked == false)
-        {
-            CloseInfoWindow();
-        }
+        isClicked = true;
+        OpenInfoWindow();
     }
 
     private void OpenInfoWindow()
     {
-        if(infoPlanetWindowObject != null)
+        if(infoWindow != null)
         {
-            Object.Destroy(infoPlanetWindowObject.gameObject);
-            infoPlanetWindowObject = null;
+            Object.Destroy(infoWindow.gameObject);
+            infoWindow = null;
         }
 
-        if (infoPlanetWindowObject == null)
+        if (infoWindow == null)
         {
-            var infoPlanetPrefab = Managers.Resources.DownloadData(ObjectType.InfoPlanetWindow);
+            var infoWindowPrefab = Managers.Resources.DownloadData(ObjectType.PlanetWindow);
 
-            infoPlanetWindowObject = Instantiate(infoPlanetPrefab);
-            Managers.Canvas.AddModule(infoPlanetWindowObject);
-            infoPlanetWindowObject.GetComponent<InfoPlanetWindow>().Init(controller);
-
+            infoWindow = Instantiate(infoWindowPrefab);
+            Managers.Canvas.AddModule(infoWindow);
+            infoWindow.GetComponent<PlanetWindow>().Init(controller);
         }
     }
 }
