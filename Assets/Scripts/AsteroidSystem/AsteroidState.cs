@@ -72,9 +72,9 @@ public class AsteroidState : MonoBehaviour
         var angle = Random.Range(0, 360f);
         var radius = Random.Range(radiusMin, radiusMax);
 
-        var dropView = new GameObject("Drop" + this.data.DropKind.ToString(), typeof(SpriteRenderer));
-        dropView.AddComponent<ItemViewGame>().Init(data.ItemKind, 4);
-        dropView.transform.position =
+        var drop = new GameObject("Drop" + this.Data.DropKind.ToString(), typeof(ItemController));
+        drop.GetComponent<ItemController>().Init(data.ItemKind, 5);
+        drop.transform.position =
             new Vector3(transform.position.x + radius * Mathf.Sin(angle),
                         transform.position.y + radius * Mathf.Cos(angle),
                         0);

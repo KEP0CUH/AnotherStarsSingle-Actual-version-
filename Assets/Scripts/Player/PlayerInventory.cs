@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class PlayerInventory : IPlayerInventory
 {
@@ -40,7 +38,6 @@ public class PlayerInventory : IPlayerInventory
                         return;
                     }
                 }
-
             }
 
             GameObject newItemStateObj;

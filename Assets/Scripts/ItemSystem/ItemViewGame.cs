@@ -13,6 +13,8 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     private List<IObserver> observers = new List<IObserver>();
     public ItemState State => state;
 
+    private ItemController controller;
+
     private bool triggerWorked = false;
 
     private Action<ItemKind,ItemState> onItemDrop;
@@ -21,7 +23,7 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
 
-    public virtual void Init(ItemKind kind, int count)
+    public virtual ItemViewGame Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);
         if (data.IsWeapon())
@@ -36,6 +38,20 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         {
             CreateBaseItem(kind, count);
         }
+
+        return this;
+    }
+
+    public virtual ItemViewGame Init(ItemController controller)
+    {
+        this.controller = controller;
+        this.state = controller.State;
+
+        this.GetComponent<SpriteRenderer>().sprite = controller.State.Data.Icon;
+        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<Rigidbody>().isKinematic = true;
+
+        return this;
     }
 
     private void CreateGun(ItemKind kind, int ammoCount)

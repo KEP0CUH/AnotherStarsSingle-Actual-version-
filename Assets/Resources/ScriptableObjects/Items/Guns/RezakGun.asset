@@ -16,5 +16,6 @@ MonoBehaviour:
   title: "\u041C\u0443\u043B\u044C\u0442\u0438\u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   description: 
   kind: 6
+  ammoMax: 0
   ammoKind: 0
   soundKind: 12

@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class DeviceViewGame : ItemViewGame
 {
-    public override void Init(ItemKind kind, int count)
+    public override ItemViewGame Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);
         this.state = this.gameObject.AddComponent<DeviceState>();
@@ -16,5 +16,7 @@ public class DeviceViewGame : ItemViewGame
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         this.GetComponent<BoxCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
+
+        return this;
     }
 }

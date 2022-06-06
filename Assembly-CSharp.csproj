@@ -82,8 +82,10 @@
     <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
+    <Compile Include="Assets\Scripts\UI\InfoWindows\PlanetWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\BuyWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\InfoWindows\ItemWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\DeviceSlot.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipInventory.cs" />
@@ -138,8 +140,9 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\UI\InfoWindows\PlanetWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\InfoWindows\ItemWindow.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\ItemController.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem2\ItemController2.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryInside.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

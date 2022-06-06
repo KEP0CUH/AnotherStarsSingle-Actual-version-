@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="ScriptableObjects/Items/Guns/newGun",fileName ="NewGun",order =54)]
 public class GunData : ItemData
 {
+    [SerializeField] private int ammoMax;
     [SerializeField] private AmmoKind ammoKind;
     [SerializeField] private SoundKind soundKind;
 

@@ -70,7 +70,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
         foreach(var item in this.itemStates)
         {
-            CreateItemSlot(inventory, item.Value);
+            CreateItemCell(inventory, item.Value);
         }
     }
 
@@ -94,7 +94,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
         foreach (var gun in this.gunStates)
         {
-            CreateGunSlot(inventory, gun);
+            CreateGunCell(inventory, gun);
         }
     }
 
@@ -118,7 +118,7 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
 
         foreach(var device in this.deviceStates)
         {
-            CreateDeviceSlot(inventory,device);
+            CreateDeviceCell(inventory,device);
         }
     }
 
@@ -383,21 +383,21 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     }
 
     [ContextMenu("CreateItemSlot")]
-    private void CreateItemSlot(IPlayerInventory inventory, ItemState state)
+    private void CreateItemCell(IPlayerInventory inventory, ItemState state)
     {
         var itemSlot = new GameObject("Item " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
         itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform, inventory, state);
         itemSlots.Add(itemSlot);
     }
 
-    private void CreateGunSlot(IShipInventory inventory, ItemState state)
+    private void CreateGunCell(IShipInventory inventory, ItemState state)
     {
         var gunSlot = new GameObject("Gun " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
         gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
         gunSlots.Add(gunSlot);
     }
 
-    private void CreateDeviceSlot(IShipInventory inventory, ItemState state)
+    private void CreateDeviceCell(IShipInventory inventory, ItemState state)
     {
         var deviceSlot = new GameObject("Device " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
         deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);
