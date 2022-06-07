@@ -16,3 +16,5 @@ MonoBehaviour:
   title: "\u041A\u043E\u0440\u0432\u0435\u0442"
   description: 
   kind: 0
+  maxGuns: 1
+  maxDevices: 1

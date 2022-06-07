@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class ShipInventory : IShipInventory
 {
     private ShipState shipState;
-
     public ShipState ShipState => ShipState;
 
     private List<GunState> guns;
@@ -15,15 +12,11 @@ public class ShipInventory : IShipInventory
     private List<DeviceState> devices;
     private int maxNumDevices;
 
-    /// <summary>
-    /// Конструктор оборудоваемых слотов корабля. Изначально все ячейки заполняются пустышками, которые будут заменены при взаимодействии.
-    /// </summary>
-    /// <param name="maxNumGuns">Максимальное число оружий одеваемых на корабль.</param>
-    public ShipInventory(ShipState shipState, int maxNumGuns, int maxNumDevices)
+    public ShipInventory(ShipState state)
     {
-        this.shipState = shipState;
-        this.maxNumGuns = maxNumGuns;
-        this.maxNumDevices = maxNumDevices;
+        this.shipState = state;
+        this.maxNumGuns = state.Data.MaxGuns;
+        this.maxNumDevices = state.Data.MaxDevices;
 
 
         guns = new List<GunState>();

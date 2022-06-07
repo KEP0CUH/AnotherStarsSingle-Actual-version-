@@ -25,6 +25,13 @@ public class PlayerController : MonoBehaviour, IObserver
     public PlayerState PlayerState => playerState;
     public PlayerInventory Inventory => inventory;
 
+    public PlayerController Init()
+    {
+        //this.playerState = new PlayerState()
+
+        return this;
+    }
+
     private void Start()
     {
         this.gameObject.AddComponent<PlayerData>().Init();

@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\MobSpawner\MobSpawner.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\PlanetInside.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\InventoryInside.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldController.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\FieldWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
@@ -119,10 +120,12 @@
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetView.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem2\ItemController2.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldState.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\MobWindow.cs" />
     <Compile Include="Assets\Scripts\UI\GlobalMap\GlobalMapUI.cs" />
+    <Compile Include="Assets\Scripts\ItemSystem\ItemController.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\InfoWindow.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Enums.cs" />
@@ -140,9 +143,7 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem\ItemController.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem2\ItemController2.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\InventoryInside.cs" />
+    <Compile Include="Assets\Scripts\ShipSystem\ShipController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
