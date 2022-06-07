@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 [RequireComponent(typeof(LocationState))]
 [RequireComponent(typeof(LocationView))]
 public class LocationController : MonoBehaviour

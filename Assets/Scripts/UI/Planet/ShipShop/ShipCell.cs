@@ -23,6 +23,6 @@ public class ShipCell : MonoBehaviour
     private void BuyShip()
     {
         Debug.Log("Changing ship...");
-        Managers.Player.Controller.PlayerState.SetShip(this.shipData.Kind);
+        Managers.Player.Controller.State.SetShip(this.shipData.Kind);
     }
 }

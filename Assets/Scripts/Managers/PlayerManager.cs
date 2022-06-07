@@ -21,7 +21,12 @@ public class PlayerManager : MonoBehaviour, IGameManager
         Debug.Log("Player manager started.".SetColor(Color.Green));
     }
 
-    public void Init(PlayerController controller, PlayerState state)
+    public void TryInteractWithEquipment(ItemState state)
+    {
+        this.Controller.State.ShipController.TryInteractWithItem(state);
+    }
+
+    public void Init(PlayerController controller)
     {
         this.controller = controller;
     }

@@ -75,7 +75,7 @@ public class BuyWindow : MonoBehaviour
 
     private void ConfirmBuying()
     {
-        Managers.Player.Controller.Inventory.AddItem(this.itemCell.State, (int)sliderComponent.value, false);
+        Managers.Player.Controller.PlayerInventory.AddItem(this.itemCell.State, (int)sliderComponent.value, false);
         itemShopView.RemoveItem(this.itemCell.State, itemCell.State.Count, false);
         Object.Destroy(this.gameObject);
         itemShopView.ShowListItemShop();

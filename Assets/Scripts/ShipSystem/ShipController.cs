@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ShipController : MonoBehaviour
 {
     private ShipState shipState;
@@ -10,19 +9,24 @@ public class ShipController : MonoBehaviour
 
     public ShipController Init(ShipKind kind)
     {
-        this.shipState = this.gameObject.AddComponent<ShipState>().Init(kind);
+        this.shipState = this.gameObject.AddComponent<ShipState>().Init(this,kind);
         this.shipInventory = this.State.Inventory;
         
         return this;
     }
 
-    public void TryInteractWithItem(ItemState state)
+    public void AddEquipment(ItemState state,bool needDestroying = false)
     {
         this.Inventory.TryInteractWithItem(state);
     }
 
-    public void TryInteractWithItemFromInventory(ItemState state, IPlayerInventory inventory)
+    public void RemoveEquipment(ItemState state, bool needDestroying = false)
     {
-        this.Inventory.TryInteractWithItemFromInventory(state, inventory);
+        this.Inventory.TryInteractWithItem(state);
+    }
+
+    public void TryInteractWithItem(ItemState state)
+    {
+        this.Inventory.TryInteractWithItem(state);
     }
 }

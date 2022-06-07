@@ -39,6 +39,7 @@ public class ShipInventory : IShipInventory
         ShowInventory();
     }
 
+
     #region Одеть(Снять) определенное оборудование на(с) корабль(я)
 
     public void TryInteractWithItem(ItemState state)
@@ -71,37 +72,6 @@ public class ShipInventory : IShipInventory
             return;
         }
     }
-
-    public void TryInteractWithItemFromInventory(ItemState state,IPlayerInventory inventory)
-    {
-        if (state.IsWeapon)
-        {
-            if (state.IsSet)
-            {
-                TryUnsetGun((GunState)state,inventory);
-            }
-            else if (state.IsSet == false)
-            {
-                TrySetGun((GunState)state,inventory);
-            }
-        }
-        else if (state.IsDevice)
-        {
-            if (state.IsSet)
-            {
-                TryUnsetDevice((DeviceState)state,inventory);
-            }
-            else if (state.IsSet == false)
-            {
-                TrySetDevice((DeviceState)state,inventory);
-            }
-        }
-        else
-        {
-            Debug.Log("Ни рыба ни мясо");
-            return;
-        }
-    }
     #endregion
 
     #region TRY_SET/UNSET_GUN
@@ -114,27 +84,8 @@ public class ShipInventory : IShipInventory
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
                 guns[i].SetIsTrue();
-                Managers.Player.Controller.Inventory.RemoveItem(state);
-                Object.Destroy(state.gameObject);
-                ShowInventory();
-                return;
-            }
-        }
-        return;
-    }
-
-    private void TrySetGun(GunState state,IPlayerInventory inventory)
-    {
-        for (int i = 0; i < maxNumGuns; i++)
-        {
-            if (guns[i].Data.ItemKind == ItemKind.EmptyGun)
-            {
-                Object.Destroy(guns[i].gameObject);
-                guns[i] = CreateGunStateObject(state);
-                guns[i].SetIsTrue();
-                state.SetIsTrue();
-                inventory.RemoveItem(state);
-                Object.Destroy(state.gameObject);
+                Managers.Player.Controller.PlayerInventory.RemoveItem(state,1,true);
+                //Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -151,26 +102,8 @@ public class ShipInventory : IShipInventory
                 guns[i] = CreateEmptyGunState();
                 guns[i].SetIsFalse();
                 state.SetIsFalse();
-                Managers.Player.Controller.Inventory.AddItem(state);
-                Object.Destroy(state.gameObject);
-                ShowInventory();
-                return;
-            }
-        }
-        return;
-    }
-
-    private void TryUnsetGun(GunState state,IPlayerInventory inventory)
-    {
-        for (int i = 0; i < guns.Count; i++)
-        {
-            if (guns[i] == state)
-            {
-                guns[i] = CreateEmptyGunState();
-                guns[i].SetIsFalse();
-                state.SetIsFalse();
-                inventory.AddItem(state);
-                Object.Destroy(state.gameObject);
+                Managers.Player.Controller.PlayerInventory.AddItem(state,1,true);
+                //Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
             }
@@ -189,25 +122,7 @@ public class ShipInventory : IShipInventory
                 Object.Destroy(devices[i]);
                 devices[i] = CreateDeviceStateObject(state);
                 devices[i].SetIsTrue();
-                Managers.Player.Controller.Inventory.RemoveItem(state);
-                Object.Destroy(state.gameObject);
-                ShowInventory();
-                return;
-            }
-        }
-    }
-
-    private void TrySetDevice(DeviceState state,IPlayerInventory inventory)
-    {
-        for (int i = 0; i < maxNumDevices; i++)
-        {
-            if (devices[i].Data.ItemKind == ItemKind.EmptyDevice)
-            {
-                Object.Destroy(devices[i]);
-                devices[i] = CreateDeviceStateObject(state);
-                devices[i].SetIsTrue();
-                state.SetIsTrue();
-                inventory.RemoveItem(state);
+                Managers.Player.Controller.PlayerInventory.RemoveItem(state);
                 Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
@@ -224,24 +139,7 @@ public class ShipInventory : IShipInventory
                 devices[i] = CreateEmptyDeviceState();
                 devices[i].SetIsFalse();
                 state.SetIsFalse();
-                Managers.Player.Controller.Inventory.AddItem(state);
-                Object.Destroy(state.gameObject);
-                ShowInventory();
-                return;
-            }
-        }
-    }
-
-    private void TryUnsetDevice(DeviceState state,IPlayerInventory inventory)
-    {
-        for(int i = 0; i < devices.Count;i++)
-        {
-            if (devices[i] == state)
-            {
-                devices[i] = CreateEmptyDeviceState();
-                devices[i].SetIsFalse();
-                state.SetIsFalse();
-                inventory.AddItem(state);
+                Managers.Player.Controller.PlayerInventory.AddItem(state);
                 Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
@@ -309,13 +207,13 @@ public class ShipInventory : IShipInventory
         {
             TryInteractWithItem(state);
             var item = CreateDrop(state);
-            Managers.Player.Controller.Inventory.RemoveItem(state);
+            Managers.Player.Controller.PlayerInventory.RemoveItem(state);
             Object.Destroy(state.gameObject);
         }
         else
         {
             var item = CreateDrop(state);
-            Managers.Player.Controller.Inventory.RemoveItem(state);
+            Managers.Player.Controller.PlayerInventory.RemoveItem(state);
             if(state.Count <= 0)
             {
                 Object.Destroy(state.gameObject);

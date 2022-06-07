@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerState
 {
     private PlayerData data;
-    [SerializeField] private ShipState ship;
+    private ShipController shipController;
+    private PlayerController playerController;
 
     private float maxHealth;
     private float health;
 
     public float Health => health;
     public PlayerData Data => data;
-    public ShipState Ship => ship;
+    public ShipController ShipController => shipController;
+    public PlayerController PlayerController => playerController;
 
-    public PlayerState(PlayerData data,ShipState playerShip)
+    public PlayerState(PlayerController playerController, ShipController shipController)
     {
-        this.data = data;
-        this.ship = playerShip;
+        this.playerController = playerController;
+        this.shipController = shipController;
     }
 
     public void ChangeHealth(int value)
@@ -37,14 +37,14 @@ public class PlayerState
 
     public void SetShip(ShipKind kind)
     {
-        if(this.Ship.Inventory != null)
+        if(this.ShipController.State.Inventory != null)
         {
             Debug.Log("Удаление оборудования с корабля...");
-            this.Ship.Inventory.RemoveAllEquipmentFromShip();
+            this.ShipController.State.Inventory.RemoveAllEquipmentFromShip();
             Debug.Log("Оборудование удалено...");
         }
         Debug.Log("Начата смена корабля...");
-        this.ship = this.ship.Init(kind);
+        this.shipController = this.shipController.Init(kind);
         Managers.Player.Controller.UpdateState();
     }
 }

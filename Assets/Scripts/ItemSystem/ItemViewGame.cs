@@ -91,7 +91,7 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
             if (other.GetComponent<PlayerController>() && Input.GetKey(KeyCode.Space) && (onItemDrop != null) )
             {
                 triggerWorked = true;
-                inventory = other.GetComponent<PlayerController>().Inventory;
+                inventory = other.GetComponent<PlayerController>().PlayerInventory;
                 for(int i = 0; i < this.state.Count;i++)
                 {
                     onItemDrop.Invoke(this.state.Data.ItemKind, state);

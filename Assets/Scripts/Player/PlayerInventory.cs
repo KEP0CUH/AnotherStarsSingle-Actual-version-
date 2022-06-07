@@ -67,6 +67,14 @@ public class PlayerInventory : IPlayerInventory
     }
     #endregion
 
+    public void ReplaceItem(int id)
+    {
+        if(itemStates.ContainsKey(id))
+        {
+
+        }
+    }
+
 
     #region œŒ ¿«¿“‹ »Õ¬≈Õ“¿–‹
     public void ShowInventory()

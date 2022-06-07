@@ -81,7 +81,7 @@ public class SellWindow : MonoBehaviour
     private void ConfirmSelling()
     {
         itemShopView.AddItem(this.itemCell.State, (int)sliderComponent.value);
-        Managers.Player.Controller.Inventory.RemoveItem(this.itemCell.State, (int)sliderComponent.value);
+        Managers.Player.Controller.PlayerInventory.RemoveItem(this.itemCell.State, (int)sliderComponent.value);
         Object.Destroy(this.gameObject);
         itemShopView.ShowListItemShop();
     }

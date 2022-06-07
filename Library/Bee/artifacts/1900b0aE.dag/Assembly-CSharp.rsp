@@ -396,6 +396,7 @@
 "Assets/Scripts/Player/PlayerData.cs"
 "Assets/Scripts/Player/PlayerInventory.cs"
 "Assets/Scripts/Player/PlayerState.cs"
+"Assets/Scripts/ShipSystem/ShipController.cs"
 "Assets/Scripts/ShipSystem/ShipData.cs"
 "Assets/Scripts/ShipSystem/ShipInventory.cs"
 "Assets/Scripts/ShipSystem/ShipState.cs"

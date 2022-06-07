@@ -69,7 +69,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
     }
     protected virtual void DropItem()
     {
-        Managers.Player.Controller.PlayerState.Ship.Inventory.TryDropItemFromShip(this.state);
+        Managers.Player.Controller.State.ShipController.State.Inventory.TryDropItemFromShip(this.state);
     }
     public void OnPointerDown(PointerEventData data)
     {
@@ -78,9 +78,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
     protected virtual void TryInteract()
     {
-        if (state.Data.ItemKind != ItemKind.EmptyDevice && state.Data.ItemKind != ItemKind.EmptyGun)
+        if (state.IsEmpty() == false)
         {
-            Managers.Player.Controller.PlayerState.Ship.TryInteractWithItem(this.state);
+            //Managers.Player.Controller.State.ShipController.TryInteractWithItem(this.state);
+            Managers.Player.TryInteractWithEquipment(this.state);
         }
     }
 }

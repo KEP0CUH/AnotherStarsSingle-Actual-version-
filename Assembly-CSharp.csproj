@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem2\ItemController2.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
+    <Compile Include="Assets\Scripts\ShipSystem\ShipController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldState.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\MobWindow.cs" />
     <Compile Include="Assets\Scripts\UI\GlobalMap\GlobalMapUI.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\ShipSystem\ShipController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
