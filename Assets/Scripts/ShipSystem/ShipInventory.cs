@@ -236,6 +236,7 @@ public class ShipInventory : IShipInventory
                 }*/
         CanvasUI.Inventory.ShowInventory(this, guns);
         CanvasUI.Inventory.ShowInventory(this, devices);
+        //Managers.Player.Controller.ShowInventory();
     }
     #endregion
 

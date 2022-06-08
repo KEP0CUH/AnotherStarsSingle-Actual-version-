@@ -418,6 +418,7 @@
 "Assets/Scripts/UI/Inventory/InventoryInside.cs"
 "Assets/Scripts/UI/Inventory/InventoryUI.cs"
 "Assets/Scripts/UI/Inventory/ItemSlot.cs"
+"Assets/Scripts/UI/Inventory/ItemUI.cs"
 "Assets/Scripts/UI/Minimap/RadarUI.cs"
 "Assets/Scripts/UI/Planet/ItemShop/ItemCell.cs"
 "Assets/Scripts/UI/Planet/ItemShop/ItemShop.cs"

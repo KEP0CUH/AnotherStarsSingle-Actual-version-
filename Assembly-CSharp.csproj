@@ -144,6 +144,7 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ItemUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -80,6 +80,7 @@ public class PlayerInventory : IPlayerInventory
     public void ShowInventory()
     {
         CanvasUI.Inventory.ShowInventory(this, itemStates);
+        Managers.Player.Controller.ShowInventory();
     }
     #endregion
 

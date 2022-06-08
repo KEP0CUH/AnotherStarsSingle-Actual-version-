@@ -385,23 +385,23 @@ public class InventoryUI : MonoBehaviour, IUIModule, IInventoryUI
     [ContextMenu("CreateItemSlot")]
     private void CreateItemCell(IPlayerInventory inventory, ItemState state)
     {
-        var itemSlot = new GameObject("Item " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(ItemSlot));
-        itemSlot.GetComponent<ItemSlot>().Init(rightDownInventoryList.transform, inventory, state);
-        itemSlots.Add(itemSlot);
+        var itemUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemUI));
+        itemUI.GetComponent<ItemUI>().Init(rightDownInventoryList.transform, state);
+        itemSlots.Add(itemUI);
     }
 
     private void CreateGunCell(IShipInventory inventory, ItemState state)
     {
-        var gunSlot = new GameObject("Gun " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(GunSlot));
-        gunSlot.GetComponent<GunSlot>().Init(rightInventoryList.transform, inventory, state);
-        gunSlots.Add(gunSlot);
+        var gunUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemUI));
+        gunUI.GetComponent<ItemUI>().Init(rightInventoryList.transform, state);
+        gunSlots.Add(gunUI);
     }
 
     private void CreateDeviceCell(IShipInventory inventory, ItemState state)
     {
-        var deviceSlot = new GameObject("Device " + state.Data.Title, typeof(Image), typeof(Selectable), typeof(DeviceSlot));
-        deviceSlot.GetComponent<DeviceSlot>().Init(rightMiddleInventoryList.transform, inventory, state);
-        deviceSlots.Add(deviceSlot);
+        var deviceUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemUI));
+        deviceUI.GetComponent<ItemUI>().Init(rightMiddleInventoryList.transform, state);
+        deviceSlots.Add(deviceUI);
     }
 
     private void OnValidate()

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
     private PlayerState playerState;
     private PlayerInventory playerInventory;
+    private InventoryInside inventoryInside;
     private ShipController shipController;
 
     private float timer = 0;
@@ -31,6 +32,10 @@ public class PlayerController : MonoBehaviour, IObserver
         this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor);
         this.playerState = new PlayerState(this,shipController);
         this.playerInventory = new PlayerInventory();
+
+        this.inventoryInside = Instantiate(Managers.Resources.DownloadData(ObjectType.InventoryInside)).GetComponent<InventoryInside>();
+        this.inventoryInside.Init(this);
+        Managers.Canvas.AddModule(this.inventoryInside.gameObject);
 
         Managers.Player.Init(this);
 
@@ -55,6 +60,10 @@ public class PlayerController : MonoBehaviour, IObserver
         globalMapCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
 
+    public void ShowInventory()
+    {
+        this.inventoryInside.ShowInventory();
+    }
 
     #region MOVEMENT_FOR_CLICK
     /// <summary>

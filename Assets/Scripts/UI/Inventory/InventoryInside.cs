@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class InventoryInside : MonoBehaviour
 {
     [SerializeField] private Image shipIcon;
+    [SerializeField] private Text shipTitle;
     [SerializeField] private Text health;
     [SerializeField] private Transform gunsList;
     [SerializeField] private Transform devicesList;
@@ -28,10 +29,14 @@ public class InventoryInside : MonoBehaviour
         deviceCells = new List<GameObject>();
         itemCells = new List<GameObject>();
 
+        this.shipIcon.sprite = playerController.ShipController.State.Data.Icon;
+        this.shipTitle.text = playerController.ShipController.State.Data.Title;
+
+
         return this;
     }
 
-    public void ShowInventory(IShipInventory inventory)
+    public void ShowInventory()
     {
         ShowGuns();
         ShowDevices();
@@ -40,22 +45,81 @@ public class InventoryInside : MonoBehaviour
 
     private void ShowGuns()
     {
-        //this.guns = playerController.State.Ship.Inventory.GetGuns();
-
         foreach(var gun in gunCells)
         {
             if (gun != null) Object.Destroy(gun.gameObject);
         }
         this.gunCells.Clear();
+        this.guns.Clear();
+
+        foreach(var gun in this.playerController.ShipController.Inventory.GetGuns())
+        {
+            this.guns.Add(gun.Id, gun);
+        }
+
+        foreach(var gun in this.guns)
+        {
+            CreateCell(gun.Value);
+        }
     }
 
     private void ShowDevices()
     {
+        foreach(var device in deviceCells)
+        {
+            if (device != null) Object.Destroy(device.gameObject);
+        }
+        this.deviceCells.Clear();
+        this.devices.Clear();
 
+        foreach(var device in this.playerController.ShipController.Inventory.GetDevices())
+        {
+            this.devices.Add(device.Id, device);
+        }
+
+        foreach(var device in devices)
+        {
+            CreateCell(device.Value);
+        }
     }
 
     private void ShowItems()
     {
+        foreach(var item in itemCells)
+        {
+            if(item != null) Object.Destroy(item.gameObject);
+        }
+        this.itemCells.Clear();
+        this.items.Clear();
 
+        foreach(var item in this.playerController.PlayerInventory.GetAllItems())
+        {
+            this.items.Add(item.Key, item.Value);
+        }
+
+        foreach(var item in items)
+        {
+            CreateCell(item.Value);
+        }
+    }
+
+    private void CreateCell(ItemState state)
+    {
+        var itemUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemUI));
+        if (state.IsItem || state.IsSet == false)
+        {
+            itemUI.GetComponent<ItemUI>().Init(itemsList.transform, state);
+            itemCells.Add(itemUI);
+        }
+        else if(state.IsWeapon && state.IsSet)
+        {
+            itemUI.GetComponent<ItemUI>().Init(gunsList.transform, state);
+            gunCells.Add(itemUI);
+        }
+        else if(state.IsDevice && state.IsSet)
+        {
+            itemUI.GetComponent<ItemUI>().Init(devicesList.transform, state);
+            deviceCells.Add(itemUI);
+        }
     }
 }
