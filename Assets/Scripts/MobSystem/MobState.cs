@@ -27,11 +27,11 @@ public class MobState : MonoBehaviour
     public float Health => health;
     public float MaxHealth => maxHealth;
 
-    public MobState Init(MobController controller,MobKind kind)
+    public MobState Init(MobController controller,MobKind kind,InventoryController inventory)
     {
         this.mobController = controller;
         this.data = Managers.Resources.DownloadData(kind);
-        this.shipState = this.gameObject.GetComponent<ShipState>().Init(data.Ship);
+        this.shipState = this.gameObject.GetComponent<ShipState>().Init(data.Ship,inventory);
         id = GetId();
 
         switch(kind)

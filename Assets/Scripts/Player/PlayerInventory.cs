@@ -3,37 +3,37 @@ using UnityEngine;
 
 public class PlayerInventory : IPlayerInventory
 {
-    private Dictionary<int, ItemState> itemStates;
+    private Dictionary<int, ItemState> items;
 
     public PlayerInventory()
     {
-        itemStates = new Dictionary<int, ItemState>();
+        items = new Dictionary<int, ItemState>();
     }
 
 
     #region ÄÎÁÀÂÈÒÜ Â ÈÍÂÅÍÒÀĞÜ ÏĞÅÄÌÅÒ
-    public void AddItem(ItemState addedState,int count = 1, bool needDestroying = false)
+    public void AddItem(ItemState addedItem,int count = 1, bool needDestroying = false)
     {
-        if(addedState.IsEmpty())
+        if(addedItem.IsEmpty())
         {
             return;
         }
 
-        if (itemStates.ContainsKey(addedState.Id))
+        if (items.ContainsKey(addedItem.Id))
         {
             return;
         }
         else
         {
             Debug.Log("Äîáàâëåíèå ïğåäìåòà");
-            if (addedState.IsItem)
+            if (addedItem.IsItem)
             {
-                foreach (var existState in itemStates.Values)
+                foreach (var existState in items.Values)
                 {
-                    if (existState.Data.ItemKind == addedState.Data.ItemKind)
+                    if (existState.Data.ItemKind == addedItem.Data.ItemKind)
                     {
                         existState.IncreaseNumber(count);
-                        if(needDestroying && existState.Count <= 0) Object.Destroy(addedState.gameObject);
+                        if(needDestroying && existState.Count <= 0) Object.Destroy(addedItem.gameObject);
                         ShowInventory();
                         return;
                     }
@@ -43,25 +43,25 @@ public class PlayerInventory : IPlayerInventory
             GameObject newItemStateObj;
             ItemState newItemState;
 
-            if (addedState.IsWeapon)
+            if (addedItem.IsWeapon)
             {
-                newItemStateObj = new GameObject(($"{addedState.Data.Title}"), typeof(GunState));
+                newItemStateObj = new GameObject(($"{addedItem.Data.Title}"), typeof(GunState));
                 newItemState = newItemStateObj.GetComponent<GunState>();
-                newItemState.Init((GunState)addedState);
+                newItemState.Init((GunState)addedItem);
             }
-            else if (addedState.IsDevice)
+            else if (addedItem.IsDevice)
             {
-                newItemStateObj = new GameObject(($"{addedState.Data.Title}"), typeof(DeviceState));
+                newItemStateObj = new GameObject(($"{addedItem.Data.Title}"), typeof(DeviceState));
                 newItemState = newItemStateObj.GetComponent<DeviceState>();
-                newItemState.Init((DeviceState)addedState);
+                newItemState.Init((DeviceState)addedItem);
             }
             else
             {
-                newItemStateObj = new GameObject(($"{addedState.Data.Title}"), typeof(ItemState));
-                newItemState = newItemStateObj.GetComponent<ItemState>().Init(addedState);
+                newItemStateObj = new GameObject(($"{addedItem.Data.Title}"), typeof(ItemState));
+                newItemState = newItemStateObj.GetComponent<ItemState>().Init(addedItem);
             }
-            if (needDestroying) Object.Destroy(addedState.gameObject);
-            itemStates.Add(newItemState.Id, newItemState);
+            if (needDestroying) Object.Destroy(addedItem.gameObject);
+            items.Add(newItemState.Id, newItemState);
             ShowInventory();
         }
     }
@@ -69,7 +69,7 @@ public class PlayerInventory : IPlayerInventory
 
     public void ReplaceItem(int id)
     {
-        if(itemStates.ContainsKey(id))
+        if(items.ContainsKey(id))
         {
 
         }
@@ -79,7 +79,7 @@ public class PlayerInventory : IPlayerInventory
     #region ÏÎÊÀÇÀÒÜ ÈÍÂÅÍÒÀĞÜ
     public void ShowInventory()
     {
-        CanvasUI.Inventory.ShowInventory(this, itemStates);
+        CanvasUI.Inventory.ShowInventory(this, items);
         Managers.Player.Controller.ShowInventory();
     }
     #endregion
@@ -87,15 +87,15 @@ public class PlayerInventory : IPlayerInventory
     #region ÏÎËÓ×ÈÒÜ ÑËÎÂÀĞÜ ÂÑÅÕ ÏĞÅÄÌÅÒÎÂ, ÊÎÒÎĞÛÅ ÅÑÒÜ Ó ÈÃĞÎÊÀ
     public Dictionary<int,ItemState> GetAllItems()
     {
-        return this.itemStates;
+        return this.items;
     }
     #endregion
 
     #region ÏÎËÓ×ÈÒÜ ÈÒÅÌ ÈÇ ÈÍÂÅÍÒÀĞß ÏÎ ÈÄÓ, ÅÑËÈ ÒÀÊÎÉ ÈÌÅÅÒÑß
     public ItemState GetItem(int id)
     {
-        if (itemStates.ContainsKey(id))
-            return itemStates[id];
+        if (items.ContainsKey(id))
+            return items[id];
         return null;
     }
     #endregion
@@ -104,21 +104,21 @@ public class PlayerInventory : IPlayerInventory
     #region ÓÄÀËÈÒÜ ÓÊÀÇÀÍÍÛÉ ÏĞÅÄÌÅÒ ÈÇ ÈÍÂÅÍÒÀĞß
     public void RemoveItem(ItemState state,int count = 1,bool needDestroying = false)
     {
-        if (itemStates.ContainsKey(state.Id))
+        if (items.ContainsKey(state.Id))
         {
             if (state.IsItem)
             {
-                itemStates[state.Id].DecreaseNumber(count);
-                if (itemStates[state.Id].Count <= 0)
+                items[state.Id].DecreaseNumber(count);
+                if (items[state.Id].Count <= 0)
                 {
-                    itemStates.Remove(state.Id);
+                    items.Remove(state.Id);
                     if(needDestroying) Object.Destroy(state.gameObject);
                 }
                 ShowInventory();
             }
             else
             {
-                itemStates.Remove(state.Id);
+                items.Remove(state.Id);
                 if (needDestroying) Object.Destroy(state.gameObject);
                 ShowInventory();
             }

@@ -9,20 +9,24 @@ public class MobController : MonoBehaviour
     private float moveSpeed;
     private MobState mobState;
     private MobView mobView;
+    private InventoryController inventoryController;
 
     private GameObject spawner;
 
-    public event System.Action onDamagedMob;
+    public event System.Action OnMobDamaged;
 
+    public InventoryController InventoryController => inventoryController;
     public MobState State => mobState;
     public MobView View => mobView;
     public GameObject Spawner => spawner;
 
     public void Init(Transform spawner,MobKind kind)
     {
-        this.mobState = this.gameObject.GetComponent<MobState>().Init(this,kind);
+        this.inventoryController = new InventoryController();
+        this.mobState = this.gameObject.GetComponent<MobState>().Init(this,kind,this.inventoryController);
         this.mobView = this.gameObject.GetComponent<MobView>().Init(this,this.mobState);
         this.spawner = spawner.gameObject;
+
 
         this.moveSpeed = 5.0f / Constants.TICKS_PER_SEC;
         transform.localPosition = new Vector3(0, 0, -10);
@@ -61,7 +65,7 @@ public class MobController : MonoBehaviour
             Debug.Log("Враг повреждается");
             Object.Destroy(other.gameObject);
             ChangeMobHealth(-1 * other.GetComponent<AmmoController>().State.Data.BaseDamage);
-            onDamagedMob?.Invoke();
+            OnMobDamaged?.Invoke();
         }
 
     }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
     private PlayerState playerState;
     private PlayerInventory playerInventory;
+    private InventoryController inventoryController;
     private InventoryInside inventoryInside;
     private ShipController shipController;
 
@@ -25,19 +26,23 @@ public class PlayerController : MonoBehaviour, IObserver
 
     public PlayerState State => playerState;
     public PlayerInventory PlayerInventory => playerInventory;
+    public InventoryController Inventory => inventoryController;
     public ShipController ShipController => shipController;
 
     public PlayerController Init()
     {
-        this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor);
+        this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor,this.inventoryController);
         this.playerState = new PlayerState(this,shipController);
         this.playerInventory = new PlayerInventory();
+        this.inventoryController = new InventoryController();
 
         this.inventoryInside = Instantiate(Managers.Resources.DownloadData(ObjectType.InventoryInside)).GetComponent<InventoryInside>();
         this.inventoryInside.Init(this);
         Managers.Canvas.AddModule(this.inventoryInside.gameObject);
-
         Managers.Player.Init(this);
+
+
+        this.shipController.Inventory.OnInteractWithEquipment += this.inventoryInside.ShowInventory;
 
         SetupCamera();
         SetupRadar();
@@ -166,6 +171,7 @@ public class PlayerController : MonoBehaviour, IObserver
         {
             Debug.Log("Invoked event OnItemDrop.");
             playerInventory.AddItem(state);
+            inventoryController.AddItem(state);
         }
     }
 
@@ -230,8 +236,6 @@ public class PlayerController : MonoBehaviour, IObserver
         {
             Managers.Canvas.DisableAllModules();
         }
-
-
     }
 
 

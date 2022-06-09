@@ -4,7 +4,8 @@ using UnityEngine;
 public class ShipInventory : IShipInventory
 {
     private ShipState shipState;
-    public ShipState ShipState => ShipState;
+    private InventoryController inventory;
+    public ShipState ShipState => shipState;
 
     private List<GunState> guns;
     private int maxNumGuns;
@@ -12,12 +13,15 @@ public class ShipInventory : IShipInventory
     private List<DeviceState> devices;
     private int maxNumDevices;
 
+    public event System.Action OnInteractWithEquipment;
+
+
     public ShipInventory(ShipState state)
     {
         this.shipState = state;
         this.maxNumGuns = state.Data.MaxGuns;
         this.maxNumDevices = state.Data.MaxDevices;
-
+        this.inventory = state.InventoryController;
 
         guns = new List<GunState>();
         for (int i = 0; i < maxNumGuns; i++)
@@ -30,11 +34,6 @@ public class ShipInventory : IShipInventory
         {
             devices.Add(CreateEmptyDeviceState());
         }
-
-   /*     var defaultGun = new GameObject("GunDefault", typeof(GunState));
-        defaultGun.GetComponent<GunState>().Init(ItemKind.weaponMultiblaster, 1);
-        TrySetGun(defaultGun.GetComponent<GunState>());*/
-
 
         ShowInventory();
     }
@@ -49,10 +48,12 @@ public class ShipInventory : IShipInventory
             if (state.IsSet)
             {
                 TryUnsetGun((GunState)state);
+                OnInteractWithEquipment?.Invoke();
             }
             else if (state.IsSet == false)
             {
                 TrySetGun((GunState)state);
+                OnInteractWithEquipment?.Invoke();
             }
         }
         else if (state.IsDevice)
@@ -60,10 +61,12 @@ public class ShipInventory : IShipInventory
             if (state.IsSet)
             {
                 TryUnsetDevice((DeviceState)state);
+                OnInteractWithEquipment?.Invoke();
             }
             else if (state.IsSet == false)
             {
                 TrySetDevice((DeviceState)state);
+                OnInteractWithEquipment?.Invoke();
             }
         }
         else

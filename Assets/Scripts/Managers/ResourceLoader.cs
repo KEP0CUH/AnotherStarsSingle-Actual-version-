@@ -264,34 +264,6 @@ public class ResourceLoader : MonoBehaviour, IGameManager
             itemShops.Add(itemShopType, Resources.Load<ItemShopData>(itemShopsPath + itemShopType));
         }
 
-        //ammo.Add(AmmoKind.MultiblasterAmmo, Resources.Load<AmmoData>(basePath + ammoPath + "Multiblaster"));
-
-        /*        items.Add(ItemKind.rudaFerrum, Resources.Load<ItemData>(basePath + oresPath                     + $"FerrumOre"));
-                items.Add(ItemKind.rudaGold, Resources.Load<ItemData>(basePath + oresPath                       + $"GoldOre"));
-                items.Add(ItemKind.rudaNickel, Resources.Load<ItemData>(basePath + oresPath                     + $"NickelOre"));
-                items.Add(ItemKind.rudaTitan, Resources.Load<ItemData>(basePath + oresPath                      + $"TitanOre"));
-                items.Add(ItemKind.rudaMineral, Resources.Load<ItemData>(basePath + oresPath                    + $"MineralOre"));
-                items.Add(ItemKind.rudaOrganic, Resources.Load<ItemData>(basePath + oresPath                    + $"OrganicOre"));
-                items.Add(ItemKind.rudaOsmium, Resources.Load<ItemData>(basePath + oresPath                     + $"OsmiumOre"));
-
-                items.Add(ItemKind.weaponEmpty, Resources.Load<ItemData>(basePath + gunsPath                          + "EmptyGun"));
-                items.Add(ItemKind.DesintegratorGun, Resources.Load<ItemData>(basePath + gunsPath                + "Desintegrator"));
-                items.Add(ItemKind.MultiblasterGun, Resources.Load<ItemData>(basePath + gunsPath                 + "Multiblaster"));
-                items.Add(ItemKind.weaponKinetic, Resources.Load<GunData>(basePath + gunsPath                           + "Desintegrator"));
-
-                items.Add(ItemKind.deviceEmpty, Resources.Load<ItemData>(basePath + devicesPath                     + "EmptyDevice"));
-                items.Add(ItemKind.deviceTourbine, Resources.Load<ItemData>(basePath + devicesPath                  + "Tourbine"));
-
-                items.Add(ItemKind.blueLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                      + "BlueLaser"));
-                items.Add(ItemKind.redLaserAmmo, Resources.Load<ItemData>(basePath + ammoPath                       + "RedLaser"));
-
-               */
-
-        /*        asteroids.Add(AsteroidType.GoldAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath      + "GoldAsteroid"));
-                asteroids.Add(AsteroidType.FerrumAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "FerrumAsteroid"));
-                asteroids.Add(AsteroidType.NickelAsteroid, Resources.Load<AsteroidData>(basePath + asteroidsPath    + "NickelAsteroid"));
-                asteroids.Add(AsteroidType.TitanAsteroid, Resources.Load<AsteroidData>($""));*/
-
         foreach (var asteroidType in Enum.GetValues(typeof(AsteroidType)))
         {
             asteroids.Add((AsteroidType)asteroidType, Resources.Load<AsteroidData>(asteroidsPath + asteroidType));

@@ -16,7 +16,7 @@ public class MobWindow : MonoBehaviour
     public void Init(MobController controller)
     {
         this.controller = controller;
-        this.controller.onDamagedMob += OnMobDamaged;
+        this.controller.OnMobDamaged += UpdateHealthInfo;
 
         this.icon.sprite = controller.State.ShipState.Data.Icon;
         this.health.text = controller.State.MaxHealth.ToString();
@@ -26,7 +26,7 @@ public class MobWindow : MonoBehaviour
         this.buttonClose.onClick.AddListener(CloseWindow);
     }
 
-    private void OnMobDamaged()
+    private void UpdateHealthInfo()
     {
         this.health.text = controller.State.MaxHealth.ToString();
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
@@ -39,6 +39,6 @@ public class MobWindow : MonoBehaviour
 
     private void OnDestroy()
     {
-        this.controller.onDamagedMob -= OnMobDamaged;
+        this.controller.OnMobDamaged -= UpdateHealthInfo;
     }
 }

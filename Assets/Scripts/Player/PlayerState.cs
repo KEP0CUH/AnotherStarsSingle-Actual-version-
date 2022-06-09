@@ -44,7 +44,7 @@ public class PlayerState
             Debug.Log("Оборудование удалено...");
         }
         Debug.Log("Начата смена корабля...");
-        this.shipController = this.shipController.Init(kind);
+        this.shipController = this.shipController.Init(kind,playerController.Inventory);
         Managers.Player.Controller.UpdateState();
     }
 }

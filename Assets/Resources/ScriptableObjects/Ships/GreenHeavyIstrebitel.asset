@@ -16,3 +16,5 @@ MonoBehaviour:
   title: 
   description: 
   kind: 3
+  maxGuns: 2
+  maxDevices: 1

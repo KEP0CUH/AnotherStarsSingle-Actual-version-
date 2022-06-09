@@ -82,16 +82,14 @@
     <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
+    <Compile Include="Assets\Scripts\UI\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\PlanetWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\BuyWindow.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\ItemWindow.cs" />
-    <Compile Include="Assets\Scripts\Managers\AsteroidManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\DeviceSlot.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipInventory.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventoryUI.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemData.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
@@ -114,13 +112,11 @@
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunState.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\GunSlot.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetView.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
-    <Compile Include="Assets\Scripts\ItemSystem2\ItemController2.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldState.cs" />
@@ -144,7 +140,7 @@
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInventoryUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Inventory\ItemUI.cs" />
+    <Compile Include="Assets\Scripts\InventorySystem\InventoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

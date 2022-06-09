@@ -10,6 +10,7 @@ public class InventoryInside : MonoBehaviour
     [SerializeField] private Transform gunsList;
     [SerializeField] private Transform devicesList;
     [SerializeField] private Transform itemsList;
+    [SerializeField] private Button buttonClose;
 
     private List<GameObject> gunCells = new List<GameObject>();
     private List<GameObject> deviceCells = new List<GameObject>();
@@ -31,8 +32,9 @@ public class InventoryInside : MonoBehaviour
 
         this.shipIcon.sprite = playerController.ShipController.State.Data.Icon;
         this.shipTitle.text = playerController.ShipController.State.Data.Title;
+        this.buttonClose.onClick.AddListener(CloseInventory);
 
-
+        ShowInventory();
         return this;
     }
 
@@ -92,7 +94,7 @@ public class InventoryInside : MonoBehaviour
         this.itemCells.Clear();
         this.items.Clear();
 
-        foreach(var item in this.playerController.PlayerInventory.GetAllItems())
+        foreach(var item in this.playerController.Inventory.GetItems())
         {
             this.items.Add(item.Key, item.Value);
         }
@@ -121,5 +123,10 @@ public class InventoryInside : MonoBehaviour
             itemUI.GetComponent<ItemUI>().Init(devicesList.transform, state);
             deviceCells.Add(itemUI);
         }
+    }
+
+    private void CloseInventory()
+    {
+        this.gameObject.SetActive(false);
     }
 }
