@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShipInventory : IShipInventory
 {
+    private Transform parent;
     private ShipState shipState;
     private InventoryController inventory;
     public ShipState ShipState => shipState;
@@ -16,12 +17,13 @@ public class ShipInventory : IShipInventory
     public event System.Action OnInteractWithEquipment;
 
 
-    public ShipInventory(ShipState state)
+    public ShipInventory(Transform parent,ShipState state,InventoryController inventory)
     {
+        this.parent = parent;
         this.shipState = state;
         this.maxNumGuns = state.Data.MaxGuns;
         this.maxNumDevices = state.Data.MaxDevices;
-        this.inventory = state.InventoryController;
+        this.inventory = inventory;
 
         guns = new List<GunState>();
         for (int i = 0; i < maxNumGuns; i++)
@@ -47,12 +49,12 @@ public class ShipInventory : IShipInventory
         {
             if (state.IsSet)
             {
-                TryUnsetGun((GunState)state);
+                TryUnsetGun(state);
                 OnInteractWithEquipment?.Invoke();
             }
             else if (state.IsSet == false)
             {
-                TrySetGun((GunState)state);
+                TrySetGun(state);
                 OnInteractWithEquipment?.Invoke();
             }
         }
@@ -60,12 +62,12 @@ public class ShipInventory : IShipInventory
         {
             if (state.IsSet)
             {
-                TryUnsetDevice((DeviceState)state);
+                TryUnsetDevice(state);
                 OnInteractWithEquipment?.Invoke();
             }
             else if (state.IsSet == false)
             {
-                TrySetDevice((DeviceState)state);
+                TrySetDevice(state);
                 OnInteractWithEquipment?.Invoke();
             }
         }
@@ -78,7 +80,7 @@ public class ShipInventory : IShipInventory
     #endregion
 
     #region TRY_SET/UNSET_GUN
-    private void TrySetGun(GunState state)
+    private void TrySetGun(ItemState state)
     {
         for (int i = 0; i < maxNumGuns; i++)
         {
@@ -87,8 +89,7 @@ public class ShipInventory : IShipInventory
                 Object.Destroy(guns[i].gameObject);
                 guns[i] = CreateGunStateObject(state);
                 guns[i].SetIsTrue();
-                Managers.Player.Controller.PlayerInventory.RemoveItem(state,1,true);
-                //Object.Destroy(state.gameObject);
+                inventory.RemoveItem(state, 1, true);
                 ShowInventory();
                 return;
             }
@@ -96,7 +97,7 @@ public class ShipInventory : IShipInventory
         return;
     }
 
-    private void TryUnsetGun(GunState state)
+    private void TryUnsetGun(ItemState state)
     {
         for (int i = 0; i < guns.Count; i++)
         {
@@ -105,8 +106,7 @@ public class ShipInventory : IShipInventory
                 guns[i] = CreateEmptyGunState();
                 guns[i].SetIsFalse();
                 state.SetIsFalse();
-                Managers.Player.Controller.PlayerInventory.AddItem(state,1,true);
-                //Object.Destroy(state.gameObject);
+                inventory.AddItem(state, 1, true);
                 ShowInventory();
                 return;
             }
@@ -116,7 +116,7 @@ public class ShipInventory : IShipInventory
     #endregion
 
     #region TRY_SET/UNSET_DEVICE
-    private void TrySetDevice(DeviceState state)
+    private void TrySetDevice(ItemState state)
     {
         for(int i = 0; i < maxNumDevices; i++)
         {
@@ -125,7 +125,7 @@ public class ShipInventory : IShipInventory
                 Object.Destroy(devices[i]);
                 devices[i] = CreateDeviceStateObject(state);
                 devices[i].SetIsTrue();
-                Managers.Player.Controller.PlayerInventory.RemoveItem(state);
+                inventory.RemoveItem(state);
                 Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
@@ -133,7 +133,7 @@ public class ShipInventory : IShipInventory
         }
     }
 
-    private void TryUnsetDevice(DeviceState state)
+    private void TryUnsetDevice(ItemState state)
     {
         for(int i = 0; i < devices.Count;i++)
         {
@@ -142,7 +142,7 @@ public class ShipInventory : IShipInventory
                 devices[i] = CreateEmptyDeviceState();
                 devices[i].SetIsFalse();
                 state.SetIsFalse();
-                Managers.Player.Controller.PlayerInventory.AddItem(state);
+                inventory.AddItem(state);
                 Object.Destroy(state.gameObject);
                 ShowInventory();
                 return;
@@ -210,13 +210,13 @@ public class ShipInventory : IShipInventory
         {
             TryInteractWithItem(state);
             var item = CreateDrop(state);
-            Managers.Player.Controller.PlayerInventory.RemoveItem(state);
+            inventory.RemoveItem(state);
             Object.Destroy(state.gameObject);
         }
         else
         {
             var item = CreateDrop(state);
-            Managers.Player.Controller.PlayerInventory.RemoveItem(state);
+            inventory.RemoveItem(state);
             if(state.Count <= 0)
             {
                 Object.Destroy(state.gameObject);
@@ -229,41 +229,30 @@ public class ShipInventory : IShipInventory
     #region Показ инвентаря корабля(т.е. одетого на него оборудования)
     public void ShowInventory()
     {
-        /*        foreach(var gun in guns)
-                {
-                    if(gun == null)
-                    {
-                        gun = new BaseItemData;
-                    }
-
-                }*/
-        CanvasUI.Inventory.ShowInventory(this, guns);
-        CanvasUI.Inventory.ShowInventory(this, devices);
-        //Managers.Player.Controller.ShowInventory();
+        OnInteractWithEquipment?.Invoke();
     }
     #endregion
 
 
     #region Воссоздание нового состояния итема исходя из другого состояния. 
-    private GunState CreateGunStateObject(GunState state)
+    private GunState CreateGunStateObject(ItemState state)
     {
         ItemState newItemState;
 
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
-        newItemState = newItemStateObj.GetComponent<GunState>();
-
-        newItemState.Init(state);
+        newItemStateObj.GetComponent<Transform>().SetParent(parent);
+        newItemState = newItemStateObj.GetComponent<GunState>().Init(state);
         return (GunState)newItemState;
     }
 
-    private DeviceState CreateDeviceStateObject(DeviceState state)
+    private DeviceState CreateDeviceStateObject(ItemState state)
     {
         ItemState newItemState;
 
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
-        newItemState = newItemStateObj.GetComponent<DeviceState>();
+        newItemStateObj.GetComponent<Transform>().SetParent(parent);
+        newItemState = newItemStateObj.GetComponent<DeviceState>().Init(state);
 
-        newItemState.Init(state);
         return (DeviceState)newItemState;
     }
     #endregion
@@ -273,8 +262,10 @@ public class ShipInventory : IShipInventory
     private GunState CreateGunStateObject(ItemKind kind)
     {
         var gunDefault = new GameObject("DefaultGun", typeof(GunState));
+        gunDefault.GetComponent<Transform>().SetParent(parent);
         var gunState = gunDefault.GetComponent<GunState>();
         gunState.Init(kind, 1);
+        gunState.SetIsTrue();
 
         return gunState;
     }
@@ -282,8 +273,10 @@ public class ShipInventory : IShipInventory
     private DeviceState CreateDeviceStateObject(ItemKind kind)
     {
         var deviceDefault = new GameObject("DefaultDevice", typeof(DeviceState));
+        deviceDefault.GetComponent<Transform>().SetParent(parent);
         var deviceState = deviceDefault.GetComponent<DeviceState>();
         deviceState.Init(kind, 1);
+        deviceState.SetIsTrue();
 
         return deviceState;
     }

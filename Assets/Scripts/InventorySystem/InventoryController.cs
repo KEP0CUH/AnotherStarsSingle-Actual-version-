@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class InventoryController
 {
     private Dictionary<int, ItemState> items;
+    private Transform parent;
 
-    public InventoryController()
+    public InventoryController(Transform parent)
     {
         items = new Dictionary<int, ItemState>();
+        this.parent = parent;
     }
 
     public void AddItem(ItemState addedItem,int count = 1,bool needDestroying = false)
@@ -59,7 +61,8 @@ public class InventoryController
             }
             if (needDestroying) Object.Destroy(addedItem.gameObject);
 
-            items.Add(newItemState.Id, newItemState);
+            newItemStateObj.GetComponent<Transform>().SetParent(parent);
+            this.items.Add(newItemState.Id, newItemState);
         }
     }
 
@@ -80,6 +83,11 @@ public class InventoryController
                     items.Remove(removedItem.Id);
                     if(needDestroying) Object.Destroy(removedItem.gameObject);
                 }
+            }
+            else
+            {
+                items.Remove(removedItem.Id);
+                if (needDestroying) Object.Destroy(removedItem.gameObject);
             }
         }
     }

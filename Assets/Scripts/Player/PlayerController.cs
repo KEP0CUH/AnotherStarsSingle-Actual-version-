@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour, IObserver
     private List<GunState> guns = new List<GunState>();
 
     private PlayerState playerState;
-    private PlayerInventory playerInventory;
     private InventoryController inventoryController;
     private InventoryInside inventoryInside;
     private ShipController shipController;
@@ -25,24 +24,19 @@ public class PlayerController : MonoBehaviour, IObserver
     private Camera globalMapCamera;
 
     public PlayerState State => playerState;
-    public PlayerInventory PlayerInventory => playerInventory;
     public InventoryController Inventory => inventoryController;
     public ShipController ShipController => shipController;
 
     public PlayerController Init()
     {
+        this.inventoryController = new InventoryController(this.transform);
         this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor,this.inventoryController);
         this.playerState = new PlayerState(this,shipController);
-        this.playerInventory = new PlayerInventory();
-        this.inventoryController = new InventoryController();
 
         this.inventoryInside = Instantiate(Managers.Resources.DownloadData(ObjectType.InventoryInside)).GetComponent<InventoryInside>();
         this.inventoryInside.Init(this);
         Managers.Canvas.AddModule(this.inventoryInside.gameObject);
         Managers.Player.Init(this);
-
-
-        this.shipController.Inventory.OnInteractWithEquipment += this.inventoryInside.ShowInventory;
 
         SetupCamera();
         SetupRadar();
@@ -170,7 +164,6 @@ public class PlayerController : MonoBehaviour, IObserver
         if (eventType == EventType.OnItemDropped)
         {
             Debug.Log("Invoked event OnItemDrop.");
-            playerInventory.AddItem(state);
             inventoryController.AddItem(state);
         }
     }
@@ -178,6 +171,14 @@ public class PlayerController : MonoBehaviour, IObserver
     private void Start()
     {
         this.Init();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryInside.Reswitch();
+        }
     }
 
     /// <summary>
@@ -227,9 +228,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (CanvasUI.Inventory.IsEnabled)
-                CanvasUI.Inventory.Disable();
-            else CanvasUI.Inventory.Enable();
+            
         }
 
         if (Input.GetKey(KeyCode.Escape))

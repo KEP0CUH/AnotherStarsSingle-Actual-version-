@@ -109,6 +109,6 @@ public class ConstantUI : MonoBehaviour
 
     private void OpenInventory()
     {
-        CanvasUI.Inventory.Enable();
+        
     }
 }

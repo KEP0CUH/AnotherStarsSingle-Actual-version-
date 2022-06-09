@@ -22,7 +22,7 @@ public class MobController : MonoBehaviour
 
     public void Init(Transform spawner,MobKind kind)
     {
-        this.inventoryController = new InventoryController();
+        this.inventoryController = new InventoryController(this.transform);
         this.mobState = this.gameObject.GetComponent<MobState>().Init(this,kind,this.inventoryController);
         this.mobView = this.gameObject.GetComponent<MobView>().Init(this,this.mobState);
         this.spawner = spawner.gameObject;

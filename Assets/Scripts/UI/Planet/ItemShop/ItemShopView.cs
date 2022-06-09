@@ -199,7 +199,7 @@ public class ItemShopView : MonoBehaviour
         }
 
         playerItems = new Dictionary<int, ItemState>();
-        playerItems = Managers.Player.Controller.PlayerInventory.GetAllItems();
+        playerItems = Managers.Player.Controller.Inventory.GetItems();
 
         foreach (var item in playerItems)
         {

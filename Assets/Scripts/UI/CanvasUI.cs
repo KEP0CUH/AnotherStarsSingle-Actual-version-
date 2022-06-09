@@ -10,7 +10,6 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
     public ManagerStatus Status { get; private set; }
     public UIModuleKind Kind { get; private set; }
 
-    public static InventoryUI Inventory;
     public static RadarUI Radar;
     public static GlobalMapUI GlobalMap;
     
@@ -23,10 +22,6 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         Debug.Log("CanvasUI starting...".SetColor(Color.Yellow));
         canvas = SetupCanvas();
         SetupEventSystem();
-
-        canvas.AddComponent<InventoryUI>();
-        Inventory = canvas.GetComponent<InventoryUI>();
-        modules.Add(Inventory);
 
         canvas.AddComponent<RadarUI>();
         Radar = canvas.GetComponent<RadarUI>();

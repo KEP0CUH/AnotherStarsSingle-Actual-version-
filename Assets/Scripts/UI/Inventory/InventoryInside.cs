@@ -33,6 +33,7 @@ public class InventoryInside : MonoBehaviour
         this.shipIcon.sprite = playerController.ShipController.State.Data.Icon;
         this.shipTitle.text = playerController.ShipController.State.Data.Title;
         this.buttonClose.onClick.AddListener(CloseInventory);
+        this.playerController.ShipController.State.Inventory.OnInteractWithEquipment += ShowInventory;
 
         ShowInventory();
         return this;
@@ -45,6 +46,16 @@ public class InventoryInside : MonoBehaviour
         ShowItems();
     }
 
+    public void Reswitch()
+    {
+        if (this.gameObject.activeInHierarchy)
+        {
+            this.gameObject.SetActive(false);
+            ShowInventory();
+        }
+        else this.gameObject.SetActive(true);
+    }
+
     private void ShowGuns()
     {
         foreach(var gun in gunCells)
@@ -54,7 +65,7 @@ public class InventoryInside : MonoBehaviour
         this.gunCells.Clear();
         this.guns.Clear();
 
-        foreach(var gun in this.playerController.ShipController.Inventory.GetGuns())
+        foreach(var gun in this.playerController.ShipController.State.Inventory.GetGuns())
         {
             this.guns.Add(gun.Id, gun);
         }
@@ -74,7 +85,7 @@ public class InventoryInside : MonoBehaviour
         this.deviceCells.Clear();
         this.devices.Clear();
 
-        foreach(var device in this.playerController.ShipController.Inventory.GetDevices())
+        foreach(var device in this.playerController.ShipController.State.Inventory.GetDevices())
         {
             this.devices.Add(device.Id, device);
         }

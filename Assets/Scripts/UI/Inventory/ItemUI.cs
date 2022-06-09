@@ -11,11 +11,9 @@ public class ItemUI : MonoBehaviour,IPointerDownHandler
     [SerializeField] private Button buttonInfo;
     [SerializeField] private Button buttonDrop;
 
-    private Transform parent;
     private ItemState state;
     public ItemUI Init(Transform parent,ItemState state)
     {
-        this.parent = parent;
         this.state = state;
 
         this.gameObject.GetComponent<RectTransform>().SetParent(parent);
@@ -36,7 +34,7 @@ public class ItemUI : MonoBehaviour,IPointerDownHandler
 
     protected virtual void DropItem()
     {
-        Managers.Player.Controller.ShipController.Inventory.TryDropItemFromShip(this.state);
+        Managers.Player.Controller.ShipController.State.Inventory.TryDropItemFromShip(this.state);
     }
 
     public void OnPointerDown(PointerEventData data)
