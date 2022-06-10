@@ -33,8 +33,9 @@ public class PlayerController : MonoBehaviour, IObserver
         this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor,this.inventoryController);
         this.playerState = new PlayerState(this,shipController);
 
-        this.inventoryInside = Instantiate(Managers.Resources.DownloadData(ObjectType.InventoryInside)).GetComponent<InventoryInside>();
-        this.inventoryInside.Init(this);
+        this.inventoryInside = Instantiate(Managers.Resources.DownloadData(ObjectType.InventoryInside))
+                                        .GetComponent<InventoryInside>().Init(this);
+        
         Managers.Canvas.AddModule(this.inventoryInside.gameObject);
         Managers.Player.Init(this);
 
@@ -153,11 +154,7 @@ public class PlayerController : MonoBehaviour, IObserver
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ItemViewGame>())
-        {
-            var view = other.gameObject.GetComponent<ItemViewGame>();
-            view.AddObserver(this.gameObject.GetComponent<PlayerController>(), EventType.OnItemDropped);
-        }
+
     }
     public void Invoke(EventType eventType, ItemKind kind, ItemState state)
     {

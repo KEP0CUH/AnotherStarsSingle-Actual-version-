@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody))]
-public class ItemViewGame : MonoBehaviour, Interactable, IObservable
+public class ItemViewGame : MonoBehaviour
 {
     [SerializeField]
     protected ItemState state;
-    private InventoryController inventory;
-    private List<IObserver> observers = new List<IObserver>();
     public ItemState State => state;
 
     private ItemController controller;
+    PlayerController playerController;
 
     private bool triggerWorked = false;
-
-    private Action<ItemKind,ItemState> onItemDrop;
-    private Action<ItemKind, int> inItemAddedInventory;
+    private bool needTake = false;
 
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
@@ -28,9 +23,9 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         var data = Managers.Resources.DownloadData(kind);
         if (data.IsWeapon())
         {
-            CreateGun(kind,count);
+            CreateGun(kind, count);
         }
-        else if(data.IsDevice())
+        else if (data.IsDevice())
         {
             CreateDevice(kind, count);
         }
@@ -52,6 +47,23 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
         this.GetComponent<Rigidbody>().isKinematic = true;
 
         return this;
+    }
+
+    public virtual void TakeItem()
+    {
+        if (playerController != null && needTake == true)
+        {
+            triggerWorked = false;
+            playerController.Inventory.AddItem(this.state);
+            playerController.ShowInventory();
+            CloseInfoWindow();
+            Object.Destroy(this.gameObject);
+        }
+    }
+
+    public virtual void NeedTake()
+    {
+        this.needTake = true;
     }
 
     private void CreateGun(ItemKind kind, int ammoCount)
@@ -88,81 +100,43 @@ public class ItemViewGame : MonoBehaviour, Interactable, IObservable
     {
         if (triggerWorked == false)
         {
-            if (other.GetComponent<PlayerController>() && Input.GetKey(KeyCode.Space) && (onItemDrop != null) )
+            if (other.GetComponent<PlayerController>())
             {
                 triggerWorked = true;
-                inventory = other.GetComponent<PlayerController>().Inventory;
-                for(int i = 0; i < this.state.Count;i++)
-                {
-                    onItemDrop.Invoke(this.state.Data.ItemKind, state);
-                }
+                playerController = other.GetComponent<PlayerController>();
             }
         }
     }
 
-    public void AddObserver(IObserver observer,EventType eventType)
+    protected void OnTriggerStay(Collider other)
     {
-        if (observers.Contains(observer))
-        {
-            return;
-        }
+        TakeItem();
+    }
 
-        if(eventType == EventType.OnItemDropped)
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PlayerController>())
         {
-            onItemDrop += (kind, state) =>
-            {
-                observers.Add(observer);
-                observer.Invoke(eventType,kind, state);
-                Destroy(this.gameObject);
-            };
+            triggerWorked = false;
         }
     }
 
-    public void OnPickup()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnDrop()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void RemoveObserver(IObserver observer)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnMouseEnter()
-    {
-        CreateInfoWindow();
-    }
-
-    private void OnMouseDown()
+    protected void OnMouseDown()
     {
         isClicked = true;
-    }
-
-    private void OnMouseExit()
-    {
-        if (isClicked == false)
-        {
-            CloseInfoWindow();
-        }
+        CreateInfoWindow();
     }
 
     private void CreateInfoWindow()
     {
-        if(infoWindow == null)
+        if (infoWindow != null)
         {
-            infoWindow = new GameObject("InfoWindow", typeof(ItemInfoWindow));
-            infoWindow.GetComponent<ItemInfoWindow>().Init(this,this.state);
+            Object.Destroy(infoWindow.gameObject);
         }
-        else
-        {
-            CloseInfoWindow();
-            CreateInfoWindow();
-        }
+
+        infoWindow = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemWindow));
+        infoWindow.GetComponent<ItemWindow>().Init(this, this.state);
+        Managers.Canvas.AddModule(infoWindow);
     }
 
     public void CloseInfoWindow()

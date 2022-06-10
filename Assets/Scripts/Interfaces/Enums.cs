@@ -247,6 +247,7 @@ public enum ObjectType
     FieldWindow,
     MobWindow,
     PlanetWindow,
+    ItemWindow,
     ItemUI,
     InventoryInside,
 }

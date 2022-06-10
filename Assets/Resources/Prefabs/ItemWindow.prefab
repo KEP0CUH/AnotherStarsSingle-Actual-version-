@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 5206714976002732067}
   - component: {fileID: 5206714976002732077}
   - component: {fileID: 5206714976002732066}
+  - component: {fileID: 7865679859572909128}
   m_Layer: 5
   m_Name: ItemWindow
   m_TagString: Untagged
@@ -756,6 +757,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7865679859572909128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206714976002732064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412e4e8ce6cd0c2489d718b6c2995589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 8888146276493718964}
+  title: {fileID: 5206714976954044506}
+  size: {fileID: 5206714975443688849}
+  type: {fileID: 2253086651059483889}
+  buttonTake: {fileID: 1399965767519034393}
 --- !u!1 &5206714976064699272
 GameObject:
   m_ObjectHideFlags: 0

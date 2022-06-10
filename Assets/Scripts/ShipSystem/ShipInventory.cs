@@ -104,7 +104,6 @@ public class ShipInventory : IShipInventory
             if (guns[i] == state)
             {
                 guns[i] = CreateEmptyGunState();
-                guns[i].SetIsFalse();
                 state.SetIsFalse();
                 inventory.AddItem(state, 1, true);
                 ShowInventory();
@@ -140,7 +139,6 @@ public class ShipInventory : IShipInventory
             if(devices[i] == state)
             {
                 devices[i] = CreateEmptyDeviceState();
-                devices[i].SetIsFalse();
                 state.SetIsFalse();
                 inventory.AddItem(state);
                 Object.Destroy(state.gameObject);
@@ -237,26 +235,22 @@ public class ShipInventory : IShipInventory
     #region Воссоздание нового состояния итема исходя из другого состояния. 
     private GunState CreateGunStateObject(ItemState state)
     {
-        ItemState newItemState;
-
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
         newItemStateObj.GetComponent<Transform>().SetParent(parent);
-        newItemState = newItemStateObj.GetComponent<GunState>().Init(state);
+        var newItemState = newItemStateObj.GetComponent<GunState>().Init(state);
+
         return (GunState)newItemState;
     }
 
     private DeviceState CreateDeviceStateObject(ItemState state)
     {
-        ItemState newItemState;
-
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(DeviceState));
         newItemStateObj.GetComponent<Transform>().SetParent(parent);
-        newItemState = newItemStateObj.GetComponent<DeviceState>().Init(state);
+        var newItemState = newItemStateObj.GetComponent<DeviceState>().Init(state);
 
         return (DeviceState)newItemState;
     }
     #endregion
-
 
     #region Воссоздание нового состояния итема исходя из вида итема.
     private GunState CreateGunStateObject(ItemKind kind)
@@ -284,7 +278,6 @@ public class ShipInventory : IShipInventory
 
 
     #region Создание пустых слотов для инвентаря.
-
     private GunState CreateEmptyGunState()
     {
         return CreateGunStateObject(ItemKind.EmptyGun);
