@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class ShipController : MonoBehaviour
 {
     private ShipState shipState;

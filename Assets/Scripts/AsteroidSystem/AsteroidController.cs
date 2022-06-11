@@ -26,14 +26,6 @@ public class AsteroidController : MonoBehaviour
         return this;
     }
 
-    public void Init(Transform spawner,AsteroidState asteroidState,Vector2 quarter)
-    {
-        this.spawner = spawner.gameObject;
-        this.asteroidState = asteroidState;
-
-        this.asteroidView = GetComponent<AsteroidView>().Init(asteroidState,spawner,quarter);
-    }
-
     public void CloseInfoWindow()
     {
         if(infoWindow != null)

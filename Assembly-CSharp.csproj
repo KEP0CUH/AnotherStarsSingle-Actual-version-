@@ -61,7 +61,6 @@
     <Compile Include="Assets\Scripts\MobSystem\MobController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopView.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IShipInventory.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetState.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobState.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceViewGame.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidData.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\SellWindow.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IColliderable.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShop.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\ItemInfoWindow.cs" />
@@ -90,7 +88,6 @@
     <Compile Include="Assets\Scripts\InventorySystem\InventoryController.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipInventory.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemData.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IObserver.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IUIModule.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\ItemViewGame.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\MobSpawner\MobSpawner.cs" />
@@ -112,7 +109,6 @@
     <Compile Include="Assets\Scripts\UI\CanvasUI.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetController.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\Interactable.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\Planets\PlanetView.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationController.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopController.cs" />
@@ -129,7 +125,6 @@
     <Compile Include="Assets\Scripts\UI\InfoWindows\AsteroidWindow.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICanvas.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationView.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IObservable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Constants.cs" />
     <Compile Include="Assets\Scripts\Managers\ResourceLoader.cs" />
     <Compile Include="Assets\Scripts\UI\AsteroidField\AsteroidFieldWindow.cs" />

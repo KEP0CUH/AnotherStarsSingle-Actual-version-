@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipInventory : IShipInventory
+public class ShipInventory
 {
     private Transform parent;
     private ShipState shipState;
@@ -10,12 +10,10 @@ public class ShipInventory : IShipInventory
 
     private List<GunState> guns;
     private int maxNumGuns;
-
     private List<DeviceState> devices;
     private int maxNumDevices;
 
     public event System.Action OnInteractWithEquipment;
-
 
     public ShipInventory(Transform parent,ShipState state,InventoryController inventory)
     {

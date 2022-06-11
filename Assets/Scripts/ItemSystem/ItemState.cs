@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemState : MonoBehaviour, Interactable
+public class ItemState : MonoBehaviour
 {
     private static int ID = 1;
     [SerializeField] protected ItemData data;
@@ -72,16 +72,6 @@ public class ItemState : MonoBehaviour, Interactable
         if (data.ItemKind == ItemKind.EmptyDevice || data.ItemKind == ItemKind.EmptyGun)
             return true;
         return false;
-    }
-
-    public void OnDrop()
-    {
-        Debug.Log("Item was dropped.");
-    }
-
-    public void OnPickup()
-    {
-        Debug.Log("Item was picked up.");
     }
 
     public void IncreaseNumber(int num = 1)

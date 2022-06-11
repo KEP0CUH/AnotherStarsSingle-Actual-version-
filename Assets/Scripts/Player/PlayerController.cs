@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerController : MonoBehaviour, IObserver
+public class PlayerController : MonoBehaviour
 {
     private List<GunState> guns = new List<GunState>();
 
@@ -149,19 +149,6 @@ public class PlayerController : MonoBehaviour, IObserver
         foreach (var gun in this.guns)
         {
             gun.Shoot(this.gameObject.transform, gun);
-        }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-
-    }
-    public void Invoke(EventType eventType, ItemKind kind, ItemState state)
-    {
-        if (eventType == EventType.OnItemDropped)
-        {
-            Debug.Log("Invoked event OnItemDrop.");
-            inventoryController.AddItem(state);
         }
     }
 
