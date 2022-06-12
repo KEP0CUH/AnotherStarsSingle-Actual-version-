@@ -8,12 +8,15 @@ public class ItemData : ScriptableObject
     [SerializeField]
     private string title;
     [SerializeField]
+    private int size;
+    [SerializeField]
     private string description;
     [SerializeField]
     private ItemKind kind;
 
     public Sprite Icon => icon;
     public string Title => title;
+    public int Size => size;
     public string Description => description;
     public ItemKind ItemKind => kind;
 
@@ -94,12 +97,14 @@ public class ItemData : ScriptableObject
                 name = "Multiblaster";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Мультибластер";
+                size = 50;
                 description = "";
                 break;
             case ItemKind.DesintegratorGun:
                 name = "Desintegrator";
                 icon = Resources.Load<Sprite>(gunSpritesPath + name);
                 title = "Дезинтегратор";
+                size = 50;
                 description = "";
                 break;
             case ItemKind.KineticGun:
@@ -129,6 +134,7 @@ public class ItemData : ScriptableObject
                 name = "Tourbine";
                 icon = Resources.Load<Sprite>(deviceSpritesPath + name);
                 title = "Турбина";
+                size = 40;
                 description = "Ускоряет корабль на 30%";
                 break;
 

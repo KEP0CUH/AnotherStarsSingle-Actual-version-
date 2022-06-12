@@ -24,16 +24,16 @@ public class PlanetData : ScriptableObject
         switch (planet)
         {
             case Planet.Arcea:
-                title = "Арсея";
+                title = "РђСЂСЃРµСЏ";
                 description = "";
                 itemShopType = ItemShopType.GreenShop1;
                 break;
             case Planet.Mars:
-                title = "Марс";
+                title = "РњР°СЂСЃ";
                 itemShopType = ItemShopType.ShopEmpty;
                 break;
             case Planet.Earth:
-                title = "Земля";
+                title = "Р—РµРјР»СЏ";
                 itemShopType = ItemShopType.GreenShop2;
                 break;
 
