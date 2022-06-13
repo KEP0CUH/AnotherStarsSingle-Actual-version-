@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody))]
 public class MobView : MonoBehaviour
@@ -12,6 +12,7 @@ public class MobView : MonoBehaviour
 
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
+    private static TargetLight targetLight = null;
 
     public MobView Init(MobController mobController,MobState state)
     {
@@ -19,7 +20,7 @@ public class MobView : MonoBehaviour
         this.mobState = state;
 
         this.gameObject.GetComponent<SpriteRenderer>().sprite = state.ShipState.Data.Icon;
-        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<SphereCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
 
         return this;
@@ -33,13 +34,19 @@ public class MobView : MonoBehaviour
             infoWindow = null;
             isClicked = false;
         }
-    }
 
+        if (targetLight != null)
+        {
+            Destroy(targetLight.gameObject);
+            targetLight = null;
+        }
+    }
 
     private void OnMouseDown()
     {
         isClicked = true;
         CreateInfoWindow();
+        CreateTargetLight();
     }
 
     private void CreateInfoWindow()
@@ -58,17 +65,29 @@ public class MobView : MonoBehaviour
         }
     }
 
+    private void CreateTargetLight()
+    {
+        if (targetLight != null)
+        {
+            Object.Destroy(targetLight.gameObject);
+            targetLight = null;
+        }
+
+        if (targetLight == null)
+        {
+            targetLight = new GameObject().AddComponent<TargetLight>().Init(this.gameObject.GetComponent<SphereCollider>().radius);
+            targetLight.transform.SetParent(this.transform, false);
+            targetLight.transform.localPosition = new Vector3(0, 0, 1);
+        }
+    }
+
     private void OnDestroy()
     {
         if (gameObject.scene.isLoaded)
         {
             this.mobController.Spawner.gameObject.GetComponent<MobSpawner>().RemoveMob(this.mobState.Id);
 
-            if (infoWindow != null)
-            {
-                Destroy(infoWindow.gameObject);
-                infoWindow = null;
-            }
+            CloseInfoWindow();
         }
     }
 

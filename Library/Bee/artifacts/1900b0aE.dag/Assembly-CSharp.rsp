@@ -387,6 +387,7 @@
 "Assets/Scripts/Player/ConstantUI.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/PlayerData.cs"
+"Assets/Scripts/Player/PlayerMovement.cs"
 "Assets/Scripts/Player/PlayerState.cs"
 "Assets/Scripts/Player/Radar.cs"
 "Assets/Scripts/ShipSystem/ShipController.cs"
@@ -394,7 +395,6 @@
 "Assets/Scripts/ShipSystem/ShipInventory.cs"
 "Assets/Scripts/ShipSystem/ShipState.cs"
 "Assets/Scripts/Spawner/Spawner.cs"
-"Assets/Scripts/TestScripts/CircleGeneration.cs"
 "Assets/Scripts/UI/AsteroidField/AsteroidFieldWindow.cs"
 "Assets/Scripts/UI/CanvasUI.cs"
 "Assets/Scripts/UI/GlobalMap/GlobalMapUI.cs"
@@ -418,6 +418,7 @@
 "Assets/Scripts/UI/Planet/PlanetInside.cs"
 "Assets/Scripts/UI/Planet/ShipShop/ShipCell.cs"
 "Assets/Scripts/UI/Planet/ShipShop/ShipShop.cs"
+"Assets/Scripts/Various/TargetLight.cs"
 -langversion:8.0
 
 /deterministic

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private List<GunState> guns = new List<GunState>();
 
     private PlayerState playerState;
+    private PlayerMovement playerMovement;
     private InventoryController inventoryController;
     private InventoryInside inventoryInside;
     private ShipController shipController;
@@ -19,8 +20,6 @@ public class PlayerController : MonoBehaviour
     private int numOfFires = 5;
     private int firesMade = 0;
 
-    [SerializeField]
-    private float moveSpeed = 1 / Constants.TICKS_PER_SEC;
     private Camera mainCamera;
     private Camera radarCamera;
     private Camera globalMapCamera;
@@ -29,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public InventoryController Inventory => inventoryController;
     public ShipController ShipController => shipController;
     public ConstantUI ConstantUI => constantUI;
+
+    public Camera MainCamera => mainCamera;
     
 
     public PlayerController Init()
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
         Managers.Player.Init(this);
 
         this.constantUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ConstantUI)).GetComponent<ConstantUI>().Init(this);
+        this.playerMovement = gameObject.AddComponent<PlayerMovement>().Init(this);
+
 
         SetupCamera();
         SetupRadar();
@@ -76,7 +79,12 @@ public class PlayerController : MonoBehaviour
         this.inventoryInside.ShowInventory();
     }
 
-    #region MOVEMENT_FOR_CLICK
+    public void MoveToApproach(Vector2 target)
+    {
+        this.playerMovement.Move(target);
+    }
+
+/*    #region MOVEMENT_FOR_CLICK
     /// <summary>
     /// Осуществление движения игрока к месту клика мышкой.
     /// </summary>
@@ -102,12 +110,13 @@ public class PlayerController : MonoBehaviour
                 if (_difference.magnitude != 0)
                 {
                     transform.position += new Vector3(_difference.x * moveSpeed, _difference.y * moveSpeed, 0);
+                    MoveToClick(clickPosition,transform.position);
                 }
             }
             UpdateCameraPosition();
         }
     }
-    #endregion
+    #endregion*/
 
     /// <summary>
     /// Создаёт главную камеру игрока и настраивает её на работу.
@@ -189,11 +198,11 @@ public class PlayerController : MonoBehaviour
         if (Managers.Player.IsLanded == false)
         {
 
-            if (Input.GetKey(KeyCode.Mouse1))
+/*            if (Input.GetKey(KeyCode.Mouse1))
             {
                 Vector2 clickPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 MoveToClick(clickPosition, transform.position);
-            }
+            }*/
 
             if (Input.GetKey(KeyCode.Mouse0))
             {

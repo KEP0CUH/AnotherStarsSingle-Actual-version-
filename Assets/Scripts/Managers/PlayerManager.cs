@@ -31,6 +31,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this.controller = controller;
     }
 
+    public void Approach(Vector3 target)
+    {
+        this.Controller.MoveToApproach(new Vector2(target.x,target.y));
+    }
+
     public void Land(Transform transform)
     {
         this.landPlace = transform;

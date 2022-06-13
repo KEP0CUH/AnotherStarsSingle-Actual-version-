@@ -24,6 +24,7 @@ public class MobWindow : MonoBehaviour
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
 
         this.buttonClose.onClick.AddListener(CloseWindow);
+        this.buttonApproach.onClick.AddListener(LaunchPlayer);
     }
 
     private void UpdateHealthInfo()
@@ -35,6 +36,11 @@ public class MobWindow : MonoBehaviour
     private void CloseWindow()
     {
         this.controller.View.CloseInfoWindow();
+    }
+
+    private void LaunchPlayer()
+    {
+        Managers.Player.Controller.MoveToApproach(controller.transform.position);
     }
 
     private void OnDestroy()

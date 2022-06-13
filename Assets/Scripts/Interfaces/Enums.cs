@@ -239,6 +239,8 @@ public enum IconType
     ButtonSettings,
     ButtonApproach,
     ButtonAttack,
+    TargetLight,
+    EndPoint
 }
 
 public enum ObjectType
