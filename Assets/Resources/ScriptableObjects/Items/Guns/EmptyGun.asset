@@ -17,6 +17,11 @@ MonoBehaviour:
   size: 0
   description: 
   kind: 0
-  ammoMax: 0
   ammoKind: 2
   soundKind: 0
+  maxCartriges: 0
+  attackRange: 0
+  cooldown: 0
+  energyCost: 0
+  type: 0
+  cpu: 0

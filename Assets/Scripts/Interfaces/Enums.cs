@@ -68,6 +68,13 @@ public enum ItemKind
     #endregion
 
 }
+
+public enum GunType
+{
+    Energetic,
+    Kinetic,
+    Rocket
+}
 public enum AmmoKind
 {
     MultiblasterAmmo,
@@ -250,6 +257,8 @@ public enum ObjectType
     ItemWindow,
     ItemUI,
     InventoryInside,
+    ConstantUI,
+    Radar
 }
 
 public enum ItemShopType

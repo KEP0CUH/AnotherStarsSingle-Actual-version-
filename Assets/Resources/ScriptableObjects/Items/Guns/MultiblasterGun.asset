@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10e741ce75dc41849ba5134ad3a4b5e2, type: 3}
-  m_Name: Multiblaster
+  m_Name: MultiblasterGun
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 3f29f025adfbdd84f9d54d6ada453de2, type: 3}
   title: "\u041C\u0443\u043B\u044C\u0442\u0438\u0431\u043B\u0430\u0441\u0442\u0435\u0440"
   size: 50
   description: 
   kind: 2
-  ammoMax: 0
   ammoKind: 0
   soundKind: 12
+  maxCartriges: 5
+  attackRange: 350
+  cooldown: 2
+  energyCost: 0
+  type: 1
+  cpu: 1000

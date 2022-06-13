@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private InventoryController inventoryController;
     private InventoryInside inventoryInside;
     private ShipController shipController;
+    private ConstantUI constantUI;
+    private Radar radar;
 
     private float timer = 0;
     private float shootDelay = 0.5f;
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public PlayerState State => playerState;
     public InventoryController Inventory => inventoryController;
     public ShipController ShipController => shipController;
+    public ConstantUI ConstantUI => constantUI;
+    
 
     public PlayerController Init()
     {
@@ -38,6 +42,8 @@ public class PlayerController : MonoBehaviour
         
         Managers.Canvas.AddModule(this.inventoryInside.gameObject);
         Managers.Player.Init(this);
+
+        this.constantUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ConstantUI)).GetComponent<ConstantUI>().Init(this);
 
         SetupCamera();
         SetupRadar();
@@ -58,6 +64,11 @@ public class PlayerController : MonoBehaviour
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
         globalMapCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
+    }
+
+    public void OpenInventory()
+    {
+        this.inventoryInside.Reswitch();
     }
 
     public void ShowInventory()
@@ -114,8 +125,12 @@ public class PlayerController : MonoBehaviour
 
     private void SetupRadar()
     {
+        radar = Instantiate(Managers.Resources.DownloadData(ObjectType.Radar)).GetComponent<Radar>().Init(this);
+
+
         GameObject radarCam = new GameObject("RadarCamera");
         radarCam.AddComponent<Camera>();
+
 
         var cam = radarCam.GetComponent<Camera>();
         cam.orthographicSize = 20;
@@ -201,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.M))
             {
-                CanvasUI.Radar.Enable();
+                radar.Enable();
             }
 
             if(Input.GetKey(KeyCode.L))
@@ -218,6 +233,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             Managers.Canvas.DisableAllModules();
+            radar.Disable();
         }
     }
 

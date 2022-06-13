@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
         controller.gameObject.transform.position = new Vector3(transform.position.x + 450, transform.position.y + 450, 0);
         controller.UpdateCameraPosition();
         isLanded = true;
-        CanvasUI.Radar.Disable();
+        //CanvasUI.Radar.Disable();
     }
 
     public void LandOnAsteroidField(Transform transform, Vector2 quarter)
@@ -53,6 +53,6 @@ public class PlayerManager : MonoBehaviour, IGameManager
         controller.gameObject.transform.position = new Vector2(this.landPlace.position.x, this.landPlace.position.y);
         controller.UpdateCameraPosition();
         isLanded = false;
-        CanvasUI.Radar.Enable();
+        //CanvasUI.Radar.Enable();
     }
 }

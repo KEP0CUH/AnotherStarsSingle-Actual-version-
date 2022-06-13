@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GunState : ItemState
 {
-
-    private int maxAmmo;
-    public int MaxAmmo => maxAmmo;
-
     public override ItemState Init(ItemKind kind, int count)
     {
         base.Init(kind, count);

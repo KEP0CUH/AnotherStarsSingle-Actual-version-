@@ -73,11 +73,10 @@
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShop.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\ItemInfoWindow.cs" />
-    <Compile Include="Assets\Scripts\UI\ConstantUI\ConstantUI.cs" />
+    <Compile Include="Assets\Scripts\Player\ConstantUI.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldView.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopState.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidState.cs" />
-    <Compile Include="Assets\Scripts\UI\Minimap\RadarUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoController.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\ItemUI.cs" />
@@ -132,6 +131,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
+    <Compile Include="Assets\Scripts\Player\Radar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
