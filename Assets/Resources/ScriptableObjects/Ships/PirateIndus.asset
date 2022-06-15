@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Indus
   m_EditorClassIdentifier: 
   kind: 6
+  icon: {fileID: 21300000, guid: 4c001ef29a57aa243bee59763d119c06, type: 3}
+  title: "\u0418\u043D\u0434\u0443\u0441\u0442\u0440\u0438\u0430\u043B\u044C\u043D\u044B\u0439"
+  cost: 23750
+  size: 700
+  maxGuns: 1
+  maxDevices: 2
+  armor: 1
+  shields: 2
+  structure: 350
+  speed: 75
+  energy: 100
+  cpu: 130
+  radar: 1200

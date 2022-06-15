@@ -388,6 +388,7 @@
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/PlayerData.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
+"Assets/Scripts/Player/PlayerShoot.cs"
 "Assets/Scripts/Player/PlayerState.cs"
 "Assets/Scripts/Player/Radar.cs"
 "Assets/Scripts/ShipSystem/ShipController.cs"

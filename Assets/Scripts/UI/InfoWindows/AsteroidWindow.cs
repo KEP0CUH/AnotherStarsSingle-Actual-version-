@@ -25,6 +25,8 @@ public class AsteroidWindow : MonoBehaviour
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
 
         this.buttonClose.onClick.AddListener(CloseWindow);
+        this.buttonApproach.onClick.AddListener(LaunchPlayer);
+        this.buttonAttack.onClick.AddListener(LaunchAttack);
     }
 
     private void OnAsteroidDamaged()
@@ -36,6 +38,16 @@ public class AsteroidWindow : MonoBehaviour
     private void CloseWindow()
     {
         controller.CloseInfoWindow();
+    }
+
+    private void LaunchPlayer()
+    {
+        Managers.Player.Controller.MoveToApproach(controller.transform.position);
+    }
+
+    private void LaunchAttack()
+    {
+        Managers.Player.Controller.Shoot(this.controller.transform);
     }
 
     private void OnDestroy()

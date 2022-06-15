@@ -16,7 +16,7 @@ public class GunState : ItemState
         return this;
     }
 
-    public void Shoot(Transform parent,GunState gun)
+    public void Shoot(Transform parent,Transform target,GunState gun)
     {
         if(((GunData)data).AmmoKind != AmmoKind.EmptyAmmo)
         {
@@ -29,7 +29,7 @@ public class GunState : ItemState
             bullet.transform.localEulerAngles = sourceAngle;
 
 
-            bullet.AddComponent<AmmoController>().Init(gun);
+            bullet.AddComponent<AmmoController>().Init(target,gun);
 
             Destroy(bullet, 4);
         }

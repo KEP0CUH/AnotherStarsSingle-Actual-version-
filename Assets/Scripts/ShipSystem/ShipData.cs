@@ -3,11 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Ships/NewShip", fileName = "NewShip", order = 54)]
 public class ShipData : ScriptableObject
 {
-    [SerializeField]
-    private ShipKind kind;
-    private Sprite icon;
-    private string title;
-    private int cost, size, maxGuns, maxDevices, armor, shields, structure, speed, energy, cpu, radar;
+    [SerializeField] private ShipKind kind;
+    [SerializeField] private Sprite icon;
+    [SerializeField] private string title;
+    [SerializeField] private int cost, size, maxGuns, maxDevices, armor, shields, structure, speed, energy, cpu, radar;
 
     public Sprite Icon => icon;
     public string Title => title;
@@ -81,20 +80,48 @@ public class ShipData : ScriptableObject
             case ShipKind.PirateIndus:
                 name = "Indus";
                 title = "Индустриальный";
+                cost = 23750;
+                size = 700;
                 maxGuns = 1;
                 maxDevices = 2;
+                armor = 1;
+                shields = 2;
+                structure = 350;
+                speed = 75;
+                energy = 100;
+                cpu = 130;
+                radar = 1200;
                 break;
             case ShipKind.PirateIstrebitel:
                 name = "Istrebitel";
                 title = "Истребитель";
+                cost = 72000;
+                size = 900;
                 maxGuns = 2;
                 maxDevices = 1;
+                armor = 3;
+                shields = 7;
+                structure = 550;
+                speed = 68;
+                energy = 150;
+                cpu = 260;
+                radar = 1000;
                 break;
             case ShipKind.PirateFrigate:
                 name = "Frigate";
                 title = "Фрегат";
+                cost = 146250;
+                size = 1400;
                 maxGuns = 3;
                 maxDevices = 2;
+                armor = 4;
+                shields = 8;
+                structure = 1000;
+                speed = 55;
+                energy = 200;
+                cpu = 1200;
+                radar = 1100;
+
                 break;
         }
     }

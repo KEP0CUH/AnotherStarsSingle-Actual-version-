@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState playerState;
     private PlayerMovement playerMovement;
+    private PlayerShoot playerShoot;
     private InventoryController inventoryController;
     private InventoryInside inventoryInside;
     private ShipController shipController;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
         this.constantUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ConstantUI)).GetComponent<ConstantUI>().Init(this);
         this.playerMovement = gameObject.AddComponent<PlayerMovement>().Init(this);
+        this.playerShoot = gameObject.AddComponent<PlayerShoot>().Init(this);
 
 
         SetupCamera();
@@ -83,40 +85,6 @@ public class PlayerController : MonoBehaviour
     {
         this.playerMovement.Move(target);
     }
-
-/*    #region MOVEMENT_FOR_CLICK
-    /// <summary>
-    /// Осуществление движения игрока к месту клика мышкой.
-    /// </summary>
-    /// <param name="clickPosition">Место клика мышкой.</param>
-    /// <param name="currentPosition">Текущая позиция игрока.</param>
-    private void MoveToClick(Vector2 clickPosition, Vector3 currentPosition)
-    {
-        if (clickPosition.x != currentPosition.x && clickPosition.y != currentPosition.y)
-        {
-            // Вычисляем вектор с направлением от текущего положения к клику, но с длиной единица - нормализуем.
-            Vector2 _difference = (clickPosition - new Vector2(currentPosition.x, currentPosition.y)).normalized;
-
-            // Поворачиваем игрока. Вычисление угла через тангенс.
-            float angle = Mathf.Atan2(_difference.y, _difference.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
-
-
-            // Если текущие координаты x и y игрока сильно отличаются от целевых,то движение продолжается
-            if (Math.Abs(clickPosition.x - currentPosition.x) >= 0.1f || Math.Abs(clickPosition.y - currentPosition.y) >= 0.1f)
-            {
-                // Чтобы не было ошибки при делении на нуль,если клик осуществляется в текущие координаты. Возможно даже не нужна
-                if (_difference.magnitude != 0)
-                {
-                    transform.position += new Vector3(_difference.x * moveSpeed, _difference.y * moveSpeed, 0);
-                    MoveToClick(clickPosition,transform.position);
-                }
-            }
-            UpdateCameraPosition();
-        }
-    }
-    #endregion*/
 
     /// <summary>
     /// Создаёт главную камеру игрока и настраивает её на работу.
@@ -167,13 +135,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void Shoot()
+    public void Shoot(Transform target)
     {
-        this.guns = this.playerState.ShipController.State.Inventory.GetGuns();
-        foreach (var gun in this.guns)
-        {
-            gun.Shoot(this.gameObject.transform, gun);
-        }
+        this.playerShoot.SetTarget(target);
     }
 
     private void Start()
@@ -197,31 +161,6 @@ public class PlayerController : MonoBehaviour
 
         if (Managers.Player.IsLanded == false)
         {
-
-/*            if (Input.GetKey(KeyCode.Mouse1))
-            {
-                Vector2 clickPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                MoveToClick(clickPosition, transform.position);
-            }*/
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                timer += Time.fixedDeltaTime;
-                if (timer > shootDelay)
-                {
-                    if (numOfFires > firesMade)
-                    {
-                        Shoot();
-                        firesMade++;
-                        timer -= 12 * Time.fixedDeltaTime;
-                    }
-                    if (numOfFires <= firesMade)
-                    {
-                        timer = 0;
-                        firesMade = 0;
-                    }
-                }
-            }
 
             if (Input.GetKey(KeyCode.M))
             {

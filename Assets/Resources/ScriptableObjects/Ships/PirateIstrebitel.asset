@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Istrebitel
   m_EditorClassIdentifier: 
   kind: 7
+  icon: {fileID: 21300000, guid: c411395546cf13b4c9c26dca7e2eef92, type: 3}
+  title: "\u0418\u0441\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043B\u044C"
+  cost: 72000
+  size: 900
+  maxGuns: 2
+  maxDevices: 1
+  armor: 3
+  shields: 7
+  structure: 550
+  speed: 68
+  energy: 150
+  cpu: 260
+  radar: 1000

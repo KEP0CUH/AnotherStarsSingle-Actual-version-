@@ -10,9 +10,9 @@ public class AmmoController : MonoBehaviour
     public AmmoState State => ammoState;
     public AmmoView View => ammoView;
 
-    public void Init(GunState gun)
+    public void Init(Transform target,GunState gun)
     {
         this.ammoState = GetComponent<AmmoState>().Init(this, ((GunData)(gun.Data)).AmmoKind);
-        this.ammoView = GetComponent<AmmoView>().Init(this);
+        this.ammoView = GetComponent<AmmoView>().Init(target,this);
     }
 }

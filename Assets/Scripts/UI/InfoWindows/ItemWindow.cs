@@ -23,5 +23,11 @@ public class ItemWindow : MonoBehaviour
     private void TakeItem()
     {
         this.view.NeedTake();
+        LaunchPlayer();
+    }
+
+    private void LaunchPlayer()
+    {
+        Managers.Player.Controller.MoveToApproach(view.transform.position);
     }
 }

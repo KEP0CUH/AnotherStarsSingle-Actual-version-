@@ -4,6 +4,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
 {
     private PlayerController controller;
 
+    private Transform target = null;
     private Transform landPlace;
     private bool isLanded;                      // Сидит ли на планете?
     public bool IsLanded => isLanded;
@@ -29,6 +30,12 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void Init(PlayerController controller)
     {
         this.controller = controller;
+    }
+
+    public void Attack(Transform target)
+    {
+        this.target = target;
+        controller.Shoot(target);
     }
 
     public void Approach(Vector3 target)

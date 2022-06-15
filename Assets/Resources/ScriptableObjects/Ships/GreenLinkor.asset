@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Linkor
   m_EditorClassIdentifier: 
   kind: 4
+  icon: {fileID: 21300000, guid: b03cd14204d045e4cb097b9a0c69256f, type: 3}
+  title: "\u041B\u0438\u043D\u043A\u043E\u0440"
+  cost: 312651
+  size: 1400
+  maxGuns: 4
+  maxDevices: 5
+  armor: 8
+  shields: 32
+  structure: 1750
+  speed: 65
+  energy: 410
+  cpu: 3100
+  radar: 2100

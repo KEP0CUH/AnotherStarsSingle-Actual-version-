@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Frigate
   m_EditorClassIdentifier: 
   kind: 8
+  icon: {fileID: 21300000, guid: 39313eabcbc344442a3611119dba0d54, type: 3}
+  title: "\u0424\u0440\u0435\u0433\u0430\u0442"
+  cost: 146250
+  size: 1400
+  maxGuns: 3
+  maxDevices: 2
+  armor: 4
+  shields: 8
+  structure: 1000
+  speed: 55
+  energy: 200
+  cpu: 1200
+  radar: 1100

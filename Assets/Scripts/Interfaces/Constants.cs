@@ -8,5 +8,5 @@ public class Constants : MonoBehaviour
     public const int TICKS_PER_SEC = 60;
     private const int MS_PER_TICK = 1000 / TICKS_PER_SEC;
 
-    public const float SPEED_KOEFFICIENT = 1.0f / TICKS_PER_SEC * 0.05f;
+    public const float SPEED_KOEFFICIENT = 0.03f * 1.0f / TICKS_PER_SEC ;
 }

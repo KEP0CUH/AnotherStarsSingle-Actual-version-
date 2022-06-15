@@ -28,7 +28,7 @@ public class MobController : MonoBehaviour
         this.spawner = spawner.gameObject;
 
 
-        this.moveSpeed = 5.0f / Constants.TICKS_PER_SEC;
+        this.moveSpeed = mobState.ShipState.Data.Speed;
         transform.localPosition = new Vector3(0, 0, -10);
         transform.position = new Vector3(transform.position.x,transform.position.y, -10);
     }
@@ -117,7 +117,8 @@ public class MobController : MonoBehaviour
             StartCoroutine(Delay());
         }
 
-        transform.localPosition = Vector2.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.fixedDeltaTime);
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, targetPos,
+            moveSpeed * Constants.SPEED_KOEFFICIENT);
         transform.localPosition -= 10 * Vector3.forward;
 
         if (Mathf.Abs(transform.localPosition.x - difference.x) < 0.1 && Mathf.Abs(transform.localPosition.y - difference.y) < 0.1)

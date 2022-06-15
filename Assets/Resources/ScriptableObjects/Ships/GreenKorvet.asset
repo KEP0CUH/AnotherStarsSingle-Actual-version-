@@ -13,3 +13,16 @@ MonoBehaviour:
   m_Name: Korvet
   m_EditorClassIdentifier: 
   kind: 1
+  icon: {fileID: 21300000, guid: 6654602c8ce0c27409fd848d513efcd3, type: 3}
+  title: "\u041A\u043E\u0440\u0432\u0435\u0442"
+  cost: 21250
+  size: 670
+  maxGuns: 1
+  maxDevices: 3
+  armor: 2
+  shields: 18
+  structure: 670
+  speed: 92
+  energy: 230
+  cpu: 700
+  radar: 2000

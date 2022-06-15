@@ -25,6 +25,7 @@ public class MobWindow : MonoBehaviour
 
         this.buttonClose.onClick.AddListener(CloseWindow);
         this.buttonApproach.onClick.AddListener(LaunchPlayer);
+        this.buttonAttack.onClick.AddListener(LaunchAttack);
     }
 
     private void UpdateHealthInfo()
@@ -41,6 +42,11 @@ public class MobWindow : MonoBehaviour
     private void LaunchPlayer()
     {
         Managers.Player.Controller.MoveToApproach(controller.transform.position);
+    }
+
+    private void LaunchAttack()
+    {
+        Managers.Player.Controller.Shoot(this.controller.transform);
     }
 
     private void OnDestroy()
