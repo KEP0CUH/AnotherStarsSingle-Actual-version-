@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee634a21cba4a7842b1e3e0083718d54, type: 3}
-  m_Name: Tourbine
+  m_Name: TourbineDevice
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 3b2a4dc62197e804eb259b41e0f91ed1, type: 3}
   title: "\u0422\u0443\u0440\u0431\u0438\u043D\u0430"

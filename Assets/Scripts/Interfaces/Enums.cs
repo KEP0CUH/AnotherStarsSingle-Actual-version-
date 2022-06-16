@@ -240,7 +240,8 @@ public enum IconType
     ButtonApproach,
     ButtonAttack,
     TargetLight,
-    EndPoint
+    EndPoint,
+    RangeAttack,
 }
 
 public enum ObjectType

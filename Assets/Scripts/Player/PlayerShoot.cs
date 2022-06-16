@@ -61,12 +61,26 @@ public class PlayerShoot : MonoBehaviour
         this.guns = this.controller.State.ShipController.State.Inventory.GetGuns();
         foreach (var gun in this.guns)
         {
-            Debug.Log(100 * ((Vector2)transform.position - (Vector2)target.position).magnitude);
-            if(((GunData)(gun.Data)).AttackRange >= 100 * ((Vector2)transform.position - (Vector2)target.position).magnitude)
+            if(gun.IsEmpty() == false)
             {
-                gun.Shoot(this.gameObject.transform, target, gun);
+                ShowAttackRange(gun);
+                if ((((GunData)(gun.Data)).AttackRange / 100.0f) >= ((Vector2)transform.position - (Vector2)target.position).magnitude)
+                {
+                    Debug.Log(((Vector2)transform.position - (Vector2)target.position).magnitude);
+                    gun.Shoot(this.gameObject.transform, target, gun);
+                }
             }
         }
+    }
 
+    private void ShowAttackRange(GunState gun)
+    {
+        var attackRange = new GameObject("Range");
+        attackRange.transform.parent = this.transform;
+        attackRange.transform.localPosition = Vector3.zero;
+        var range = ((GunData)gun.Data).AttackRange / 100.0f;
+        attackRange.transform.localScale = new Vector3(range, range);
+        attackRange.AddComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(IconType.RangeAttack);
+        Object.Destroy(attackRange, 2);
     }
 }
