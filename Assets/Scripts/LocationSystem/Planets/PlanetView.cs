@@ -1,19 +1,20 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(TargetLight))]
 public class PlanetView : MonoBehaviour
 {
     private PlanetController controller;
 
     private static GameObject   infoWindow;
-    private static bool         isClicked = false;
-    
+    private static TargetLight targetLight = null;
+
     public PlanetView Init(PlanetController controller)
     {
         this.controller = controller;
         this.gameObject.name                            = this.controller.State.Data.Title;
         this.GetComponent<SpriteRenderer>().sprite      = this.controller.State.Data.Icon;
-
+        this.gameObject.AddComponent<LandPlanetOnDoubleClick>().Init(controller);
 
         return this;
     }
@@ -24,14 +25,19 @@ public class PlanetView : MonoBehaviour
         {
             Object.Destroy(infoWindow.gameObject);
             infoWindow = null;
-            isClicked = false;
+        }
+
+        if (targetLight != null)
+        {
+            Destroy(targetLight.gameObject);
+            targetLight = null;
         }
     }
 
     private void OnMouseDown()
     {
-        isClicked = true;
         OpenInfoWindow();
+        CreateTargetLight();
     }
 
     private void OpenInfoWindow()
@@ -50,5 +56,17 @@ public class PlanetView : MonoBehaviour
             Managers.Canvas.AddModule(infoWindow);
             infoWindow.GetComponent<PlanetWindow>().Init(controller);
         }
+    }
+
+    private void CreateTargetLight()
+    {
+        if (targetLight != null)
+        {
+            Destroy(targetLight.gameObject);
+            targetLight = null;
+        }
+
+        var radius = this.GetComponent<SphereCollider>().radius;
+        targetLight = new GameObject("TargetLight").AddComponent<TargetLight>().Init(this.transform,4.5f * radius);
     }
 }

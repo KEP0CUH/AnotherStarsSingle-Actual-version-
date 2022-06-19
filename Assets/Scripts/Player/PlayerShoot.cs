@@ -66,7 +66,6 @@ public class PlayerShoot : MonoBehaviour
                 ShowAttackRange(gun);
                 if ((((GunData)(gun.Data)).AttackRange / 100.0f) >= ((Vector2)transform.position - (Vector2)target.position).magnitude)
                 {
-                    Debug.Log(((Vector2)transform.position - (Vector2)target.position).magnitude);
                     gun.Shoot(this.gameObject.transform, target, gun);
                 }
             }

@@ -5,13 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AttackOnDoubleClick))]
 public class MobView : MonoBehaviour
 {
     private MobState mobState;
     private MobController mobController;
 
     private static GameObject infoWindow = null;
-    private static bool isClicked = false;
+
     private static TargetLight targetLight = null;
 
     public MobView Init(MobController mobController,MobState state)
@@ -32,7 +33,6 @@ public class MobView : MonoBehaviour
         {
             Destroy(infoWindow.gameObject);
             infoWindow = null;
-            isClicked = false;
         }
 
         if (targetLight != null)
@@ -44,11 +44,9 @@ public class MobView : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isClicked = true;
         CreateInfoWindow();
         CreateTargetLight();
     }
-
     private void CreateInfoWindow()
     {
         if(infoWindow != null)
@@ -67,18 +65,14 @@ public class MobView : MonoBehaviour
 
     private void CreateTargetLight()
     {
-        if (targetLight != null)
+        if(targetLight != null)
         {
-            Object.Destroy(targetLight.gameObject);
+            Destroy(targetLight.gameObject);
             targetLight = null;
         }
 
-        if (targetLight == null)
-        {
-            targetLight = new GameObject().AddComponent<TargetLight>().Init(this.gameObject.GetComponent<SphereCollider>().radius);
-            targetLight.transform.SetParent(this.transform, false);
-            targetLight.transform.localPosition = new Vector3(0, 0, 1);
-        }
+        var radius = this.GetComponent<SphereCollider>().radius;
+        targetLight = new GameObject("TargetLight").AddComponent<TargetLight>().Init(this.transform, radius);
     }
 
     private void OnDestroy()

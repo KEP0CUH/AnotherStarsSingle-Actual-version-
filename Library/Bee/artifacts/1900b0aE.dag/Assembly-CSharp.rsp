@@ -419,6 +419,8 @@
 "Assets/Scripts/UI/Planet/PlanetInside.cs"
 "Assets/Scripts/UI/Planet/ShipShop/ShipCell.cs"
 "Assets/Scripts/UI/Planet/ShipShop/ShipShop.cs"
+"Assets/Scripts/Various/AttackOnDoubleClick.cs"
+"Assets/Scripts/Various/LandPlanetOnDoubleClick.cs"
 "Assets/Scripts/Various/TargetLight.cs"
 -langversion:8.0
 
