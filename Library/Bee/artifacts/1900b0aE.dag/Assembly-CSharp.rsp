@@ -382,6 +382,7 @@
 "Assets/Scripts/Managers/ResourceLoader.cs"
 "Assets/Scripts/MobSystem/MobController.cs"
 "Assets/Scripts/MobSystem/MobData.cs"
+"Assets/Scripts/MobSystem/MobMovement.cs"
 "Assets/Scripts/MobSystem/MobState.cs"
 "Assets/Scripts/MobSystem/MobView.cs"
 "Assets/Scripts/Player/ConstantUI.cs"

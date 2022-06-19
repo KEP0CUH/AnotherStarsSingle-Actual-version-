@@ -54,11 +54,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Planet\ShipShop\ShipCell.cs" />
+    <Compile Include="Assets\Scripts\Various\LandPlanetOnDoubleClick.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldData.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Guns\GunViewGame.cs" />
     <Compile Include="Assets\Scripts\Managers\Managers.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IGameManager.cs" />
     <Compile Include="Assets\Scripts\MobSystem\MobController.cs" />
+    <Compile Include="Assets\Scripts\Various\AttackOnDoubleClick.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationState.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\ItemShopView.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ColorfulDebugLog.cs" />
@@ -134,8 +136,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
-    <Compile Include="Assets\Scripts\Various\AttackOnDoubleClick.cs" />
-    <Compile Include="Assets\Scripts\Various\LandPlanetOnDoubleClick.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
