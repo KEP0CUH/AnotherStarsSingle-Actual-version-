@@ -80,7 +80,7 @@ public class ItemShopView : MonoBehaviour
                 var newItemStateComponent = newItemStateObject.GetComponent<DeviceState>();
                 AddItem(newItemStateComponent);
             }
-            else
+            else if(itemData.IsItem())
             {
                 newItemStateObject.AddComponent<ItemState>().Init(itemData.ItemKind, 1);
 

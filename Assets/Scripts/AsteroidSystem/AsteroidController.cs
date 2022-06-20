@@ -2,12 +2,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(AsteroidState))]
 [RequireComponent(typeof(AsteroidView))]
+[RequireComponent(typeof(AsteroidMovement))]
 public class AsteroidController : MonoBehaviour
 {
     private GameObject spawner;
 
     private AsteroidState asteroidState;
     private AsteroidView asteroidView;
+    private AsteroidMovement asteroidMovement;
 
     private static GameObject infoWindow = null;
     private static bool isClicked = false;
@@ -21,7 +23,8 @@ public class AsteroidController : MonoBehaviour
     {
         this.spawner = spawner.gameObject;
         this.asteroidState = this.gameObject.GetComponent<AsteroidState>().Init(type);
-        this.asteroidView = this.gameObject.GetComponent<AsteroidView>().Init(asteroidState, spawner, quarter);
+        this.asteroidView = this.gameObject.GetComponent<AsteroidView>().Init(asteroidState);
+        this.asteroidMovement = this.gameObject.GetComponent<AsteroidMovement>().Init(this,spawner,quarter);
 
         return this;
     }

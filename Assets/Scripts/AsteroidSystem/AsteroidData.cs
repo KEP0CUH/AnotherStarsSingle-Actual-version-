@@ -15,8 +15,8 @@ public class AsteroidData : ScriptableObject
     [SerializeField] [Range(100, 10000)] private int maxHealth = 900;
 
     [Header("MOVE_PARAMETERS")]
-    [SerializeField] private float moveSpeedMin = 2.0f / Constants.TICKS_PER_SEC;
-    [SerializeField] private float moveSpeedMax = 3.0f / Constants.TICKS_PER_SEC;
+    [SerializeField] private float moveSpeedMin = 80;
+    [SerializeField] private float moveSpeedMax = 160;
 
     public string Title => title;
     public string Description => description;
@@ -32,6 +32,8 @@ public class AsteroidData : ScriptableObject
     private void OnValidate()
     {
         icon = Resources.Load<Sprite>(this.iconPath);
+        moveSpeedMin = 180;
+        moveSpeedMax = 360;
         switch (type)
         {
             case AsteroidType.GoldAsteroid:

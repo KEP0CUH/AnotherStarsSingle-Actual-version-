@@ -20,5 +20,5 @@ MonoBehaviour:
   dropKind: 196
   minHealth: 400
   maxHealth: 900
-  moveSpeedMin: 0.2
-  moveSpeedMax: 0.3
+  moveSpeedMin: 180
+  moveSpeedMax: 360

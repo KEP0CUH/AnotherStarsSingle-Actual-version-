@@ -18,10 +18,6 @@ public class ItemShop : MonoBehaviour
     public ItemShop Init(ItemShopView itemShopView)
     {
         this.itemShopView = itemShopView;
-        var scroll = GetComponent<ScrollRect>();
-        scroll.horizontal = true;
-        scroll.vertical = false;
-        scroll.scrollSensitivity = 15;
         buttonClose.GetComponent<Button>().onClick.AddListener(() => itemShopView.CloseItemShop());
         itemShopView.ShowListItemShop();
         return this;

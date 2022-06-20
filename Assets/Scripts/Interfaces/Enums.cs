@@ -246,7 +246,6 @@ public enum IconType
 
 public enum ObjectType
 {
-    BuyWindow,
     ConfirmBuying,
     ConfirmSelling,
     ItemShop,

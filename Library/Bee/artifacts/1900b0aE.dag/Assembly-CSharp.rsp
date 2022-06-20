@@ -368,6 +368,7 @@
 "Assets/Scripts/LocationSystem/AsteroidField/AsteroidFieldData.cs"
 "Assets/Scripts/LocationSystem/AsteroidField/AsteroidFieldState.cs"
 "Assets/Scripts/LocationSystem/AsteroidField/AsteroidFieldView.cs"
+"Assets/Scripts/LocationSystem/AsteroidField/AsteroidMovement.cs"
 "Assets/Scripts/LocationSystem/LocationController.cs"
 "Assets/Scripts/LocationSystem/LocationData.cs"
 "Assets/Scripts/LocationSystem/LocationState.cs"

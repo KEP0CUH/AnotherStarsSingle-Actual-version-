@@ -52,22 +52,16 @@ public class SellWindow : MonoBehaviour
         inputFieldComponentText.GetComponent<Text>().text = sliderComponent.value.ToString();
         inputField.GetComponent<InputField>().onValueChanged.AddListener((content) => UpdateSlider(content));
 
-        buttonYes.GetComponent<Image>().color = new UnityEngine.Color(24, 171, 64, 255) / 256;
         buttonYes.GetComponent<Button>().onClick.AddListener(ConfirmSelling);
-
-        buttonNo.GetComponent<Image>().color = new UnityEngine.Color(230, 59, 24, 255) / 256;
         buttonNo.GetComponent<Button>().onClick.AddListener(CancelSelling);
-
     }
     private void UpdateTextField(float a)
     {
-        Debug.Log("UpdateTextField worked");
         inputField.GetComponent<InputField>().text = a.ToString();
     }
 
     private void UpdateSlider(string content)
     {
-        Debug.Log("UpdateTextField");
         try
         {
             slider.GetComponent<Slider>().value = int.Parse(content);

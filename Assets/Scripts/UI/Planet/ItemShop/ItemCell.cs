@@ -2,9 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
 [RequireComponent(typeof(RectTransform))]
-
 public class ItemCell : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private GameObject icon;
@@ -30,8 +28,6 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
         return this;
     }
 
-
-
     public void OnPointerDown(PointerEventData data)
     {
         TryInteract();
@@ -44,40 +40,30 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
     {
         if (itemState.Data.ItemKind != ItemKind.EmptyDevice && itemState.Data.ItemKind != ItemKind.EmptyGun)
         {
-            Debug.Log("запрос на покупку / продажу итема");
             if (forBuy)
             {
-                CreateBuyWindow();
+                CreateTradeWindow(true);
             }
             else if (forBuy == false)
             {
-                CreateSellWindow();
+                CreateTradeWindow(false);
             }
-
         }
     }
 
-    private void CreateBuyWindow()
+    private void CreateTradeWindow(bool forBuy = true)
     {
-        var confirmBuyingPrefab = Managers.Resources.DownloadData(ObjectType.ConfirmBuying);
-        var confirmBuyingObject = Instantiate(confirmBuyingPrefab, this.transform);
-
-        var rect = confirmBuyingObject.GetComponent<RectTransform>();
-        rect.transform.SetParent(this.shopView.Shop.gameObject.transform);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMax = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.offsetMin = new Vector2(-96, -120);
-        rect.offsetMax = new Vector2(96, 70);
-
-        confirmBuyingObject.GetComponent<BuyWindow>().Init(shopView, confirmBuyingObject.transform, this);
-    }
-
-    private void CreateSellWindow()
-    {
-        var tradeWindowPrefab = Managers.Resources.DownloadData(ObjectType.ConfirmSelling);
-        var tradeWindow = Instantiate(tradeWindowPrefab, this.transform);
-
+        GameObject prefabTradeWindow;
+        if(forBuy)
+        {
+             prefabTradeWindow = Managers.Resources.DownloadData(ObjectType.ConfirmBuying);
+        }
+        else
+        {
+            prefabTradeWindow = Managers.Resources.DownloadData(ObjectType.ConfirmSelling);
+        }
+            
+        var tradeWindow = Instantiate(prefabTradeWindow, this.transform);
         var rect = tradeWindow.GetComponent<RectTransform>();
         rect.transform.SetParent(this.shopView.Shop.gameObject.transform);
         rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -85,8 +71,15 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
         rect.pivot = new Vector2(0.5f, 0.5f);
         rect.offsetMin = new Vector2(-96, -120);
         rect.offsetMax = new Vector2(96, 70);
-
-        tradeWindow.GetComponent<SellWindow>().Init(shopView, tradeWindow.transform, this);
+        if(forBuy)
+        {
+            tradeWindow.GetComponent<BuyWindow>().Init(shopView, tradeWindow.transform, this);
+        }
+        else
+        {
+            tradeWindow.GetComponent<SellWindow>().Init(shopView, tradeWindow.transform, this);
+        }
+        
     }
 
     private void OpenMiniInfo()

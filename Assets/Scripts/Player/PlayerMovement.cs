@@ -50,19 +50,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (clickPos.x != currentPosition.x && clickPos.y != currentPosition.y)
         {
-            // Вычисляем вектор с направлением от текущего положения к клику, но с длиной единица - нормализуем.
+            // Р’С‹С‡РёСЃР»СЏРµРј РІРµРєС‚РѕСЂ СЃ РЅР°РїСЂР°РІР»РµРЅРёРµРј РѕС‚ С‚РµРєСѓС‰РµРіРѕ РїРѕР»РѕР¶РµРЅРёСЏ Рє РєР»РёРєСѓ, РЅРѕ СЃ РґР»РёРЅРѕР№ РµРґРёРЅРёС†Р° - РЅРѕСЂРјР°Р»РёР·СѓРµРј.
             Vector2 _difference = (clickPos - new Vector2(currentPosition.x, currentPosition.y)).normalized;
 
-            // Поворачиваем игрока. Вычисление угла через тангенс.
+            // РџРѕРІРѕСЂР°С‡РёРІР°РµРј РёРіСЂРѕРєР°. Р’С‹С‡РёСЃР»РµРЅРёРµ СѓРіР»Р° С‡РµСЂРµР· С‚Р°РЅРіРµРЅСЃ.
             float angle = Mathf.Atan2(_difference.y, _difference.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
 
-            // Если текущие координаты x и y игрока сильно отличаются от целевых,то движение продолжается
+            // Р•СЃР»Рё С‚РµРєСѓС‰РёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ x Рё y РёРіСЂРѕРєР° СЃРёР»СЊРЅРѕ РѕС‚Р»РёС‡Р°СЋС‚СЃСЏ РѕС‚ С†РµР»РµРІС‹С…,С‚Рѕ РґРІРёР¶РµРЅРёРµ РїСЂРѕРґРѕР»Р¶Р°РµС‚СЃСЏ
             if (Math.Abs(clickPos.x - currentPosition.x) >= 0.2f || Math.Abs(clickPos.y - currentPosition.y) >= 0.2f)
             {
-                // Чтобы не было ошибки при делении на нуль,если клик осуществляется в текущие координаты. Возможно даже не нужна
+                // Р§С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ РѕС€РёР±РєРё РїСЂРё РґРµР»РµРЅРёРё РЅР° РЅСѓР»СЊ,РµСЃР»Рё РєР»РёРє РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ РІ С‚РµРєСѓС‰РёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹. Р’РѕР·РјРѕР¶РЅРѕ РґР°Р¶Рµ РЅРµ РЅСѓР¶РЅР°
                 if (_difference.magnitude != 0)
                 {
                     transform.position += new Vector3(_difference.x * moveSpeed, _difference.y * moveSpeed, 0);

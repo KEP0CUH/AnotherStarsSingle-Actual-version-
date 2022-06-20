@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\UI\Planet\PlanetInside.cs" />
     <Compile Include="Assets\Scripts\UI\Inventory\InventoryInside.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidFieldController.cs" />
+    <Compile Include="Assets\Scripts\MobSystem\MobMovement.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\FieldWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Ammo\AmmoData.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipState.cs" />
@@ -136,7 +137,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
-    <Compile Include="Assets\Scripts\MobSystem\MobMovement.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\AsteroidField\AsteroidMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
