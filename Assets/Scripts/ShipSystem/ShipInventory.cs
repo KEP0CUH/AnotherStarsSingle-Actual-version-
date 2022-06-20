@@ -208,6 +208,7 @@ public class ShipInventory
             var item = CreateDrop(state);
             inventory.RemoveItem(state);
             Object.Destroy(state.gameObject);
+            OnInteractWithEquipment?.Invoke();
         }
         else
         {
@@ -217,6 +218,7 @@ public class ShipInventory
             {
                 Object.Destroy(state.gameObject);
             }
+            OnInteractWithEquipment?.Invoke();
         }
     }
     #endregion

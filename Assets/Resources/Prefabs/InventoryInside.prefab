@@ -417,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6257465052660339743
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1497,13 +1497,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250c6aa60bfcad74596be5f6c984b259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipIcon: {fileID: 5270375226071240238}
-  shipTitle: {fileID: 2033299181576428072}
-  health: {fileID: 2888589739564401435}
   gunsList: {fileID: 5612823464132689097}
   devicesList: {fileID: 7118593507370992937}
   itemsList: {fileID: 4347658129102774850}
   buttonClose: {fileID: 2400231139795266693}
+  icon: {fileID: 5270375226071240238}
+  title: {fileID: 2033299181576428072}
+  size: {fileID: 7077498476921840414}
+  armor: {fileID: 2166618029549583755}
+  shields: {fileID: 5966857565130310389}
+  structure: {fileID: 2888589739564401435}
+  speed: {fileID: 816197873438556508}
+  energy: {fileID: 7285241158666825123}
+  cpu: {fileID: 8305694020810807967}
 --- !u!1 &6263230548819643386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1602,7 @@ GameObject:
   - component: {fileID: 8651492523824185474}
   - component: {fileID: 2888589739564401435}
   m_Layer: 0
-  m_Name: TextHealth
+  m_Name: TextStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

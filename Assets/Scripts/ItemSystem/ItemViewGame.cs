@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody))]
 public class ItemViewGame : MonoBehaviour
@@ -43,7 +43,7 @@ public class ItemViewGame : MonoBehaviour
         this.state = controller.State;
 
         this.GetComponent<SpriteRenderer>().sprite = controller.State.Data.Icon;
-        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<SphereCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
 
         return this;
@@ -72,7 +72,7 @@ public class ItemViewGame : MonoBehaviour
         state = gameObject.GetComponent<GunState>();
         this.state.Init(kind, ammoCount);
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
-        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<SphereCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
     }
 
@@ -82,7 +82,7 @@ public class ItemViewGame : MonoBehaviour
         state = gameObject.GetComponent<DeviceState>();
         this.state.Init(kind, count);
         this.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
-        this.GetComponent<BoxCollider>().isTrigger = true;
+        this.GetComponent<SphereCollider>().isTrigger = true;
         this.GetComponent<Rigidbody>().isKinematic = true;
     }
 
@@ -91,7 +91,7 @@ public class ItemViewGame : MonoBehaviour
         gameObject.AddComponent<ItemState>();
         state = gameObject.GetComponent<ItemState>();
         this.state.Init(kind, itemCount);
-        gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        gameObject.GetComponent<SphereCollider>().isTrigger = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = state.Data.Icon;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }

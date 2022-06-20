@@ -8,7 +8,14 @@ public class ShipController : MonoBehaviour
 
     public ShipController Init(ShipKind kind,InventoryController inventory)
     {
-        this.shipState = this.gameObject.AddComponent<ShipState>().Init(this,kind,inventory);
+        if(this.gameObject.GetComponent<ShipState>())
+        {
+            this.shipState = this.gameObject.GetComponent<ShipState>().Init(this, kind, inventory);
+        }
+        else
+        {
+            this.shipState = this.gameObject.AddComponent<ShipState>().Init(this, kind, inventory);
+        }
         
         return this;
     }

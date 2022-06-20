@@ -5,11 +5,15 @@ public class MobWindow : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private Text health;
-    [SerializeField] private Text size;
     [SerializeField] private Scrollbar slider;
     [SerializeField] private Button buttonAttack;
     [SerializeField] private Button buttonApproach;
     [SerializeField] private Button buttonClose;
+    [SerializeField] private Text title;
+    [SerializeField] private Text race;
+    [SerializeField] private Text shipClass;
+    [SerializeField] private Text size;
+    [SerializeField] private Text speed;
 
     private MobController controller;
 
@@ -18,9 +22,13 @@ public class MobWindow : MonoBehaviour
         this.controller = controller;
         this.controller.OnMobDamaged += UpdateHealthInfo;
 
-        this.icon.sprite = controller.State.ShipState.Data.Icon;
+        var data = controller.State.ShipState.Data;
+        this.icon.sprite = data.Icon;
+        this.speed.text = $"<color=grey>Скорость</color>   {data.Speed}";
+
+
         this.health.text = controller.State.MaxHealth.ToString();
-        this.size.text = controller.State.Health.ToString();
+        this.size.text = $"<color=grey>Размер</color>   {controller.State.Health}";
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
 
         this.buttonClose.onClick.AddListener(CloseWindow);

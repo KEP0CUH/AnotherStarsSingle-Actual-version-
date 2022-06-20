@@ -41,10 +41,12 @@ public class PlayerState
         {
             Debug.Log("Удаление оборудования с корабля...");
             this.ShipController.State.Inventory.RemoveAllEquipmentFromShip();
+            this.shipController.State.Inventory.OnInteractWithEquipment -= this.PlayerController.InventoryInside.ShowInventory;
             Debug.Log("Оборудование удалено...");
         }
         Debug.Log("Начата смена корабля...");
         this.shipController = this.shipController.Init(kind,playerController.Inventory);
+        this.shipController.State.Inventory.OnInteractWithEquipment += this.PlayerController.InventoryInside.ShowInventory;
         Managers.Player.Controller.UpdateState();
     }
 }

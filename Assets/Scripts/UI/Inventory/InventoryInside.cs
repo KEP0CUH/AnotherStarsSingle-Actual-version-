@@ -4,13 +4,20 @@ using UnityEngine.UI;
 
 public class InventoryInside : MonoBehaviour
 {
-    [SerializeField] private Image shipIcon;
-    [SerializeField] private Text shipTitle;
-    [SerializeField] private Text health;
     [SerializeField] private Transform gunsList;
     [SerializeField] private Transform devicesList;
     [SerializeField] private Transform itemsList;
     [SerializeField] private Button buttonClose;
+
+    [SerializeField] private Image icon;
+    [SerializeField] private Text title;
+    [SerializeField] private Text size; 
+    [SerializeField] private Text armor;
+    [SerializeField] private Text shields;
+    [SerializeField] private Text structure;
+    [SerializeField] private Text speed;
+    [SerializeField] private Text energy;
+    [SerializeField] private Text cpu;
 
     private List<GameObject> gunCells = new List<GameObject>();
     private List<GameObject> deviceCells = new List<GameObject>();
@@ -30,8 +37,7 @@ public class InventoryInside : MonoBehaviour
         deviceCells = new List<GameObject>();
         itemCells = new List<GameObject>();
 
-        this.shipIcon.sprite = playerController.ShipController.State.Data.Icon;
-        this.shipTitle.text = playerController.ShipController.State.Data.Title;
+
         this.buttonClose.onClick.AddListener(CloseInventory);
         this.playerController.ShipController.State.Inventory.OnInteractWithEquipment += ShowInventory;
 
@@ -44,6 +50,8 @@ public class InventoryInside : MonoBehaviour
         ShowGuns();
         ShowDevices();
         ShowItems();
+        ShowShip();
+
     }
 
     public void Reswitch()
@@ -54,6 +62,21 @@ public class InventoryInside : MonoBehaviour
             ShowInventory();
         }
         else this.gameObject.SetActive(true);
+    }
+
+    private void ShowShip()
+    {
+        var data = playerController.ShipController.State.Data;
+        this.icon.sprite = data.Icon;
+        this.title.text = data.Title;
+        this.title.text = $"<color=orange>{data.Title}</color>";
+        this.size.text = $"      Трюм         <color=orange>{data.Size}</color>";
+        this.armor.text = $"      Броня        <color=orange>{data.Armor}</color>";
+        this.shields.text = $"      Щиты         <color=orange>{data.Shields}%</color>";
+        this.structure.text = $"      Структура    <color=orange>{data.Structure}</color>";
+        this.speed.text = $"      Скорость     <color=orange>{data.Speed}</color>";
+        this.energy.text = $"      Энергия      <color=orange>{data.Energy}</color>";
+        this.cpu.text = $"      ЦП           <color=orange>{data.Cpu}</color>";
     }
 
     private void ShowGuns()

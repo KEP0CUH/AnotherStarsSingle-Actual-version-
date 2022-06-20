@@ -1203,11 +1203,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7378245599857382689}
   health: {fileID: 3394137543478860857}
-  size: {fileID: 3394137543516449616}
   slider: {fileID: 8032475184660450949}
   buttonAttack: {fileID: 827709982532109752}
   buttonApproach: {fileID: 1031447222700817548}
   buttonClose: {fileID: 4469293151656329664}
+  title: {fileID: 6159856755032830159}
+  race: {fileID: 3394137543738587091}
+  shipClass: {fileID: 2183830424985023927}
+  size: {fileID: 3394137543516449616}
+  speed: {fileID: 6159856756543454468}
 --- !u!1 &6159856756543454466
 GameObject:
   m_ObjectHideFlags: 0

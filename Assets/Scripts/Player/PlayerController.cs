@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public PlayerState State => playerState;
     public InventoryController Inventory => inventoryController;
+    public InventoryInside InventoryInside => inventoryInside;
     public ShipController ShipController => shipController;
     public ConstantUI ConstantUI => constantUI;
 
@@ -57,11 +58,18 @@ public class PlayerController : MonoBehaviour
 
         return this;
     }
+
+    public void ChangeShip(ShipKind kind)
+    {
+        this.State.SetShip(kind);
+    }
+
     public void UpdateState()
     {
         if (this.playerState != null)
         {
             this.GetComponent<SpriteRenderer>().sprite = playerState.ShipController.State.Data.Icon;
+            ShowInventory();
         }
     }
     public void UpdateCameraPosition()
