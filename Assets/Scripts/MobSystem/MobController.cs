@@ -52,8 +52,17 @@ public class MobController : MonoBehaviour
         if (other.GetComponent<AmmoController>())
         {
             Destroy(other.gameObject);
-            ChangeMobHealth(-1 * other.GetComponent<AmmoController>().State.Data.BaseDamage);
+            var gunData = (GunData)other.GetComponent<AmmoController>().GunState.Data;
+            var damage = gunData.CalculateDamage() - this.State.ShipState.Data.Armor;
+            Debug.Log($"${damage}");
+            ChangeMobHealth(-1 * damage);
             OnMobDamaged?.Invoke();
+
+
+/*            var damageText = new GameObject("DamageText",typeof(RectTransform));
+            Managers.Canvas.AddModule(damageText);
+            damageText.AddComponent<DamageText>().Init(this.transform,"Damage");
+            Object.Destroy(damageText, 5);*/
         }
     }
 }

@@ -3,10 +3,10 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
     private ItemState itemState;
-    private ItemViewGame itemView;
+    private ItemView itemView;
 
     public ItemState State => itemState;
-    public ItemViewGame View => itemView;
+    public ItemView View => itemView;
 
     public void Init(ItemKind kind, int count = 1)
     {
@@ -42,15 +42,15 @@ public class ItemController : MonoBehaviour
     {
         if(State.Data.IsWeapon())
         {
-            this.itemView = gameObject.AddComponent<GunViewGame>().Init(this);
+            this.itemView = gameObject.AddComponent<GunView>().Init(this);
         }
         else if(State.Data.IsDevice())
         {
-            this.itemView = gameObject.AddComponent<DeviceViewGame>().Init(this);
+            this.itemView = gameObject.AddComponent<DeviceView>().Init(this);
         }
         else if(State.Data.IsItem())
         {
-            this.itemView = gameObject.AddComponent<ItemViewGame>().Init(this);
+            this.itemView = gameObject.AddComponent<ItemView>().Init(this);
         }
     }
 }

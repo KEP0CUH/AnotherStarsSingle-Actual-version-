@@ -9,6 +9,8 @@ public class GunData : ItemData
     [SerializeField] private int attackRange;
     [SerializeField] private float cooldown;
     [SerializeField] private int energyCost;
+    [SerializeField] private int damage;
+    private float deviation = 0.2f;
     [SerializeField] private GunType type;
     [SerializeField] private int cpu;
 
@@ -18,7 +20,14 @@ public class GunData : ItemData
     public int AttackRange => attackRange;
     public float Cooldown => cooldown;
     public int EnergyCost => energyCost;
+    public int Damage => damage;
+    public float Deviation => deviation;
     public int CPU => cpu;
+
+    public int CalculateDamage()
+    {
+        return this.damage + (int)Random.Range(-deviation * damage, deviation * damage);
+    }
 
     public override bool IsItem()
     {
@@ -31,6 +40,7 @@ public class GunData : ItemData
 
     protected override void OnValidate()
     {
+        deviation = 0.2f;
         base.OnValidate();
         switch(ItemKind)
         {
@@ -40,6 +50,8 @@ public class GunData : ItemData
                 maxCartriges = 3;
                 attackRange = 500;
                 cooldown = 2.5f;
+                energyCost = 3;
+                damage = 50;
                 type = GunType.Energetic;
                 cpu = 1200;
                 break;
@@ -49,6 +61,8 @@ public class GunData : ItemData
                 maxCartriges = 5;
                 attackRange = 350;
                 cooldown = 2.0f;
+                energyCost = 4;
+                damage = 25;
                 type = GunType.Kinetic;
                 cpu = 1000;
                 break;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GunState : ItemState
 {
+
     public override ItemState Init(ItemKind kind, int count)
     {
         base.Init(kind, count);
@@ -18,7 +19,7 @@ public class GunState : ItemState
 
     public void Shoot(Transform parent,Transform target,GunState gun)
     {
-        if(((GunData)data).AmmoKind != AmmoKind.EmptyAmmo)
+        if(((GunData)Data).AmmoKind != AmmoKind.EmptyAmmo)
         {
             Debug.Log("Стреляю");
             GameObject bullet = new GameObject("Bullet");

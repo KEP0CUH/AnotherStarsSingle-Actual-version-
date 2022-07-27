@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private ShipController shipController;
     private ConstantUI constantUI;
     private Radar radar;
+    private Wallet wallet;
 
     private float timer = 0;
     private float shootDelay = 0.5f;
@@ -30,8 +31,9 @@ public class PlayerController : MonoBehaviour
     public InventoryInside InventoryInside => inventoryInside;
     public ShipController ShipController => shipController;
     public ConstantUI ConstantUI => constantUI;
-
     public Camera MainCamera => mainCamera;
+
+    public Wallet Wallet => wallet;
     
 
     public PlayerController Init()
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         this.playerMovement = gameObject.AddComponent<PlayerMovement>().Init(this);
         this.playerShoot = gameObject.AddComponent<PlayerShoot>().Init(this);
 
+        this.wallet = new Wallet();
 
         SetupCamera();
         SetupRadar();
@@ -139,9 +142,7 @@ public class PlayerController : MonoBehaviour
         cam.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         cam.targetTexture = Resources.Load<RenderTexture>("Textures/GlobalMap");
         globalMapCamera = cam;
-    }
-
-
+    } 
 
     public void Shoot(Transform target)
     {

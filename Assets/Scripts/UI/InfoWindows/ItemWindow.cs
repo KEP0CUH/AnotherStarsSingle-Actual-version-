@@ -9,9 +9,9 @@ public class ItemWindow : MonoBehaviour
     [SerializeField] private Text type;
     [SerializeField] private Button buttonTake;
 
-    private ItemViewGame view;
+    private ItemView view;
 
-    public void Init(ItemViewGame view,ItemState state)
+    public void Init(ItemView view,ItemState state)
     {
         this.icon.sprite = state.Data.Icon;
         this.title.text = state.Data.Title;

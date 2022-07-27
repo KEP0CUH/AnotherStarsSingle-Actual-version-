@@ -9,9 +9,9 @@ public class ItemInfoWindow : MonoBehaviour
     private GameObject title;
     private GameObject description;
 
-    private ItemViewGame controller;
+    private ItemView controller;
 
-    public void Init(ItemViewGame controller,ItemState state)
+    public void Init(ItemView controller,ItemState state)
     {
         this.controller = controller;
 

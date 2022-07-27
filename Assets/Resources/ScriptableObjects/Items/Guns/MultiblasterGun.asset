@@ -22,6 +22,7 @@ MonoBehaviour:
   maxCartriges: 5
   attackRange: 350
   cooldown: 2
-  energyCost: 0
+  energyCost: 4
+  damage: 25
   type: 1
   cpu: 1000

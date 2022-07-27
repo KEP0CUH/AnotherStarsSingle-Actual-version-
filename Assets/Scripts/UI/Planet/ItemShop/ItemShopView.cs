@@ -90,6 +90,11 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
+    private void CreateStatesShopItems()
+    {
+
+    }
+
     public void AddItem(ItemState state,int count = 1, bool needDestroying = false)
     {
         if(state.IsEmpty())

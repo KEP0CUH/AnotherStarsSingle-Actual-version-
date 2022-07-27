@@ -23,5 +23,6 @@ MonoBehaviour:
   attackRange: 0
   cooldown: 0
   energyCost: 0
+  damage: 0
   type: 0
   cpu: 0

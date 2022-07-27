@@ -7,16 +7,18 @@ public class ItemShopData : ScriptableObject
 {
     [SerializeField] private ItemShopType itemShopType;
     [SerializeField] private List<ItemData> itemsForBuyingData;
+    [SerializeField] private List<ItemState> itemsForBuyingStates;
 
     public ItemShopType ItemShopType => itemShopType;
     public List<ItemData> ItemsForBuyingData => itemsForBuyingData;
-
+    public List<ItemState> ItemsForBuyingState => itemsForBuyingStates;
 
     private void OnValidate()
     {
         if (Managers.Resources != null)
         {
             itemsForBuyingData = new List<ItemData>();
+            itemsForBuyingStates = new List<ItemState>();
             switch (itemShopType)
             {
                 case ItemShopType.GreenShop1:
@@ -24,6 +26,9 @@ public class ItemShopData : ScriptableObject
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.FerrumOre));
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.MultiblasterGun));
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.DesintegratorGun));
+
+                    var newItem = new GameObject("shopItem",typeof(ItemState));
+                    newItem.GetComponent<ItemState>().Init(ItemKind.GoldOre,50);
                     break;
                 case ItemShopType.GreenShop2:
                     itemsForBuyingData.Add(Managers.Resources.DownloadData(ItemKind.OsmiumOre));
