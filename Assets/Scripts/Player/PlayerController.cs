@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IItemHandler
 {
     private List<GunState> guns = new List<GunState>();
 
@@ -194,6 +194,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-   
+    public void HandleItem(ItemState state)
+    {
+        Debug.Log($"Подбирание предмета игроком. Надо обработать тут, а не так как сейчас.");
+        Inventory.AddItem(state);
+        ShowInventory();
+        UnityEngine.Object.Destroy(state.gameObject);
+    }
 }

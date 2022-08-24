@@ -348,6 +348,7 @@
 "Assets/Scripts/Interfaces/Enums.cs"
 "Assets/Scripts/Interfaces/ICanvas.cs"
 "Assets/Scripts/Interfaces/IGameManager.cs"
+"Assets/Scripts/Interfaces/IItemHandler.cs"
 "Assets/Scripts/Interfaces/IUIModule.cs"
 "Assets/Scripts/InventorySystem/InventoryController.cs"
 "Assets/Scripts/ItemSystem/Ammo/AmmoController.cs"

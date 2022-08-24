@@ -10,7 +10,6 @@ public class ItemView : MonoBehaviour
     public ItemState State => state;
 
     private ItemController controller;
-    PlayerController playerController;
 
     private bool triggerWorked = false;
     private bool needTake = false;
@@ -34,6 +33,8 @@ public class ItemView : MonoBehaviour
             CreateBaseItem(kind, count);
         }
 
+        needTake = false;
+
         return this;
     }
 
@@ -51,14 +52,8 @@ public class ItemView : MonoBehaviour
 
     public virtual void TakeItem()
     {
-        if (playerController != null && needTake == true)
-        {
-            triggerWorked = false;
-            playerController.Inventory.AddItem(this.state);
-            playerController.ShowInventory();
-            CloseInfoWindow();
-            Object.Destroy(this.gameObject);
-        }
+        triggerWorked = false;
+        CloseInfoWindow();
     }
 
     public virtual void NeedTake()
@@ -100,10 +95,13 @@ public class ItemView : MonoBehaviour
     {
         if (triggerWorked == false)
         {
-            if (other.GetComponent<PlayerController>())
+            if(other.GetComponent<IItemHandler>() != null)
             {
-                triggerWorked = true;
-                playerController = other.GetComponent<PlayerController>();
+                if(needTake)
+                {
+                    triggerWorked = true;
+                    other.GetComponent<IItemHandler>().HandleItem(this.state);
+                }
             }
         }
     }
@@ -116,6 +114,10 @@ public class ItemView : MonoBehaviour
     protected void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerController>())
+        {
+            triggerWorked = false;
+        }
+        if(other.GetComponent<IItemHandler>() != null)
         {
             triggerWorked = false;
         }

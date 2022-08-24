@@ -22,27 +22,27 @@ public class AsteroidFieldData : ScriptableObject
         switch (type)
         {
             case AsteroidFieldType.GoldField:
-                title = "Золотое";
+                title = "Р—РѕР»РѕС‚РѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.GoldAsteroid);
                 break;
             case AsteroidFieldType.FerrumField:
-                title = "Железное";
+                title = "Р–РµР»РµР·РЅРѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.FerrumAsteroid);
                 break;
             case AsteroidFieldType.TitanField:
-                title = "Титановое";
+                title = "РўРёС‚Р°РЅРѕРІРѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.TitanAsteroid);
                 break;
             case AsteroidFieldType.MineralField:
-                title = "Минеральное";
+                title = "РњРёРЅРµСЂР°Р»СЊРЅРѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.MineralAsteroid);
                 break;
             case AsteroidFieldType.OrganicField:
-                title = "Органическое";
+                title = "РћСЂРіР°РЅРёС‡РµСЃРєРѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.OrganicAsteroid);
                 break;
             case AsteroidFieldType.OsmiumField:
-                title = "Осмиевое";
+                title = "РћСЃРјРёРµРІРѕРµ";
                 asteroidData = Resources.Load<AsteroidData>(dropPath + AsteroidType.OsmiumAsteroid);
                 break;
         }

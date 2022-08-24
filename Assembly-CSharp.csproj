@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\UI\Inventory\ItemUI.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\PlanetWindow.cs" />
     <Compile Include="Assets\Scripts\ItemSystem\Devices\DeviceState.cs" />
+    <Compile Include="Assets\Scripts\Player\Wallet.cs" />
     <Compile Include="Assets\Scripts\UI\Planet\ItemShop\Windows\BuyWindow.cs" />
     <Compile Include="Assets\Scripts\Player\Radar.cs" />
     <Compile Include="Assets\Scripts\UI\InfoWindows\ItemWindow.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\AsteroidSystem\AsteroidView.cs" />
     <Compile Include="Assets\Scripts\ShipSystem\ShipData.cs" />
-    <Compile Include="Assets\Scripts\Player\Wallet.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IItemHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
