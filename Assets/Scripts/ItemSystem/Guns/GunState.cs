@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunState : ItemState
+public class GunState : ItemState, IUsable
 {
-
     public override ItemState Init(ItemKind kind, int count)
     {
         base.Init(kind, count);
@@ -17,9 +16,26 @@ public class GunState : ItemState
         return this;
     }
 
+    public override void Set()
+    {
+        Debug.Log("Попытка одеть пушку на корабль.");
+        //SetIsTrue();
+    }
+
+    public override void Unset()
+    {
+        Debug.Log("Попытка снять пушку с корабля");
+        //SetIsFalse();
+    }
+
+    public GunData GetData()
+    {
+        return (GunData)this.Data;
+    }
+
     public void Shoot(Transform parent,Transform target,GunState gun)
     {
-        if(((GunData)Data).AmmoKind != AmmoKind.EmptyAmmo)
+        if(GetData().AmmoKind != AmmoKind.EmptyAmmo)
         {
             Debug.Log("Стреляю");
             GameObject bullet = new GameObject("Bullet");

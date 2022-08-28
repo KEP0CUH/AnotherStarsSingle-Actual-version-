@@ -36,6 +36,10 @@ public class InventoryController
                         {
                             Object.Destroy(addedItem.gameObject);
                         }
+                        else
+                        {
+                            addedItem.OnPickup();
+                        }
                         return;
                     }
                 }

@@ -100,7 +100,7 @@ public class ItemView : MonoBehaviour
                 if(needTake)
                 {
                     triggerWorked = true;
-                    other.GetComponent<IItemHandler>().HandleItem(this.state);
+                    other.GetComponent<IItemHandler>().PickupItem(this.state);
                 }
             }
         }
@@ -150,4 +150,6 @@ public class ItemView : MonoBehaviour
             isClicked = false;
         }
     }
+
+ 
 }

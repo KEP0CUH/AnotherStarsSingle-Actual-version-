@@ -13,6 +13,9 @@ public class ShipInventory
     private List<DeviceState> devices;
     private int maxNumDevices;
 
+    private List<IUsable> shipGuns;
+    private List<IUsable> shipDevices;
+
     public event System.Action OnInteractWithEquipment;
 
     public ShipInventory(Transform parent,ShipState state,InventoryController inventory)
@@ -24,15 +27,19 @@ public class ShipInventory
         this.inventory = inventory;
 
         guns = new List<GunState>();
+        shipGuns = new List<IUsable>();
         for (int i = 0; i < maxNumGuns; i++)
         {
             guns.Add(CreateEmptyGunState());
+            shipGuns.Add(CreateEmptyGunState());
         }
 
         devices = new List<DeviceState>();
+        shipDevices = new List<IUsable>();
         for (int i = 0; i < maxNumDevices; i++)
         {
             devices.Add(CreateEmptyDeviceState());
+            shipDevices.Add(CreateEmptyDeviceState());
         }
 
         ShowInventory();
@@ -40,6 +47,31 @@ public class ShipInventory
 
 
     #region Одеть(Снять) определенное оборудование на(с) корабль(я)
+
+/*    public void TrySetGun(IUsableGun gun)
+    {
+        for(int i = 0; i < maxNumGuns;i++)
+        {
+            //
+            TrySetItem(gun);
+        }
+
+    }
+
+    public void TryUnsetGun(IUsableGun gun)
+    {
+        TryUnsetItem(gun);
+    }*/
+
+    public void TrySetItem(IUsable item)
+    {
+        item.Set();
+    }
+
+    public void TryUnsetItem(IUsable item)
+    {
+        item.Unset();
+    }
 
     public void TryInteractWithItem(ItemState state)
     {

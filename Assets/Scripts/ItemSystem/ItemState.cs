@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemState : MonoBehaviour
+public class ItemState : MonoBehaviour, IInventoryHandler, IUsable
 {
     private static int ID = 1;
     [SerializeField] public virtual ItemData Data { get; private set; }
@@ -56,6 +56,16 @@ public class ItemState : MonoBehaviour
         this.isSet = false;
         this.id = id;
     }
+    public void OnPickup()
+    {
+        Debug.Log("Итем взят.");
+        Object.Destroy(this.gameObject);
+    }
+
+    public void OnDrop()
+    {
+        Debug.Log("Итем выброшен.");
+    }
 
     public void SetIsTrue()
     {
@@ -64,6 +74,15 @@ public class ItemState : MonoBehaviour
     public void SetIsFalse()
     {
         isSet = false;
+    }
+    public virtual void Set()
+    {
+        Debug.Log("Это обычный предмет, установка/снятие на корабль невозможны.");
+    }
+
+    public virtual void Unset()
+    {
+        Debug.Log("Это обычный предмет, установка/снятие на корабль невозможны.");
     }
 
     public bool IsEmpty()
@@ -88,5 +107,4 @@ public class ItemState : MonoBehaviour
         return ID;
     }
 
-     
 }

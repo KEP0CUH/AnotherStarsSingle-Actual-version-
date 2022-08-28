@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 public interface IItemHandler
 {
-    public void HandleItem(ItemState state);
+    public void PickupItem(ItemState state);
 }

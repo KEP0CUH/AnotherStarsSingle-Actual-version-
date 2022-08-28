@@ -194,11 +194,10 @@ public class PlayerController : MonoBehaviour, IItemHandler
         }
     }
 
-    public void HandleItem(ItemState state)
+    public void PickupItem(ItemState state)
     {
-        Debug.Log($"Подбирание предмета игроком. Надо обработать тут, а не так как сейчас.");
+        Debug.Log($"Подбирание предмета игроком.");
         Inventory.AddItem(state);
         ShowInventory();
-        UnityEngine.Object.Destroy(state.gameObject);
     }
 }
