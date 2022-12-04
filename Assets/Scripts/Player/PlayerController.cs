@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour, IItemHandler
     public ShipController ShipController => shipController;
     public ConstantUI ConstantUI => constantUI;
     public Camera MainCamera => mainCamera;
-
     public Wallet Wallet => wallet;
     
 
