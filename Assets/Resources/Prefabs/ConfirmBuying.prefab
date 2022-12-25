@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 2738666648876692609}
   - component: {fileID: 6143398264862015974}
   - component: {fileID: 1253781568172214304}
+  - component: {fileID: 2281875564243586078}
   m_Layer: 0
   m_Name: ConfirmBuying
   m_TagString: Untagged
@@ -754,6 +755,18 @@ MonoBehaviour:
   slider: {fileID: 251002534275680071}
   buttonYes: {fileID: 7196600699696009607}
   buttonNo: {fileID: 7976103282280682051}
+--- !u!114 &2281875564243586078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528871580338683959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977d86e6c41996343b8cd6d9e804a2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6678315200746212104
 GameObject:
   m_ObjectHideFlags: 0

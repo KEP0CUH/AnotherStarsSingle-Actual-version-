@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
 
 public interface IUsable
 {
-    public ItemData Data { get; }
-    public void Set();
-    public void Unset();
+    public          ItemData            Data { get; }
+    public          void                Set();
+    public          void                Unset();
 }

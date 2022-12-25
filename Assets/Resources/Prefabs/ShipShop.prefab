@@ -1949,6 +1949,7 @@ GameObject:
   - component: {fileID: 1916982040505687112}
   - component: {fileID: 8272061693874323717}
   - component: {fileID: 2052609882517424002}
+  - component: {fileID: 3605779032473988465}
   m_Layer: 0
   m_Name: ShipShop
   m_TagString: Untagged
@@ -2056,6 +2057,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3605779032473988465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801283668900272436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977d86e6c41996343b8cd6d9e804a2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9002987806494873683
 GameObject:
   m_ObjectHideFlags: 0

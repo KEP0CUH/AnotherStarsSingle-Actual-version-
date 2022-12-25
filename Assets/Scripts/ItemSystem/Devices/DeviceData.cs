@@ -1,14 +1,23 @@
-using UnityEngine.UI;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="ScriptableObjects/Items/Devices/newDevice",fileName ="newDevice",order =54)]
 public class DeviceData : ItemData
 {
-    [SerializeField] private int energyCost;
-    [SerializeField] private float cooldown;
-    public int EnergyCost => energyCost;
+    [SerializeField]
+    private                 int          energyCost;
+    [SerializeField] 
+    private                 float        cooldown;
 
-    protected override void OnValidate()
+    public                  int          EnergyCost => energyCost;
+
+    protected override      void         OnValidate()
     {
         base.OnValidate();
 
@@ -21,12 +30,12 @@ public class DeviceData : ItemData
         }
     }
 
-    public override bool IsItem()
+    public override         bool         IsItem()
     {
         return false;
     }
 
-    public override bool IsDevice()
+    public override         bool         IsDevice()
     {
         return true;
     }

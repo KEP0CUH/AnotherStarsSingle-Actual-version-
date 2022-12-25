@@ -1,6 +1,11 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -9,9 +14,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AmmoView : MonoBehaviour
 {
-    private AmmoController ammoController;
-    private Transform target;
-    public AmmoView Init(Transform target, AmmoController controller)
+    private             AmmoController          ammoController;
+    private             Transform               target;
+    public              AmmoView                Init(Transform target, AmmoController controller)
     {
         this.ammoController = controller;
         this.gameObject.GetComponent<SpriteRenderer>().sprite = ammoController.State.Data.Icon;
@@ -22,7 +27,7 @@ public class AmmoView : MonoBehaviour
         return this;
     }
 
-    private void CreateAudioSound(AudioClip sound)
+    private             void                    CreateAudioSound(AudioClip sound)
     {
         var audioObj = new GameObject("SoundObject", typeof(AudioSource));
         var audioComponent = audioObj.GetComponent<AudioSource>();
@@ -32,7 +37,7 @@ public class AmmoView : MonoBehaviour
         Destroy(audioObj, 3);
     }
 
-    private void FixedUpdate()
+    private             void                    FixedUpdate()
     {
         if (target != null) Move();
         else
@@ -41,7 +46,7 @@ public class AmmoView : MonoBehaviour
         }
     }
 
-    private void Move()
+    private             void                    Move()
     {
         // Вычисляем вектор с направлением, но с длиной единица - нормализуем.
         Vector2 _difference = (new Vector2(target.position.x, target.position.y)

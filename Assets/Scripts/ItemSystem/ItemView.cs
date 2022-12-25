@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -6,18 +13,18 @@ using UnityEngine;
 public class ItemView : MonoBehaviour
 {
     [SerializeField]
-    protected ItemState state;
-    public ItemState State => state;
+    protected           ItemState               state;
+    public              ItemState               State => state;
 
-    private ItemController controller;
+    private             ItemController          controller;
 
-    private bool triggerWorked = false;
-    private bool needTake = false;
+    private             bool                    triggerWorked   = false;
+    private             bool                    needTake        = false;
 
-    private static GameObject infoWindow = null;
-    private static bool isClicked = false;
+    private static      GameObject              infoWindow      = null;
+    private static      bool                    isClicked       = false;
 
-    public virtual ItemView Init(ItemKind kind, int count)
+    public virtual      ItemView                Init(ItemKind kind, int count)
     {
         var data = Managers.Resources.DownloadData(kind);
         if (data.IsWeapon())
@@ -38,7 +45,7 @@ public class ItemView : MonoBehaviour
         return this;
     }
 
-    public virtual ItemView Init(ItemController controller)
+    public virtual      ItemView                Init(ItemController controller)
     {
         this.controller = controller;
         this.state = controller.State;
@@ -50,18 +57,18 @@ public class ItemView : MonoBehaviour
         return this;
     }
 
-    public virtual void TakeItem()
+    public virtual      void                    TakeItem()
     {
         triggerWorked = false;
         CloseInfoWindow();
     }
 
-    public virtual void NeedTake()
+    public virtual      void                    NeedTake()
     {
         this.needTake = true;
     }
 
-    private void CreateGun(ItemKind kind, int ammoCount)
+    private             void                    CreateGun(ItemKind kind, int ammoCount)
     {
         gameObject.AddComponent<GunState>();
         state = gameObject.GetComponent<GunState>();
@@ -71,7 +78,7 @@ public class ItemView : MonoBehaviour
         this.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    private void CreateDevice(ItemKind kind, int count)
+    private             void                    CreateDevice(ItemKind kind, int count)
     {
         gameObject.AddComponent<DeviceState>();
         state = gameObject.GetComponent<DeviceState>();
@@ -81,7 +88,7 @@ public class ItemView : MonoBehaviour
         this.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    private void CreateBaseItem(ItemKind kind, int itemCount)
+    private             void                    CreateBaseItem(ItemKind kind, int itemCount)
     {
         gameObject.AddComponent<ItemState>();
         state = gameObject.GetComponent<ItemState>();
@@ -91,7 +98,7 @@ public class ItemView : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected           void                    OnTriggerEnter(Collider other)
     {
         if (triggerWorked == false)
         {
@@ -106,12 +113,12 @@ public class ItemView : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay(Collider other)
+    protected           void                    OnTriggerStay(Collider other)
     {
         TakeItem();
     }
 
-    protected void OnTriggerExit(Collider other)
+    protected           void                    OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerController>())
         {
@@ -123,13 +130,13 @@ public class ItemView : MonoBehaviour
         }
     }
 
-    protected void OnMouseDown()
+    protected           void                    OnMouseDown()
     {
         isClicked = true;
         CreateInfoWindow();
     }
 
-    private void CreateInfoWindow()
+    private             void                    CreateInfoWindow()
     {
         if (infoWindow != null)
         {
@@ -141,7 +148,7 @@ public class ItemView : MonoBehaviour
         Managers.Canvas.AddModule(infoWindow);
     }
 
-    public void CloseInfoWindow()
+    public              void                    CloseInfoWindow()
     {
         if (infoWindow != null)
         {
@@ -149,7 +156,5 @@ public class ItemView : MonoBehaviour
             infoWindow = null;
             isClicked = false;
         }
-    }
-
- 
+    } 
 }

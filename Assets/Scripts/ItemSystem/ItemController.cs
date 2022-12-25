@@ -1,24 +1,31 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    private ItemState itemState;
-    private ItemView itemView;
+    private             ItemState           itemState;
+    private             ItemView            itemView;
 
-    public ItemState State => itemState;
-    public ItemView View => itemView;
+    public              ItemState           State => itemState;
+    public              ItemView            View => itemView;
 
-    public void Init(ItemKind kind, int count = 1)
+    public              void                Init(ItemKind kind, int count = 1)
     {
         CreateStateAndView(kind, count = 1);
     }
 
-    public void Init(ItemState state)
+    public              void                Init(ItemState state)
     {
         CreateStateAndView(state.Data.ItemKind, state.Count);
     }
 
-    private void CreateStateAndView(ItemKind kind, int count = 1)
+    private             void                CreateStateAndView(ItemKind kind, int count = 1)
     {
         var data = Managers.Resources.DownloadData(kind);
 
@@ -38,7 +45,7 @@ public class ItemController : MonoBehaviour
         CreateView();
     }
 
-    private void CreateView()
+    private             void                CreateView()
     {
         if(State.Data.IsWeapon())
         {

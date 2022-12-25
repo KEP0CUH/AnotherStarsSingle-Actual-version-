@@ -742,6 +742,7 @@ GameObject:
   - component: {fileID: 2738666648876692609}
   - component: {fileID: 6143398264862015974}
   - component: {fileID: 1693731290749672251}
+  - component: {fileID: 5750047161360293011}
   m_Layer: 0
   m_Name: ConfirmSelling
   m_TagString: Untagged
@@ -796,7 +797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.17777678, g: 0.3946436, b: 0.8018868, a: 0.8509804}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -830,6 +831,18 @@ MonoBehaviour:
   slider: {fileID: 251002534275680071}
   buttonYes: {fileID: 7196600699696009607}
   buttonNo: {fileID: 7976103282280682051}
+--- !u!114 &5750047161360293011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6528871580338683959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977d86e6c41996343b8cd6d9e804a2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6678315200746212104
 GameObject:
   m_ObjectHideFlags: 0

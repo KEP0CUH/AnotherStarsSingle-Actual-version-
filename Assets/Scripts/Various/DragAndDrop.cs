@@ -1,7 +1,14 @@
-using UnityEngine;
-using UnityEngine.UI;
+//////////////////////////////////////////////////
+///     Created:    04.12.22
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    06.12.22
+///     Tested:     Not
+/////////////////////////////////////////////////
 
-public class DragAndDrop : MonoBehaviour
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class DragAndDrop : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     private bool canMove;
     private bool dragging;
@@ -17,19 +24,38 @@ public class DragAndDrop : MonoBehaviour
         rect = GetComponent<RectTransform>();
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        canMove = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        canMove = false;
+        dragging = false;   
+    }
+
     private void Update()
     {
-
-
-        if (Input.GetMouseButtonDown(0))
+        if(canMove)
         {
-            Input.GetMouseButton(0);
-            Debug.Log("Зажатие мыши на перетаскиваемом объекте.");
-            Debug.Log(rect.transform.position);
-            Debug.Log(Input.mousePosition);
-            differenceBetweenRectAndClick = Input.mousePosition - rect.transform.position;
-            canMove = true;
-            dragging = true;
+            if (Input.GetMouseButtonDown(0))
+            {
+                Input.GetMouseButton(0);
+                Debug.Log("Зажатие мыши на перетаскиваемом объекте.");
+                Debug.Log(rect.transform.position);
+                Debug.Log(Input.mousePosition);
+                differenceBetweenRectAndClick = Input.mousePosition - rect.transform.position;
+                canMove = true;
+                dragging = true;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                canMove = false;
+                dragging = false;
+                Debug.Log("Отжатие мыши на перетаскиваеом объекте.");
+            }
         }
 
         if (dragging)
@@ -75,16 +101,8 @@ public class DragAndDrop : MonoBehaviour
                     }
                 }
             }
-
-
-            //rect.transform.position = target;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            canMove = false;
-            dragging = false;
-            Debug.Log("Отжатие мыши на перетаскиваеом объекте.");
         }
     }
+
+
 }

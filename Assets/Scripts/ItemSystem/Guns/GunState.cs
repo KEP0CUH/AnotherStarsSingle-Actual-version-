@@ -1,39 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 public class GunState : ItemState, IUsable
 {
-    public override ItemState Init(ItemKind kind, int count)
+    public override         ItemState       Init(ItemKind kind, int count)
     {
         base.Init(kind, count);
         return this;
     }
 
-    public override ItemState Init(ItemState state)
+    public override         ItemState       Init(ItemState state)
     {
         base.Init(state);
         return this;
     }
 
-    public override void Set()
+    public override         void            Set()
     {
         Debug.Log("Попытка одеть пушку на корабль.");
         //SetIsTrue();
     }
 
-    public override void Unset()
+    public override         void            Unset()
     {
         Debug.Log("Попытка снять пушку с корабля");
         //SetIsFalse();
     }
 
-    public GunData GetData()
+    public                  GunData         GetData()
     {
         return (GunData)this.Data;
     }
 
-    public void Shoot(Transform parent,Transform target,GunState gun)
+    public                  void            Shoot(Transform parent,Transform target,GunState gun)
     {
         if(GetData().AmmoKind != AmmoKind.EmptyAmmo)
         {
@@ -51,5 +56,4 @@ public class GunState : ItemState, IUsable
             Destroy(bullet, 4);
         }
     }
-
 }

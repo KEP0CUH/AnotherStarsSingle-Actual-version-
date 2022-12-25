@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 public enum ManagerStatus
 {
     Shutdown = 1,
@@ -10,6 +17,7 @@ public enum EventType
     OnItemDropped,
     OnItemPicked,
 }
+
 public enum UIModuleKind
 {
     Canvas = 2,
@@ -18,6 +26,7 @@ public enum UIModuleKind
     Radar = 16,
     GlobalMap
 }
+
 public enum ItemKind
 {
     #region WEAPONS
@@ -75,6 +84,7 @@ public enum GunType
     Kinetic,
     Rocket
 }
+
 public enum AmmoKind
 {
     MultiblasterAmmo,
@@ -162,8 +172,6 @@ public enum AsteroidFieldType
     OrganicField,
     OsmiumField,
 }
-
-
 
 public enum EntityKind
 {

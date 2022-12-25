@@ -1,18 +1,36 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using System.Collections.Generic;
 
 public class InventoryController
 {
-    private Dictionary<int, ItemState> items;
-    private Transform parent;
+    private         Dictionary<int, ItemState>          items;
+    private         Transform                           parent;
 
-    public InventoryController(Transform parent)
+    public          InventoryController(Transform parent)
     {
         items = new Dictionary<int, ItemState>();
         this.parent = parent;
     }
 
-    public void AddItem(ItemState addedItem,int count = 1,bool needDestroying = false)
+    /// <summary>
+    /// Метод для добавления нового итема в инвентарь NPC. Сейчас используется полиморфизм для проверки итема,
+    /// а следует использовать обобщенное программирование. Добавить template<class T>, 
+    /// где у класса T будет следующая концепция: 1) Метод IsEmpty(проверяет не пустышка ли итем)
+    ///                                           2) Метод IsItem(проверяет является ли предмет обычной вещью)
+    ///                                           3) Метод IsGun(проверяет является ли предмет оружием)
+    ///                                           4) Метод IsDevice(проверяет является ли предмет устройством)
+    /// </summary>
+    /// <param name="addedItem"></param>
+    /// <param name="count"></param>
+    /// <param name="needDestroying"></param>
+    public          void                                AddItem(ItemState addedItem,int count = 1,bool needDestroying = false)
     {
         if (addedItem.IsEmpty())
         {
@@ -31,7 +49,7 @@ public class InventoryController
                 {
                     if(item.Value.Data.ItemKind == addedItem.Data.ItemKind)
                     {
-                        item.Value.IncreaseNumber(count);
+                        item.Value.IncreaseCount(count);
                         if(needDestroying)
                         {
                             Object.Destroy(addedItem.gameObject);
@@ -70,18 +88,18 @@ public class InventoryController
         }
     }
 
-    public Dictionary<int,ItemState> GetItems()
+    public          Dictionary<int,ItemState>           GetItems()
     {
         return this.items;
     }
 
-    public void RemoveItem(ItemState removedItem,int count = 1,bool needDestroying = false)
+    public           void                               RemoveItem(ItemState removedItem,int count = 1,bool needDestroying = false)
     {
         if(items.ContainsKey(removedItem.Id))
         {
             if(removedItem.IsItem)
             {
-                items[removedItem.Id].DecreaseNumber(count);
+                items[removedItem.Id].DecreaseCount(count);
                 if(items[removedItem.Id].Count <= 0)
                 {
                     items.Remove(removedItem.Id);

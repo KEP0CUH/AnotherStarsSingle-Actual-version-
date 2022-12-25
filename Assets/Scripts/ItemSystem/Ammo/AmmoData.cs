@@ -1,31 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Ammo/newAmmo", fileName = "newAmmo", order = 54)]
 public class AmmoData : ScriptableObject
 {
-    [SerializeField] private string title;
-    [SerializeField] private Sprite icon;
-    [SerializeField] private string iconPath = "Icons/Items/Ammo/";
-    [SerializeField] private AudioClip clip;
-    [SerializeField] private string soundPath = "Sounds/";
-    [SerializeField] private AmmoKind kind;
+    [SerializeField] 
+    private             string           title;
+    [SerializeField]
+    private             Sprite           icon;
+    [SerializeField]
+    private             string           iconPath       = "Icons/Items/Ammo/";
+    [SerializeField]
+    private             AudioClip        clip;
+    [SerializeField] 
+    private             string           soundPath      = "Sounds/";
+    [SerializeField] 
+    private             AmmoKind         kind;
 
 
-    [SerializeField] [Range(15,50)] private int baseDamage = 25;
+    [SerializeField] [Range(15,50)]
+    private             int              baseDamage     = 25;
 
     [SerializeField] [Range(2f / Constants.TICKS_PER_SEC, 5f / Constants.TICKS_PER_SEC)]
-        private float speed = 2f / Constants.TICKS_PER_SEC;
+    private             float            speed          = 2f / Constants.TICKS_PER_SEC;
 
-    public string Title => title;
-    public Sprite Icon => icon;
-    public AudioClip Sound => clip;
-    public AmmoKind Kind => kind;
-    public int BaseDamage => baseDamage;
-    public float Speed => speed;
+    public              string           Title => title;
+    public              Sprite           Icon => icon;
+    public              AudioClip        Sound => clip;
+    public              AmmoKind         Kind => kind;
+    public              int              BaseDamage => baseDamage;
+    public              float            Speed => speed;
 
-    private void OnValidate()
+    private             void             OnValidate()
     {
         var pathAmmo = iconPath;
         var pathSounds = soundPath;

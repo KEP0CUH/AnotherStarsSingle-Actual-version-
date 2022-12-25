@@ -115,7 +115,7 @@ public class ItemShopView : MonoBehaviour
                 {
                     if (item.Data.ItemKind == state.Data.ItemKind)
                     {
-                        item.IncreaseNumber(count);
+                        item.IncreaseCount(count);
                         if (needDestroying) Object.Destroy(state.gameObject);
                         ShowListItemShop();
                         return;
@@ -155,7 +155,7 @@ public class ItemShopView : MonoBehaviour
         {
             if(shopItems[state.Id].IsItem)
             {
-                shopItems[state.Id].DecreaseNumber(count);
+                shopItems[state.Id].DecreaseCount(count);
                 if(shopItems[state.Id].Count <= 0)
                 {
                     Object.Destroy(shopItems[state.Id]);

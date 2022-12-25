@@ -1,44 +1,61 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="ScriptableObjects/Items/Guns/newGun",fileName ="NewGun",order =54)]
 public class GunData : ItemData
 {
-    [SerializeField] private AmmoKind ammoKind;
-    [SerializeField] private SoundKind soundKind;
-    [SerializeField] private int maxCartriges;
-    [SerializeField] private int attackRange;
-    [SerializeField] private float cooldown;
-    [SerializeField] private int energyCost;
-    [SerializeField] private int damage;
-    private float deviation = 0.2f;
-    [SerializeField] private GunType type;
-    [SerializeField] private int cpu;
+    [SerializeField]
+    private             AmmoKind            ammoKind;
+    [SerializeField]
+    private             SoundKind           soundKind;
+    [SerializeField]
+    private             int                 maxCartriges;
+    [SerializeField]
+    private             int                 attackRange;
+    [SerializeField]
+    private             float               cooldown;
+    [SerializeField]
+    private             int                 energyCost;
+    [SerializeField] 
+    private             int                 damage;
+    private             float               deviation       = 0.2f;
+    [SerializeField] 
+    private             GunType             type;
+    [SerializeField] 
+    private             int                 cpu;
 
-    public AmmoKind AmmoKind => ammoKind;
-    public SoundKind SoundKind => soundKind;
-    public int MaxCartriges => maxCartriges;
-    public int AttackRange => attackRange;
-    public float Cooldown => cooldown;
-    public int EnergyCost => energyCost;
-    public int Damage => damage;
-    public float Deviation => deviation;
-    public int CPU => cpu;
+    public              AmmoKind            AmmoKind => ammoKind;
+    public              SoundKind           SoundKind => soundKind;
+    public              int                 MaxCartriges => maxCartriges;
+    public              int                 AttackRange => attackRange;
+    public              float               Cooldown => cooldown;
+    public              int                 EnergyCost => energyCost;
+    public              int                 Damage => damage;
+    public              float               Deviation => deviation;
+    public              int                 CPU => cpu;
 
-    public int CalculateDamage()
+    public              int                 CalculateDamage()
     {
         return this.damage + (int)Random.Range(-deviation * damage, deviation * damage);
     }
 
-    public override bool IsItem()
+    public override     bool                IsItem()
     {
         return false;
     }
-    public override bool IsWeapon()
+
+    public override     bool                IsWeapon()
     {
         return true;
     }
 
-    protected override void OnValidate()
+    protected override  void                OnValidate()
     {
         deviation = 0.2f;
         base.OnValidate();

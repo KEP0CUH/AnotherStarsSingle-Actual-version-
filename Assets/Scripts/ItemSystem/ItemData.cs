@@ -1,46 +1,51 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Items/newItem", fileName = "NewItem", order = 53)]
 public class ItemData : ScriptableObject
 {
     [SerializeField]
-    private Sprite icon;
+    private             Sprite           icon;
     [SerializeField]
-    private string title;
+    private             string           title, description;
     [SerializeField]
-    private int size;
+    private             int              size;
     [SerializeField]
-    private string description;
-    [SerializeField]
-    private ItemKind kind;
+    private             ItemKind         kind;
 
-    public Sprite Icon => icon;
-    public string Title => title;
-    public int Size => size;
-    public string Description => description;
-    public ItemKind ItemKind => kind;
+    public              Sprite           Icon => icon;
+    public              string           Title => title;
+    public              string           Description => description;
+    public              int              Size => size;
+    public              ItemKind         ItemKind => kind;
 
-    public virtual bool IsItem()
+    public virtual      bool             IsItem()
     {
         return true;
     }
 
-    public virtual bool IsWeapon()
+    public virtual      bool             IsWeapon()
     {
         return false;
     }
 
-    public virtual bool IsDevice()
+    public virtual      bool             IsDevice()
     {
         return false;
     }
 
-    protected virtual void OnValidate()
+    protected virtual   void             OnValidate()
     {
-        string oreSpritesPath = "Icons/Items/Ores/";
-        string gunSpritesPath = "Icons/Items/Guns/";
-        string deviceSpritesPath = "Icons/Items/Devices/";
-        string ammoSpritesPath = "Icons/Items/Ammo/";
+        string oreSpritesPath       = "Icons/Items/Ores/";
+        string gunSpritesPath       = "Icons/Items/Guns/";
+        string deviceSpritesPath    = "Icons/Items/Devices/";
+        string ammoSpritesPath      = "Icons/Items/Ammo/";
 
         name = kind.ToString();
         icon = Resources.Load<Sprite>(gunSpritesPath + kind);
