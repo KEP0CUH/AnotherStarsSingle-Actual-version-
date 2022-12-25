@@ -1,14 +1,21 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class PlanetInside : MonoBehaviour
 {
-    private PlanetController planetController;
-    private GameObject shipShop = null;
-    public PlanetController PlanetController => planetController;
+    private             PlanetController            planetController;
+    private             GameObject                  shipShop            = null;
+    public              PlanetController            PlanetController => planetController;
 
-    public void Init(PlanetController state)
+    public              void                        Init(PlanetController   state)
     {
         this.planetController = state;
 
@@ -25,12 +32,12 @@ public class PlanetInside : MonoBehaviour
         CreateShipShop();
         CreateItemShop();
     }
-    private void Start()
+    private             void                        Start()
     {
         this.GetComponent<Image>().sprite = planetController.State.Data.IconBG;
     }
 
-    private void CreateRiseButton()
+    private             void                        CreateRiseButton()
     {
             var buttonLand = new GameObject("Land", typeof(Image), typeof(Button));
             var rect = buttonLand.GetComponent<RectTransform>();
@@ -48,7 +55,7 @@ public class PlanetInside : MonoBehaviour
             button.onClick.AddListener(OnRise);
     }
 
-    private void CreateShipShop()
+    private             void                        CreateShipShop()
     {
         var buttonShipShop = new GameObject("openShipShop", typeof(Image), typeof(Button));
         var rect = buttonShipShop.GetComponent<RectTransform>();
@@ -66,7 +73,7 @@ public class PlanetInside : MonoBehaviour
         button.onClick.AddListener(OnOpenShipShop);
     }
 
-    private void CreateItemShop()
+    private             void                        CreateItemShop()
     {
         if(this.planetController.State.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
@@ -87,14 +94,14 @@ public class PlanetInside : MonoBehaviour
         }
     }
 
-    private void OnRise()
+    private             void                        OnRise()
     {
         this.planetController.OnRise();
         Managers.Player.Rise();
         Close();
     }
 
-    private void OnOpenShipShop()
+    private             void                        OnOpenShipShop()
     {
         if(shipShop == null)
         {
@@ -110,12 +117,12 @@ public class PlanetInside : MonoBehaviour
         }
     }
 
-    private void OnOpenItemShop()
+    private             void                        OnOpenItemShop()
     {
         planetController.OnOpenItemShop();
     }
 
-    private void Close()
+    private             void                        Close()
     {
         Destroy(this.gameObject);
     }

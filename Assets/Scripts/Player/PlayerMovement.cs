@@ -1,16 +1,23 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerController playerController;
+    private             PlayerController        playerController;
 
-    private Vector2 clickPos;
-    private float moveSpeed;
-    private bool movementEnd;
-    private GameObject endPoint = null;
+    private             Vector2                 clickPos;
+    private             float                   moveSpeed;
+    private             bool                    movementEnd;
+    private             GameObject              endPoint            = null;
 
-    public PlayerMovement Init(PlayerController controller)
+    public              PlayerMovement          Init(PlayerController controller)
     {
         this.playerController = controller;
         movementEnd = true;
@@ -20,14 +27,14 @@ public class PlayerMovement : MonoBehaviour
         return this;
     }
 
-    public void Move(Vector2 targetPos)
+    public              void                    Move(Vector2 targetPos)
     {
         this.clickPos = targetPos;
         CreateEndPoint();
         movementEnd = false;
     }
 
-    private void FixedUpdate()
+    private             void                    FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -44,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MoveToClick()
+    private             void                    MoveToClick()
     {
         Vector2 currentPosition = this.gameObject.transform.position;
 
@@ -77,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void CreateEndPoint()
+    private             void                    CreateEndPoint()
     {
         if(endPoint != null)
         {

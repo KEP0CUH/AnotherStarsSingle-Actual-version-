@@ -1,21 +1,32 @@
-using System.Collections;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="newMob",menuName="Mob",order =51)]
 public class MobData : ScriptableObject
 {
-    [SerializeField] private string title;
-    [SerializeField] private MobKind kind;
-    [SerializeField] private ShipKind ship;
-    [SerializeField] private List<ItemKind> guns;
-    [SerializeField] private List<ItemKind> devices;
+    [SerializeField]
+    private              string                 title;
+    [SerializeField] 
+    private              MobKind                kind;
+    [SerializeField] 
+    private              ShipKind               ship;
+    [SerializeField] 
+    private              List<ItemKind>         guns;
+    [SerializeField]
+    private              List<ItemKind>         devices;
 
-    public string Title => title;
-    public ShipKind Ship => ship;
-    public MobKind MobKind => kind;
+    public               string                 Title => title;
+    public               ShipKind               Ship => ship;
+    public               MobKind                MobKind => kind;
 
-    private void OnValidate()
+    private              void                   OnValidate()
     {
         guns = new List<ItemKind>();
         devices = new List<ItemKind>();

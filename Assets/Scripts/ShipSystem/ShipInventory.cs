@@ -1,24 +1,33 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipInventory
 {
-    private Transform parent;
-    private ShipState shipState;
-    private InventoryController inventory;
-    public ShipState ShipState => shipState;
+    private             Transform                               parent;
+    private             ShipState                               shipState;
+    private             InventoryController                     inventory;
+    public              ShipState                               ShipState => shipState;
 
-    private List<GunState> guns;
-    private int maxNumGuns;
-    private List<DeviceState> devices;
-    private int maxNumDevices;
+    private             List<GunState>                          guns;
+    private             int                                     maxNumGuns;
+    private             List<DeviceState>                       devices;
+    private             int                                     maxNumDevices;
 
-    private List<IUsable> shipGuns;
-    private List<IUsable> shipDevices;
+    private             List<IUsable>                           shipGuns;
+    private             List<IUsable>                           shipDevices;
 
-    public event System.Action OnInteractWithEquipment;
+    public              event System.Action                     OnInteractWithEquipment;
 
-    public ShipInventory(Transform parent,ShipState state,InventoryController inventory)
+    public              ShipInventory(Transform                 parent,
+                                      ShipState                 state,
+                                      InventoryController       inventory)
     {
         this.parent = parent;
         this.shipState = state;
@@ -48,7 +57,7 @@ public class ShipInventory
 
     #region Одеть(Снять) определенное оборудование на(с) корабль(я)
 
-/*    public void TrySetGun(IUsableGun gun)
+/*  public              void                                    TrySetGun(IUsableGun gun)
     {
         for(int i = 0; i < maxNumGuns;i++)
         {
@@ -110,7 +119,7 @@ public class ShipInventory
     #endregion
 
     #region TRY_SET/UNSET_GUN
-    private void TrySetGun(ItemState state)
+    private             void                                    TrySetGun(ItemState state)
     {
         for (int i = 0; i < maxNumGuns; i++)
         {
@@ -127,7 +136,7 @@ public class ShipInventory
         return;
     }
 
-    private void TryUnsetGun(ItemState state)
+    private             void                                    TryUnsetGun(ItemState state)
     {
         for (int i = 0; i < guns.Count; i++)
         {
@@ -145,7 +154,7 @@ public class ShipInventory
     #endregion
 
     #region TRY_SET/UNSET_DEVICE
-    private void TrySetDevice(ItemState state)
+    private             void                                    TrySetDevice(ItemState state)
     {
         for(int i = 0; i < maxNumDevices; i++)
         {
@@ -162,7 +171,7 @@ public class ShipInventory
         }
     }
 
-    private void TryUnsetDevice(ItemState state)
+    private             void                                    TryUnsetDevice(ItemState state)
     {
         for(int i = 0; i < devices.Count;i++)
         {
@@ -185,12 +194,12 @@ public class ShipInventory
     /// Получить список пушек, одетых на корабль.
     /// </summary>
     /// <returns></returns>
-    public List<GunState> GetGuns()
+    public              List<GunState>                          GetGuns()
     {
         return this.guns;
     }
 
-    public List<DeviceState> GetDevices()
+    public              List<DeviceState>                       GetDevices()
     {
         return this.devices;
     }
@@ -198,7 +207,7 @@ public class ShipInventory
 
 
     #region Снять всё оборудования с корабля. Обычно используется при покупке нового корабля.
-    public void RemoveAllEquipmentFromShip()
+    public              void                                    RemoveAllEquipmentFromShip()
     {
         for (int i = 0; i < guns.Count; i++)
         {
@@ -232,7 +241,7 @@ public class ShipInventory
     #endregion
 
     #region ВЫБРОСИТЬ УКАЗАННОЕ ОБОРУДОВАНИЕ С КОРАБЛЯ(УСТАНОВЛЕННАЯ ПУШКА ИЛИ УСТРОЙСТВО)
-    public void TryDropItemFromShip(ItemState state)
+    public              void                                    TryDropItemFromShip(ItemState state)
     {
         if(state.IsSet)
         {
@@ -257,7 +266,7 @@ public class ShipInventory
 
 
     #region Показ инвентаря корабля(т.е. одетого на него оборудования)
-    public void ShowInventory()
+    public              void                                    ShowInventory()
     {
         OnInteractWithEquipment?.Invoke();
     }
@@ -265,7 +274,7 @@ public class ShipInventory
 
 
     #region Воссоздание нового состояния итема исходя из другого состояния. 
-    private GunState CreateGunStateObject(ItemState state)
+    private             GunState                                CreateGunStateObject(ItemState state)
     {
         var newItemStateObj = new GameObject(($"{state.Data.Title}"), typeof(GunState));
         newItemStateObj.GetComponent<Transform>().SetParent(parent);
@@ -285,7 +294,7 @@ public class ShipInventory
     #endregion
 
     #region Воссоздание нового состояния итема исходя из вида итема.
-    private GunState CreateGunStateObject(ItemKind kind)
+    private             GunState                                CreateGunStateObject(ItemKind kind)
     {
         var gunDefault = new GameObject("DefaultGun", typeof(GunState));
         gunDefault.GetComponent<Transform>().SetParent(parent);
@@ -296,7 +305,7 @@ public class ShipInventory
         return gunState;
     }
 
-    private DeviceState CreateDeviceStateObject(ItemKind kind)
+    private             DeviceState                             CreateDeviceStateObject(ItemKind kind)
     {
         var deviceDefault = new GameObject("DefaultDevice", typeof(DeviceState));
         deviceDefault.GetComponent<Transform>().SetParent(parent);
@@ -310,18 +319,18 @@ public class ShipInventory
 
 
     #region Создание пустых слотов для инвентаря.
-    private GunState CreateEmptyGunState()
+    private             GunState                                CreateEmptyGunState()
     {
         return CreateGunStateObject(ItemKind.EmptyGun);
     }
 
-    private DeviceState CreateEmptyDeviceState()
+    private             DeviceState                             CreateEmptyDeviceState()
     {
         return CreateDeviceStateObject(ItemKind.EmptyDevice);
     }
     #endregion
 
-    private GameObject CreateDrop(ItemState state)
+    private             GameObject                              CreateDrop(ItemState state)
     {
         var item = new GameObject(state.Data.Title,typeof(ItemController));
         item.transform.position = shipState.gameObject.transform.position;

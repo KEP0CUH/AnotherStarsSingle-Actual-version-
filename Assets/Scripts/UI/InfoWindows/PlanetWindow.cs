@@ -1,16 +1,28 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlanetWindow : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Text title;
-    [SerializeField] private Text organization;
-    [SerializeField] private Text size;
-    [SerializeField] private Button buttonLand;
+    [SerializeField] 
+    private                 Image                   icon;
+    [SerializeField] 
+    private                 Text                    title;
+    [SerializeField] 
+    private                 Text                    organization;
+    [SerializeField] 
+    private                 Text                    size;
+    [SerializeField] 
+    private                 Button                  buttonLand;
 
-    private PlanetController controller;
-    public void Init(PlanetController controller)
+    private                 PlanetController        controller;
+    public                  void                    Init(PlanetController   controller)
     {
         this.controller = controller;
 
@@ -21,7 +33,7 @@ public class PlanetWindow : MonoBehaviour
         this.buttonLand.onClick.AddListener(Land);
     }
 
-    private void Land()
+    private                 void                    Land()
     {
         Managers.Player.Land(controller.transform);
 

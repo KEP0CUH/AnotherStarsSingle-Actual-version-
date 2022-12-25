@@ -1,12 +1,20 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(SphereCollider))]
 public class TargetLight : MonoBehaviour
 {
-    private static GameObject targetLight = null;
-    private float radius = 1;
-    public TargetLight Init(Transform parent, float radius)
+    private static          GameObject                  targetLight     = null;
+    private                 float                       radius          = 1;
+    public                  TargetLight                 Init(Transform      parent,
+                                                             float          radius)
     {
         Debug.Log($"Radius = {radius}");
         if (targetLight != null)
@@ -24,7 +32,7 @@ public class TargetLight : MonoBehaviour
         return this;
     }
 
-    private void CreateTargetLight()
+    private                 void                        CreateTargetLight()
     {
         targetLight.GetComponent<SpriteRenderer>().sprite = Managers.Resources.DownloadData(IconType.TargetLight);
         targetLight.transform.localScale = new Vector3(radius, radius, radius);

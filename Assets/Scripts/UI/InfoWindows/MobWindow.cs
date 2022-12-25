@@ -1,23 +1,41 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MobWindow : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Text health;
-    [SerializeField] private Scrollbar slider;
-    [SerializeField] private Button buttonAttack;
-    [SerializeField] private Button buttonApproach;
-    [SerializeField] private Button buttonClose;
-    [SerializeField] private Text title;
-    [SerializeField] private Text race;
-    [SerializeField] private Text shipClass;
-    [SerializeField] private Text size;
-    [SerializeField] private Text speed;
+    [SerializeField] 
+    private             Image                   icon;
+    [SerializeField] 
+    private             Text                    health;
+    [SerializeField] 
+    private             Scrollbar               slider;
+    [SerializeField] 
+    private             Button                  buttonAttack;
+    [SerializeField] 
+    private             Button                  buttonApproach;
+    [SerializeField] 
+    private             Button                  buttonClose;
+    [SerializeField] 
+    private             Text                    title;
+    [SerializeField] 
+    private             Text                    race;
+    [SerializeField] 
+    private             Text                    shipClass;
+    [SerializeField] 
+    private             Text                    size;
+    [SerializeField] 
+    private             Text                    speed;
 
-    private MobController controller;
+    private             MobController           controller;
 
-    public void Init(MobController controller)
+    public              void                    Init(MobController      controller)
     {
         this.controller = controller;
         this.controller.OnMobDamaged += UpdateHealthInfo;
@@ -36,28 +54,28 @@ public class MobWindow : MonoBehaviour
         this.buttonAttack.onClick.AddListener(LaunchAttack);
     }
 
-    private void UpdateHealthInfo()
+    private             void                    UpdateHealthInfo()
     {
         this.health.text = controller.State.MaxHealth.ToString();
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
     }
 
-    private void CloseWindow()
+    private             void                    CloseWindow()
     {
         this.controller.View.CloseInfoWindow();
     }
 
-    private void LaunchPlayer()
+    private             void                    LaunchPlayer()
     {
         Managers.Player.Controller.MoveToApproach(controller.transform.position);
     }
 
-    private void LaunchAttack()
+    private             void                    LaunchAttack()
     {
         Managers.Player.Controller.Shoot(this.controller.transform);
     }
 
-    private void OnDestroy()
+    private             void                    OnDestroy()
     {
         this.controller.OnMobDamaged -= UpdateHealthInfo;
     }

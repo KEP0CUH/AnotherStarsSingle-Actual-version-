@@ -6,20 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(AsteroidFieldState))]
 public class AsteroidFieldView : MonoBehaviour
 {
-    private AsteroidFieldState state;
-    private AsteroidFieldController controller;
+    private             AsteroidFieldState                          state;
+    private             AsteroidFieldController                     controller;
 
-    private Dictionary<int, AsteroidController> asteroids;
-    private int maxNumAsteroids;
-    private int currentNumAsteroids;
+    private             Dictionary<int, AsteroidController>         asteroids;
+    private             int                                         maxNumAsteroids;
+    private             int                                         currentNumAsteroids     = 0;
 
-    [SerializeField] private Vector2 quarter;
+    [SerializeField] 
+    private             Vector2                                     quarter;
 
-    private static GameObject infoWindow = null;
-    private static bool isClicked = false;
+    private static      GameObject                                  infoWindow              = null;
+    private static      bool                                        isClicked               = false;
 
-    public Vector2 Quarter => quarter;
-    public AsteroidFieldView Init(AsteroidFieldController controller, Transform locationCoord, AsteroidFieldType type, Vector2 quarter)
+    public              Vector2                                     Quarter => quarter;
+
+    public              AsteroidFieldView                           Init(AsteroidFieldController    controller,
+                                                                         Transform                  locationCoord,
+                                                                         AsteroidFieldType          type,
+                                                                         Vector2                    quarter)
     {
         this.controller = controller;
         this.asteroids = new Dictionary<int, AsteroidController>();
@@ -36,7 +41,7 @@ public class AsteroidFieldView : MonoBehaviour
         CreateAsteroid();
         return this;
     }
-    public void DestroyAsteroid(int id)
+    public              void                                        DestroyAsteroid(int id)
     {
         if (this.asteroids.ContainsKey(id))
         {
@@ -44,7 +49,7 @@ public class AsteroidFieldView : MonoBehaviour
         }
     }
 
-    public void CloseInfoWindow()
+    public              void                                        CloseInfoWindow()
     {
         if (infoWindow != null)
         {
@@ -54,7 +59,7 @@ public class AsteroidFieldView : MonoBehaviour
         }
     }
 
-    private void CreateAsteroid()
+    private             void                                        CreateAsteroid()
     {
         AsteroidType type = this.state.Data.AsteroidData.Type;
         var newAsteroid = new GameObject($"{type} + asteroid", typeof(AsteroidController));
@@ -67,7 +72,7 @@ public class AsteroidFieldView : MonoBehaviour
         this.asteroids.Add(newAsteroidController.State.Id, newAsteroidController);
     }
 
-    private void FixedUpdate()
+    private             void                                        FixedUpdate()
     {
         if (currentNumAsteroids < maxNumAsteroids)
         {
@@ -76,13 +81,13 @@ public class AsteroidFieldView : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private             void                                        OnMouseDown()
     {
         isClicked = true;
         CreateInfoWindow();
     }
 
-    private void CreateInfoWindow()
+    private             void                                        CreateInfoWindow()
     {
         if (infoWindow != null)
         {

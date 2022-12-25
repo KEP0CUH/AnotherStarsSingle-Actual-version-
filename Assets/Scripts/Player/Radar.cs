@@ -1,13 +1,22 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Radar : MonoBehaviour
 {
-    [SerializeField] private Button buttonSettings;
-    [SerializeField] private Button buttonMap;
+    [SerializeField] 
+    private             Button                  buttonSettings;
+    [SerializeField] 
+    private             Button                  buttonMap;
 
-    private PlayerController playerController;
-    public Radar Init(PlayerController controller)
+    private             PlayerController        playerController;
+    public              Radar                   Init(PlayerController controller)
     {
         this.playerController = controller;
         this.buttonMap.onClick.AddListener(CanvasUI.GlobalMap.Enable);
@@ -17,12 +26,12 @@ public class Radar : MonoBehaviour
         return this;
     }
 
-    public void Enable()
+    public              void                    Enable()
     {
         this.gameObject.SetActive(true);   
     }
 
-    public void Disable()
+    public              void                    Disable()
     {
         this.gameObject.SetActive(false);
     }

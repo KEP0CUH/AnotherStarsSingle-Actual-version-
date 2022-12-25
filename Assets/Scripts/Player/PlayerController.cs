@@ -1,41 +1,47 @@
-using System;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour, IItemHandler
 {
-    private List<GunState> guns = new List<GunState>();
+    private             List<GunState>              guns = new List<GunState>();
 
-    private PlayerState playerState;
-    private PlayerMovement playerMovement;
-    private PlayerShoot playerShoot;
-    private InventoryController inventoryController;
-    private InventoryInside inventoryInside;
-    private ShipController shipController;
-    private ConstantUI constantUI;
-    private Radar radar;
-    private Wallet wallet;
+    private             PlayerState                 playerState;
+    private             PlayerMovement              playerMovement;
+    private             PlayerShoot                 playerShoot;
+    private             InventoryController         inventoryController;
+    private             InventoryInside             inventoryInside;
+    private             ShipController              shipController;
+    private             ConstantUI                  constantUI;
+    private             Radar                       radar;
+    private             Wallet                      wallet;
 
-    private float timer = 0;
-    private float shootDelay = 0.5f;
-    private int numOfFires = 5;
-    private int firesMade = 0;
+    private             float                       timer                   = 0;
+    private             float                       shootDelay              = 0.5f;
+    private             int                         numOfFires              = 5;
+    private             int                         firesMade               = 0;
 
-    private Camera mainCamera;
-    private Camera radarCamera;
-    private Camera globalMapCamera;
+    private             Camera                      mainCamera;
+    private             Camera                      radarCamera;
+    private             Camera                      globalMapCamera;
 
-    public PlayerState State => playerState;
-    public InventoryController Inventory => inventoryController;
-    public InventoryInside InventoryInside => inventoryInside;
-    public ShipController ShipController => shipController;
-    public ConstantUI ConstantUI => constantUI;
-    public Camera MainCamera => mainCamera;
-    public Wallet Wallet => wallet;
+    public              PlayerState                 State => playerState;
+    public              InventoryController         Inventory => inventoryController;
+    public              InventoryInside             InventoryInside => inventoryInside;
+    public              ShipController              ShipController => shipController;
+    public              ConstantUI                  ConstantUI => constantUI;
+    public              Camera                      MainCamera => mainCamera;
+    public              Wallet                      Wallet => wallet;
     
 
-    public PlayerController Init()
+    public              PlayerController            Init()
     {
         this.inventoryController = new InventoryController(this.transform);
         this.shipController = this.gameObject.AddComponent<ShipController>().Init(ShipKind.GreenLinkor,this.inventoryController);
@@ -61,12 +67,12 @@ public class PlayerController : MonoBehaviour, IItemHandler
         return this;
     }
 
-    public void ChangeShip(ShipKind kind)
+    public              void                        ChangeShip(ShipKind kind)
     {
         this.State.SetShip(kind);
     }
 
-    public void UpdateState()
+    public              void                        UpdateState()
     {
         if (this.playerState != null)
         {
@@ -74,32 +80,32 @@ public class PlayerController : MonoBehaviour, IItemHandler
             ShowInventory();
         }
     }
-    public void UpdateCameraPosition()
+    public              void                        UpdateCameraPosition()
     {
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         radarCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
         globalMapCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -40);
     }
 
-    public void OpenInventory()
+    public              void                        OpenInventory()
     {
         this.inventoryInside.Reswitch();
     }
 
-    public void ShowInventory()
+    public              void                        ShowInventory()
     {
         this.inventoryInside.ShowInventory();
     }
 
-    public void MoveToApproach(Vector2 target)
+    public              void                        MoveToApproach(Vector2 target)
     {
         this.playerMovement.Move(target);
     }
 
     /// <summary>
-    /// Создаёт главную камеру игрока и настраивает её на работу.
+    /// Создаёт главную камеру игрока и настраивает её работу.
     /// </summary>
-    private void SetupCamera()
+    private             void                        SetupCamera()
     {
         GameObject camera = new GameObject("MainCamera", typeof(Camera), typeof(AudioListener));
 
@@ -110,7 +116,7 @@ public class PlayerController : MonoBehaviour, IItemHandler
         mainCamera = camera.GetComponent<Camera>();
     }
 
-    private void SetupRadar()
+    private             void                        SetupRadar()
     {
         radar = Instantiate(Managers.Resources.DownloadData(ObjectType.Radar)).GetComponent<Radar>().Init(this);
 
@@ -128,7 +134,7 @@ public class PlayerController : MonoBehaviour, IItemHandler
         radarCamera = cam;
     }
 
-    private void SetupGlobalMap()
+    private             void                        SetupGlobalMap()
     {
         GameObject globalMapCameraObj = new GameObject("GlobalMap");
         globalMapCameraObj.AddComponent<Camera>();
@@ -143,17 +149,17 @@ public class PlayerController : MonoBehaviour, IItemHandler
         globalMapCamera = cam;
     } 
 
-    public void Shoot(Transform target)
+    public              void                        Shoot(Transform target)
     {
         this.playerShoot.SetTarget(target);
     }
 
-    private void Start()
+    private             void                        Start()
     {
         this.Init();
     }
 
-    private void Update()
+    private             void                        Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
@@ -161,10 +167,7 @@ public class PlayerController : MonoBehaviour, IItemHandler
         }
     }
 
-    /// <summary>
-    /// Обработка ввода.
-    /// </summary>
-    private void FixedUpdate()
+    private             void                        FixedUpdate()
     {
 
         if (Managers.Player.IsLanded == false)
@@ -193,7 +196,7 @@ public class PlayerController : MonoBehaviour, IItemHandler
         }
     }
 
-    public void PickupItem(ItemState state)
+    public              void                        PickupItem(ItemState state)
     {
         Debug.Log($"Подбирание предмета игроком.");
         Inventory.AddItem(state);

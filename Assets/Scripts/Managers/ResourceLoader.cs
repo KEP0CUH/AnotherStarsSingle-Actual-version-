@@ -1,31 +1,37 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceLoader : MonoBehaviour, IGameManager
 {
-    private Dictionary<ItemKind,ItemData> items;
-    private Dictionary<AsteroidType, AsteroidData> asteroids;
-    private Dictionary<AmmoKind,AmmoData> ammo;
+    private         Dictionary<ItemKind,ItemData>                       items;
+    private         Dictionary<AsteroidType, AsteroidData>              asteroids;
+    private         Dictionary<AmmoKind,AmmoData>                       ammo;
 /*    private Dictionary<GunKind, GunData> guns;*/
-    private Dictionary<SoundKind,AudioClip> sounds;
-    private Dictionary<ShipKind, ShipData> ships;
-    private Dictionary<Location, LocationData> locations;
-    private Dictionary<Planet, PlanetData> planets;
-    private Dictionary<IconType, Sprite> icons;
-    private Dictionary<AsteroidFieldType, AsteroidFieldData> asteroidFields;
-    private Dictionary<SunType, Sprite> sunIcons;
-    private Dictionary<MobKind, MobData> mobs;
-    private Dictionary<ObjectType, GameObject> objects;
-    private Dictionary<ItemShopType,ItemShopData> itemShops;
+    private         Dictionary<SoundKind,AudioClip>                     sounds;
+    private         Dictionary<ShipKind, ShipData>                      ships;
+    private         Dictionary<Location, LocationData>                  locations;
+    private         Dictionary<Planet, PlanetData>                      planets;
+    private         Dictionary<IconType, Sprite>                        icons;
+    private         Dictionary<AsteroidFieldType, AsteroidFieldData>    asteroidFields;
+    private         Dictionary<SunType, Sprite>                         sunIcons;
+    private         Dictionary<MobKind, MobData>                        mobs;
+    private         Dictionary<ObjectType, GameObject>                  objects;
+    private         Dictionary<ItemShopType,ItemShopData>               itemShops;
 
-    public Dictionary<ItemKind, ItemData> Items => items;
-    public Dictionary<AsteroidType, AsteroidData> Asteroids => asteroids;
-    public ManagerStatus Status { get; private set; }
+    public          Dictionary<ItemKind, ItemData>                      Items => items;
+    public          Dictionary<AsteroidType, AsteroidData>              Asteroids => asteroids;
+    public          ManagerStatus                                       Status { get; private set; }
 
 
-    public void Startup()
+    public          void                                                Startup()
     {
         Debug.Log("ResourceLoader starting...".SetColor(Color.Yellow));
         items = new Dictionary<ItemKind, ItemData>();
@@ -49,7 +55,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         Debug.Log("ResourceLoader started.".SetColor(Color.Green));
     }
 
-    public ItemData DownloadData(ItemKind kind)
+    public          ItemData                                            DownloadData(ItemKind kind)
     {
         if(items.ContainsKey(kind))
         {
@@ -59,7 +65,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public MobData DownloadData(MobKind kind)
+    public          MobData                                             DownloadData(MobKind kind)
     {
         if(mobs.ContainsKey(kind))
         {
@@ -69,7 +75,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public GameObject DownloadData(ObjectType type)
+    public          GameObject                                          DownloadData(ObjectType type)
     { 
         if(objects.ContainsKey(type))
         {
@@ -79,7 +85,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public ItemShopData DownloadData(ItemShopType type)
+    public          ItemShopData                                        DownloadData(ItemShopType type)
     {
         if(itemShops.ContainsKey(type))
         {
@@ -89,7 +95,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public AsteroidFieldData DownloadData(AsteroidFieldType kind)
+    public          AsteroidFieldData                                   DownloadData(AsteroidFieldType kind)
     {
         if (asteroidFields.ContainsKey(kind))
         {
@@ -99,7 +105,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-/*    public GunData DownloadData(GunKind kind)
+/*  public          GunData                                             DownloadData(GunKind kind)
     {
         if (guns.ContainsKey(kind))
         {
@@ -109,7 +115,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }*/
 
-    public AmmoData DownloadData(AmmoKind kind)
+    public          AmmoData                                            DownloadData(AmmoKind kind)
     {
         if(ammo.ContainsKey(kind))
         {
@@ -119,7 +125,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public AsteroidData DownloadData(AsteroidType type)
+    public          AsteroidData                                        DownloadData(AsteroidType type)
     {
         if(asteroids.ContainsKey(type))
         {
@@ -129,7 +135,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public AudioClip DownloadData(SoundKind kind)
+    public          AudioClip                                           DownloadData(SoundKind kind)
     {
         if(sounds.ContainsKey(kind))
         {
@@ -139,7 +145,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public ShipData DownloadData(ShipKind kind)
+    public          ShipData                                            DownloadData(ShipKind kind)
     {
         if (ships.ContainsKey(kind))
         {
@@ -149,7 +155,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public LocationData DownloadData(Location location)
+    public          LocationData                                        DownloadData(Location location)
     {
         if(locations.ContainsKey(location))
         {
@@ -159,7 +165,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public PlanetData DownloadData(Planet planet)
+    public          PlanetData                                          DownloadData(Planet planet)
     {
         if(planets.ContainsKey(planet))
         {
@@ -169,7 +175,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public Sprite DownloadData(SunType type)
+    public          Sprite                                              DownloadData(SunType type)
     {
         if(sunIcons.ContainsKey(type))
         {
@@ -179,7 +185,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         return null;
     }
 
-    public Sprite DownloadData(IconType icon)
+    public          Sprite                                              DownloadData(IconType icon)
     {
         if(icons.ContainsKey(icon))
         {
@@ -188,7 +194,7 @@ public class ResourceLoader : MonoBehaviour, IGameManager
         Debug.Log("Critical warning!!! No all resources were founded.".SetColor(Color.Red));
         return null;
     }
-    private void LoadAllResources()
+    private         void                                                LoadAllResources()
     {
         string oresPath                         = $"ScriptableObjects/Items/Ores/";
         string gunsPath                         = $"ScriptableObjects/Items/Guns/";

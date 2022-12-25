@@ -1,10 +1,16 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AsteroidFieldWindow : MonoBehaviour
 {
-
-    public void Init()
+    public              void                Init()
     {
         Managers.Canvas.AddModule(this.gameObject);
 
@@ -18,7 +24,7 @@ public class AsteroidFieldWindow : MonoBehaviour
         CreateRiseButton();
     }
 
-    private void CreateRiseButton()
+    private             void                CreateRiseButton()
     {
         var buttonLand = new GameObject("Land", typeof(Image), typeof(Button));
         var rect = buttonLand.GetComponent<RectTransform>();
@@ -35,14 +41,14 @@ public class AsteroidFieldWindow : MonoBehaviour
         var button = buttonLand.GetComponent<Button>();
         button.onClick.AddListener(OnRise);
     }
-    private void OnRise()
+    private             void                OnRise()
     {
         Managers.Player.Rise();
         Close();
     }
 
 
-    private void Close()
+    private             void                Close()
     {
         Destroy(this.gameObject);
     }

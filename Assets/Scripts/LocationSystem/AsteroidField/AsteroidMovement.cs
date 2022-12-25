@@ -1,14 +1,20 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidMovement : MonoBehaviour
 {
-    private float moveSpeed;
-    private AsteroidController controller;
-    private Transform spawner;
-    private Vector2 quarter;
-    public AsteroidMovement Init(AsteroidController controller,Transform spawner,Vector2 quarter)
+    private             float                           moveSpeed;
+    private             AsteroidController              controller;
+    private             Transform                       spawner;
+    private             Vector2                         quarter;
+    public              AsteroidMovement                Init(AsteroidController controller,Transform spawner,Vector2 quarter)
     {
         this.controller = controller;
         this.moveSpeed = controller.State.MoveSpeed * Constants.SPEED_KOEFFICIENT;
@@ -20,7 +26,7 @@ public class AsteroidMovement : MonoBehaviour
         return this;
     }
 
-    private void ConfigMovementParameters()
+    private             void                            ConfigMovementParameters()
     {
         var originPoint = spawner.transform.localPosition;
         xMax += originPoint.x + 150 * quarter.x;
@@ -33,31 +39,31 @@ public class AsteroidMovement : MonoBehaviour
 
     #region MOVEMENT
     // Координаты, в пределах которых осуществляется движение
-    public float xMax = +50;
-    public float xMin = -50;
-    public float yMax = 50;
-    public float yMin = -50;
+    public              float           xMax        = +50;
+    public              float           xMin        = -50;
+    public              float           yMax        = 50;
+    public              float           yMin        = -50;
 
     // Радиус и углы не используются, но в будущем возможно генерация позиции будет именно по окружности, а не по прямоугольнику.
-    public int radius = 50;
-    public float angle = 0f;
+    public              int             radius      = 50;
+    public              float           angle       = 0f;
 
     // Различие между текущей позицией и целевой. Это нужно для движения от и до.
-    Vector2 difference;
-    Vector2 targetPos;
+    private             Vector2         difference;
+    private             Vector2         targetPos;
 
     // Прибыл ли враг в целевую точку?
-    bool moveEnd = true;
+    private             bool            moveEnd     = true;
 
     // Целевые координаты - генерируются рандомно.
-    private float xTarget;
-    private float yTarget;
+    private             float           xTarget;
+    private             float           yTarget;
 
     // Максимальное время полета. Если враг раньше прибудет в целевую точку, то он сразу отправится в другую.
     [SerializeField]
-    private float delayTime = 10f;
+    private             float           delayTime   = 10f;
 
-    private void FixedUpdate()
+    private             void            FixedUpdate()
     {
         if (moveEnd)
         {

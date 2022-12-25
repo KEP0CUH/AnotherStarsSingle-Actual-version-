@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +15,13 @@ using UnityEngine;
 [RequireComponent(typeof(ResourceLoader))]
 public class Managers : MonoBehaviour
 {
-    public static PlayerManager Player { get; private set; }
-    public static CanvasUI Canvas { get; private set; }
-    public static ResourceLoader Resources { get; private set; }
+    public static           PlayerManager               Player { get; private set; }
+    public static           CanvasUI                    Canvas { get; private set; }
+    public static           ResourceLoader              Resources { get; private set; }
 
-    private List<IGameManager> gameManagers = new List<IGameManager>();
+    private                 List<IGameManager>          gameManagers = new List<IGameManager>();
 
-    private void Awake()
+    private                 void                        Awake()
     {
         Player = GetComponent<PlayerManager>();
         Canvas = GetComponent<CanvasUI>();
@@ -31,11 +38,7 @@ public class Managers : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    /// <summary>
-    /// Начать запуск всех менеджеров.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator StartupManagers()
+    private                 IEnumerator                 StartupManagers()
     {
         foreach(IGameManager manager in gameManagers)
         {

@@ -1,13 +1,19 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MobMovement : MonoBehaviour
 {
-    private float moveSpeed = 5.0f;
-    private MobController controller;
+    private             float                   moveSpeed = 5.0f;
+    private             MobController           controller;
 
-    public MobMovement Init(MobController controller)
+    public              MobMovement             Init(MobController controller)
     {
         this.controller = controller;
         this.moveSpeed = controller.State.ShipState.Data.Speed * Constants.SPEED_KOEFFICIENT;
@@ -17,31 +23,31 @@ public class MobMovement : MonoBehaviour
 
     #region MOVEMENT
     // Координаты, в пределах которых осуществляется движение
-    public float xMax = +15;
-    public float xMin = -15;
-    public float yMax = 15;
-    public float yMin = -15;
+    public              float                   xMax            = +15;
+    public              float                   xMin            = -15;
+    public              float                   yMax            = 15;
+    public              float                   yMin            = -15;
 
     // Радиус и углы не используются, но в будущем возможно генерация позиции будет именно по окружности, а не по прямоугольнику.
-    public int radius = 50;
-    public float angle = 0f;
+    public              int                     radius          = 50;
+    public              float                   angle           = 0f;
 
     // Различие между текущей позицией и целевой. Это нужно для движения от и до.
-    Vector2 difference;
-    Vector2 targetPos;
+    private             Vector2                 difference;
+    private             Vector2                 targetPos;
 
     // Прибыл ли враг в целевую точку?
-    bool moveEnd = true;
+    private             bool                    moveEnd          = true;
 
     // Целевые координаты - генерируются рандомно.
-    private float xTarget;
-    private float yTarget;
+    private             float                   xTarget;
+    private             float                   yTarget;
 
     // Максимальное время полета. Если враг раньше прибудет в целевую точку, то он сразу отправится в другую.
     [SerializeField]
-    private float delayTime = 10f;
+    private             float                   delayTime        = 10f;
 
-    private void FixedUpdate()
+    private             void                    FixedUpdate()
     {
         if (moveEnd)
         {
@@ -72,7 +78,7 @@ public class MobMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Delay()
+    private             IEnumerator             Delay()
     {
         yield return new WaitForSeconds(delayTime);
         moveEnd = true;

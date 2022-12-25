@@ -1,12 +1,19 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    private ShipState shipState;
+    private             ShipState               shipState;
 
-    public ShipState State => shipState;
+    public              ShipState               State => shipState;
 
-    public ShipController Init(ShipKind kind,InventoryController inventory)
+    public              ShipController          Init(ShipKind kind,InventoryController inventory)
     {
         if(this.gameObject.GetComponent<ShipState>())
         {
@@ -20,17 +27,17 @@ public class ShipController : MonoBehaviour
         return this;
     }
 
-    public void AddEquipment(ItemState state,bool needDestroying = false)
+    public              void                    AddEquipment(ItemState state,bool needDestroying = false)
     {
         this.State.Inventory.TryInteractWithItem(state);
     }
 
-    public void RemoveEquipment(ItemState state, bool needDestroying = false)
+    public              void                    RemoveEquipment(ItemState state, bool needDestroying = false)
     {
         this.State.Inventory.TryInteractWithItem(state);
     }
 
-    public void TryInteractWithItem(ItemState state)
+    public              void                    TryInteractWithItem(ItemState state)
     {
         this.State.Inventory.TryInteractWithItem(state);
     }

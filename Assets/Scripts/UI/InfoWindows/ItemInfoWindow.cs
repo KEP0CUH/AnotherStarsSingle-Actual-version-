@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,13 +12,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class ItemInfoWindow : MonoBehaviour
 {
-    private GameObject icon;
-    private GameObject title;
-    private GameObject description;
+    private                 GameObject              icon;
+    private                 GameObject              title;
+    private                 GameObject              description;
 
-    private ItemView controller;
+    private                 ItemView                controller;
 
-    public void Init(ItemView controller,ItemState state)
+    public                  void                    Init(ItemView       controller,
+                                                         ItemState      state)
     {
         this.controller = controller;
 
@@ -21,7 +29,7 @@ public class ItemInfoWindow : MonoBehaviour
         CreateButtonClose();
     }
 
-    private void CreateWindow()
+    private                 void                    CreateWindow()
     {
         Managers.Canvas.AddModule(this.gameObject);
 
@@ -37,7 +45,7 @@ public class ItemInfoWindow : MonoBehaviour
         rect.offsetMax = new Vector2(-10, 220);
     }
 
-    private void CreateIcon(Sprite content)
+    private                 void                    CreateIcon(Sprite content)
     {
         icon = new GameObject("Icon", typeof(RectTransform), typeof(Image));
 
@@ -53,7 +61,7 @@ public class ItemInfoWindow : MonoBehaviour
         rect.offsetMax = new Vector2(32, -10);
     }
 
-    private void CreateTitle(string content)
+    private                 void                    CreateTitle(string content)
     {
         title = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -74,7 +82,7 @@ public class ItemInfoWindow : MonoBehaviour
 
         text.text = content;
     }
-    private void CreateButtonClose()
+    private                 void                    CreateButtonClose()
     {
         var buttonClose = new GameObject("CloseWindow", typeof(Image), typeof(Button));
         var rect = buttonClose.GetComponent<RectTransform>();
@@ -88,7 +96,7 @@ public class ItemInfoWindow : MonoBehaviour
         buttonDrop.onClick.AddListener(CloseInfoWindow);
     }
     
-    private void CloseInfoWindow()
+    private                 void                    CloseInfoWindow()
     {
         controller.CloseInfoWindow();
     }

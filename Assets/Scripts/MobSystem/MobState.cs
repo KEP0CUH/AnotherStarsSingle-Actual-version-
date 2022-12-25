@@ -1,33 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
 
+using UnityEngine;
 
 [RequireComponent(typeof(ShipState))]
 public class MobState : MonoBehaviour
 {
-    private static int ID = 1;
+    private static          int                     FREE_GLOBAL_ID = 1;
 
-    private int id;
-    private MobData data;
-    private ShipState shipState;
+    private                 int                     id;
+    private                 MobData                 data;
+    private                 ShipState               shipState;
 
-    private MobController mobController;
+    private                 MobController           mobController;
 
     [Range(0, 10000)] 
-        private float health;
+    private                 float                   health;
     [Range(0, 10000)]
-        private float maxHealth;
+    private                 float                   maxHealth;
 
 
-    public int Id => id;
-    public MobData Data => data;
-    public ShipState ShipState => shipState;
+    public                  int                     Id => id;
+    public                  MobData                 Data => data;
+    public                  ShipState               ShipState => shipState;
 
-    public float Health => health;
-    public float MaxHealth => maxHealth;
+    public                  float                   Health => health;
+    public                  float                   MaxHealth => maxHealth;
 
-    public MobState Init(MobController controller,MobKind kind,InventoryController inventory)
+    public                  MobState                Init(MobController controller,MobKind kind,InventoryController inventory)
     {
         this.mobController = controller;
         this.data = Managers.Resources.DownloadData(kind);
@@ -51,7 +55,7 @@ public class MobState : MonoBehaviour
         return this;
     }
 
-    public void ChangeHealth(int value)
+    public                  void                    ChangeHealth(int value)
     {
         this.health += value;
         if(this.health < 0)
@@ -65,10 +69,10 @@ public class MobState : MonoBehaviour
         }
     }
 
-    private static int GetId()
+    private static          int                     GetId()
     {
-        ID++;
-        return ID;
+        FREE_GLOBAL_ID++;
+        return FREE_GLOBAL_ID;
     }
 
 }

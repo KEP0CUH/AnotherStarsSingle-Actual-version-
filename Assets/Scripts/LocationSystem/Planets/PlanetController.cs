@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(PlanetState))]
@@ -5,18 +12,18 @@ using UnityEngine;
 
 public class PlanetController : MonoBehaviour
 {
-    private PlanetState state;
-    private PlanetView view;
-    private Transform parent;
-    private int offset;
+    private             PlanetState             state;
+    private             PlanetView              view;
+    private             Transform               parent;
+    private             int                     offset;
 
-    private ItemShopController itemShopController = null;
+    private             ItemShopController      itemShopController      = null;
 
-    public PlanetState State => state;
-    public PlanetView View => view;
-    public ItemShopController ItemShopController => itemShopController;
+    public              PlanetState             State => state;
+    public              PlanetView              View => view;
+    public              ItemShopController      ItemShopController => itemShopController;
 
-    public void Init(Transform parent,Planet kind,int offset)
+    public              void                    Init(Transform parent,Planet kind,int offset)
     {
         this.parent = parent;
         this.state = this.GetComponent<PlanetState>().Init(this,kind);
@@ -24,12 +31,12 @@ public class PlanetController : MonoBehaviour
         this.offset = offset;
     }
 
-    public void CloseInfoWindow()
+    public              void                    CloseInfoWindow()
     {
         view.CloseInfoWindow();
     }
 
-    public void OnOpenItemShop()
+    public              void                    OnOpenItemShop()
     {
         if(itemShopController == null)
         {
@@ -43,7 +50,7 @@ public class PlanetController : MonoBehaviour
         }
     }
 
-    public void OnRise()
+    public              void                    OnRise()
     {
         if(itemShopController != null)
         {
@@ -51,7 +58,7 @@ public class PlanetController : MonoBehaviour
         }
     }
 
-    private void Start()
+    private             void                    Start()
     {
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.SetParent(parent, true);
@@ -60,17 +67,17 @@ public class PlanetController : MonoBehaviour
         SetRandomPositionAroundSun();
     }
 
-    private void FixedUpdate()
+    private             void                    FixedUpdate()
     {
         SaveRotationAboutSun();
     }
 
-    private void SetRandomPositionAroundSun()
+    private             void                    SetRandomPositionAroundSun()
     {
         this.gameObject.transform.RotateAround(parent.position, parent.forward, Random.Range(0, 360));
     }
 
-    private void SaveRotationAboutSun()
+    private             void                    SaveRotationAboutSun()
     {
         transform.RotateAround(parent.position, parent.forward, 4.0f * Time.fixedDeltaTime);
     }

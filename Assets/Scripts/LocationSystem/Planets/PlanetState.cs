@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 public class PlanetState : MonoBehaviour
 {
-    private static int ID = 1;
-    [SerializeField] private int id;
-    [SerializeField] private PlanetData data;
-    private PlanetController controller;
+    private static          int                     FREE_GLOBAL_ID = 1;
+    [SerializeField] 
+    private                 int                     id;
+    [SerializeField]
+    private                 PlanetData              data;
+    private                 PlanetController        controller;
 
-    public int Id => id;
-    public PlanetData Data => data;
+    public                  int                     Id => id;
+    public                  PlanetData              Data => data;
 
-    public PlanetState Init(PlanetController controller,Planet kind)
+    public                  PlanetState             Init(PlanetController controller,Planet kind)
     {
         this.id = GetId();
         this.controller = controller;
@@ -23,7 +30,7 @@ public class PlanetState : MonoBehaviour
     }
 
 
-    public void CreateItemShop()
+    public                  void                    CreateItemShop()
     {
         //itemShopController.OpenItemShop();
 
@@ -49,7 +56,7 @@ public class PlanetState : MonoBehaviour
         //}
     }
 
-/*    public void SwitchItemShop()
+/*    public                void                    SwitchItemShop()
     {
         if(itemShop != null)
         {
@@ -66,9 +73,9 @@ public class PlanetState : MonoBehaviour
     }*/
 
 
-    private int GetId()
+    private                 int                     GetId()
     {
-        ID++;
-        return ID;
+        FREE_GLOBAL_ID++;
+        return FREE_GLOBAL_ID;
     }
 }

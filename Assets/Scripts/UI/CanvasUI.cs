@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +13,16 @@ using UnityEngine.UI;
 
 public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
 {
-    private static GameObject canvas;
-    public ManagerStatus Status { get; private set; }
-    public UIModuleKind Kind { get; private set; }
+    private static          GameObject              canvas;
+    public                  ManagerStatus           Status { get; private set; }
+    public                  UIModuleKind            Kind { get; private set; }
 
-    public static GlobalMapUI GlobalMap;
+    public static           GlobalMapUI             GlobalMap;
     
-    private List<IUIModule> modules = new List<IUIModule>();
+    private                 List<IUIModule>         modules         = new List<IUIModule>();
 
 
-    public void Startup()
+    public                  void                    Startup()
     {
         Kind = UIModuleKind.Canvas;
         Debug.Log("CanvasUI starting...".SetColor(Color.Yellow));
@@ -32,14 +39,15 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         Debug.Log("CanvasUI started...".SetColor(Color.Green));
     }
 
-    public GameObject AddModule(GameObject gameObject, string layer = "UI")
+    public                  GameObject              AddModule(GameObject     gameObject,
+                                                              string         layer = "UI")
     {
         gameObject.GetComponent<RectTransform>().SetParent(canvas.transform,false);
         gameObject.layer = LayerMask.NameToLayer(layer);
         return gameObject;
     }
 
-    private GameObject SetupCanvas()
+    private                 GameObject              SetupCanvas()
     {
         GameObject canvas = new GameObject("Canvas");
         canvas.layer = LayerMask.NameToLayer("UI");
@@ -53,14 +61,14 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
 
         return canvas;
     }
-    private void SetupEventSystem()
+    private                 void                    SetupEventSystem()
     {
         GameObject eventSystem = new GameObject("EventSystem");
         eventSystem.AddComponent<EventSystem>();
         eventSystem.AddComponent<StandaloneInputModule>();
     }
 
-    public void DisableAllModules()
+    public                  void                    DisableAllModules()
     {
         foreach(IUIModule module in modules)
         {
@@ -68,7 +76,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         }
     }
 
-    public void EnableModule(UIModuleKind kind)
+    public                  void                    EnableModule(UIModuleKind   kind)
     {
         foreach(IUIModule module in modules)
         {
@@ -79,7 +87,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         }
     }
 
-    public void DisableModule(UIModuleKind kind)
+    public                  void                    DisableModule(UIModuleKind  kind)
     {
         foreach (IUIModule module in modules)
         {
@@ -90,7 +98,7 @@ public class CanvasUI : MonoBehaviour, IGameManager, ICanvas
         }
     }
 
-    private IEnumerator StartupModules()
+    private                 IEnumerator             StartupModules()
     {
         foreach(IUIModule module in modules)
         {

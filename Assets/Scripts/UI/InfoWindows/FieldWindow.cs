@@ -1,15 +1,26 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FieldWindow : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Text type;
-    [SerializeField] private Button buttonClose;
-    [SerializeField] private Button buttonLand;
+    [SerializeField] 
+    private             Image                           icon;
+    [SerializeField] 
+    private             Text                            type;
+    [SerializeField] 
+    private             Button                          buttonClose;
+    [SerializeField] 
+    private             Button                          buttonLand;
 
-    AsteroidFieldController controller;
-    public void Init(AsteroidFieldController controller)
+    private             AsteroidFieldController         controller;
+    public              void                            Init(AsteroidFieldController    controller)
     {
         this.controller = controller;
 
@@ -20,7 +31,7 @@ public class FieldWindow : MonoBehaviour
         this.buttonClose.onClick.AddListener(CloseWindow);
     }
 
-    private void Land()
+    private             void                            Land()
     {
         if(this.controller != null)
         {
@@ -34,7 +45,7 @@ public class FieldWindow : MonoBehaviour
         }
     }
 
-    private void CloseWindow()
+    private             void                            CloseWindow()
     {
         this.controller.CloseInfoWindow();
     }

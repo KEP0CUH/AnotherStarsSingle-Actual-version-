@@ -1,36 +1,42 @@
-using System.Collections;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    private PlayerController controller;
-    private Transform target;
-    private List<GunState> guns = new List<GunState>();
+    private             PlayerController            controller;
+    private             Transform                   target;
+    private             List<GunState>              guns            = new List<GunState>();
 
-    private float timer = 0;
-    private float shootDelay = 0.5f;
-    private int numOfFires = 5;
-    private int firesMade = 0;
+    private             float                       timer           = 0;
+    private             float                       shootDelay      = 0.5f;
+    private             int                         numOfFires      = 5;
+    private             int                         firesMade       = 0;
 
-    public PlayerShoot Init(PlayerController controller)
+    public              PlayerShoot                 Init(PlayerController controller)
     {
         this.controller = controller;
 
         return this;
     }
 
-    public void SetTarget(Transform target)
+    public              void                        SetTarget(Transform target)
     {
         this.target = target;
     }
 
-    public void ResetTarget()
+    public              void                        ResetTarget()
     {
         this.target = null;
     }
 
-    private void FixedUpdate()
+    private             void                        FixedUpdate()
     {
         if (target == null)
         {
@@ -56,7 +62,7 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    private             void                        Shoot()
     {
         this.guns = this.controller.State.ShipController.State.Inventory.GetGuns();
         foreach (var gun in this.guns)
@@ -72,7 +78,7 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void ShowAttackRange(GunState gun)
+    private             void                        ShowAttackRange(GunState gun)
     {
         var attackRange = new GameObject("Range");
         attackRange.transform.parent = this.transform;

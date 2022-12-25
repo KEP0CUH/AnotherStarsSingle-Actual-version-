@@ -1,19 +1,26 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
 using UnityEngine;
 public class LandPlanetOnDoubleClick : MonoBehaviour
 {
-    private float clickCounter = 0;
-    private float firstClickTime = 0;
-    private float timeBetweenClicks = 0.5f;
-    private bool coroutineIsRunning = false;
-    private PlanetController controller;
+    private             float               clickCounter            = 0;
+    private             float               firstClickTime          = 0;
+    private             float               timeBetweenClicks       = 0.5f;
+    private             bool                coroutineIsRunning      = false;
+    private             PlanetController controller;
 
-    public void Init(PlanetController controller)
+    public              void                Init(PlanetController   controller)
     {
         this.controller = controller;
     }
 
-    private void OnMouseOver()
+    private             void                OnMouseOver()
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -27,7 +34,7 @@ public class LandPlanetOnDoubleClick : MonoBehaviour
         }
     }
 
-    private IEnumerator DoubleClickDetection()
+    private             IEnumerator         DoubleClickDetection()
     {
         coroutineIsRunning = true;
         while (firstClickTime + timeBetweenClicks >= Time.time)
@@ -44,7 +51,7 @@ public class LandPlanetOnDoubleClick : MonoBehaviour
         coroutineIsRunning = false;
     }
 
-    private void Land()
+    private             void                Land()
     {
         Managers.Player.Land(controller.transform);
 

@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -5,18 +12,24 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class ItemCell : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private GameObject icon;
-    [SerializeField] private GameObject buttonInfo;
-    [SerializeField] private GameObject miniInfoWindow;
-    [SerializeField] private GameObject textCount;
+    [SerializeField] 
+    private             GameObject              icon;
+    [SerializeField] 
+    private             GameObject              buttonInfo;
+    [SerializeField] 
+    private             GameObject              miniInfoWindow;
+    [SerializeField] 
+    private             GameObject              textCount;
 
-    private ItemShopView shopView;
-    private ItemState itemState;
-    private bool forBuy = false;
+    private             ItemShopView            shopView;
+    private             ItemState               itemState;
+    private             bool                    forBuy = false;
 
-    public ItemState State => itemState;
+    public              ItemState               State => itemState;
 
-    public ItemCell Init(ItemShopView shopView,ItemState item,bool forBuy)
+    public              ItemCell                Init(ItemShopView                   shopView,
+                                                     ItemState                      item,
+                                                     bool                           forBuy)
     {
         this.shopView = shopView;
         this.itemState = item;
@@ -28,15 +41,15 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
         return this;
     }
 
-    public void OnPointerDown(PointerEventData data)
+    public              void                    OnPointerDown(PointerEventData      data)
     {
         TryInteract();
     }
-    protected virtual void DropItem()
+    protected virtual   void                    DropItem()
     {
         Debug.Log("Выкинуть предмет из магазина нельзя.");
     }
-    private void TryInteract()
+    private             void                    TryInteract()
     {
         if (itemState.Data.ItemKind != ItemKind.EmptyDevice && itemState.Data.ItemKind != ItemKind.EmptyGun)
         {
@@ -51,7 +64,7 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void CreateTradeWindow(bool forBuy = true)
+    private             void                    CreateTradeWindow(bool forBuy = true)
     {
         GameObject prefabTradeWindow;
         if(forBuy)
@@ -82,13 +95,13 @@ public class ItemCell : MonoBehaviour, IPointerDownHandler
         
     }
 
-    private void OpenMiniInfo()
+    private             void                    OpenMiniInfo()
     {
         Debug.Log("Open mini info");
         this.miniInfoWindow.SetActive(true);
     }
 
-/*    protected virtual void TryInteract()
+/*   protected virtual  void                    TryInteract()
     {
         if (state.Data.ItemKind != ItemKind.EmptyDevice && state.Data.ItemKind != ItemKind.EmptyGun)
         {

@@ -1,30 +1,42 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Ships/NewShip", fileName = "NewShip", order = 54)]
 public class ShipData : ScriptableObject
 {
-    [SerializeField] private ShipKind kind;
-    [SerializeField] private Sprite icon;
-    [SerializeField] private string title;
-    [SerializeField] private int cost, size, maxGuns, maxDevices, armor, shields, structure, speed, energy, cpu, radar;
+    [SerializeField] 
+    private             ShipKind            kind;
+    [SerializeField] 
+    private             Sprite              icon;
+    [SerializeField] 
+    private             string              title;
+    [SerializeField] 
+    private             int                 cost, size, maxGuns, maxDevices, armor, shields,
+                                            structure, speed, energy, cpu, radar;
 
-    public Sprite Icon => icon;
-    public string Title => title;
-    public ShipKind Kind => kind;
+    public              Sprite              Icon => icon;
+    public              string              Title => title;
+    public              ShipKind            Kind => kind;
 
-    public int Cost => cost;
-    public int Size => size;
-    public int MaxGuns => maxGuns;
-    public int MaxDevices => maxDevices;
-    public int Armor => armor;
-    public int Shields => shields;
-    public int Structure => structure;
-    public int Speed => speed;
-    public int Energy => energy;
-    public int Cpu => cpu;
-    public int Radar => radar;
+    public              int                 Cost => cost;
+    public              int                 Size => size;
+    public              int                 MaxGuns => maxGuns;
+    public              int                 MaxDevices => maxDevices;
+    public              int                 Armor => armor;
+    public              int                 Shields => shields;
+    public              int                 Structure => structure;
+    public              int                 Speed => speed;
+    public              int                 Energy => energy;
+    public              int                 Cpu => cpu;
+    public              int                 Radar => radar;
 
-    private void OnValidate()
+    private             void                OnValidate()
     {
         var iconsShipsPath = "Icons/Ships/";
         icon = Resources.Load<Sprite>(iconsShipsPath + kind);
@@ -125,5 +137,4 @@ public class ShipData : ScriptableObject
                 break;
         }
     }
-
 }

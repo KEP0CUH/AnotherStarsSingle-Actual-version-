@@ -1,5 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -7,13 +12,14 @@ using UnityEngine;
 [RequireComponent(typeof(ItemShopView))]
 public class ItemShopController : MonoBehaviour
 {
-    private ItemShopState itemShopState;
-    private ItemShopView itemShopView;
+    private             ItemShopState           itemShopState;
+    private             ItemShopView            itemShopView;
 
-    public ItemShopState State => itemShopState;
-    public ItemShopView View => itemShopView;
+    public              ItemShopState           State => itemShopState;
+    public              ItemShopView            View => itemShopView;
 
-    public ItemShopController Init(ItemShopType type, int id)
+    public              ItemShopController      Init(ItemShopType       type,
+                                                     int                id)
     {
         if(type != ItemShopType.ShopEmpty)
         {
@@ -28,7 +34,7 @@ public class ItemShopController : MonoBehaviour
         }
     }
 
-    public void SwitchItemShop()
+    public              void                    SwitchItemShop()
     {
         if(this.View.ShopIsOpen)
         {
@@ -40,12 +46,12 @@ public class ItemShopController : MonoBehaviour
         }
     }
 
-    public void OpenItemShop()
+    public              void                    OpenItemShop()
     {
         this.View.OpenItemShop();
     }
 
-    public void CloseItemShop()
+    public              void                    CloseItemShop()
     {
         this.View.CloseItemShop();
     }

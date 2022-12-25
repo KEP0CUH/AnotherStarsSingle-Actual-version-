@@ -1,14 +1,21 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections;
 using UnityEngine;
 
 public class AttackOnDoubleClick : MonoBehaviour
 {
-    private float clickCounter = 0;
-    private float firstClickTime = 0;
-    private float timeBetweenClicks = 0.5f;
-    private bool coroutineIsRunning = false;
+    private             float               clickCounter            = 0;
+    private             float               firstClickTime          = 0;
+    private             float               timeBetweenClicks       = 0.5f;
+    private             bool                coroutineIsRunning      = false;
 
-    private void OnMouseOver()
+    private             void                OnMouseOver()
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -22,7 +29,7 @@ public class AttackOnDoubleClick : MonoBehaviour
         }
     }
 
-    private IEnumerator DoubleClickDetection()
+    private             IEnumerator         DoubleClickDetection()
     {
         coroutineIsRunning = true;
         while (firstClickTime + timeBetweenClicks >= Time.time)

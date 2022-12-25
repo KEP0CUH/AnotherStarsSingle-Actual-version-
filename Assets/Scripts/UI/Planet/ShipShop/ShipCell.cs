@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +13,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ShipCell : MonoBehaviour
 {
-    private ShipShop shipShop;
-    private ShipData shipData;
+    private             ShipShop            shipShop;
+    private             ShipData            shipData;
 
-    public ShipCell Init(ShipShop shipShop,Transform parent, ShipData data)
+    public              ShipCell            Init(ShipShop       shipShop,
+                                                 Transform      parent,
+                                                 ShipData       data)
     {
         this.shipShop = shipShop;
         this.shipData = data;
@@ -22,7 +31,7 @@ public class ShipCell : MonoBehaviour
         return this;
     }
 
-    private void SelectShip()
+    private             void                SelectShip()
     {
         shipShop.UpdateSelectedShip(shipData);
     }

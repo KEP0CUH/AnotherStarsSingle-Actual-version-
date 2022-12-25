@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,10 +12,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class DamageText : MonoBehaviour
 {
-    public Text text; // поле для UI текста
-    private Transform parent;
+    public              Text                text; // поле для UI текста
+    private             Transform           parent;
 
-    public void Init(Transform parent,string content)
+    public              void                Init(Transform parent,string content)
     {
         var camera = Managers.Player.Controller.MainCamera;
 
@@ -39,7 +46,4 @@ public class DamageText : MonoBehaviour
 
     }
 
-    void Update()
-    {
-    }
 }

@@ -1,19 +1,23 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
-
 
 [RequireComponent(typeof(RectTransform))]
 public class InfoWindow : MonoBehaviour
 {
-    private AsteroidController controller;
+    private                 AsteroidController              controller;
 
-    private GameObject icon;
-    private GameObject title;
-    private GameObject description;
+    private                 GameObject                      icon;
+    private                 GameObject                      title;
+    private                 GameObject                      description;
     
-
-
-    public void Init(AsteroidController controller)
+    public                  void                            Init(AsteroidController     controller)
     {
         this.controller = controller;
         var data = controller.State;
@@ -24,7 +28,8 @@ public class InfoWindow : MonoBehaviour
         CreateButtonClose();
     }
 
-    public void Init(AsteroidController controller,AsteroidFieldData data)
+    public                  void                            Init(AsteroidController     controller,
+                                                                 AsteroidFieldData      data)
     {
         this.controller = controller;
 
@@ -35,7 +40,7 @@ public class InfoWindow : MonoBehaviour
         CreateButtonClose();
     }
 
-    private void CreateWindow()
+    private                 void                            CreateWindow()
     {
         Managers.Canvas.AddModule(this.gameObject);
 
@@ -52,7 +57,7 @@ public class InfoWindow : MonoBehaviour
 
     }
 
-    private void CreateIcon(Sprite content)
+    private                 void                            CreateIcon(Sprite content)
     {
         icon = new GameObject("Icon",typeof(RectTransform),typeof(Image));
 
@@ -69,7 +74,7 @@ public class InfoWindow : MonoBehaviour
         Debug.Log("InfoIcon created.");
     }
 
-    private void CreateTitle(string content)
+    private                 void                            CreateTitle(string content)
     {
         title = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -91,7 +96,7 @@ public class InfoWindow : MonoBehaviour
         text.text = content;
     }
 
-    private void CreateDescription(string content)
+    private                 void                            CreateDescription(string content)
     {
         description = new GameObject("Title", typeof(RectTransform), typeof(Text));
 
@@ -113,7 +118,7 @@ public class InfoWindow : MonoBehaviour
         text.text = content;
     }
 
-    private void CreateButtonClose()
+    private                 void                            CreateButtonClose()
     {
         var buttonClose = new GameObject("CloseWindow", typeof(Image), typeof(Button));
         var rect = buttonClose.GetComponent<RectTransform>();
@@ -127,7 +132,7 @@ public class InfoWindow : MonoBehaviour
         buttonDrop.onClick.AddListener(CloseInfoWindow);
     }
 
-    public void CloseInfoWindow()
+    public                  void                            CloseInfoWindow()
     {
         controller.CloseInfoWindow();
     }

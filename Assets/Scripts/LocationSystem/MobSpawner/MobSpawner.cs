@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class MobSpawner : MonoBehaviour
 {
-    [SerializeField] private List<MobKind> mobs;
-    private Dictionary<int,MobController> spawnedMobs;
+    [SerializeField] 
+    private             List<MobKind>                           mobs;
+    private             Dictionary<int,MobController>           spawnedMobs;
 
-    private bool isInitialized = false;
+    private             bool                                    isInitialized        = false;
 
-    private int currentNumMobs = 0;
-    private int maxNumMobs = 4;
+    private             int                                     currentNumMobs       = 0;
+    private             int                                     maxNumMobs           = 4;
 
 
-    public void Init(MobSpawnerType kind)
+    public              void                                    Init(MobSpawnerType kind)
     {
         mobs = new List<MobKind>();
         spawnedMobs = new Dictionary<int,MobController>();
@@ -40,7 +41,7 @@ public class MobSpawner : MonoBehaviour
         isInitialized = true;
     }
 
-    private void FixedUpdate()
+    private             void                                    FixedUpdate()
     {
         if (isInitialized && this.currentNumMobs < this.maxNumMobs)
         {
@@ -48,7 +49,7 @@ public class MobSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnMobs()
+    public              void                                    SpawnMobs()
     {
         int i = 0;
         while(this.currentNumMobs < this.maxNumMobs)
@@ -65,7 +66,7 @@ public class MobSpawner : MonoBehaviour
         }
     }
 
-    public void RemoveMob(int id)
+    public              void                                    UnspawnMob(int id)
     {
         if(spawnedMobs.ContainsKey(id))
         {
@@ -76,7 +77,7 @@ public class MobSpawner : MonoBehaviour
         }
     }
 
-    private void RespawnMob(MobKind kind)
+    private             void                                    RespawnMob(MobKind kind)
     {
         this.currentNumMobs++;
         var mob = new GameObject("Mob", typeof(MobController));

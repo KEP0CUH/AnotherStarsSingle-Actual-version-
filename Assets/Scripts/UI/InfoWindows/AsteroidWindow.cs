@@ -1,19 +1,33 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AsteroidWindow : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Text health;
-    [SerializeField] private Text size;
-    [SerializeField] private Scrollbar slider;
-    [SerializeField] private Button buttonAttack;
-    [SerializeField] private Button buttonApproach;
-    [SerializeField] private Button buttonClose;
+    [SerializeField] 
+    private             Image                       icon;
+    [SerializeField] 
+    private             Text                        health;
+    [SerializeField] 
+    private             Text                        size;
+    [SerializeField] 
+    private             Scrollbar                   slider;
+    [SerializeField] 
+    private             Button                      buttonAttack;
+    [SerializeField] 
+    private             Button                      buttonApproach;
+    [SerializeField] 
+    private             Button                      buttonClose;
 
-    private AsteroidController controller;
+    private             AsteroidController          controller;
 
-    public void Init(AsteroidController controller)
+    public              void                        Init(AsteroidController controller)
     {
         this.controller = controller;
         this.controller.OnDamagedAsteroid += OnAsteroidDamaged;
@@ -29,28 +43,28 @@ public class AsteroidWindow : MonoBehaviour
         this.buttonAttack.onClick.AddListener(LaunchAttack);
     }
 
-    private void OnAsteroidDamaged()
+    private             void                        OnAsteroidDamaged()
     {
         this.health.text = controller.State.Health.ToString();
         this.slider.value = (float)(controller.State.Health / controller.State.MaxHealth);
     }
 
-    private void CloseWindow()
+    private             void                        CloseWindow()
     {
         controller.CloseInfoWindow();
     }
 
-    private void LaunchPlayer()
+    private             void                        LaunchPlayer()
     {
         Managers.Player.Controller.MoveToApproach(controller.transform.position);
     }
 
-    private void LaunchAttack()
+    private             void                        LaunchAttack()
     {
         Managers.Player.Controller.Shoot(this.controller.transform);
     }
 
-    private void OnDestroy()
+    private             void                        OnDestroy()
     {
         this.controller.OnDamagedAsteroid -= OnAsteroidDamaged;
     }

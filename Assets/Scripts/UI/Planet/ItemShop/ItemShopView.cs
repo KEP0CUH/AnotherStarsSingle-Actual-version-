@@ -1,27 +1,33 @@
-using System.Collections;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemShopView : MonoBehaviour
 {
-    private ItemShopController itemShopController;
+    private             ItemShopController              itemShopController;
 
-    private GameObject itemShopObject = null;
-    private ItemShop itemShopComponent;
-    private bool shopIsOpen = false;
+    private             GameObject                      itemShopObject          = null;
+    private             ItemShop                        itemShopComponent;
+    private             bool                            shopIsOpen              = false;
 
-    private Dictionary<int, ItemState> shopItems;
-    private Dictionary<int, ItemState> playerItems;
+    private             Dictionary<int, ItemState>      shopItems;
+    private             Dictionary<int, ItemState>      playerItems;
 
-    private List<ItemCell> shopItemsCells;
-    private List<ItemCell> playerItemsCells;
+    private             List<ItemCell>                  shopItemsCells;
+    private             List<ItemCell>                  playerItemsCells;
 
-    public ItemShopController controller => itemShopController;
-    public ItemShop Shop => itemShopComponent;
-    public bool ShopIsOpen => shopIsOpen;
+    public              ItemShopController              controller => itemShopController;
+    public              ItemShop                        Shop => itemShopComponent;
+    public              bool                            ShopIsOpen => shopIsOpen;
 
 
-    public ItemShopView Init(ItemShopController controller)
+    public              ItemShopView                    Init(ItemShopController     controller)
     {
         if (controller.State.Data.ItemShopType != ItemShopType.ShopEmpty)
         {
@@ -39,7 +45,7 @@ public class ItemShopView : MonoBehaviour
         return this;
     }
 
-    public void OpenItemShop()
+    public              void                            OpenItemShop()
     {
         if (itemShopObject == null)
         {
@@ -51,7 +57,7 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    public void CloseItemShop()
+    public              void                            CloseItemShop()
     {
         if (itemShopObject != null)
         {
@@ -61,7 +67,7 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    private void CreateStatesForShopItems()
+    private             void                            CreateStatesForShopItems()
     {
         foreach (var itemData in controller.State.Data.ItemsForBuyingData)
         {
@@ -90,12 +96,14 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    private void CreateStatesShopItems()
+    private             void                            CreateStatesShopItems()
     {
 
     }
 
-    public void AddItem(ItemState state,int count = 1, bool needDestroying = false)
+    public              void                            AddItem(ItemState       state,
+                                                                int             count = 1,
+                                                                bool            needDestroying = false)
     {
         if(state.IsEmpty())
         {
@@ -149,7 +157,9 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    public void RemoveItem(ItemState state,int count = 1, bool needDestroying = false)
+    public              void                            RemoveItem(ItemState    state,
+                                                                   int          count = 1,
+                                                                   bool         needDestroying = false)
     {
         if(shopItems.ContainsKey(state.Id))
         {
@@ -172,7 +182,7 @@ public class ItemShopView : MonoBehaviour
         }
     }
 
-    public void ShowListItemShop()
+    public              void                            ShowListItemShop()
     {
         Debug.Log("«десь надо спавнить слоты дл€ состо€ние в словаре shopItems");
 
@@ -216,5 +226,4 @@ public class ItemShopView : MonoBehaviour
             playerItemsCells.Add(cellComponent);
         }
     }
-
 }

@@ -1,5 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -8,14 +13,14 @@ using UnityEngine;
 [RequireComponent(typeof(AttackOnDoubleClick))]
 public class MobView : MonoBehaviour
 {
-    private MobState mobState;
-    private MobController mobController;
+    private                 MobState                    mobState;
+    private                 MobController               mobController;
 
-    private static GameObject infoWindow = null;
+    private static          GameObject                  infoWindow          = null;
 
-    private static TargetLight targetLight = null;
+    private static          TargetLight                 targetLight         = null;
 
-    public MobView Init(MobController mobController,MobState state)
+    public                  MobView                     Init(MobController mobController,MobState state)
     {
         this.mobController = mobController;
         this.mobState = state;
@@ -27,7 +32,7 @@ public class MobView : MonoBehaviour
         return this;
     }
 
-    public void CloseInfoWindow()
+    public                  void                        CloseInfoWindow()
     {
         if (infoWindow != null)
         {
@@ -42,12 +47,12 @@ public class MobView : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private                 void                        OnMouseDown()
     {
         CreateInfoWindow();
         CreateTargetLight();
     }
-    private void CreateInfoWindow()
+    private                 void                        CreateInfoWindow()
     {
         if(infoWindow != null)
         {
@@ -63,7 +68,7 @@ public class MobView : MonoBehaviour
         }
     }
 
-    private void CreateTargetLight()
+    private                 void                        CreateTargetLight()
     {
         if(targetLight != null)
         {
@@ -75,15 +80,13 @@ public class MobView : MonoBehaviour
         targetLight = new GameObject("TargetLight").AddComponent<TargetLight>().Init(this.transform, radius);
     }
 
-    private void OnDestroy()
+    private                 void                        OnDestroy()
     {
         if (gameObject.scene.isLoaded)
         {
-            this.mobController.Spawner.gameObject.GetComponent<MobSpawner>().RemoveMob(this.mobState.Id);
+            this.mobController.Spawner.gameObject.GetComponent<MobSpawner>().UnspawnMob(this.mobState.Id);
 
             CloseInfoWindow();
         }
     }
-
-
 }

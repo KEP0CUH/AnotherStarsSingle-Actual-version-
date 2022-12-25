@@ -10,26 +10,26 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
-    private bool canMove;
-    private bool dragging;
-    private RectTransform rect;
+    private             bool                canMove;
+    private             bool                dragging;
+    private             RectTransform       rect;
 
-    private Vector3 differenceBetweenRectAndClick;
-    private Vector3 target;
+    private             Vector3             differenceBetweenRectAndClick;
+    private             Vector3             target;
 
-    private void Start()
+    private             void                Start()
     {
         canMove = false;
         dragging = false;
         rect = GetComponent<RectTransform>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public              void                OnPointerEnter(PointerEventData     eventData)
     {
         canMove = true;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public              void                OnPointerExit(PointerEventData      eventData)
     {
         canMove = false;
         dragging = false;   
@@ -103,6 +103,4 @@ public class DragAndDrop : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
             }
         }
     }
-
-
 }

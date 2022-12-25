@@ -1,11 +1,18 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class LocationView : MonoBehaviour
 {
-    private LocationController locationController;
+    private             LocationController          locationController;
 
-    public LocationView Init(LocationController controller)
+    public              LocationView                Init(LocationController controller)
     {
         this.locationController = controller;
 

@@ -1,4 +1,10 @@
-using System.Collections;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,21 +12,27 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Location",fileName ="NewGalaxe",order = 54)]
 public class LocationData : ScriptableObject
 {
-    [SerializeField] private string                     title;
-    [SerializeField] private string                     description;
-    [SerializeField] private Location                   location;
-    [SerializeField] private List<Planet>               planets;
-    [SerializeField] private MobSpawnerType             mobSpawnerType;
-    [SerializeField] private SunType                    sunType;
+    [SerializeField] 
+    private             string                     title;
+    [SerializeField] 
+    private             string                     description;
+    [SerializeField] 
+    private             Location                   location;
+    [SerializeField] 
+    private             List<Planet>               planets;
+    [SerializeField] 
+    private             MobSpawnerType             mobSpawnerType;
+    [SerializeField] 
+    private             SunType                    sunType;
 
 
 
-    public string                                       Title => title;
-    public List<Planet>                                 Planets => planets;
-    public MobSpawnerType                               MobSpawnerType => mobSpawnerType;
-    public SunType                                      SunType => sunType;
+    public              string                     Title => title;
+    public              List<Planet>               Planets => planets;
+    public              MobSpawnerType             MobSpawnerType => mobSpawnerType;
+    public              SunType                    SunType => sunType;
 
-    private void OnValidate()
+    private             void                       OnValidate()
     {
         planets = new List<Planet>();
         description = "";
@@ -54,5 +66,4 @@ public class LocationData : ScriptableObject
 
         }
     }
-
 }

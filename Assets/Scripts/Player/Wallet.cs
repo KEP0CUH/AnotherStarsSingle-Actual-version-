@@ -1,27 +1,31 @@
-using UnityEngine;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
 
 public class Wallet
 {
-    private int sum = 0;
+    private         int                 sum         = 0;
+    public          int                 Sum => sum;
 
-    public int Sum => sum;
-
-    public Wallet()
+    public          Wallet()
     {
         this.sum = 100;
     }
 
-    public Wallet(int sum)
+    public          Wallet(int sum)
     {
         this.sum = sum;
     }
 
-    public void PutMoney(int sum)
+    public          void                PutMoney(int sum)
     {
         this.sum += sum;
     }
 
-    public bool TakeMoney(int sum)
+    public          bool                TakeMoney(int sum)
     {
         if(this.sum - sum >= 0)
         {

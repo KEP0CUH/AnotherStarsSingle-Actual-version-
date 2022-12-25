@@ -1,19 +1,28 @@
-using System.Collections;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName="ItemShop",fileName ="newItemShop",order =51)]
 public class ItemShopData : ScriptableObject
 {
-    [SerializeField] private ItemShopType itemShopType;
-    [SerializeField] private List<ItemData> itemsForBuyingData;
-    [SerializeField] private List<ItemState> itemsForBuyingStates;
+    [SerializeField] 
+    private             ItemShopType                itemShopType;
+    [SerializeField] 
+    private             List<ItemData>              itemsForBuyingData;
+    [SerializeField] 
+    private             List<ItemState>             itemsForBuyingStates;
 
-    public ItemShopType ItemShopType => itemShopType;
-    public List<ItemData> ItemsForBuyingData => itemsForBuyingData;
-    public List<ItemState> ItemsForBuyingState => itemsForBuyingStates;
+    public              ItemShopType                ItemShopType => itemShopType;
+    public              List<ItemData>              ItemsForBuyingData => itemsForBuyingData;
+    public              List<ItemState>             ItemsForBuyingState => itemsForBuyingStates;
 
-    private void OnValidate()
+    private             void                        OnValidate()
     {
         if (Managers.Resources != null)
         {

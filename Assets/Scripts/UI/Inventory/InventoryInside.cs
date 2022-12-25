@@ -1,36 +1,56 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryInside : MonoBehaviour
 {
-    [SerializeField] private Transform gunsList;
-    [SerializeField] private Transform devicesList;
-    [SerializeField] private Transform itemsList;
-    [SerializeField] private Button buttonClose;
+    [SerializeField] 
+    private             Transform                            gunsList;
+    [SerializeField] 
+    private             Transform                            devicesList;
+    [SerializeField] 
+    private             Transform                            itemsList;
+    [SerializeField] 
+    private             Button                               buttonClose;
 
-    [SerializeField] private Image icon;
-    [SerializeField] private Text title;
-    [SerializeField] private Text size; 
-    [SerializeField] private Text armor;
-    [SerializeField] private Text shields;
-    [SerializeField] private Text structure;
-    [SerializeField] private Text speed;
-    [SerializeField] private Text energy;
-    [SerializeField] private Text cpu;
+    [SerializeField] 
+    private             Image                                icon;
+    [SerializeField] 
+    private             Text                                 title;
+    [SerializeField] 
+    private             Text                                 size; 
+    [SerializeField] 
+    private             Text                                 armor;
+    [SerializeField] 
+    private             Text                                 shields;
+    [SerializeField] 
+    private             Text                                 structure;
+    [SerializeField] 
+    private             Text                                 speed;
+    [SerializeField] 
+    private             Text                                 energy;
+    [SerializeField] 
+    private             Text                                 cpu;
 
-    private List<GameObject> gunCells = new List<GameObject>();
-    private List<GameObject> deviceCells = new List<GameObject>();
-    private List<GameObject> itemCells = new List<GameObject>();
-    private Dictionary<int, GunState> guns = new Dictionary<int, GunState>();
-    private Dictionary<int, DeviceState> devices = new Dictionary<int, DeviceState>();
-    private Dictionary<int, ItemState> items = new Dictionary<int, ItemState>();
+    private             List<GameObject>                     gunCells       = new List<GameObject>();
+    private             List<GameObject>                     deviceCells    = new List<GameObject>();
+    private             List<GameObject>                     itemCells      = new List<GameObject>();
+    private             Dictionary<int, GunState>            guns           = new Dictionary<int, GunState>();
+    private             Dictionary<int, DeviceState>         devices        = new Dictionary<int, DeviceState>();
+    private             Dictionary<int, ItemState>           items          = new Dictionary<int, ItemState>();
 
-    private PlayerController playerController;
+    private             PlayerController                     playerController;
 
-    public PlayerController Player => playerController;
+    public              PlayerController                     Player => playerController;
 
-    public InventoryInside Init(PlayerController controller)
+    public              InventoryInside                      Init(PlayerController      controller)
     {
         this.playerController = controller;
         gunCells = new List<GameObject>();
@@ -45,7 +65,7 @@ public class InventoryInside : MonoBehaviour
         return this;
     }
 
-    public void ShowInventory()
+    public              void                                 ShowInventory()
     {
         ShowGuns();
         ShowDevices();
@@ -54,7 +74,7 @@ public class InventoryInside : MonoBehaviour
 
     }
 
-    public void Reswitch()
+    public              void                                 Reswitch()
     {
         if (this.gameObject.activeInHierarchy)
         {
@@ -64,7 +84,7 @@ public class InventoryInside : MonoBehaviour
         else this.gameObject.SetActive(true);
     }
 
-    private void ShowShip()
+    private             void                                 ShowShip()
     {
         var data = playerController.ShipController.State.Data;
         this.icon.sprite = data.Icon;
@@ -79,7 +99,7 @@ public class InventoryInside : MonoBehaviour
         this.cpu.text = $"      ÷œ           <color=orange>{data.Cpu}</color>";
     }
 
-    private void ShowGuns()
+    private             void                                 ShowGuns()
     {
         foreach(var gun in gunCells)
         {
@@ -99,7 +119,7 @@ public class InventoryInside : MonoBehaviour
         }
     }
 
-    private void ShowDevices()
+    private             void                                 ShowDevices()
     {
         foreach(var device in deviceCells)
         {
@@ -119,7 +139,7 @@ public class InventoryInside : MonoBehaviour
         }
     }
 
-    private void ShowItems()
+    private             void                                 ShowItems()
     {
         foreach(var item in itemCells)
         {
@@ -139,7 +159,7 @@ public class InventoryInside : MonoBehaviour
         }
     }
 
-    private void CreateCell(ItemState state)
+    private             void                                 CreateCell(ItemState state)
     {
         var itemUI = Instantiate(Managers.Resources.DownloadData(ObjectType.ItemUI));
         if (state.IsItem || state.IsSet == false)
@@ -159,7 +179,7 @@ public class InventoryInside : MonoBehaviour
         }
     }
 
-    private void CloseInventory()
+    private             void                                 CloseInventory()
     {
         this.gameObject.SetActive(false);
     }

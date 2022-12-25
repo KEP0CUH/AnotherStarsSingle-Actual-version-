@@ -1,17 +1,30 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemWindow : MonoBehaviour
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private Text title;
-    [SerializeField] private Text size;
-    [SerializeField] private Text type;
-    [SerializeField] private Button buttonTake;
+    [SerializeField] 
+    private             Image               icon;
+    [SerializeField] 
+    private             Text                title;
+    [SerializeField] 
+    private             Text                size;
+    [SerializeField] 
+    private             Text                type;
+    [SerializeField] 
+    private             Button              buttonTake;
 
-    private ItemView view;
+    private             ItemView            view;
 
-    public void Init(ItemView view,ItemState state)
+    public              void                Init(ItemView       view,
+                                                 ItemState      state)
     {
         this.icon.sprite = state.Data.Icon;
         this.title.text = state.Data.Title;
@@ -20,13 +33,13 @@ public class ItemWindow : MonoBehaviour
         buttonTake.onClick.AddListener(TakeItem);
     }
 
-    private void TakeItem()
+    private             void                TakeItem()
     {
         this.view.NeedTake();
         LaunchPlayer();
     }
 
-    private void LaunchPlayer()
+    private             void                LaunchPlayer()
     {
         Managers.Player.Controller.MoveToApproach(view.transform.position);
     }

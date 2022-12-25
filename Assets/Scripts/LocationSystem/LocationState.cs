@@ -1,22 +1,32 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MobSpawner))]
 public class LocationState : MonoBehaviour
 {
-    [SerializeField] private LocationData locationData;
+    [SerializeField]
+    private             LocationData                    locationData;
     
-    [SerializeField] private List<AsteroidFieldType> asteroidFieldsTypes = new List<AsteroidFieldType>();
-    [SerializeField] private MobSpawner mobSpawner;
+    [SerializeField] 
+    private             List<AsteroidFieldType>         asteroidFieldsTypes = new List<AsteroidFieldType>();
+    [SerializeField] 
+    private             MobSpawner                      mobSpawner;
 
 
 
-    private LocationController controller;
-    private List<Planet> planets;
+    private             LocationController              controller;
+    private             List<Planet>                    planets;
 
-    public LocationData Data => locationData;
+    public              LocationData                    Data => locationData;
 
-    public LocationState Init(LocationController controller,Location location)
+    public              LocationState                   Init(LocationController controller,Location location)
     {
         this.controller = controller;
         this.locationData = Managers.Resources.DownloadData(location);
@@ -32,7 +42,7 @@ public class LocationState : MonoBehaviour
         return this;
     }
 
-    private void SpawnPlanets()
+    private             void                            SpawnPlanets()
     {
         for (int i = 0; i < planets.Count; i++)
         {
@@ -41,7 +51,7 @@ public class LocationState : MonoBehaviour
         }
     }
 
-    private void SpawnAsteroidFieldIfHave()
+    private             void                            SpawnAsteroidFieldIfHave()
     {
         for(int i = 0; i < asteroidFieldsTypes.Count; i++)
         {

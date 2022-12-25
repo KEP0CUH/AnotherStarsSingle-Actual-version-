@@ -1,26 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GlobalMapUI : MonoBehaviour, IUIModule
 {
-    private GameObject globalMap;
+    private             GameObject          globalMap;
 
-    public ManagerStatus Status { get; private set; }
-    public UIModuleKind Kind { get;private set; }
+    public              ManagerStatus       Status { get; private set; }
+    public              UIModuleKind        Kind { get;private set; }
 
-    public void Disable()
+    public              void                Disable()
     {
         globalMap.SetActive(false);
     }
 
-    public void Enable()
+    public              void                Enable()
     {
         globalMap.SetActive(true);
     }
 
-    public void Startup(ICanvas canvas)
+    public              void                Startup(ICanvas canvas)
     {
         Debug.Log("GlobalMap initializing...");
         Status = ManagerStatus.Initializing;
@@ -33,7 +38,7 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         Status = ManagerStatus.Started;
     }
 
-    public void AddLocationOnMap(LocationState location)
+    public              void                AddLocationOnMap(LocationState location)
     {
         var newLocation = new GameObject($"{location.Data.Title}", typeof(RectTransform), typeof(Image), typeof(Button));
 
@@ -58,7 +63,7 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
 
     }
 
-    private void CreateGlobalMap(ICanvas canvas)
+    private             void                CreateGlobalMap(ICanvas canvas)
     {
 
         globalMap = new GameObject("GlobalMap", typeof(RectTransform));
@@ -87,7 +92,7 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         CreateButtonClose(rect);
     }
 
-    private void CreateButtonClose(RectTransform rectParent)
+    private             void                CreateButtonClose(RectTransform rectParent)
     {
         var buttonClose = new GameObject("CloseGlobalMap", typeof(RectTransform), typeof(Image),typeof(Button));
 
@@ -106,12 +111,12 @@ public class GlobalMapUI : MonoBehaviour, IUIModule
         button.onClick.AddListener(CloseGlobalMap);
     }
 
-    private void CloseGlobalMap()
+    private             void                CloseGlobalMap()
     {
         CanvasUI.GlobalMap.Disable();
     }
 
-    private void TeleportPlayer(Vector3 targetPos)
+    private             void                TeleportPlayer(Vector3 targetPos)
     {
         Managers.Player.Controller.gameObject.transform.position = targetPos;
         Managers.Player.Controller.UpdateCameraPosition();

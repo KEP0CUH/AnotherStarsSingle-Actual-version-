@@ -1,15 +1,22 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(TargetLight))]
 public class PlanetView : MonoBehaviour
 {
-    private PlanetController controller;
+    private                 PlanetController            controller;
 
-    private static GameObject   infoWindow;
-    private static TargetLight targetLight = null;
+    private static          GameObject                  infoWindow;
+    private static          TargetLight                 targetLight         = null;
 
-    public PlanetView Init(PlanetController controller)
+    public                  PlanetView                  Init(PlanetController controller)
     {
         this.controller = controller;
         this.gameObject.name                            = this.controller.State.Data.Title;
@@ -19,7 +26,7 @@ public class PlanetView : MonoBehaviour
         return this;
     }
 
-    public void CloseInfoWindow()
+    public                  void                        CloseInfoWindow()
     {
         if (infoWindow != null)
         {
@@ -34,13 +41,13 @@ public class PlanetView : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
+    private                 void                        OnMouseDown()
     {
         OpenInfoWindow();
         CreateTargetLight();
     }
 
-    private void OpenInfoWindow()
+    private                 void                        OpenInfoWindow()
     {
         if(infoWindow != null)
         {
@@ -58,7 +65,7 @@ public class PlanetView : MonoBehaviour
         }
     }
 
-    private void CreateTargetLight()
+    private                 void                        CreateTargetLight()
     {
         if (targetLight != null)
         {

@@ -1,3 +1,10 @@
+///////////////////////////////////////////
+///     Created:    -
+///     Author:     KEPOLLlblLLlKA
+///     Updated:    25.12.2022
+///     Tested:     Not
+///////////////////////////////////////////
+
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -6,21 +13,21 @@ using UnityEngine;
 [RequireComponent(typeof(MobMovement))]
 public class MobController : MonoBehaviour
 {
-    private MobState mobState;
-    private MobView mobView;
-    private MobMovement mobMovement;
-    private InventoryController inventoryController;
+    private             MobState                    mobState;
+    private             MobView                     mobView;
+    private             MobMovement                 mobMovement;
+    private             InventoryController         inventoryController;
 
-    private GameObject spawner;
+    private             GameObject                  spawner;
 
-    public event System.Action OnMobDamaged;
+    public              event System.Action         OnMobDamaged;
 
-    public InventoryController InventoryController => inventoryController;
-    public MobState State => mobState;
-    public MobView View => mobView;
-    public GameObject Spawner => spawner;
+    public              InventoryController         InventoryController => inventoryController;
+    public              MobState                    State => mobState;
+    public              MobView                     View => mobView;
+    public              GameObject                  Spawner => spawner;
 
-    public void Init(Transform spawner,MobKind kind)
+    public              void                        Init(Transform spawner,MobKind kind)
     {
         this.inventoryController = new InventoryController(this.transform);
         this.mobState = this.gameObject.GetComponent<MobState>().Init(this,kind,this.inventoryController);
@@ -32,22 +39,22 @@ public class MobController : MonoBehaviour
         transform.position = new Vector3(transform.position.x,transform.position.y, -10);
     }
 
-    public void CloseInfoWindow()
+    public              void                        CloseInfoWindow()
     {
         this.View.CloseInfoWindow();
     }
 
-    public void ChangeMobHealth(int value)
+    public              void                        ChangeMobHealth(int value)
     {
         mobState.ChangeHealth(value);
     }
 
-    public void KillMob(int id)
+    public              void                        KillMob(int id)
     {
-        this.Spawner.GetComponent<MobSpawner>().RemoveMob(id);
+        this.Spawner.GetComponent<MobSpawner>().UnspawnMob(id);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private             void                        OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<AmmoController>())
         {
