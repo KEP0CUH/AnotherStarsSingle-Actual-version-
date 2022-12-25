@@ -72,17 +72,17 @@ public class ShipInventory
         TryUnsetItem(gun);
     }*/
 
-    public void TrySetItem(IUsable item)
+    public              void                                    TrySetItem(IUsable item)
     {
         item.Set();
     }
 
-    public void TryUnsetItem(IUsable item)
+    public              void                                    TryUnsetItem(IUsable item)
     {
         item.Unset();
     }
 
-    public void TryInteractWithItem(ItemState state)
+    public              void                                    TryInteractWithItem(ItemState state)
     {
         if (state.IsWeapon)
         {

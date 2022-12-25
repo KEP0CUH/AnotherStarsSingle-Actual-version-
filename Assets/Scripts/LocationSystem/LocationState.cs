@@ -44,10 +44,12 @@ public class LocationState : MonoBehaviour
 
     private             void                            SpawnPlanets()
     {
-        for (int i = 0; i < planets.Count; i++)
+        for (int i = 0; i < planets.Count; ++i)
         {
+            int orbitNumber = i + 1;
+
             var planet = new GameObject($"Planet{planets[i]}");
-            planet.AddComponent<PlanetController>().Init(this.transform, planets[i], i * 3);
+            planet.AddComponent<PlanetController>().Init(this.transform, planets[i], orbitNumber);
         }
     }
 

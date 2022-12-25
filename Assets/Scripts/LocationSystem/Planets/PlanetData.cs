@@ -36,22 +36,22 @@ public class PlanetData : ScriptableObject
         switch (planet)
         {
             case Planet.Arcea:
-                title = "Арсея";
-                description = "";
-                itemShopType = ItemShopType.GreenShop1;
+                title           = "Арсея";
+                description     = "";
+                itemShopType    = ItemShopType.GreenShop1;
                 break;
             case Planet.Mars:
-                title = "Марс";
-                itemShopType = ItemShopType.ShopEmpty;
+                title           = "Марс";
+                itemShopType    = ItemShopType.ShopEmpty;
                 break;
             case Planet.Earth:
-                title = "Земля";
-                itemShopType = ItemShopType.GreenShop2;
+                title           = "Земля";
+                itemShopType    = ItemShopType.GreenShop2;
                 break;
 
         }
-        iconPlanet = Resources.Load<Sprite>("Icons/Planets/" + iconType);
-        iconBG = Resources.Load<Sprite>("Icons/Cosmoports/" + iconType);
+        iconPlanet  = Resources.Load<Sprite>("Icons/Planets/"       + iconType);
+        iconBG      = Resources.Load<Sprite>("Icons/Cosmoports/"    + iconType);
     }
 
 }

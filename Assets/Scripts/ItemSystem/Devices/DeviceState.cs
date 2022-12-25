@@ -11,11 +11,11 @@ public class DeviceState : ItemState, IUsable
 {
     public override         void            Set()
     {
-        Debug.Log("Попытка одеть устройство на корабль.");
+        Debug.Log("РџРѕРїС‹С‚РєР° РѕРґРµС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅР° РєРѕСЂР°Р±Р»СЊ.");
     }
     public override         void            Unset()
     {
-        Debug.Log("Попытка снять устройство с корабля");
+        Debug.Log("РџРѕРїС‹С‚РєР° СЃРЅСЏС‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ СЃ РєРѕСЂР°Р±Р»СЏ");
     }
 
     public override         ItemState       Init(ItemKind kind, int count)

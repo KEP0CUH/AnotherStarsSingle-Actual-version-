@@ -23,13 +23,13 @@ public class GunState : ItemState, IUsable
 
     public override         void            Set()
     {
-        Debug.Log("Попытка одеть пушку на корабль.");
+        Debug.Log("РџРѕРїС‹С‚РєР° РѕРґРµС‚СЊ РїСѓС€РєСѓ РЅР° РєРѕСЂР°Р±Р»СЊ.");
         //SetIsTrue();
     }
 
     public override         void            Unset()
     {
-        Debug.Log("Попытка снять пушку с корабля");
+        Debug.Log("РџРѕРїС‹С‚РєР° СЃРЅСЏС‚СЊ РїСѓС€РєСѓ СЃ РєРѕСЂР°Р±Р»СЏ");
         //SetIsFalse();
     }
 
@@ -42,7 +42,7 @@ public class GunState : ItemState, IUsable
     {
         if(GetData().AmmoKind != AmmoKind.EmptyAmmo)
         {
-            Debug.Log("Стреляю");
+            Debug.Log("РЎС‚СЂРµР»СЏСЋ");
             GameObject bullet = new GameObject("Bullet");
 
             var sourcePosition = new Vector3(parent.position.x, parent.position.y, 0);

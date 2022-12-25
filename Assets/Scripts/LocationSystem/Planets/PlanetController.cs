@@ -15,7 +15,7 @@ public class PlanetController : MonoBehaviour
     private             PlanetState             state;
     private             PlanetView              view;
     private             Transform               parent;
-    private             int                     offset;
+    private             int                     orbitNumber;
 
     private             ItemShopController      itemShopController      = null;
 
@@ -23,12 +23,12 @@ public class PlanetController : MonoBehaviour
     public              PlanetView              View => view;
     public              ItemShopController      ItemShopController => itemShopController;
 
-    public              void                    Init(Transform parent,Planet kind,int offset)
+    public              void                    Init(Transform parent,Planet kind,int orbitNumber)
     {
         this.parent = parent;
         this.state = this.GetComponent<PlanetState>().Init(this,kind);
         this.view = this.GetComponent<PlanetView>().Init(this);
-        this.offset = offset;
+        this.orbitNumber = orbitNumber;
     }
 
     public              void                    CloseInfoWindow()
@@ -62,7 +62,7 @@ public class PlanetController : MonoBehaviour
     {
         this.gameObject.AddComponent<SphereCollider>();
         this.gameObject.transform.SetParent(parent, true);
-        this.gameObject.transform.localPosition = new Vector3(Random.Range(2,offset + 2), Random.Range(2, offset + 2), 0);
+        this.gameObject.transform.localPosition = CalculateOrbitalPosition(orbitNumber);
      
         SetRandomPositionAroundSun();
     }
@@ -80,5 +80,27 @@ public class PlanetController : MonoBehaviour
     private             void                    SaveRotationAboutSun()
     {
         transform.RotateAround(parent.position, parent.forward, 4.0f * Time.fixedDeltaTime);
+    }
+
+    private             Vector3                 CalculateOrbitalPosition(int    orbitNumber)
+    {
+        Vector3 startPosition = new Vector3(0,0,0);
+
+        int temp        = Random.Range(-1,1);
+        int temp1       = -2 - orbitNumber * 2;         // Генерация позиций относительно Солнца, которая
+        int temp2       = +2 + orbitNumber * 2;         // отстоит как минимум на 2 клетки от солнца по х и у координатам
+        
+        if(temp >= 0)
+            startPosition.x   = temp1;
+        else startPosition.x  = temp2;
+
+        temp            = Random.Range(-1,1);
+        temp1           = -2 - orbitNumber * 2;
+        temp2           = +2 + orbitNumber * 2;
+        if (temp >= 0)
+            startPosition.y   = temp1;
+        else startPosition.y  = temp2;
+
+        return startPosition;
     }
 }
